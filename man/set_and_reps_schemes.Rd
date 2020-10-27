@@ -9,6 +9,8 @@
 \alias{scheme_step_reverse}
 \alias{scheme_wave_descending}
 \alias{scheme_light_heavy}
+\alias{scheme_pyramid}
+\alias{scheme_pyramid_reverse}
 \title{Set and Rep Schemes}
 \usage{
 scheme_generic(
@@ -72,6 +74,24 @@ scheme_light_heavy(
   progression_table = perc_drop,
   progression_table_control = list(volume = "normal")
 )
+
+scheme_pyramid(
+  reps = c(12, 10, 8, 8, 10, 12),
+  adjustment = 0,
+  vertical_planning = vertical_linear,
+  vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
+  progression_table = RIR_increment,
+  progression_table_control = list(volume = "extensive")
+)
+
+scheme_pyramid_reverse(
+  reps = c(8, 10, 12, 12, 10, 8),
+  adjustment = 0,
+  vertical_planning = vertical_linear,
+  vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
+  progression_table = RIR_increment,
+  progression_table_control = list(volume = "extensive")
+)
 }
 \arguments{
 \item{reps}{Numeric vector indicating reps prescription}
@@ -113,6 +133,10 @@ differ to make easier and quicker schemes writing and groupings
 \item \code{scheme_wave_descending}: Descending Wave set and rep scheme
 
 \item \code{scheme_light_heavy}: Light-Heavy set and rep scheme
+
+\item \code{scheme_pyramid}: Pyramid set and rep scheme
+
+\item \code{scheme_pyramid_reverse}: Reverse Pyramid set and rep scheme
 }}
 
 \examples{
@@ -180,4 +204,12 @@ scheme_wave_descending()
 # Light-Heavy set and rep schemes
 --------------------------
 scheme_light_heavy()
+
+# Pyramid set and rep schemes
+--------------------------
+scheme_pyramid()
+
+# Reverse Pyramid set and rep schemes
+--------------------------
+scheme_pyramid_reverse()
 }

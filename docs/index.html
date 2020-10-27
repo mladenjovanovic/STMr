@@ -86,12 +86,93 @@
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h2>
-<p>This is a quick example, more are coming.</p>
+<p>This is a quick example, more are coming….</p>
+<div id="progression-tables" class="section level3">
+<h3 class="hasAnchor">
+<a href="#progression-tables" class="anchor"></a>Progression tables</h3>
+<p><a href="https://amzn.to/3owbBr6">Strength Training Manual</a> comes with two progression table implemented in <code>RIR_increment</code> and <code>perc_drop</code> functions, although there are fixed variants (and you can easily make your own).</p>
+<p>To visualize these progression tables, we need to write a simple plot function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">ggstance</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">STM</span><span class="op">)</span>
 
+<span class="va">plot_progression_table</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">progression_table</span> <span class="op">=</span> <span class="va">RIR_increment</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">progression_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/progression_table.html">generate_progression_table</a></span><span class="op">(</span>
+    progression_table <span class="op">=</span> <span class="va">progression_table</span><span class="op">)</span>
+  
+  <span class="va">progression_tbl</span> <span class="op">&lt;-</span> <span class="va">progression_tbl</span> <span class="op">%&gt;%</span>
+    <span class="fu">mutate</span><span class="op">(</span>
+      volume <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span>
+        <span class="va">volume</span>,
+        levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"intensive"</span>, <span class="st">"normal"</span>, <span class="st">"extensive"</span><span class="op">)</span>
+      <span class="op">)</span>,
+      type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span>
+        <span class="va">type</span>,
+        levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"grinding"</span>, <span class="st">"ballistic"</span><span class="op">)</span>
+      <span class="op">)</span>,
+      reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span>,
+      step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">step</span><span class="op">)</span>,
+      perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="va">perc_1RM</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span>,
+      adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="va">adjustment</span>, <span class="fl">2</span><span class="op">)</span>
+    <span class="op">)</span>
+  
+  <span class="va">gg_perc_1RM</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">progression_tbl</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">step</span>, y <span class="op">=</span> <span class="va">reps</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">theme_linedraw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="co">#geom_tile(fill = "transparent", color = "black") + </span>
+    <span class="fu">geom_text</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">perc_1RM</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">facet_grid</span><span class="op">(</span><span class="va">type</span><span class="op">~</span><span class="va">volume</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">scale_y_discrete</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">progression_tbl</span><span class="op">$</span><span class="va">reps</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">theme</span><span class="op">(</span>
+      legend.position <span class="op">=</span> <span class="st">"none"</span>,
+      axis.title <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,
+      <span class="co">#axis.text = element_blank(),</span>
+      axis.ticks <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,
+      panel.grid.major <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,
+      panel.grid.minor <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>
+    <span class="op">)</span> <span class="op">+</span>
+    <span class="fu">xlab</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">ylab</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"%1RM"</span><span class="op">)</span>
+  
+  <span class="va">gg_adj</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">progression_tbl</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">step</span>, y <span class="op">=</span> <span class="va">reps</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">theme_linedraw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="co">#geom_tile(fill = "transparent", color = "black") + </span>
+    <span class="fu">geom_text</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">adjustment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">facet_grid</span><span class="op">(</span><span class="va">type</span><span class="op">~</span><span class="va">volume</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">scale_y_discrete</span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rev.html">rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">progression_tbl</span><span class="op">$</span><span class="va">reps</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">theme</span><span class="op">(</span>
+      legend.position <span class="op">=</span> <span class="st">"none"</span>,
+      axis.title <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,
+      <span class="co">#axis.text = element_blank(),</span>
+      axis.ticks <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,
+      panel.grid.major <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>,
+      panel.grid.minor <span class="op">=</span> <span class="fu">element_blank</span><span class="op">(</span><span class="op">)</span>
+    <span class="op">)</span> <span class="op">+</span>
+    <span class="fu">xlab</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">ylab</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Adjustment"</span>, <span class="st">"RIR Increment or Percent Drop"</span><span class="op">)</span>
+  
+  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+    `%1RM` <span class="op">=</span> <span class="va">gg_perc_1RM</span>,
+    `Adjustment` <span class="op">=</span> <span class="va">gg_adj</span>
+  <span class="op">)</span>
+<span class="op">}</span></pre></div>
+<p>Here is the table of the <code>RIR_increment</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu">plot_progression_table</span><span class="op">(</span><span class="va">RIR_increment</span><span class="op">)</span><span class="op">$</span><span class="va">`%1RM`</span></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
+<p>And table of the <code>perc_drop</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu">plot_progression_table</span><span class="op">(</span><span class="va">perc_drop</span><span class="op">)</span><span class="op">$</span><span class="va">`%1RM`</span></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
+</div>
+<div id="set-and-rep-schemes" class="section level3">
+<h3 class="hasAnchor">
+<a href="#set-and-rep-schemes" class="anchor"></a>Set and Rep schemes</h3>
+<p><a href="https://amzn.to/3owbBr6">Strength Training Manual</a> comes with more than 2,000 set and rep schemes. <code>STM</code> package allows re-creation of those schemes, but also creation of custom ones.</p>
+<p>To make these schemes more visual, we need to write a plotting function.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="co"># Plot scheme function</span>
 <span class="va">plot_scheme</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">scheme</span>, <span class="va">label_size</span> <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">{</span>
   <span class="co"># Reorganize the data</span>
@@ -99,22 +180,25 @@
     <span class="fu">group_by</span><span class="op">(</span><span class="va">index</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu">mutate</span><span class="op">(</span>
       set <span class="op">=</span> <span class="fu">row_number</span><span class="op">(</span><span class="op">)</span>,
-      adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">adjustment</span>, <span class="fl">1</span><span class="op">)</span>,
-      perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">perc_1RM</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span>,
+      adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="va">adjustment</span>, <span class="fl">2</span><span class="op">)</span>,
+      perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="va">perc_1RM</span> <span class="op">*</span> <span class="fl">100</span>, <span class="fl">2</span><span class="op">)</span>,
       index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Week "</span>, <span class="va">index</span><span class="op">)</span>
     <span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu">rename</span><span class="op">(</span>
-      RIR <span class="op">=</span> <span class="va">adjustment</span>,
+      Reps <span class="op">=</span> <span class="va">reps</span>,
+      Adjustment <span class="op">=</span> <span class="va">adjustment</span>,
       `%1RM` <span class="op">=</span> <span class="va">perc_1RM</span>
     <span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"reps"</span>, <span class="st">"RIR"</span>, <span class="st">"%1RM"</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"param"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-    <span class="fu">mutate</span><span class="op">(</span>param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">param</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"reps"</span>, <span class="st">"RIR"</span>, <span class="st">"%1RM"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Reps"</span>, <span class="st">"Adjustment"</span>, <span class="st">"%1RM"</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"param"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+    <span class="fu">mutate</span><span class="op">(</span>
+      param <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">param</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Reps"</span>, <span class="st">"Adjustment"</span>, <span class="st">"%1RM"</span><span class="op">)</span><span class="op">)</span>,
+      hjust <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">value</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span>
 
   <span class="co"># Plot</span>
   <span class="fu">ggplot</span><span class="op">(</span><span class="va">scheme</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span>, y <span class="op">=</span> <span class="va">set</span>, fill <span class="op">=</span> <span class="va">param</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">theme_linedraw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://rdrr.io/pkg/ggstance/man/geom_barh.html">geom_barh</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu">geom_text</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">value</span><span class="op">)</span>, hjust <span class="op">=</span> <span class="fl">1.1</span>, size <span class="op">=</span> <span class="va">label_size</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu">geom_text</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>label <span class="op">=</span> <span class="va">value</span>, hjust <span class="op">=</span> <span class="va">hjust</span><span class="op">)</span>, size <span class="op">=</span> <span class="va">label_size</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">facet_grid</span><span class="op">(</span><span class="va">index</span> <span class="op">~</span> <span class="va">param</span>, scales <span class="op">=</span> <span class="st">"free_x"</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">scale_y_reverse</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">theme</span><span class="op">(</span>
@@ -129,8 +213,8 @@
     <span class="fu">xlab</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">ylab</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>
 <span class="op">}</span></pre></div>
-<p>Wave Set and Rep Scheme</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
+<p>Here is an example for the Wave Set and Rep Scheme</p>
+<div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="co"># Wave set and rep scheme</span>
 <span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span>
   reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,
@@ -143,20 +227,22 @@
 <span class="op">)</span>
 
 <span class="fu">plot_scheme</span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
-<p>Set Accumulation Wave Scheme</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
+<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
+<p>Example of Set Accumulation Wave Scheme</p>
+<div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span>
   reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,
   <span class="co"># Needed to remove default scheme_wave adjustment</span>
   adjustment <span class="op">=</span> <span class="fl">0</span>,
   vertical_planning <span class="op">=</span> <span class="va">vertical_set_accumulation</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>accumulate_rep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">RIR_increment</span>,
+  <span class="co"># Custom progression table</span>
+  progression_table <span class="op">=</span> <span class="va">perc_drop_fixed_5</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu">plot_scheme</span><span class="op">(</span><span class="va">scheme</span>, label_size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
+</div>
 </div>
 </div>
   </div>

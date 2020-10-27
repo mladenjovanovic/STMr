@@ -121,7 +121,7 @@
 
 <span class='fu'>vertical_linear</span><span class='op'>(</span><span class='va'>reps</span>, reps_change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='fu'>vertical_reverse_linear</span><span class='op'>(</span><span class='va'>reps</span>, reps_change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>vertical_linear_reverse</span><span class='op'>(</span><span class='va'>reps</span>, reps_change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'>vertical_block</span><span class='op'>(</span><span class='va'>reps</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>1</span>, <span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 
@@ -192,7 +192,7 @@
 <li><p><code>vertical_planning</code>: Generic Vertical Planning</p></li>
 <li><p><code>vertical_constant</code>: Constants Vertical Planning</p></li>
 <li><p><code>vertical_linear</code>: Linear Vertical Planning</p></li>
-<li><p><code>vertical_reverse_linear</code>: Reverse Linear Vertical Planning</p></li>
+<li><p><code>vertical_linear_reverse</code>: Reverse Linear Vertical Planning</p></li>
 <li><p><code>vertical_block</code>: Block Vertical Planning</p></li>
 <li><p><code>vertical_block_variant</code>: Block Variant Vertical Planning</p></li>
 <li><p><code>vertical_rep_accumulation</code>: Rep Accumulation Vertical Planning</p></li>
@@ -405,7 +405,7 @@
 #&gt; 11    2     4    0
 #&gt; 12    2     4    0</div><div class='input'>
 <span class='co'># Reverse Linear</span>
-<span class='fu'>vertical_reverse_linear</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>6</span>, <span class='fl'>4</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>vertical_linear_reverse</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>6</span>, <span class='fl'>4</span>, <span class='fl'>2</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   reps index step
 #&gt; 1    6     1   -2
 #&gt; 2    4     1   -2
@@ -415,7 +415,7 @@
 #&gt; 6    3     2   -1
 #&gt; 7    8     3    0
 #&gt; 8    6     3    0
-#&gt; 9    4     3    0</div><div class='input'><span class='fu'>vertical_reverse_linear</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+#&gt; 9    4     3    0</div><div class='input'><span class='fu'>vertical_linear_reverse</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>5</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step
 #&gt; 1     5     1   -3
 #&gt; 2     5     1   -3
