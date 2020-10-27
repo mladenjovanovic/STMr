@@ -95,7 +95,7 @@ Wave Set and Rep Scheme
 # Wave set and rep scheme
 scheme <- scheme_wave(
   reps = c(10, 8, 6, 10, 8, 6),
-  # Adjusting using lower %1RM (perc_drop method used)
+  # Adjusting sets to use lower %1RM (RIR Inc method used, so RIR adjusted)
   adjustment = c(4, 2, 0, 6, 4, 2),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4)),
