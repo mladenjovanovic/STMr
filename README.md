@@ -64,12 +64,20 @@ scheme <- scheme %>%
   mutate(param = factor(param, levels = c("reps", "RIR", "%1RM")))
 
 # Plot
-ggplot(scheme, aes(x = value, y = set)) +
-  theme_bw() +
+ggplot(scheme, aes(x = value, y = set, fill = param)) +
+  theme_linedraw() +
   geom_barh(stat =  "identity") +
   geom_label(aes(label = value), hjust = 1.1, size = 3) +
   facet_grid(index~param, scales = "free_x") +
   scale_y_reverse() +
+  theme(
+    legend.position = "none",
+    axis.title = element_blank(),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank()) +
+  scale_fill_brewer(palette = "Accent") +
   xlab(NULL) +
   ylab(NULL)
 ```
