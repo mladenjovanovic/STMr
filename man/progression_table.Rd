@@ -12,6 +12,7 @@ RIR_increment(
   step = 0,
   volume = "normal",
   type = "grinding",
+  adjustment = 0,
   func_max_perc_1RM = get_max_perc_1RM
 )
 
@@ -20,6 +21,7 @@ perc_drop(
   step = 0,
   volume = "normal",
   type = "grinding",
+  adjustment = 0,
   func_max_perc_1RM = get_max_perc_1RM
 )
 
@@ -39,6 +41,8 @@ generate_progression_table(
 \item{volume}{Character string: 'intensive', 'normal' (Default), or 'extensive'}
 
 \item{type}{Type of max rep table. Options are grinding (Default) and ballistic.}
+
+\item{adjustment}{Additional adjustment. Default is 0.}
 
 \item{func_max_perc_1RM}{What max rep table should be used?
 Default is \code{\link{get_max_perc_1RM}}}

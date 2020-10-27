@@ -13,6 +13,7 @@ RIR_increment_generic(
   rep_step = ((6 - 2)/11),
   inc_start = 1,
   inc_step = ((2 - 1)/11),
+  adjustment = 0,
   func_max_perc_1RM = get_max_perc_1RM,
   ...
 )
@@ -24,6 +25,7 @@ perc_drop_generic(
   rep_step = ((-0.1 - -0.05)/11),
   inc_start = -0.025,
   inc_step = ((-0.05 - -0.025)/11),
+  adjustment = 0,
   func_max_perc_1RM = get_max_perc_1RM,
   ...
 )
@@ -43,6 +45,8 @@ perc_drop_generic(
 
 \item{inc_step}{Defines the progression for \code{step} for rep increase
 For example, lower reps can have bigger jumps than high reps.}
+
+\item{adjustment}{Additional adjustment. Default is 0.}
 
 \item{func_max_perc_1RM}{What max rep table should be used?
 Default is \code{\link{get_max_perc_1RM}}}

@@ -14,6 +14,7 @@
 #' @param inc_start Defines the progression for \code{step} for single rep
 #' @param inc_step Defines the progression for \code{step} for rep increase
 #'     For example, lower reps can have bigger jumps than high reps.
+#' @param adjustment Additional adjustment. Default is 0.
 #' @param func_max_perc_1RM What max rep table should be used?
 #'     Default is \code{\link{get_max_perc_1RM}}
 #' @param ... Forwarded to \code{func_max_perc_1RM}. Used to differentiate between
@@ -32,15 +33,16 @@ NULL
 RIR_increment_generic <- function(reps,
                                   step = 0,
                                   rep_start = 2,
-                                  rep_step = ((6-2)/11),
+                                  rep_step = ((6 - 2) / 11),
                                   inc_start = 1,
-                                  inc_step = ((2-1)/11),
+                                  inc_step = ((2 - 1) / 11),
+                                  adjustment = 0,
                                   func_max_perc_1RM = get_max_perc_1RM,
                                   ...) {
   rep_RIR <- rep_start + (reps - 1) * rep_step
   step_RIR <- -1 * step * (inc_start + (reps - 1) * inc_step)
 
-  adjustment <- rep_RIR + step_RIR
+  adjustment <- rep_RIR + step_RIR + adjustment
   perc_1RM <- func_max_perc_1RM(
     max_reps = reps,
     RIR = adjustment,
@@ -49,7 +51,8 @@ RIR_increment_generic <- function(reps,
 
   return(list(
     adjustment = adjustment,
-    perc_1RM = perc_1RM))
+    perc_1RM = perc_1RM
+  ))
 }
 
 #' @describeIn generic_progression_table Percent Drop generic table
@@ -63,6 +66,7 @@ perc_drop_generic <- function(reps,
                               rep_step = ((-0.1 - -0.05) / 11),
                               inc_start = -0.025,
                               inc_step = ((-0.05 - -0.025) / 11),
+                              adjustment = 0,
                               func_max_perc_1RM = get_max_perc_1RM,
                               ...) {
   rep_perc_drop <- rep_start + (reps - 1) * rep_step
@@ -74,11 +78,12 @@ perc_drop_generic <- function(reps,
     ...
   )
 
-  adjustment <- rep_perc_drop + step_perc_drop
+  adjustment <- rep_perc_drop + step_perc_drop + adjustment
 
   return(list(
     adjustment = adjustment,
-    perc_1RM = perc_1RM + adjustment))
+    perc_1RM = perc_1RM + adjustment
+  ))
 }
 
 
@@ -90,6 +95,7 @@ perc_drop_generic <- function(reps,
 #' @param step Progression step. Default is 0. Use negative numbers (i.e., -1, -2)
 #' @param volume Character string: 'intensive', 'normal' (Default), or 'extensive'
 #' @param type Type of max rep table. Options are grinding (Default) and ballistic.
+#' @param adjustment Additional adjustment. Default is 0.
 #' @param func_max_perc_1RM What max rep table should be used?
 #'     Default is \code{\link{get_max_perc_1RM}}
 #' @return List with two elements: \code{adjustment} and \code{perc_1RM}
@@ -107,14 +113,15 @@ RIR_increment <- function(reps,
                           step = 0,
                           volume = "normal",
                           type = "grinding",
+                          adjustment = 0,
                           func_max_perc_1RM = get_max_perc_1RM) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
     rep_start = c(0, 1, 2, 0, 1, 2),
-    rep_step = c(0, ((3-1)/11), ((6-2)/11), 0, 0.2, 0.4),
+    rep_step = c(0, ((3 - 1) / 11), ((6 - 2) / 11), 0, 0.2, 0.4),
     inc_start = c(1, 1, 1, 1, 1, 1),
-    inc_step = c(((2-1)/11), ((2-1)/11), ((2-1)/11), 0.2, 0.2, 0.2)
+    inc_step = c(((2 - 1) / 11), ((2 - 1) / 11), ((2 - 1) / 11), 0.2, 0.2, 0.2)
   )
 
   params <- params[params$volume == volume, ]
@@ -127,6 +134,7 @@ RIR_increment <- function(reps,
     rep_step = params$rep_step[1],
     inc_start = params$inc_start[1],
     inc_step = params$inc_step[1],
+    adjustment = adjustment,
     func_max_perc_1RM = func_max_perc_1RM,
     type = type
   )
@@ -142,14 +150,15 @@ perc_drop <- function(reps,
                       step = 0,
                       volume = "normal",
                       type = "grinding",
+                      adjustment = 0,
                       func_max_perc_1RM = get_max_perc_1RM) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
     rep_start = c(0, -0.025, -0.05, 0, -0.025, -0.05),
-    rep_step = c(0, ((-0.05 - -0.025)/11), ((-0.1 - -0.05)/11), 0, -0.0025, -0.005),
+    rep_step = c(0, ((-0.05 - -0.025) / 11), ((-0.1 - -0.05) / 11), 0, -0.0025, -0.005),
     inc_start = c(-0.025, -0.025, -0.025, -0.025, -0.025, -0.025),
-    inc_step = c(((-0.05 - -0.025)/11), ((-0.05 - -0.025)/11), ((-0.05 - -0.025)/11), -0.005, -0.005, -0.005)
+    inc_step = c(((-0.05 - -0.025) / 11), ((-0.05 - -0.025) / 11), ((-0.05 - -0.025) / 11), -0.005, -0.005, -0.005)
   )
 
   params <- params[params$volume == volume, ]
@@ -162,6 +171,7 @@ perc_drop <- function(reps,
     rep_step = params$rep_step[1],
     inc_start = params$inc_start[1],
     inc_step = params$inc_step[1],
+    adjustment = adjustment,
     func_max_perc_1RM = func_max_perc_1RM,
     type = type
   )
@@ -198,7 +208,7 @@ generate_progression_table <- function(type = c("grinding", "ballistic"),
   val_perc_drop_adj <- numeric(nrow(params))
   val_perc_drop_perc <- numeric(nrow(params))
 
-  for(i in seq_len(nrow(params))) {
+  for (i in seq_len(nrow(params))) {
     val_RIR_inc <- RIR_increment(
       reps = params$reps[i],
       step = params$step[i],
@@ -206,8 +216,8 @@ generate_progression_table <- function(type = c("grinding", "ballistic"),
       type = params$type[i],
       func_max_perc_1RM = func_max_perc_1RM
     )
-    val_RIR_inc_adj[i] <-  val_RIR_inc$adjustment
-    val_RIR_inc_perc[i] <-  val_RIR_inc$perc_1RM
+    val_RIR_inc_adj[i] <- val_RIR_inc$adjustment
+    val_RIR_inc_perc[i] <- val_RIR_inc$perc_1RM
 
     val_perc_drop <- perc_drop(
       reps = params$reps[i],
@@ -216,8 +226,8 @@ generate_progression_table <- function(type = c("grinding", "ballistic"),
       type = params$type[i],
       func_max_perc_1RM = func_max_perc_1RM
     )
-    val_perc_drop_adj[i] <-  val_perc_drop$adjustment
-    val_perc_drop_perc[i] <-  val_perc_drop$perc_1RM
+    val_perc_drop_adj[i] <- val_perc_drop$adjustment
+    val_perc_drop_perc[i] <- val_perc_drop$perc_1RM
   }
 
   rbind(
@@ -226,11 +236,12 @@ generate_progression_table <- function(type = c("grinding", "ballistic"),
       method = "RIR Inc",
       adjustment = val_RIR_inc_adj,
       perc_1RM = val_RIR_inc_perc
-  ),
-  data.frame(
-    params,
-    method = "Perc Drop",
-    adjustment = val_perc_drop_adj,
-    perc_1RM = val_perc_drop_perc
-  ))
+    ),
+    data.frame(
+      params,
+      method = "Perc Drop",
+      adjustment = val_perc_drop_adj,
+      perc_1RM = val_perc_drop_perc
+    )
+  )
 }

@@ -1,13 +1,15 @@
 Package: STM
-Title: What the Package Does (One Line, Title Case)
+Title: Strength Training Manual R Functions
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Mladen",
+           family = "Jovanović",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "coach.mladen.jovanovic@gmail.com")
+Description: Set and Rep Schemes from the Strength Training Manual are created
+    in Microsoft Excel. STM package allow users to recreate those schemes, as well as to
+    allow them to create their own, with additional benefit of R language
+    (i.e., reproducibility, open-source, extendability). 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
