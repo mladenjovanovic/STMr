@@ -175,9 +175,9 @@ vertical_set_accumulation <- function(reps,
                                       set_increment = 1) {
   progression_steps <- list()
 
-  before_reps <- reps[seq(1, accumulate_rep)]
+  before_reps <- reps[seq(1, min(accumulate_rep))]
   before_reps <- before_reps[-length(before_reps)]
-  after_reps <- reps[seq(accumulate_rep, length(reps))]
+  after_reps <- reps[seq(max(accumulate_rep), length(reps))]
   after_reps <- after_reps[-1]
 
   for (i in seq_along(step)) {
@@ -222,9 +222,9 @@ vertical_set_accumulation_reverse <- function(reps,
                                               set_increment = 1) {
   progression_steps <- list()
 
-  before_reps <- reps[seq(1, accumulate_rep)]
+  before_reps <- reps[seq(1, min(accumulate_rep))]
   before_reps <- before_reps[-length(before_reps)]
-  after_reps <- reps[seq(accumulate_rep, length(reps))]
+  after_reps <- reps[seq(max(accumulate_rep), length(reps))]
   after_reps <- after_reps[-1]
 
   for (i in rev(seq_along(step))) {
