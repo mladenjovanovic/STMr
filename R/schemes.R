@@ -244,13 +244,45 @@ scheme_light_heavy <- function(reps = c(6, 3, 6, 3, 6, 3),
 }
 
 
-
+#' @describeIn set_and_reps_schemes Pyramid set and rep scheme
+#' @export
+#' @examples
+#'
+#' # Pyramid set and rep schemes
+#' --------------------------
+#' scheme_pyramid()
 scheme_pyramid <- function(reps = c(12, 10, 8, 8, 10, 12),
                                adjustment = 0,
                                vertical_planning = vertical_linear,
                                vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
                                progression_table = RIR_increment,
                                progression_table_control = list(volume = "extensive")) {
+
+  scheme_generic(
+    reps = reps,
+    adjustment = adjustment,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
+
+}
+
+
+#' @describeIn set_and_reps_schemes Reverse Pyramid set and rep scheme
+#' @export
+#' @examples
+#'
+#' # Reverse Pyramid set and rep schemes
+#' --------------------------
+#' scheme_pyramid_reverse()
+scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 12, 10, 8),
+                           adjustment = 0,
+                           vertical_planning = vertical_linear,
+                           vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
+                           progression_table = RIR_increment,
+                           progression_table_control = list(volume = "extensive")) {
 
   scheme_generic(
     reps = reps,
