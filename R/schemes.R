@@ -71,7 +71,7 @@ scheme_generic <- function(reps = c(5, 5, 5),
 #' # and using 3 steps progression
 #' scheme_wave(
 #'   reps = c(8, 6, 4, 8, 6, 4),
-#'   # Adjusting using lower %1RM (perc_drop method used)
+#'   # Adjusting using lower %1RM (Perc_Drop method used)
 #'   adjustment = c(0, 0, 0, -0.1, -0.1, -0.1),
 #'   vertical_planning = vertical_linear,
 #'   vertical_planning_control = list(reps_change = c(0, -2, -4)),
@@ -82,7 +82,7 @@ scheme_generic <- function(reps = c(5, 5, 5),
 #' # This time we adjust first wave as well, first two sets easier
 #' scheme_wave(
 #'   reps = c(8, 6, 4, 8, 6, 4),
-#'   # Adjusting using lower %1RM (perc_drop method used)
+#'   # Adjusting using lower %1RM (RIR Increment method used)
 #'   adjustment = c(4, 2, 0, 6, 4, 2),
 #'   vertical_planning = vertical_linear,
 #'   vertical_planning_control = list(reps_change = c(0, -2, -4)),
@@ -93,7 +93,7 @@ scheme_wave <- function(reps = c(10, 8, 6, 10, 8, 6),
                         vertical_planning = vertical_linear,
                         vertical_planning_control = list(),
                         progression_table = RIR_increment,
-                        progression_table_control = list()) {
+                        progression_table_control = list(volume = "extensive")) {
 
   scheme_generic(
     reps = reps,
@@ -103,5 +103,162 @@ scheme_wave <- function(reps = c(10, 8, 6, 10, 8, 6),
     progression_table = progression_table,
     progression_table_control = progression_table_control
     )
+
+}
+
+#' @describeIn set_and_reps_schemes Plateau set and rep scheme
+#' @export
+#' @examples
+#'
+#' # Plateau set and rep schemes
+#' --------------------------
+#' scheme_wave()
+#'
+#' scheme_plateau(
+#'   reps = c(3, 3, 3),
+#'   progression_table_control = list(type = "ballistic"))
+scheme_plateau <- function(reps = c(5, 5, 5, 5),
+                        vertical_planning = vertical_constant,
+                        vertical_planning_control = list(),
+                        progression_table = RIR_increment,
+                        progression_table_control = list(volume = "extensive")) {
+
+  scheme_generic(
+    reps = reps,
+    # No adjustment with plateau
+    adjustment = 0,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
+
+}
+
+
+#' @describeIn set_and_reps_schemes Step set and rep scheme
+#' @export
+#' @examples
+#'
+#' # Step set and rep schemes
+#' --------------------------
+#' scheme_step()
+#'
+#' scheme_step(
+#'   reps = c(2, 2, 2),
+#'   adjustment = c(-0.1, -0.05, 0),
+#'   vertical_planning = vertical_linear_reverse,
+#'   progression_table_control = list(type = "ballistic")
+#' )
+scheme_step <- function(reps = c(5, 5, 5, 5),
+                        adjustment = c(-0.3, -0.2, -0.1, 0),
+                           vertical_planning = vertical_constant,
+                           vertical_planning_control = list(),
+                           progression_table = perc_drop,
+                           progression_table_control = list(volume = "normal")) {
+
+  scheme_generic(
+    reps = reps,
+    adjustment = adjustment,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
+
+}
+
+#' @describeIn set_and_reps_schemes Reverse Step set and rep scheme
+#' @export
+#' @examples
+#'
+#' # Reverse Step set and rep schemes
+#' --------------------------
+#' scheme_step_reverse()
+scheme_step_reverse <- function(reps = c(10, 10, 10, 10),
+                        adjustment = c(0, 3, 6, 9),
+                        vertical_planning = vertical_constant,
+                        vertical_planning_control = list(),
+                        progression_table = RIR_increment,
+                        progression_table_control = list(volume = "normal")) {
+
+  scheme_generic(
+    reps = reps,
+    adjustment = adjustment,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
+
+}
+
+#' @describeIn set_and_reps_schemes Descending Wave set and rep scheme
+#' @export
+#' @examples
+#'
+#' # Descending Wave set and rep schemes
+#' --------------------------
+#' scheme_wave_descending()
+scheme_wave_descending <- function(reps = c(6, 8, 10, 6, 8, 10),
+                        adjustment = c(4, 2, 0, 6, 4, 2),
+                        vertical_planning = vertical_linear,
+                        vertical_planning_control = list(),
+                        progression_table = RIR_increment,
+                        progression_table_control = list(volume = "extensive")) {
+
+  scheme_generic(
+    reps = reps,
+    adjustment = adjustment,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
+
+}
+
+#' @describeIn set_and_reps_schemes Light-Heavy set and rep scheme
+#' @export
+#' @examples
+#'
+#' # Light-Heavy set and rep schemes
+#' --------------------------
+#' scheme_light_heavy()
+scheme_light_heavy <- function(reps = c(6, 3, 6, 3, 6, 3),
+                                   adjustment = c(0, -0.2, 0, -0.2, 0, -0.2),
+                                   vertical_planning = vertical_constant,
+                                   vertical_planning_control = list(),
+                                   progression_table = perc_drop,
+                                   progression_table_control = list(volume = "normal")) {
+
+  scheme_generic(
+    reps = reps,
+    adjustment = adjustment,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
+
+}
+
+
+
+scheme_pyramid <- function(reps = c(12, 10, 8, 8, 10, 12),
+                               adjustment = 0,
+                               vertical_planning = vertical_linear,
+                               vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
+                               progression_table = RIR_increment,
+                               progression_table_control = list(volume = "extensive")) {
+
+  scheme_generic(
+    reps = reps,
+    adjustment = adjustment,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
 
 }
