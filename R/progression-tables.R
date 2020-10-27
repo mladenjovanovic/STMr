@@ -103,7 +103,8 @@ perc_drop_generic <- function(reps,
 NULL
 
 
-#' @describeIn progression_table RIR Increment progression table
+#' @describeIn progression_table RIR Increment progression table. This is the original
+#'     progression table from the Strength Training Manual
 #' @export
 #' @examples
 #' RIR_increment(10, step = seq(-3, 0, 1))
@@ -140,7 +141,86 @@ RIR_increment <- function(reps,
   )
 }
 
-#' @describeIn progression_table Percent Drop progression table
+#' @describeIn progression_table Fixed 2 RIR Increment progression table. This variant have fixed RIR
+#'     increment across reps from phases to phases (2RIR) and 2RIR difference between extensive, normal, and
+#'     intensive schemes
+#' @export
+#' @examples
+#' RIR_increment(10, step = seq(-3, 0, 1))
+#' RIR_increment(10, step = seq(-3, 0, 1), volume = "extensive")
+#' RIR_increment(5, step = seq(-3, 0, 1), type = "ballistic")
+RIR_increment_fixed_2 <- function(reps,
+                          step = 0,
+                          volume = "normal",
+                          type = "grinding",
+                          adjustment = 0,
+                          func_max_perc_1RM = get_max_perc_1RM) {
+  params <- data.frame(
+    volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
+    type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
+    rep_start = c(0, 2, 4, 0, 2, 4),
+    rep_step = c(0, 0, 0, 0, 0, 0),
+    inc_start = c(2, 2, 2, 2, 2, 2),
+    inc_step = c(0, 0, 0, 0, 0, 0)
+  )
+
+  params <- params[params$volume == volume, ]
+  params <- params[params$type == type, ]
+
+  RIR_increment_generic(
+    reps = reps,
+    step = step,
+    rep_start = params$rep_start[1],
+    rep_step = params$rep_step[1],
+    inc_start = params$inc_start[1],
+    inc_step = params$inc_step[1],
+    adjustment = adjustment,
+    func_max_perc_1RM = func_max_perc_1RM,
+    type = type
+  )
+}
+
+#' @describeIn progression_table Fixed 4 RIR Increment progression table. This variant have fixed RIR
+#'     increment across reps from phases to phases (4RIR) and 4RIR difference between extensive, normal, and
+#'     intensive schemes
+#' @export
+#' @examples
+#' RIR_increment(10, step = seq(-3, 0, 1))
+#' RIR_increment(10, step = seq(-3, 0, 1), volume = "extensive")
+#' RIR_increment(5, step = seq(-3, 0, 1), type = "ballistic")
+RIR_increment_fixed_4 <- function(reps,
+                                  step = 0,
+                                  volume = "normal",
+                                  type = "grinding",
+                                  adjustment = 0,
+                                  func_max_perc_1RM = get_max_perc_1RM) {
+  params <- data.frame(
+    volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
+    type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
+    rep_start = c(0, 4, 8, 0, 4, 8),
+    rep_step = c(0, 0, 0, 0, 0, 0),
+    inc_start = c(4, 4, 4, 4, 4, 4),
+    inc_step = c(0, 0, 0, 0, 0, 0)
+  )
+
+  params <- params[params$volume == volume, ]
+  params <- params[params$type == type, ]
+
+  RIR_increment_generic(
+    reps = reps,
+    step = step,
+    rep_start = params$rep_start[1],
+    rep_step = params$rep_step[1],
+    inc_start = params$inc_start[1],
+    inc_step = params$inc_step[1],
+    adjustment = adjustment,
+    func_max_perc_1RM = func_max_perc_1RM,
+    type = type
+  )
+}
+
+#' @describeIn progression_table Percent Drop progression table. This is the original
+#'     progression table from the Strength Training Manual
 #' @export
 #' @examples
 #' perc_drop(10, step = seq(-3, 0, 1))
@@ -177,7 +257,88 @@ perc_drop <- function(reps,
   )
 }
 
-#' @describeIn progression_table Generates RIR Inc and Perc Drop progression tables
+#' @describeIn progression_table 5% Fixed Percent Drop progression table. This variant have fixed percent
+#'     drops across reps from phases to phases (5%) and 5% difference between extensive, normal, and
+#'     intensive schemes
+#' @export
+#' @examples
+#' perc_drop_fixed_5(10, step = seq(-3, 0, 1))
+#' perc_drop_fixed_5(10, step = seq(-3, 0, 1), volume = "extensive")
+#' perc_drop_fixed_5(5, step = seq(-3, 0, 1), type = "ballistic")
+perc_drop_fixed_5 <- function(reps,
+                      step = 0,
+                      volume = "normal",
+                      type = "grinding",
+                      adjustment = 0,
+                      func_max_perc_1RM = get_max_perc_1RM) {
+  params <- data.frame(
+    volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
+    type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
+    rep_start = c(0, -0.05, -0.01, 0, -0.05, -0.1),
+    rep_step = c(0, 0, 0, 0, 0, 0),
+    inc_start = c(-0.05, -0.05, -0.05, -0.05, -0.05, -0.05),
+    inc_step = c(0, 0, 0, 0, 0, 0)
+  )
+
+  params <- params[params$volume == volume, ]
+  params <- params[params$type == type, ]
+
+  perc_drop_generic(
+    reps = reps,
+    step = step,
+    rep_start = params$rep_start[1],
+    rep_step = params$rep_step[1],
+    inc_start = params$inc_start[1],
+    inc_step = params$inc_step[1],
+    adjustment = adjustment,
+    func_max_perc_1RM = func_max_perc_1RM,
+    type = type
+  )
+}
+
+#' @describeIn progression_table 2.5% Fixed Percent Drop progression table. This variant have fixed percent
+#'     drops across reps from phases to phases (2.5%) and 2.5% difference between extensive, normal, and
+#'     intensive schemes
+#' @export
+#' @examples
+#' perc_drop_fixed_25(10, step = seq(-3, 0, 1))
+#' perc_drop_fixed_25(10, step = seq(-3, 0, 1), volume = "extensive")
+#' perc_drop_fixed_25(5, step = seq(-3, 0, 1), type = "ballistic")
+perc_drop_fixed_25 <- function(reps,
+                              step = 0,
+                              volume = "normal",
+                              type = "grinding",
+                              adjustment = 0,
+                              func_max_perc_1RM = get_max_perc_1RM) {
+  params <- data.frame(
+    volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
+    type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
+    rep_start = c(0, -0.025, -0.05, 0, -0.025, -0.05),
+    rep_step = c(0, 0, 0, 0, 0, 0),
+    inc_start = c(-0.025, -0.025, -0.025, -0.025, -0.025, -0.025),
+    inc_step = c(0, 0, 0, 0, 0, 0)
+  )
+
+  params <- params[params$volume == volume, ]
+  params <- params[params$type == type, ]
+
+  perc_drop_generic(
+    reps = reps,
+    step = step,
+    rep_start = params$rep_start[1],
+    rep_step = params$rep_step[1],
+    inc_start = params$inc_start[1],
+    inc_step = params$inc_step[1],
+    adjustment = adjustment,
+    func_max_perc_1RM = func_max_perc_1RM,
+    type = type
+  )
+}
+
+
+#' @describeIn progression_table Generates progression tables
+#' @param progression_table Progression table function to use. Default is
+#'     \code{\link{RIR_increment}}
 #' @export
 #' @examples
 #' generate_progression_table()
@@ -194,7 +355,8 @@ generate_progression_table <- function(type = c("grinding", "ballistic"),
                                        volume = c("intensive", "normal", "extensive"),
                                        reps = 1:12,
                                        step = seq(-3, 0, 1),
-                                       func_max_perc_1RM = get_max_perc_1RM) {
+                                       func_max_perc_1RM = get_max_perc_1RM,
+                                       progression_table = RIR_increment) {
   params <- expand.grid(
     type = type,
     volume = volume,
@@ -203,45 +365,23 @@ generate_progression_table <- function(type = c("grinding", "ballistic"),
     stringsAsFactors = FALSE
   )
 
-  val_RIR_inc_adj <- numeric(nrow(params))
-  val_RIR_inc_perc <- numeric(nrow(params))
-  val_perc_drop_adj <- numeric(nrow(params))
-  val_perc_drop_perc <- numeric(nrow(params))
+  val_adj <- numeric(nrow(params))
+  val_perc <- numeric(nrow(params))
 
   for (i in seq_len(nrow(params))) {
-    val_RIR_inc <- RIR_increment(
+    val <- progression_table(
       reps = params$reps[i],
       step = params$step[i],
       volume = params$volume[i],
       type = params$type[i],
       func_max_perc_1RM = func_max_perc_1RM
     )
-    val_RIR_inc_adj[i] <- val_RIR_inc$adjustment
-    val_RIR_inc_perc[i] <- val_RIR_inc$perc_1RM
-
-    val_perc_drop <- perc_drop(
-      reps = params$reps[i],
-      step = params$step[i],
-      volume = params$volume[i],
-      type = params$type[i],
-      func_max_perc_1RM = func_max_perc_1RM
-    )
-    val_perc_drop_adj[i] <- val_perc_drop$adjustment
-    val_perc_drop_perc[i] <- val_perc_drop$perc_1RM
+    val_adj[i] <- val$adjustment
+    val_perc[i] <- val$perc_1RM
   }
 
-  rbind(
     data.frame(
       params,
-      method = "RIR Inc",
-      adjustment = val_RIR_inc_adj,
-      perc_1RM = val_RIR_inc_perc
-    ),
-    data.frame(
-      params,
-      method = "Perc Drop",
-      adjustment = val_perc_drop_adj,
-      perc_1RM = val_perc_drop_perc
-    )
-  )
+      adjustment = val_adj,
+      perc_1RM = val_perc)
 }
