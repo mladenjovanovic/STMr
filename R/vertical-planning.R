@@ -105,9 +105,9 @@ vertical_linear <- function(reps,
 #' @examples
 #'
 #' # Reverse Linear
-#' vertical_reverse_linear(c(6, 4, 2), c(0, 1, 2))
-#' vertical_reverse_linear(c(5, 5, 5))
-vertical_reverse_linear <- function(reps,
+#' vertical_linear_reverse(c(6, 4, 2), c(0, 1, 2))
+#' vertical_linear_reverse(c(5, 5, 5))
+vertical_linear_reverse <- function(reps,
                                     reps_change = c(0, 1, 2, 3)) {
   vertical_planning(reps = reps, reps_change = reps_change)
 }
