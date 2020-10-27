@@ -3,11 +3,33 @@
 \name{progression_table}
 \alias{progression_table}
 \alias{RIR_increment}
+\alias{RIR_increment_fixed_2}
+\alias{RIR_increment_fixed_4}
 \alias{perc_drop}
+\alias{perc_drop_fixed_5}
+\alias{perc_drop_fixed_25}
 \alias{generate_progression_table}
 \title{Progression table}
 \usage{
 RIR_increment(
+  reps,
+  step = 0,
+  volume = "normal",
+  type = "grinding",
+  adjustment = 0,
+  func_max_perc_1RM = get_max_perc_1RM
+)
+
+RIR_increment_fixed_2(
+  reps,
+  step = 0,
+  volume = "normal",
+  type = "grinding",
+  adjustment = 0,
+  func_max_perc_1RM = get_max_perc_1RM
+)
+
+RIR_increment_fixed_4(
   reps,
   step = 0,
   volume = "normal",
@@ -25,12 +47,31 @@ perc_drop(
   func_max_perc_1RM = get_max_perc_1RM
 )
 
+perc_drop_fixed_5(
+  reps,
+  step = 0,
+  volume = "normal",
+  type = "grinding",
+  adjustment = 0,
+  func_max_perc_1RM = get_max_perc_1RM
+)
+
+perc_drop_fixed_25(
+  reps,
+  step = 0,
+  volume = "normal",
+  type = "grinding",
+  adjustment = 0,
+  func_max_perc_1RM = get_max_perc_1RM
+)
+
 generate_progression_table(
   type = c("grinding", "ballistic"),
   volume = c("intensive", "normal", "extensive"),
   reps = 1:12,
   step = seq(-3, 0, 1),
-  func_max_perc_1RM = get_max_perc_1RM
+  func_max_perc_1RM = get_max_perc_1RM,
+  progression_table = RIR_increment
 )
 }
 \arguments{
@@ -46,6 +87,9 @@ generate_progression_table(
 
 \item{func_max_perc_1RM}{What max rep table should be used?
 Default is \code{\link{get_max_perc_1RM}}}
+
+\item{progression_table}{Progression table function to use. Default is
+\code{\link{RIR_increment}}}
 }
 \value{
 List with two elements: \code{adjustment} and \code{perc_1RM}
@@ -55,20 +99,50 @@ Progression table explained in the 'Strength Training Manual' Chapter 6.
 }
 \section{Functions}{
 \itemize{
-\item \code{RIR_increment}: RIR Increment progression table
+\item \code{RIR_increment}: RIR Increment progression table. This is the original
+progression table from the Strength Training Manual
 
-\item \code{perc_drop}: Percent Drop progression table
+\item \code{RIR_increment_fixed_2}: Fixed 2 RIR Increment progression table. This variant have fixed RIR
+increment across reps from phases to phases (2RIR) and 2RIR difference between extensive, normal, and
+intensive schemes
 
-\item \code{generate_progression_table}: Generates RIR Inc and Perc Drop progression tables
+\item \code{RIR_increment_fixed_4}: Fixed 4 RIR Increment progression table. This variant have fixed RIR
+increment across reps from phases to phases (4RIR) and 4RIR difference between extensive, normal, and
+intensive schemes
+
+\item \code{perc_drop}: Percent Drop progression table. This is the original
+progression table from the Strength Training Manual
+
+\item \code{perc_drop_fixed_5}: 5\% Fixed Percent Drop progression table. This variant have fixed percent
+drops across reps from phases to phases (5\%) and 5\% difference between extensive, normal, and
+intensive schemes
+
+\item \code{perc_drop_fixed_25}: 2.5\% Fixed Percent Drop progression table. This variant have fixed percent
+drops across reps from phases to phases (2.5\%) and 2.5\% difference between extensive, normal, and
+intensive schemes
+
+\item \code{generate_progression_table}: Generates progression tables
 }}
 
 \examples{
 RIR_increment(10, step = seq(-3, 0, 1))
 RIR_increment(10, step = seq(-3, 0, 1), volume = "extensive")
 RIR_increment(5, step = seq(-3, 0, 1), type = "ballistic")
+RIR_increment(10, step = seq(-3, 0, 1))
+RIR_increment(10, step = seq(-3, 0, 1), volume = "extensive")
+RIR_increment(5, step = seq(-3, 0, 1), type = "ballistic")
+RIR_increment(10, step = seq(-3, 0, 1))
+RIR_increment(10, step = seq(-3, 0, 1), volume = "extensive")
+RIR_increment(5, step = seq(-3, 0, 1), type = "ballistic")
 perc_drop(10, step = seq(-3, 0, 1))
 perc_drop(10, step = seq(-3, 0, 1), volume = "extensive")
 perc_drop(5, step = seq(-3, 0, 1), type = "ballistic")
+perc_drop_fixed_5(10, step = seq(-3, 0, 1))
+perc_drop_fixed_5(10, step = seq(-3, 0, 1), volume = "extensive")
+perc_drop_fixed_5(5, step = seq(-3, 0, 1), type = "ballistic")
+perc_drop_fixed_25(10, step = seq(-3, 0, 1))
+perc_drop_fixed_25(10, step = seq(-3, 0, 1), volume = "extensive")
+perc_drop_fixed_25(5, step = seq(-3, 0, 1), type = "ballistic")
 generate_progression_table()
 
 generate_progression_table(type = "grinding", volume = "normal")

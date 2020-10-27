@@ -5,7 +5,7 @@
 \alias{vertical_planning}
 \alias{vertical_constant}
 \alias{vertical_linear}
-\alias{vertical_reverse_linear}
+\alias{vertical_linear_reverse}
 \alias{vertical_block}
 \alias{vertical_block_variant}
 \alias{vertical_rep_accumulation}
@@ -22,7 +22,7 @@ vertical_constant(reps, n_steps = 4)
 
 vertical_linear(reps, reps_change = c(0, -1, -2, -3))
 
-vertical_reverse_linear(reps, reps_change = c(0, 1, 2, 3))
+vertical_linear_reverse(reps, reps_change = c(0, 1, 2, 3))
 
 vertical_block(reps, step = c(-2, -1, 0, -3))
 
@@ -81,7 +81,7 @@ Functions for creating vertical planning (progressions)
 
 \item \code{vertical_linear}: Linear Vertical Planning
 
-\item \code{vertical_reverse_linear}: Reverse Linear Vertical Planning
+\item \code{vertical_linear_reverse}: Reverse Linear Vertical Planning
 
 \item \code{vertical_block}: Block Vertical Planning
 
@@ -145,8 +145,8 @@ vertical_linear(c(10, 8, 6), c(0, -2, -4))
 vertical_linear(c(5, 5, 5), c(0, -1, -2, -3))
 
 # Reverse Linear
-vertical_reverse_linear(c(6, 4, 2), c(0, 1, 2))
-vertical_reverse_linear(c(5, 5, 5))
+vertical_linear_reverse(c(6, 4, 2), c(0, 1, 2))
+vertical_linear_reverse(c(5, 5, 5))
 
 # Block
 vertical_block(c(6, 4, 2))

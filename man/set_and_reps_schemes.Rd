@@ -4,6 +4,11 @@
 \alias{set_and_reps_schemes}
 \alias{scheme_generic}
 \alias{scheme_wave}
+\alias{scheme_plateau}
+\alias{scheme_step}
+\alias{scheme_step_reverse}
+\alias{scheme_wave_descending}
+\alias{scheme_light_heavy}
 \title{Set and Rep Schemes}
 \usage{
 scheme_generic(
@@ -21,7 +26,51 @@ scheme_wave(
   vertical_planning = vertical_linear,
   vertical_planning_control = list(),
   progression_table = RIR_increment,
-  progression_table_control = list()
+  progression_table_control = list(volume = "extensive")
+)
+
+scheme_plateau(
+  reps = c(5, 5, 5, 5),
+  vertical_planning = vertical_constant,
+  vertical_planning_control = list(),
+  progression_table = RIR_increment,
+  progression_table_control = list(volume = "extensive")
+)
+
+scheme_step(
+  reps = c(5, 5, 5, 5),
+  adjustment = c(-0.3, -0.2, -0.1, 0),
+  vertical_planning = vertical_constant,
+  vertical_planning_control = list(),
+  progression_table = perc_drop,
+  progression_table_control = list(volume = "normal")
+)
+
+scheme_step_reverse(
+  reps = c(10, 10, 10, 10),
+  adjustment = c(0, 3, 6, 9),
+  vertical_planning = vertical_constant,
+  vertical_planning_control = list(),
+  progression_table = RIR_increment,
+  progression_table_control = list(volume = "normal")
+)
+
+scheme_wave_descending(
+  reps = c(6, 8, 10, 6, 8, 10),
+  adjustment = c(4, 2, 0, 6, 4, 2),
+  vertical_planning = vertical_linear,
+  vertical_planning_control = list(),
+  progression_table = RIR_increment,
+  progression_table_control = list(volume = "extensive")
+)
+
+scheme_light_heavy(
+  reps = c(6, 3, 6, 3, 6, 3),
+  adjustment = c(0, -0.2, 0, -0.2, 0, -0.2),
+  vertical_planning = vertical_constant,
+  vertical_planning_control = list(),
+  progression_table = perc_drop,
+  progression_table_control = list(volume = "normal")
 )
 }
 \arguments{
@@ -54,6 +103,16 @@ Set and Rep Schemes
 differ to make easier and quicker schemes writing and groupings
 
 \item \code{scheme_wave}: Wave set and rep scheme
+
+\item \code{scheme_plateau}: Plateau set and rep scheme
+
+\item \code{scheme_step}: Step set and rep scheme
+
+\item \code{scheme_step_reverse}: Reverse Step set and rep scheme
+
+\item \code{scheme_wave_descending}: Descending Wave set and rep scheme
+
+\item \code{scheme_light_heavy}: Light-Heavy set and rep scheme
 }}
 
 \examples{
@@ -73,7 +132,7 @@ scheme_wave(
 # and using 3 steps progression
 scheme_wave(
   reps = c(8, 6, 4, 8, 6, 4),
-  # Adjusting using lower \%1RM (perc_drop method used)
+  # Adjusting using lower \%1RM (Perc_Drop method used)
   adjustment = c(0, 0, 0, -0.1, -0.1, -0.1),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4)),
@@ -84,10 +143,41 @@ scheme_wave(
 # This time we adjust first wave as well, first two sets easier
 scheme_wave(
   reps = c(8, 6, 4, 8, 6, 4),
-  # Adjusting using lower \%1RM (perc_drop method used)
+  # Adjusting using lower \%1RM (RIR Increment method used)
   adjustment = c(4, 2, 0, 6, 4, 2),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4)),
   progression_table = RIR_increment,
   progression_table_control = list(volume = "extensive"))
+
+# Plateau set and rep schemes
+--------------------------
+scheme_wave()
+
+scheme_plateau(
+  reps = c(3, 3, 3),
+  progression_table_control = list(type = "ballistic"))
+
+# Step set and rep schemes
+--------------------------
+scheme_step()
+
+scheme_step(
+  reps = c(2, 2, 2),
+  adjustment = c(-0.1, -0.05, 0),
+  vertical_planning = vertical_linear_reverse,
+  progression_table_control = list(type = "ballistic")
+)
+
+# Reverse Step set and rep schemes
+--------------------------
+scheme_step_reverse()
+
+# Descending Wave set and rep schemes
+--------------------------
+scheme_wave_descending()
+
+# Light-Heavy set and rep schemes
+--------------------------
+scheme_light_heavy()
 }
