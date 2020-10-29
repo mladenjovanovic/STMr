@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![DOI](https://zenodo.org/badge/307629379.svg)](https://zenodo.org/badge/latestdoi/307629379)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/STM)](https://CRAN.R-project.org/package=STM)
 <!-- badges: end -->

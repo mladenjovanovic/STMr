@@ -7,12 +7,12 @@ citEntry(entry = "Manual",
   year         = "2020",
   address      = "Belgrade, Serbia",
   url          = "https://github.com/mladenjovanovic/STM",
-  doi          = "",
+  doi          = "10.5281/zenodo.4155015",
 
   textVersion  =
   paste("Mladen Jovanović (2020).",
         "STMP: Strength Training Manual R Functions.",
         "R package version 0.0.0.9000.",
         "url: https://github.com/mladenjovanovic/STM",
-        "doi: ")
+        "doi: 10.5281/zenodo.4155015")
 )
