@@ -83,12 +83,12 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version (once released) of <code>STM</code> from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"STM"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"STM"</span><span class="op">)</span></code></pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"mladenjovanovic/STM"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"mladenjovanovic/STM"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">
@@ -99,8 +99,8 @@
 <a href="#progression-tables" class="anchor"></a>Progression tables</h3>
 <p><a href="https://amzn.to/3owbBr6">Strength Training Manual</a> comes with two progression table implemented in <code>RIR_increment</code> and <code>perc_drop</code> functions, although there are fixed variants (and you can easily make your own).</p>
 <p>To visualize these progression tables, we need to write a simple plot function:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">ggstance</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">STM</span><span class="op">)</span>
 
@@ -164,14 +164,14 @@
     `%1RM` <span class="op">=</span> <span class="va">gg_perc_1RM</span>,
     `Adjustment` <span class="op">=</span> <span class="va">gg_adj</span>
   <span class="op">)</span>
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 <p>Here is the table of the <code>RIR_increment</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu">plot_progression_table</span><span class="op">(</span><span class="va">RIR_increment</span><span class="op">)</span><span class="op">$</span><span class="va">`%1RM`</span></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">plot_progression_table</span><span class="op">(</span><span class="va">RIR_increment</span><span class="op">)</span><span class="op">$</span><span class="va">`%1RM`</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
 <p>And table of the <code>perc_drop</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu">plot_progression_table</span><span class="op">(</span><span class="va">perc_drop</span><span class="op">)</span><span class="op">$</span><span class="va">`%1RM`</span></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">plot_progression_table</span><span class="op">(</span><span class="va">perc_drop</span><span class="op">)</span><span class="op">$</span><span class="va">`%1RM`</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
 </div>
 <div id="set-and-rep-schemes" class="section level3">
@@ -179,8 +179,8 @@
 <a href="#set-and-rep-schemes" class="anchor"></a>Set and Rep schemes</h3>
 <p><a href="https://amzn.to/3owbBr6">Strength Training Manual</a> comes with more than 2,000 set and rep schemes. <code>STM</code> package allows re-creation of those schemes, but also creation of custom ones.</p>
 <p>To make these schemes more visual, we need to write a plotting function.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="co"># Plot scheme function</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Plot scheme function</span>
 <span class="va">plot_scheme</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">scheme</span>, <span class="va">label_size</span> <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">{</span>
   <span class="co"># Reorganize the data</span>
   <span class="va">scheme</span> <span class="op">&lt;-</span> <span class="va">scheme</span> <span class="op">%&gt;%</span>
@@ -219,10 +219,10 @@
     <span class="fu">scale_fill_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Accent"</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">xlab</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu">ylab</span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span>
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 <p>Here is an example for the Wave Set and Rep Scheme</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="co"># Wave set and rep scheme</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Wave set and rep scheme</span>
 <span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span>
   reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,
   <span class="co"># Adjusting sets to use lower %1RM (RIR Inc method used, so RIR adjusted)</span>
@@ -233,11 +233,11 @@
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="fu">plot_scheme</span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></pre></div>
+<span class="fu">plot_scheme</span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
 <p>Example of Set Accumulation Wave Scheme</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span>
   reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,
   <span class="co"># Needed to remove default scheme_wave adjustment</span>
   adjustment <span class="op">=</span> <span class="fl">0</span>,
@@ -247,7 +247,7 @@
   progression_table <span class="op">=</span> <span class="va">perc_drop_fixed_5</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu">plot_scheme</span><span class="op">(</span><span class="va">scheme</span>, label_size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span></pre></div>
+<span class="fu">plot_scheme</span><span class="op">(</span><span class="va">scheme</span>, label_size <span class="op">=</span> <span class="fl">2.5</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
 </div>
 </div>
