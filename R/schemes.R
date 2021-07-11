@@ -112,7 +112,7 @@ scheme_wave <- function(reps = c(10, 8, 6, 10, 8, 6),
 #'
 #' # Plateau set and rep schemes
 #' --------------------------
-#' scheme_wave()
+#' scheme_plateau()
 #'
 #' scheme_plateau(
 #'   reps = c(3, 3, 3),
@@ -293,4 +293,32 @@ scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 12, 10, 8),
     progression_table_control = progression_table_control
   )
 
+}
+
+#' @describeIn set_and_reps_schemes Rep Accumulation set and rep scheme
+#' @export
+#' @examples
+#'
+#' # Rep Accumulation set and rep schemes
+#' --------------------------
+#' scheme_rep_acc()
+scheme_rep_acc <- function(reps = c(7, 7, 7),
+                                   adjustment = 0,
+                                   #vertical_planning = vertical_planning,
+                                   vertical_planning_control = list(step = rep(-3, 4)),
+                                   progression_table = RIR_increment,
+                                   progression_table_control = list(volume = "extensive")) {
+
+  scheme_df <- scheme_generic(
+    reps = reps,
+    adjustment = adjustment,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
+
+  scheme_df$reps <- scheme_df$reps + scheme_df$index - 1
+
+  scheme_df
 }
