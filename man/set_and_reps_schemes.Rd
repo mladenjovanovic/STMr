@@ -11,6 +11,7 @@
 \alias{scheme_light_heavy}
 \alias{scheme_pyramid}
 \alias{scheme_pyramid_reverse}
+\alias{scheme_rep_acc}
 \title{Set and Rep Schemes}
 \usage{
 scheme_generic(
@@ -92,6 +93,14 @@ scheme_pyramid_reverse(
   progression_table = RIR_increment,
   progression_table_control = list(volume = "extensive")
 )
+
+scheme_rep_acc(
+  reps = c(7, 7, 7),
+  adjustment = 0,
+  vertical_planning_control = list(step = rep(-3, 4)),
+  progression_table = RIR_increment,
+  progression_table_control = list(volume = "extensive")
+)
 }
 \arguments{
 \item{reps}{Numeric vector indicating reps prescription}
@@ -137,6 +146,8 @@ differ to make easier and quicker schemes writing and groupings
 \item \code{scheme_pyramid}: Pyramid set and rep scheme
 
 \item \code{scheme_pyramid_reverse}: Reverse Pyramid set and rep scheme
+
+\item \code{scheme_rep_acc}: Rep Accumulation set and rep scheme
 }}
 
 \examples{
@@ -176,7 +187,7 @@ scheme_wave(
 
 # Plateau set and rep schemes
 --------------------------
-scheme_wave()
+scheme_plateau()
 
 scheme_plateau(
   reps = c(3, 3, 3),
@@ -212,4 +223,8 @@ scheme_pyramid()
 # Reverse Pyramid set and rep schemes
 --------------------------
 scheme_pyramid_reverse()
+
+# Rep Accumulation set and rep schemes
+--------------------------
+scheme_rep_acc()
 }
