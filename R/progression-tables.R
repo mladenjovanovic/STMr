@@ -150,11 +150,11 @@ RIR_increment <- function(reps,
 #' RIR_increment(10, step = seq(-3, 0, 1), volume = "extensive")
 #' RIR_increment(5, step = seq(-3, 0, 1), type = "ballistic")
 RIR_increment_fixed_2 <- function(reps,
-                          step = 0,
-                          volume = "normal",
-                          type = "grinding",
-                          adjustment = 0,
-                          func_max_perc_1RM = get_max_perc_1RM) {
+                                  step = 0,
+                                  volume = "normal",
+                                  type = "grinding",
+                                  adjustment = 0,
+                                  func_max_perc_1RM = get_max_perc_1RM) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
@@ -266,11 +266,11 @@ perc_drop <- function(reps,
 #' perc_drop_fixed_5(10, step = seq(-3, 0, 1), volume = "extensive")
 #' perc_drop_fixed_5(5, step = seq(-3, 0, 1), type = "ballistic")
 perc_drop_fixed_5 <- function(reps,
-                      step = 0,
-                      volume = "normal",
-                      type = "grinding",
-                      adjustment = 0,
-                      func_max_perc_1RM = get_max_perc_1RM) {
+                              step = 0,
+                              volume = "normal",
+                              type = "grinding",
+                              adjustment = 0,
+                              func_max_perc_1RM = get_max_perc_1RM) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
@@ -305,11 +305,11 @@ perc_drop_fixed_5 <- function(reps,
 #' perc_drop_fixed_25(10, step = seq(-3, 0, 1), volume = "extensive")
 #' perc_drop_fixed_25(5, step = seq(-3, 0, 1), type = "ballistic")
 perc_drop_fixed_25 <- function(reps,
-                              step = 0,
-                              volume = "normal",
-                              type = "grinding",
-                              adjustment = 0,
-                              func_max_perc_1RM = get_max_perc_1RM) {
+                               step = 0,
+                               volume = "normal",
+                               type = "grinding",
+                               adjustment = 0,
+                               func_max_perc_1RM = get_max_perc_1RM) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
@@ -380,8 +380,9 @@ generate_progression_table <- function(type = c("grinding", "ballistic"),
     val_perc[i] <- val$perc_1RM
   }
 
-    data.frame(
-      params,
-      adjustment = val_adj,
-      perc_1RM = val_perc)
+  data.frame(
+    params,
+    adjustment = val_adj,
+    perc_1RM = val_perc
+  )
 }

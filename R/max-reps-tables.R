@@ -8,6 +8,7 @@
 #' @param reps Number of repetitions done
 #' @param weight Weight used
 #' @param type Type of max rep table. Options are grinding (Default) and ballistic.
+#' @param percMR Percent of maximum repetitions
 #' @name max_reps_tables
 NULL
 
