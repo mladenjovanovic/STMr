@@ -47,8 +47,8 @@ get_max_reps_percMR <- function(perc_1RM, percMR = 1, type = "grinding") {
 #' )
 get_max_perc_1RM_percMR <- function(max_reps, percMR = 1, type = "grinding") {
   switch(type,
-    grinding = 1 / ((0.0333 * (max_reps + ((max_reps / percMR) - max_reps))) + 1),
-    ballistic = 1 / ((0.0666 * (max_reps + ((max_reps / percMR) - max_reps))) + 1),
+    grinding = percMR / (percMR + 0.0333 * max_reps),
+    ballistic = percMR / (percMR + 0.0666 * max_reps),
     stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
   )
 }
