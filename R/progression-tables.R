@@ -339,6 +339,7 @@ perc_drop_fixed_25 <- function(reps,
 #' @describeIn progression_table Generates progression tables
 #' @param progression_table Progression table function to use. Default is
 #'     \code{\link{RIR_increment}}
+#' @param ... Forwarded to \code{progression_table} for using different rep max function
 #' @export
 #' @examples
 #' generate_progression_table()
