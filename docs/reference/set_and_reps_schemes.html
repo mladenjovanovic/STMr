@@ -221,8 +221,8 @@
     <tr>
       <th>adjustment</th>
       <td><p>Numeric vector indicating adjustments. Forwarded to <code>progression_table</code>.
-If the <code>progression_table</code> is <code><a href='progression_table.html'>RIR_increment</a></code>, <code>adjustment</code> will be done
-using RIR. On the other hand, if <code><a href='progression_table.html'>perc_drop</a></code> is used, <code>adjustment</code> will be done
+If the <code>progression_table</code> is <code><a href='percRM_step.html'>RIR_increment</a></code>, <code>adjustment</code> will be done
+using RIR. On the other hand, if <code><a href='percRM_step.html'>perc_drop</a></code> is used, <code>adjustment</code> will be done
 using 1RM percentage</p></td>
     </tr>
     <tr>
@@ -235,7 +235,7 @@ using 1RM percentage</p></td>
     </tr>
     <tr>
       <th>progression_table</th>
-      <td><p>Progression table function. Default is <code><a href='progression_table.html'>RIR_increment</a></code></p></td>
+      <td><p>Progression table function. Default is <code><a href='percRM_step.html'>RIR_increment</a></code></p></td>
     </tr>
     <tr>
       <th>progression_table_control</th>
@@ -282,7 +282,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 #&gt; 12    2     4    0   1.181818 0.9041963</div><div class='input'>
 <span class='co'># Wave set and rep schemes</span>
 <span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span>
-<span class='fu'>scheme_wave</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>scheme_wave</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step adjustment  perc_1RM
 #&gt; 1    10     1   -3  14.727273 0.5484205
 #&gt; 2     8     1   -3  11.454545 0.6068564
@@ -312,7 +312,8 @@ differ to make easier and quicker schemes writing and groupings</p></li>
   reps <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>8</span>, <span class='fl'>6</span>, <span class='fl'>4</span>, <span class='fl'>8</span>, <span class='fl'>6</span>, <span class='fl'>4</span><span class='op'>)</span>,
   vertical_planning <span class='op'>=</span> <span class='va'>vertical_block</span>,
   progression_table <span class='op'>=</span> <span class='va'>perc_drop</span>,
-  progression_table_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span><span class='op'>)</span>
+  progression_table_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step adjustment  perc_1RM
 #&gt; 1     8     1   -2     3.8375 4.4899008
 #&gt; 2     6     1   -2     1.8625 2.5769899
@@ -347,7 +348,8 @@ differ to make easier and quicker schemes writing and groupings</p></li>
   vertical_planning <span class='op'>=</span> <span class='va'>vertical_linear</span>,
   vertical_planning_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>reps_change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>,
   progression_table <span class='op'>=</span> <span class='va'>perc_drop</span>,
-  progression_table_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span><span class='op'>)</span>
+  progression_table_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step  adjustment  perc_1RM
 #&gt; 1     8     1   -2 -0.16363636 0.6260036
 #&gt; 2     6     1   -2 -0.14545455 0.6880177
@@ -376,7 +378,8 @@ differ to make easier and quicker schemes writing and groupings</p></li>
   vertical_planning <span class='op'>=</span> <span class='va'>vertical_linear</span>,
   vertical_planning_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>reps_change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>2</span>, <span class='op'>-</span><span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>,
   progression_table <span class='op'>=</span> <span class='va'>RIR_increment</span>,
-  progression_table_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span><span class='op'>)</span>
+  progression_table_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step adjustment  perc_1RM
 #&gt; 1     8     1   -2  11.818182 0.6024294
 #&gt; 2     6     1   -2   8.727273 0.6709526
@@ -398,7 +401,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 #&gt; 18    0     3    0   3.636364 0.8919883</div><div class='input'>
 <span class='co'># Plateau set and rep schemes</span>
 <span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span>
-<span class='fu'>scheme_plateau</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>scheme_plateau</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step adjustment  perc_1RM
 #&gt; 1     5     1   -3   7.545455 0.7053362
 #&gt; 2     5     1   -3   7.545455 0.7053362
@@ -418,7 +421,8 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 #&gt; 16    5     4    0   3.454545 0.7803134</div><div class='input'>
 <span class='fu'>scheme_plateau</span><span class='op'>(</span>
   reps <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span><span class='op'>)</span>,
-  progression_table_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span><span class='op'>)</span>
+  progression_table_control <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span>
+<span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step adjustment  perc_1RM
 #&gt; 1     3     1   -3        5.6 0.6358249
 #&gt; 2     3     1   -3        5.6 0.6358249
@@ -434,7 +438,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 #&gt; 12    3     4    0        1.4 0.7733713</div><div class='input'>
 <span class='co'># Step set and rep schemes</span>
 <span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span>
-<span class='fu'>scheme_step</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>scheme_step</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step  adjustment  perc_1RM
 #&gt; 1     5     1   -3 -0.43636364 0.4209017
 #&gt; 2     5     1   -3 -0.33636364 0.5209017
@@ -473,7 +477,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 #&gt; 12    5     4    0    -0.0350 0.7151875</div><div class='input'>
 <span class='co'># Reverse Step set and rep schemes</span>
 <span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span>
-<span class='fu'>scheme_step_reverse</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>scheme_step_reverse</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step adjustment  perc_1RM
 #&gt; 1    10     1   -3   8.090909 0.6240533
 #&gt; 2    10     1   -3  11.090909 0.5874311
@@ -493,7 +497,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 #&gt; 16   10     4    0  11.636364 0.5812295</div><div class='input'>
 <span class='co'># Descending Wave set and rep schemes</span>
 <span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span>
-<span class='fu'>scheme_wave_descending</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>scheme_wave_descending</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step adjustment  perc_1RM
 #&gt; 1     6     1   -3  12.181818 0.6228766
 #&gt; 2     8     1   -3  11.454545 0.6068564
@@ -521,7 +525,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 #&gt; 24    7     4    0   6.181818 0.6949490</div><div class='input'>
 <span class='co'># Light-Heavy set and rep schemes</span>
 <span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span>
-<span class='fu'>scheme_light_heavy</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>scheme_light_heavy</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step  adjustment  perc_1RM
 #&gt; 1     6     1   -3 -0.14545455 0.6880177
 #&gt; 2     3     1   -3 -0.31818182 0.5909917
@@ -549,7 +553,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 #&gt; 24    3     4    0 -0.22954545 0.6796281</div><div class='input'>
 <span class='co'># Pyramid set and rep schemes</span>
 <span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span>
-<span class='fu'>scheme_pyramid</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>scheme_pyramid</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step adjustment  perc_1RM
 #&gt; 1    12     1   -3  12.000000 0.5558026
 #&gt; 2    10     1   -3  10.727273 0.5916396
@@ -577,7 +581,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 #&gt; 24    6     4    0   3.818182 0.7536105</div><div class='input'>
 <span class='co'># Reverse Pyramid set and rep schemes</span>
 <span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span>
-<span class='fu'>scheme_pyramid_reverse</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>scheme_pyramid_reverse</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step adjustment  perc_1RM
 #&gt; 1     8     1   -3   9.454545 0.6324165
 #&gt; 2    10     1   -3  10.727273 0.5916396
@@ -605,7 +609,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 #&gt; 24    2     4    0   2.363636 0.8731267</div><div class='input'>
 <span class='co'># Rep Accumulation set and rep schemes</span>
 <span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span><span class='op'>-</span>
-<span class='fu'>scheme_rep_acc</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>scheme_rep_acc</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    reps index step adjustment perc_1RM
 #&gt; 1     7     1   -3   8.818182 0.654988
 #&gt; 2     7     1   -3   8.818182 0.654988

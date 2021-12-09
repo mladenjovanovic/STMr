@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generic progression table — generic_progression_table • STM</title>
+<title>Generic progression table — percRM_step_generic • STM</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Generic progression table — generic_progression_table" />
+<meta property="og:title" content="Generic progression table — percRM_step_generic" />
 <meta property="og:description" content="Generic progression tables allow for custom progressions using
 rep_start, rep_step, inc_start, and
 inc_step parameters. For more information check the
@@ -129,7 +129,19 @@ inc_step parameters. For more information check the
 'Strength Training Manual' Chapter 6.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>RIR_increment_generic</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>percRM_step_generic</span><span class='op'>(</span>
+  <span class='va'>reps</span>,
+  step <span class='op'>=</span> <span class='fl'>0</span>,
+  rep_start <span class='op'>=</span> <span class='fl'>0</span>,
+  rep_step <span class='op'>=</span> <span class='fl'>0</span>,
+  inc_start <span class='op'>=</span> <span class='fl'>1</span>,
+  inc_step <span class='op'>=</span> <span class='op'>(</span><span class='op'>(</span><span class='fl'>2</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>11</span><span class='op'>)</span>,
+  adjustment <span class='op'>=</span> <span class='fl'>0</span>,
+  func_max_perc_1RM <span class='op'>=</span> <span class='va'>get_max_perc_1RM_percMR</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='fu'>RIR_increment_generic</span><span class='op'>(</span>
   <span class='va'>reps</span>,
   step <span class='op'>=</span> <span class='fl'>0</span>,
   rep_start <span class='op'>=</span> <span class='fl'>2</span>,
@@ -190,7 +202,7 @@ For example, lower reps can have bigger jumps than high reps.</p></td>
     <tr>
       <th>func_max_perc_1RM</th>
       <td><p>What max rep table should be used?
-Default is <code><a href='max_reps_tables.html'>get_max_perc_1RM</a></code></p></td>
+Default is <code><a href='get_max_reps_percMR.html'>get_max_perc_1RM</a></code></p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -206,12 +218,25 @@ Default is <code><a href='max_reps_tables.html'>get_max_perc_1RM</a></code></p><
 
     
 <ul>
+<li><p><code>percRM_step_generic</code>: %RM Step generic table</p></li>
 <li><p><code>RIR_increment_generic</code>: RIR Increment generic table</p></li>
 <li><p><code>perc_drop_generic</code>: Percent Drop generic table</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>RIR_increment_generic</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'>percRM_step_generic</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $adjustment
+#&gt; [1] 6.454545 4.636364 2.818182 1.000000
+#&gt; 
+#&gt; $perc_1RM
+#&gt; [1] 0.9509396 0.9329894 0.8943254 0.7501875
+#&gt; </div><div class='input'><span class='fu'>percRM_step_generic</span><span class='op'>(</span><span class='fl'>5</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $adjustment
+#&gt; [1] 5.090909 3.727273 2.363636 1.000000
+#&gt; 
+#&gt; $perc_1RM
+#&gt; [1] 0.9386052 0.9179858 0.8765128 0.7501875
+#&gt; </div><div class='input'><span class='fu'>RIR_increment_generic</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
 #&gt; [1] 10.727273  8.909091  7.090909  5.272727
 #&gt; 
