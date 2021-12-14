@@ -45,7 +45,7 @@ RIR_increment_generic <- function(reps,
   adjustment <- rep_RIR + step_RIR + adjustment
   perc_1RM <- func_max_perc_1RM(
     max_reps = reps,
-    RIR = adjustment,
+    adjustment = adjustment,
     ...
   )
 
@@ -74,7 +74,7 @@ perc_drop_generic <- function(reps,
 
   perc_1RM <- func_max_perc_1RM(
     max_reps = reps,
-    RIR = 0,
+    adjustment = 0,
     ...
   )
 
@@ -110,6 +110,13 @@ NULL
 #' RIR_increment(10, step = seq(-3, 0, 1))
 #' RIR_increment(10, step = seq(-3, 0, 1), volume = "extensive")
 #' RIR_increment(5, step = seq(-3, 0, 1), type = "ballistic")
+#'
+#' # Generate progression table
+#' generate_progression_table(RIR_increment)
+#'
+#' # Plot progression table
+#' plot_progression_table(RIR_increment)
+#' plot_progression_table(RIR_increment, "adjustment")
 RIR_increment <- function(reps,
                           step = 0,
                           volume = "normal",
@@ -146,9 +153,16 @@ RIR_increment <- function(reps,
 #'     intensive schemes
 #' @export
 #' @examples
-#' RIR_increment(10, step = seq(-3, 0, 1))
-#' RIR_increment(10, step = seq(-3, 0, 1), volume = "extensive")
-#' RIR_increment(5, step = seq(-3, 0, 1), type = "ballistic")
+#' RIR_increment_fixed_2(10, step = seq(-3, 0, 1))
+#' RIR_increment_fixed_2(10, step = seq(-3, 0, 1), volume = "extensive")
+#' RIR_increment_fixed_2(5, step = seq(-3, 0, 1), type = "ballistic")
+#'
+#' # Generate progression table
+#' generate_progression_table(RIR_increment_fixed_2)
+#'
+#' # Plot progression table
+#' plot_progression_table(RIR_increment_fixed_2)
+#' plot_progression_table(RIR_increment_fixed_2, "adjustment")
 RIR_increment_fixed_2 <- function(reps,
                           step = 0,
                           volume = "normal",
@@ -185,9 +199,16 @@ RIR_increment_fixed_2 <- function(reps,
 #'     intensive schemes
 #' @export
 #' @examples
-#' RIR_increment(10, step = seq(-3, 0, 1))
-#' RIR_increment(10, step = seq(-3, 0, 1), volume = "extensive")
-#' RIR_increment(5, step = seq(-3, 0, 1), type = "ballistic")
+#' RIR_increment_fixed_4(10, step = seq(-3, 0, 1))
+#' RIR_increment_fixed_4(10, step = seq(-3, 0, 1), volume = "extensive")
+#' RIR_increment_fixed_4(5, step = seq(-3, 0, 1), type = "ballistic")
+#'
+#' # Generate progression table
+#' generate_progression_table(RIR_increment_fixed_4)
+#'
+#' # Plot progression table
+#' plot_progression_table(RIR_increment_fixed_4)
+#' plot_progression_table(RIR_increment_fixed_4, "adjustment")
 RIR_increment_fixed_4 <- function(reps,
                                   step = 0,
                                   volume = "normal",
@@ -226,6 +247,13 @@ RIR_increment_fixed_4 <- function(reps,
 #' perc_drop(10, step = seq(-3, 0, 1))
 #' perc_drop(10, step = seq(-3, 0, 1), volume = "extensive")
 #' perc_drop(5, step = seq(-3, 0, 1), type = "ballistic")
+#'
+#' # Generate progression table
+#' generate_progression_table(perc_drop)
+#'
+#' # Plot progression table
+#' plot_progression_table(perc_drop)
+#' plot_progression_table(perc_drop, "adjustment")
 perc_drop <- function(reps,
                       step = 0,
                       volume = "normal",
@@ -265,6 +293,13 @@ perc_drop <- function(reps,
 #' perc_drop_fixed_5(10, step = seq(-3, 0, 1))
 #' perc_drop_fixed_5(10, step = seq(-3, 0, 1), volume = "extensive")
 #' perc_drop_fixed_5(5, step = seq(-3, 0, 1), type = "ballistic")
+#'
+#' # Generate progression table
+#' generate_progression_table(perc_drop_fixed_5)
+#'
+#' # Plot progression table
+#' plot_progression_table(perc_drop_fixed_5)
+#' plot_progression_table(perc_drop_fixed_5, "adjustment")
 perc_drop_fixed_5 <- function(reps,
                       step = 0,
                       volume = "normal",
@@ -304,6 +339,13 @@ perc_drop_fixed_5 <- function(reps,
 #' perc_drop_fixed_25(10, step = seq(-3, 0, 1))
 #' perc_drop_fixed_25(10, step = seq(-3, 0, 1), volume = "extensive")
 #' perc_drop_fixed_25(5, step = seq(-3, 0, 1), type = "ballistic")
+#'
+#' # Generate progression table
+#' generate_progression_table(perc_drop_fixed_25)
+#'
+#' # Plot progression table
+#' plot_progression_table(perc_drop_fixed_25)
+#' plot_progression_table(perc_drop_fixed_25, "adjustment")
 perc_drop_fixed_25 <- function(reps,
                               step = 0,
                               volume = "normal",
@@ -339,6 +381,7 @@ perc_drop_fixed_25 <- function(reps,
 #' @describeIn progression_table Generates progression tables
 #' @param progression_table Progression table function to use. Default is
 #'     \code{\link{RIR_increment}}
+#' @param ... Forwarded to \code{progression_table} for using different rep max function
 #' @export
 #' @examples
 #' generate_progression_table()
@@ -351,12 +394,12 @@ perc_drop_fixed_25 <- function(reps,
 #'   type = "grinding",
 #'   volume = "normal"
 #' )
-generate_progression_table <- function(type = c("grinding", "ballistic"),
+generate_progression_table <- function(progression_table = RIR_increment,
+                                       type = c("grinding", "ballistic"),
                                        volume = c("intensive", "normal", "extensive"),
                                        reps = 1:12,
                                        step = seq(-3, 0, 1),
-                                       func_max_perc_1RM = get_max_perc_1RM,
-                                       progression_table = RIR_increment) {
+                                       ...) {
   params <- expand.grid(
     type = type,
     volume = volume,
@@ -374,7 +417,7 @@ generate_progression_table <- function(type = c("grinding", "ballistic"),
       step = params$step[i],
       volume = params$volume[i],
       type = params$type[i],
-      func_max_perc_1RM = func_max_perc_1RM
+      ...
     )
     val_adj[i] <- val$adjustment
     val_perc[i] <- val$perc_1RM

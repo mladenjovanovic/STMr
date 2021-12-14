@@ -155,13 +155,14 @@ scheme_generic()
 
 # Wave set and rep schemes
 --------------------------
-scheme_wave()
+  scheme_wave()
 
 scheme_wave(
   reps = c(8, 6, 4, 8, 6, 4),
   vertical_planning = vertical_block,
   progression_table = perc_drop,
-  progression_table_control = list(type = "ballistic"))
+  progression_table_control = list(type = "ballistic")
+)
 
 # Adjusted second wave
 # and using 3 steps progression
@@ -172,7 +173,8 @@ scheme_wave(
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4)),
   progression_table = perc_drop,
-  progression_table_control = list(volume = "extensive"))
+  progression_table_control = list(volume = "extensive")
+)
 
 # Adjusted using RIR inc
 # This time we adjust first wave as well, first two sets easier
@@ -183,19 +185,21 @@ scheme_wave(
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4)),
   progression_table = RIR_increment,
-  progression_table_control = list(volume = "extensive"))
+  progression_table_control = list(volume = "extensive")
+)
 
 # Plateau set and rep schemes
 --------------------------
-scheme_plateau()
+  scheme_plateau()
 
 scheme_plateau(
   reps = c(3, 3, 3),
-  progression_table_control = list(type = "ballistic"))
+  progression_table_control = list(type = "ballistic")
+)
 
 # Step set and rep schemes
 --------------------------
-scheme_step()
+  scheme_step()
 
 scheme_step(
   reps = c(2, 2, 2),
@@ -206,25 +210,25 @@ scheme_step(
 
 # Reverse Step set and rep schemes
 --------------------------
-scheme_step_reverse()
+  scheme_step_reverse()
 
 # Descending Wave set and rep schemes
 --------------------------
-scheme_wave_descending()
+  scheme_wave_descending()
 
 # Light-Heavy set and rep schemes
 --------------------------
-scheme_light_heavy()
+  scheme_light_heavy()
 
 # Pyramid set and rep schemes
 --------------------------
-scheme_pyramid()
+  scheme_pyramid()
 
 # Reverse Pyramid set and rep schemes
 --------------------------
-scheme_pyramid_reverse()
+  scheme_pyramid_reverse()
 
 # Rep Accumulation set and rep schemes
 --------------------------
-scheme_rep_acc()
+  scheme_rep_acc()
 }
