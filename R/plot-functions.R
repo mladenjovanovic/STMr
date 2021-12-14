@@ -3,12 +3,12 @@
 #' Functions for creating \code{ggplot2} plot of the Progression Table
 #'
 #' @param progression_table Function for creating progression table. Default is \code{\link{RIR_increment}}
-#' @param type Character string. Options include "%1RM" (default) and "Adjustment"
+#' @param type Character string. Options include "%1RM" (default) and "adjustment"
 #' @return \code{ggplot2} object
 #' @export
 #' @examples
 #' plot_progression_table(RIR_increment, "%1RM")
-#' plot_progression_table(RIR_increment, "Adjustment")
+#' plot_progression_table(RIR_increment, "adjustment")
 
 plot_progression_table <- function(progression_table = RIR_increment, type = "%1RM") {
 
@@ -56,7 +56,7 @@ plot_progression_table <- function(progression_table = RIR_increment, type = "%1
            ggplot2::ylab(NULL) +
            ggplot2::ggtitle("%1RM"),
 
-         "Adjustment" = ggplot2::ggplot(progression_tbl, ggplot2::aes(x = step, y = reps)) +
+         "adjustment" = ggplot2::ggplot(progression_tbl, ggplot2::aes(x = step, y = reps)) +
            ggplot2::theme_linedraw() +
            #ggplot2::geom_tile(fill = "transparent", color = "black") +
            ggplot2::geom_text(ggplot2::aes(label = adjustment)) +
@@ -73,6 +73,6 @@ plot_progression_table <- function(progression_table = RIR_increment, type = "%1
            ggplot2::xlab(NULL) +
            ggplot2::ylab(NULL) +
            ggplot2::ggtitle("Adjustment", "Depends on the progression table utilized"),
-         stop("Invalid `type` value. Please use `%1RM` or `Adjustment`", call. = FALSE)
+         stop("Invalid `type` value. Please use `%1RM` or `adjustment`", call. = FALSE)
   )
 }

@@ -10,22 +10,22 @@
 \alias{get_predicted_1RM}
 \title{Max-Reps Tables}
 \usage{
-get_max_reps_percMR(perc_1RM, percMR = 1, type = "grinding")
+get_max_reps_percMR(perc_1RM, adjustment = 1, type = "grinding")
 
-get_max_perc_1RM_percMR(max_reps, percMR = 1, type = "grinding")
+get_max_perc_1RM_percMR(max_reps, adjustment = 1, type = "grinding")
 
-get_predicted_1RM_percMR(weight, reps, percMR = 1, type = "grinding")
+get_predicted_1RM_percMR(weight, reps, adjustment = 1, type = "grinding")
 
-get_max_reps(perc_1RM, RIR = 0, type = "grinding")
+get_max_reps(perc_1RM, adjustment = 0, type = "grinding")
 
-get_max_perc_1RM(max_reps, RIR = 0, type = "grinding")
+get_max_perc_1RM(max_reps, adjustment = 0, type = "grinding")
 
-get_predicted_1RM(weight, reps, RIR = 0, type = "grinding")
+get_predicted_1RM(weight, reps, adjustment = 0, type = "grinding")
 }
 \arguments{
 \item{perc_1RM}{Percent of 1RM}
 
-\item{percMR}{Percent of maximum repetitions}
+\item{adjustment}{Adjustment to be implemented, specific to the method}
 
 \item{type}{Type of max rep table. Options are grinding (Default) and ballistic.}
 
@@ -34,25 +34,23 @@ get_predicted_1RM(weight, reps, RIR = 0, type = "grinding")
 \item{weight}{Weight used}
 
 \item{reps}{Number of repetitions done}
-
-\item{RIR}{Reps In Reserve}
 }
 \description{
 Family of functions to represent max reps tables
 }
 \section{Functions}{
 \itemize{
-\item \code{get_max_reps_percMR}: Get maximum number of repetitions using the \%MR (\code{percMR})
+\item \code{get_max_reps_percMR}: Get maximum number of repetitions using the \%MR (\code{adjustment})
 
-\item \code{get_max_perc_1RM_percMR}: Get maximum \%1RM using the \%MR (\code{percMR})
+\item \code{get_max_perc_1RM_percMR}: Get maximum \%1RM using the \%MR (\code{adjustment})
 
-\item \code{get_predicted_1RM_percMR}: Get predicted 1RM using the \%MR (\code{percMR})
+\item \code{get_predicted_1RM_percMR}: Get predicted 1RM using the \%MR (\code{adjustment})
 
-\item \code{get_max_reps}: Get maximum number of repetitions
+\item \code{get_max_reps}: Get maximum number of repetitions using the RIR method (\code{adjustment})
 
-\item \code{get_max_perc_1RM}: Get maximum \%1RM
+\item \code{get_max_perc_1RM}: Get maximum \%1RM using the RIR method (\code{adjustment})
 
-\item \code{get_predicted_1RM}: Get predicted 1RM
+\item \code{get_predicted_1RM}: Get predicted 1RM using the RIR method (\code{adjustment})
 }}
 
 \examples{
@@ -62,14 +60,14 @@ get_max_reps_percMR(0.75)
 # Get max reps that can be done with 80\% 1RM with 60\% of maximum reps
 get_max_reps_percMR(
   perc_1RM = 0.8,
-  percMR = 0.6
+  adjustment = 0.6
 )
 
 # Get max reps that can be done with 90\% 1RM with 60\% of maximum reps
 # using ballistic table
 get_max_reps_percMR(
   perc_1RM = 0.9,
-  percMR = 0.6,
+  adjustment = 0.6,
   type = "ballistic"
 )
 # Get max \%1RM to be used when doing 5 reps to failure
@@ -78,14 +76,14 @@ get_max_perc_1RM_percMR(5)
 # Get max \%1RM to be used when doing 3 reps with with 60\% of maximum reps
 get_max_perc_1RM_percMR(
   max_reps = 3,
-  percMR = 0.6,
+  adjustment = 0.6,
 )
 
 # Get max \%1RM to be used when doing 2 reps with 60\% of maximum reps
 # using ballistic table
 get_max_perc_1RM_percMR(
   max_reps = 3,
-  percMR = 0.6,
+  adjustment = 0.6,
   type = "ballistic"
 )
 # Get predicted 1RM when lifting 100kg for 5 reps to failure
@@ -98,7 +96,7 @@ get_predicted_1RM_percMR(
 get_predicted_1RM_percMR(
   weight = 120,
   reps = 3,
-  percMR = 0.6
+  adjustment = 0.6
 )
 
 # Get predicted 1RM when lifting 120kg for 2 reps with 60\% of maximum reps
@@ -106,7 +104,7 @@ get_predicted_1RM_percMR(
 get_predicted_1RM_percMR(
   weight = 120,
   reps = 2,
-  percMR = 0.6,
+  adjustment = 0.6,
   type = "ballistic"
 )
 # Get max reps that can be done with 75\% 1RM
@@ -115,14 +113,14 @@ get_max_reps(0.75)
 # Get max reps that can be done with 80\% 1RM with 2 reps in reserve
 get_max_reps(
   perc_1RM = 0.8,
-  RIR = 3
+  adjustment = 3
 )
 
 # Get max reps that can be done with 90\% 1RM with 2 reps in reserve
 # using ballistic table
 get_max_reps(
   perc_1RM = 0.9,
-  RIR = 2,
+  adjustment = 2,
   type = "ballistic"
 )
 # Get max \%1RM to be used when doing 5 reps to failure
@@ -131,14 +129,14 @@ get_max_perc_1RM(5)
 # Get max \%1RM to be used when doing 3 reps with 2 reps in reserve
 get_max_perc_1RM(
   max_reps = 3,
-  RIR = 2
+  adjustment = 2
 )
 
 # Get max \%1RM to be used when doing 2 reps with 3 reps in reserve
 # using ballistic table
 get_max_perc_1RM(
   max_reps = 3,
-  RIR = 2,
+  adjustment = 2,
   type = "ballistic"
 )
 # Get predicted 1RM when lifting 100kg for 5 reps to failure
@@ -151,7 +149,7 @@ get_predicted_1RM(
 get_predicted_1RM(
   weight = 120,
   reps = 3,
-  RIR = 2
+  adjustment = 2
 )
 
 # Get predicted 1RM when lifting 120kg for 2 reps with 1 reps in reserve
@@ -159,7 +157,7 @@ get_predicted_1RM(
 get_predicted_1RM(
   weight = 120,
   reps = 2,
-  RIR = 1,
+  adjustment = 1,
   type = "ballistic"
 )
 }

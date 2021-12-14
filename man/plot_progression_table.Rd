@@ -9,7 +9,7 @@ plot_progression_table(progression_table = RIR_increment, type = "\%1RM")
 \arguments{
 \item{progression_table}{Function for creating progression table. Default is \code{\link{RIR_increment}}}
 
-\item{type}{Character string. Options include "\%1RM" (default) and "Adjustment"}
+\item{type}{Character string. Options include "\%1RM" (default) and "adjustment"}
 }
 \value{
 \code{ggplot2} object
@@ -19,5 +19,5 @@ Functions for creating \code{ggplot2} plot of the Progression Table
 }
 \examples{
 plot_progression_table(RIR_increment, "\%1RM")
-plot_progression_table(RIR_increment, "Adjustment")
+plot_progression_table(RIR_increment, "adjustment")
 }

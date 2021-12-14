@@ -45,7 +45,7 @@ RIR_increment_generic <- function(reps,
   adjustment <- rep_RIR + step_RIR + adjustment
   perc_1RM <- func_max_perc_1RM(
     max_reps = reps,
-    RIR = adjustment,
+    adjustment = adjustment,
     ...
   )
 
@@ -74,7 +74,7 @@ perc_drop_generic <- function(reps,
 
   perc_1RM <- func_max_perc_1RM(
     max_reps = reps,
-    RIR = 0,
+    adjustment = 0,
     ...
   )
 
