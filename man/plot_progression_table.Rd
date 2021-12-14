@@ -2,14 +2,24 @@
 % Please edit documentation in R/plot-functions.R
 \name{plot_progression_table}
 \alias{plot_progression_table}
-\title{Plotting of th Progression Table}
+\title{Plotting of the Progression Table}
 \usage{
-plot_progression_table(progression_table = RIR_increment, type = "\%1RM")
+plot_progression_table(
+  progression_table = RIR_increment,
+  type = "\%1RM",
+  signif_digits = 3,
+  adjustment_multiplier = 1
+)
 }
 \arguments{
 \item{progression_table}{Function for creating progression table. Default is \code{\link{RIR_increment}}}
 
 \item{type}{Character string. Options include "\%1RM" (default) and "adjustment"}
+
+\item{signif_digits}{Rounding numbers for plotting. Default is 3}
+
+\item{adjustment_multiplier}{Factor to multiply the adjustment. Useful when converting to percentage.
+Default is 1}
 }
 \value{
 \code{ggplot2} object
