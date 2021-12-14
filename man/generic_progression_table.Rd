@@ -79,7 +79,7 @@ Generic progression tables allow for custom progressions using
 }
 \section{Functions}{
 \itemize{
-\item \code{percRM_step_generic}: \%RM Step generic table
+\item \code{percRM_step_generic}: \%MR Step generic table
 
 \item \code{RIR_increment_generic}: RIR Increment generic table
 

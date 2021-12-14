@@ -112,7 +112,7 @@ Progression table explained in the 'Strength Training Manual' Chapter 6.
 }
 \section{Functions}{
 \itemize{
-\item \code{percRM_step}: \%RM Step progression table
+\item \code{percRM_step}: \%MR Step progression table
 
 \item \code{RIR_increment}: RIR Increment progression table. This is the original
 progression table from the Strength Training Manual
