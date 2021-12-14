@@ -1,9 +1,9 @@
 #' @describeIn generic_progression_table %MR Step generic table
 #' @export
 #' @examples
-#' percRM_step_generic(10, step = seq(-3, 0, 1))
-#' percRM_step_generic(5, step = seq(-3, 0, 1), type = "ballistic")
-percRM_step_generic <- function(reps,
+#' percMR_step_generic(10, step = seq(-3, 0, 1))
+#' percMR_step_generic(5, step = seq(-3, 0, 1), type = "ballistic")
+percMR_step_generic <- function(reps,
                                   step = 0,
                                   rep_start = 0,
                                   rep_step = 0,
@@ -33,10 +33,17 @@ percRM_step_generic <- function(reps,
 #' @describeIn progression_table %MR Step progression table
 #' @export
 #' @examples
-#' percRM_step(10, step = seq(-3, 0, 1))
-#' percRM_step(10, step = seq(-3, 0, 1), volume = "extensive")
-#' percRM_step(5, step = seq(-3, 0, 1), type = "ballistic")
-percRM_step <- function(reps,
+#' percMR_step(10, step = seq(-3, 0, 1))
+#' percMR_step(10, step = seq(-3, 0, 1), volume = "extensive")
+#' percMR_step(5, step = seq(-3, 0, 1), type = "ballistic")
+#'
+#' # Generate progression table
+#' generate_progression_table(percMR_step)
+#'
+#' # Plot progression table
+#' plot_progression_table(percMR_step)
+#' plot_progression_table(percMR_step, "adjustment")
+percMR_step <- function(reps,
                       step = 0,
                       volume = "normal",
                       type = "grinding",
@@ -56,7 +63,7 @@ percRM_step <- function(reps,
   params <- params[params$volume == volume, ]
   params <- params[params$type == type, ]
 
-  percRM_step_generic(
+  percMR_step_generic(
     reps = reps,
     step = step,
     rep_start = params$rep_start[1],
