@@ -39,146 +39,33 @@ This is a quick example, more are coming….
 
 [Strength Training Manual](https://amzn.to/3owbBr6) comes with two
 progression table implemented in `RIR_increment` and `perc_drop`
-functions, although there are fixed variants (and you can easily make
+functions, although there are other variants (and you can easily make
 your own).
 
-To visualize these progression tables, we need to write a simple plot
-function:
+Here is the `RIR_increment` progression table:
 
 ``` r
-require(tidyverse)
-require(ggstance)
+# Load STM package
 require(STM)
 
-plot_progression_table <- function(progression_table = RIR_increment) {
-  progression_tbl <- generate_progression_table(
-    progression_table = progression_table)
-  
-  progression_tbl <- progression_tbl %>%
-    mutate(
-      volume = factor(
-        volume,
-        levels = c("intensive", "normal", "extensive")
-      ),
-      type = factor(
-        type,
-        levels = c("grinding", "ballistic")
-      ),
-      reps = factor(reps),
-      step = factor(step),
-      perc_1RM = signif(perc_1RM * 100, 2),
-      adjustment = signif(adjustment, 2)
-    )
-  
-  gg_perc_1RM <- ggplot(progression_tbl, aes(x = step, y = reps)) +
-    theme_linedraw() +
-    #geom_tile(fill = "transparent", color = "black") + 
-    geom_text(aes(label = perc_1RM)) +
-    facet_grid(type~volume) +
-    scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
-    theme(
-      legend.position = "none",
-      axis.title = element_blank(),
-      #axis.text = element_blank(),
-      axis.ticks = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank()
-    ) +
-    xlab(NULL) +
-    ylab(NULL) +
-    ggtitle("%1RM")
-  
-  gg_adj <- ggplot(progression_tbl, aes(x = step, y = reps)) +
-    theme_linedraw() +
-    #geom_tile(fill = "transparent", color = "black") + 
-    geom_text(aes(label = adjustment)) +
-    facet_grid(type~volume) +
-    scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
-    theme(
-      legend.position = "none",
-      axis.title = element_blank(),
-      #axis.text = element_blank(),
-      axis.ticks = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank()
-    ) +
-    xlab(NULL) +
-    ylab(NULL) +
-    ggtitle("Adjustment", "RIR Increment or Percent Drop")
-  
-  list(
-    `%1RM` = gg_perc_1RM,
-    `Adjustment` = gg_adj
-  )
-}
+plot_progression_table(RIR_increment, signif_digits = 2)
 ```
 
-Here is the table of the `RIR_increment`:
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+
+And the `perc_drop` progression table:
 
 ``` r
-plot_progression_table(RIR_increment)$`%1RM`
+plot_progression_table(perc_drop, signif_digits = 2)
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
-
-And table of the `perc_drop`:
-
-``` r
-plot_progression_table(perc_drop)$`%1RM`
-```
-
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 ### Set and Rep schemes
 
 [Strength Training Manual](https://amzn.to/3owbBr6) comes with more than
 2,000 set and rep schemes. `STM` package allows re-creation of those
 schemes, but also creation of custom ones.
-
-To make these schemes more visual, we need to write a plotting function.
-
-``` r
-# Plot scheme function
-plot_scheme <- function(scheme, label_size = 3) {
-  # Reorganize the data
-  scheme <- scheme %>%
-    group_by(index) %>%
-    mutate(
-      set = row_number(),
-      adjustment = signif(adjustment, 2),
-      perc_1RM = signif(perc_1RM * 100, 2),
-      index = paste0("Week ", index)
-    ) %>%
-    rename(
-      Reps = reps,
-      Adjustment = adjustment,
-      `%1RM` = perc_1RM
-    ) %>%
-    pivot_longer(cols = c("Reps", "Adjustment", "%1RM"), names_to = "param") %>%
-    mutate(
-      param = factor(param, levels = c("Reps", "Adjustment", "%1RM")),
-      hjust = ifelse(value < 0, -0.5, 1.5))
-
-  # Plot
-  ggplot(scheme, aes(x = value, y = set, fill = param)) +
-    theme_linedraw() +
-    geom_barh(stat = "identity") +
-    geom_text(aes(label = value, hjust = hjust), size = label_size) +
-    facet_grid(index ~ param, scales = "free_x") +
-    scale_y_reverse() +
-    theme(
-      legend.position = "none",
-      axis.title = element_blank(),
-      axis.text = element_blank(),
-      axis.ticks = element_blank(),
-      panel.grid.major = element_blank(),
-      panel.grid.minor = element_blank()
-    ) +
-    scale_fill_brewer(palette = "Accent") +
-    xlab(NULL) +
-    ylab(NULL)
-}
-```
 
 Here is an example for the Wave Set and Rep Scheme
 
@@ -197,7 +84,7 @@ scheme <- scheme_wave(
 plot_scheme(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 Example of Set Accumulation Wave Scheme
 
@@ -215,4 +102,4 @@ scheme <- scheme_wave(
 plot_scheme(scheme, label_size = 2.5)
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
