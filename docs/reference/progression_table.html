@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Progression table — percRM_step • STM</title>
+<title>Progression table — percMR_step • STM</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Progression table — percRM_step" />
+<meta property="og:title" content="Progression table — percMR_step" />
 <meta property="og:description" content="Progression table explained in the 'Strength Training Manual' Chapter 6." />
 <meta property="og:image" content="/logo.png" />
 
@@ -123,7 +123,7 @@
     <p>Progression table explained in the 'Strength Training Manual' Chapter 6.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>percRM_step</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>percMR_step</span><span class='op'>(</span>
   <span class='va'>reps</span>,
   step <span class='op'>=</span> <span class='fl'>0</span>,
   volume <span class='op'>=</span> <span class='st'>"normal"</span>,
@@ -187,12 +187,21 @@
 <span class='op'>)</span>
 
 <span class='fu'>generate_progression_table</span><span class='op'>(</span>
+  progression_table <span class='op'>=</span> <span class='va'>RIR_increment</span>,
   type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"grinding"</span>, <span class='st'>"ballistic"</span><span class='op'>)</span>,
   volume <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"intensive"</span>, <span class='st'>"normal"</span>, <span class='st'>"extensive"</span><span class='op'>)</span>,
   reps <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>12</span>,
   step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>,
-  progression_table <span class='op'>=</span> <span class='va'>RIR_increment</span>,
   <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='fu'>relInt</span><span class='op'>(</span>
+  <span class='va'>reps</span>,
+  step <span class='op'>=</span> <span class='fl'>0</span>,
+  volume <span class='op'>=</span> <span class='st'>"normal"</span>,
+  type <span class='op'>=</span> <span class='st'>"grinding"</span>,
+  adjustment <span class='op'>=</span> <span class='fl'>0</span>,
+  func_max_perc_1RM <span class='op'>=</span> <span class='va'>get_max_perc_1RM_relInt</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -221,7 +230,7 @@
     <tr>
       <th>func_max_perc_1RM</th>
       <td><p>What max rep table should be used?
-Default is <code><a href='get_max_reps_percMR.html'>get_max_perc_1RM</a></code></p></td>
+Default is <code><a href='get_max_reps_relInt.html'>get_max_perc_1RM</a></code></p></td>
     </tr>
     <tr>
       <th>progression_table</th>
@@ -241,7 +250,7 @@ Default is <code><a href='get_max_reps_percMR.html'>get_max_perc_1RM</a></code><
 
     
 <ul>
-<li><p><code>percRM_step</code>: %RM Step progression table</p></li>
+<li><p><code>percMR_step</code>: %MR Step progression table</p></li>
 <li><p><code>RIR_increment</code>: RIR Increment progression table. This is the original
 progression table from the Strength Training Manual</p></li>
 <li><p><code>RIR_increment_fixed_2</code>: Fixed 2 RIR Increment progression table. This variant have fixed RIR
@@ -259,28 +268,324 @@ intensive schemes</p></li>
 drops across reps from phases to phases (2.5%) and 2.5% difference between extensive, normal, and
 intensive schemes</p></li>
 <li><p><code>generate_progression_table</code>: Generates progression tables</p></li>
+<li><p><code>relInt</code>: Relative Intensity progression table</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>percRM_step</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'>percMR_step</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
 #&gt; [1] 0.55 0.65 0.75 0.85
 #&gt; 
 #&gt; $perc_1RM
 #&gt; [1] 0.6228766 0.6612411 0.6925208 0.7185123
-#&gt; </div><div class='input'><span class='fu'>percRM_step</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span>
+#&gt; </div><div class='input'><span class='fu'>percMR_step</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
 #&gt; [1] 0.4 0.5 0.6 0.7
 #&gt; 
 #&gt; $perc_1RM
 #&gt; [1] 0.5457026 0.6002401 0.6430868 0.6776379
-#&gt; </div><div class='input'><span class='fu'>percRM_step</span><span class='op'>(</span><span class='fl'>5</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span>
+#&gt; </div><div class='input'><span class='fu'>percMR_step</span><span class='op'>(</span><span class='fl'>5</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
 #&gt; [1] 0.55 0.65 0.75 0.85
 #&gt; 
 #&gt; $perc_1RM
 #&gt; [1] 0.6228766 0.6612411 0.6925208 0.7185123
-#&gt; </div><div class='input'><span class='fu'>RIR_increment</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+#&gt; </div><div class='input'>
+<span class='co'># Generate progression table</span>
+<span class='fu'>generate_progression_table</span><span class='op'>(</span><span class='va'>percMR_step</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          type    volume reps step adjustment  perc_1RM
+#&gt; 1    grinding intensive    1   -3       0.70 0.9545888
+#&gt; 2   ballistic intensive    1   -3       0.70 0.9131229
+#&gt; 3    grinding    normal    1   -3       0.55 0.9429110
+#&gt; 4   ballistic    normal    1   -3       0.55 0.8919883
+#&gt; 5    grinding extensive    1   -3       0.40 0.9231479
+#&gt; 6   ballistic extensive    1   -3       0.40 0.8572653
+#&gt; 7    grinding intensive    2   -3       0.70 0.9131229
+#&gt; 8   ballistic intensive    2   -3       0.70 0.8401344
+#&gt; 9    grinding    normal    2   -3       0.55 0.8919883
+#&gt; 10  ballistic    normal    2   -3       0.55 0.8050351
+#&gt; 11   grinding extensive    2   -3       0.40 0.8572653
+#&gt; 12  ballistic extensive    2   -3       0.40 0.7501875
+#&gt; 13   grinding intensive    3   -3       0.70 0.8751094
+#&gt; 14  ballistic intensive    3   -3       0.70 0.7779507
+#&gt; 15   grinding    normal    3   -3       0.55 0.8462840
+#&gt; 16  ballistic    normal    3   -3       0.55 0.7335289
+#&gt; 17   grinding extensive    3   -3       0.40 0.8001600
+#&gt; 18  ballistic extensive    3   -3       0.40 0.6668890
+#&gt; 19   grinding intensive    4   -3       0.70 0.8401344
+#&gt; 20  ballistic intensive    4   -3       0.70 0.7243377
+#&gt; 21   grinding    normal    4   -3       0.55 0.8050351
+#&gt; 22  ballistic    normal    4   -3       0.55 0.6736894
+#&gt; 23   grinding extensive    4   -3       0.40 0.7501875
+#&gt; 24  ballistic extensive    4   -3       0.40 0.6002401
+#&gt; 25   grinding intensive    5   -3       0.70 0.8078477
+#&gt; 26  ballistic intensive    5   -3       0.70 0.6776379
+#&gt; 27   grinding    normal    5   -3       0.55 0.7676204
+#&gt; 28  ballistic    normal    5   -3       0.55 0.6228766
+#&gt; 29   grinding extensive    5   -3       0.40 0.7060900
+#&gt; 30  ballistic extensive    5   -3       0.40 0.5457026
+#&gt; 31   grinding intensive    6   -3       0.70 0.7779507
+#&gt; 32  ballistic intensive    6   -3       0.70 0.6365951
+#&gt; 33   grinding    normal    6   -3       0.55 0.7335289
+#&gt; 34  ballistic    normal    6   -3       0.55 0.5791912
+#&gt; 35   grinding extensive    6   -3       0.40 0.6668890
+#&gt; 36  ballistic extensive    6   -3       0.40 0.5002501
+#&gt; 37   grinding intensive    7   -3       0.70 0.7501875
+#&gt; 38  ballistic intensive    7   -3       0.70 0.6002401
+#&gt; 39   grinding    normal    7   -3       0.55 0.7023369
+#&gt; 40  ballistic    normal    7   -3       0.55 0.5412320
+#&gt; 41   grinding extensive    7   -3       0.40 0.6318117
+#&gt; 42  ballistic extensive    7   -3       0.40 0.4617871
+#&gt; 43   grinding intensive    8   -3       0.70 0.7243377
+#&gt; 44  ballistic intensive    8   -3       0.70 0.5678131
+#&gt; 45   grinding    normal    8   -3       0.55 0.6736894
+#&gt; 46  ballistic    normal    8   -3       0.55 0.5079424
+#&gt; 47   grinding extensive    8   -3       0.40 0.6002401
+#&gt; 48  ballistic extensive    8   -3       0.40 0.4288165
+#&gt; 49   grinding intensive    9   -3       0.70 0.7002101
+#&gt; 50  ballistic intensive    9   -3       0.70 0.5387102
+#&gt; 51   grinding    normal    9   -3       0.55 0.6472873
+#&gt; 52  ballistic    normal    9   -3       0.55 0.4785105
+#&gt; 53   grinding extensive    9   -3       0.40 0.5716736
+#&gt; 54  ballistic extensive    9   -3       0.40 0.4002401
+#&gt; 55   grinding intensive   10   -3       0.70 0.6776379
+#&gt; 56  ballistic intensive   10   -3       0.70 0.5124451
+#&gt; 57   grinding    normal   10   -3       0.55 0.6228766
+#&gt; 58  ballistic    normal   10   -3       0.55 0.4523026
+#&gt; 59   grinding extensive   10   -3       0.40 0.5457026
+#&gt; 60  ballistic extensive   10   -3       0.40 0.3752345
+#&gt; 61   grinding intensive   11   -3       0.70 0.6564757
+#&gt; 62  ballistic intensive   11   -3       0.70 0.4886221
+#&gt; 63   grinding    normal   11   -3       0.55 0.6002401
+#&gt; 64  ballistic    normal   11   -3       0.55 0.4288165
+#&gt; 65   grinding extensive   11   -3       0.40 0.5219888
+#&gt; 66  ballistic extensive   11   -3       0.40 0.3531697
+#&gt; 67   grinding intensive   12   -3       0.70 0.6365951
+#&gt; 68  ballistic intensive   12   -3       0.70 0.4669157
+#&gt; 69   grinding    normal   12   -3       0.55 0.5791912
+#&gt; 70  ballistic    normal   12   -3       0.55 0.4076490
+#&gt; 71   grinding extensive   12   -3       0.40 0.5002501
+#&gt; 72  ballistic extensive   12   -3       0.40 0.3335557
+#&gt; 73   grinding intensive    1   -2       0.80 0.9600384
+#&gt; 74  ballistic intensive    1   -2       0.80 0.9231479
+#&gt; 75   grinding    normal    1   -2       0.65 0.9512659
+#&gt; 76  ballistic    normal    1   -2       0.65 0.9070611
+#&gt; 77   grinding extensive    1   -2       0.50 0.9375586
+#&gt; 78  ballistic extensive    1   -2       0.50 0.8824568
+#&gt; 79   grinding intensive    2   -2       0.80 0.9231479
+#&gt; 80  ballistic intensive    2   -2       0.80 0.8572653
+#&gt; 81   grinding    normal    2   -2       0.65 0.9070611
+#&gt; 82  ballistic    normal    2   -2       0.65 0.8299285
+#&gt; 83   grinding extensive    2   -2       0.50 0.8824568
+#&gt; 84  ballistic extensive    2   -2       0.50 0.7896399
+#&gt; 85   grinding intensive    3   -2       0.80 0.8889877
+#&gt; 86  ballistic intensive    3   -2       0.80 0.8001600
+#&gt; 87   grinding    normal    3   -2       0.65 0.8667822
+#&gt; 88  ballistic    normal    3   -2       0.65 0.7648859
+#&gt; 89   grinding extensive    3   -2       0.50 0.8334722
+#&gt; 90  ballistic extensive    3   -2       0.50 0.7144899
+#&gt; 91   grinding intensive    4   -2       0.80 0.8572653
+#&gt; 92  ballistic intensive    4   -2       0.80 0.7501875
+#&gt; 93   grinding    normal    4   -2       0.65 0.8299285
+#&gt; 94  ballistic    normal    4   -2       0.65 0.7092973
+#&gt; 95   grinding extensive    4   -2       0.50 0.7896399
+#&gt; 96  ballistic extensive    4   -2       0.50 0.6524008
+#&gt; 97   grinding intensive    5   -2       0.80 0.8277289
+#&gt; 98  ballistic intensive    5   -2       0.80 0.7060900
+#&gt; 99   grinding    normal    5   -2       0.65 0.7960808
+#&gt; 100 ballistic    normal    5   -2       0.65 0.6612411
+#&gt; 101  grinding extensive    5   -2       0.50 0.7501875
+#&gt; 102 ballistic extensive    5   -2       0.50 0.6002401
+#&gt; 103  grinding intensive    6   -2       0.80 0.8001600
+#&gt; 104 ballistic intensive    6   -2       0.80 0.6668890
+#&gt; 105  grinding    normal    6   -2       0.65 0.7648859
+#&gt; 106 ballistic    normal    6   -2       0.65 0.6192835
+#&gt; 107  grinding extensive    6   -2       0.50 0.7144899
+#&gt; 108 ballistic extensive    6   -2       0.50 0.5558026
+#&gt; 109  grinding intensive    7   -2       0.80 0.7743684
+#&gt; 110 ballistic intensive    7   -2       0.80 0.6318117
+#&gt; 111  grinding    normal    7   -2       0.65 0.7360435
+#&gt; 112 ballistic    normal    7   -2       0.65 0.5823329
+#&gt; 113  grinding extensive    7   -2       0.50 0.6820352
+#&gt; 114 ballistic extensive    7   -2       0.50 0.5174912
+#&gt; 115  grinding intensive    8   -2       0.80 0.7501875
+#&gt; 116 ballistic intensive    8   -2       0.80 0.6002401
+#&gt; 117  grinding    normal    8   -2       0.65 0.7092973
+#&gt; 118 ballistic    normal    8   -2       0.65 0.5495435
+#&gt; 119  grinding extensive    8   -2       0.50 0.6524008
+#&gt; 120 ballistic extensive    8   -2       0.50 0.4841208
+#&gt; 121  grinding intensive    9   -2       0.80 0.7274711
+#&gt; 122 ballistic intensive    9   -2       0.80 0.5716736
+#&gt; 123  grinding    normal    9   -2       0.65 0.6844267
+#&gt; 124 ballistic    normal    9   -2       0.65 0.5202497
+#&gt; 125  grinding extensive    9   -2       0.50 0.6252345
+#&gt; 126 ballistic extensive    9   -2       0.50 0.4547935
+#&gt; 127  grinding intensive   10   -2       0.80 0.7060900
+#&gt; 128 ballistic intensive   10   -2       0.80 0.5457026
+#&gt; 129  grinding    normal   10   -2       0.65 0.6612411
+#&gt; 130 ballistic    normal   10   -2       0.65 0.4939210
+#&gt; 131  grinding extensive   10   -2       0.50 0.6002401
+#&gt; 132 ballistic extensive   10   -2       0.50 0.4288165
+#&gt; 133  grinding intensive   11   -2       0.80 0.6859299
+#&gt; 134 ballistic intensive   11   -2       0.80 0.5219888
+#&gt; 135  grinding    normal   11   -2       0.65 0.6395749
+#&gt; 136 ballistic    normal   11   -2       0.65 0.4701287
+#&gt; 137  grinding extensive   11   -2       0.50 0.5771673
+#&gt; 138 ballistic extensive   11   -2       0.50 0.4056466
+#&gt; 139  grinding intensive   12   -2       0.80 0.6668890
+#&gt; 140 ballistic intensive   12   -2       0.80 0.5002501
+#&gt; 141  grinding    normal   12   -2       0.65 0.6192835
+#&gt; 142 ballistic    normal   12   -2       0.65 0.4485233
+#&gt; 143  grinding extensive   12   -2       0.50 0.5558026
+#&gt; 144 ballistic extensive   12   -2       0.50 0.3848522
+#&gt; 145  grinding intensive    1   -1       0.90 0.9643202
+#&gt; 146 ballistic intensive    1   -1       0.90 0.9310987
+#&gt; 147  grinding    normal    1   -1       0.75 0.9574876
+#&gt; 148 ballistic    normal    1   -1       0.75 0.9184423
+#&gt; 149  grinding extensive    1   -1       0.60 0.9474183
+#&gt; 150 ballistic extensive    1   -1       0.60 0.9000900
+#&gt; 151  grinding intensive    2   -1       0.90 0.9310987
+#&gt; 152 ballistic intensive    2   -1       0.90 0.8710801
+#&gt; 153  grinding    normal    2   -1       0.75 0.9184423
+#&gt; 154 ballistic    normal    2   -1       0.75 0.8491848
+#&gt; 155  grinding extensive    2   -1       0.60 0.9000900
+#&gt; 156 ballistic extensive    2   -1       0.60 0.8183306
+#&gt; 157  grinding intensive    3   -1       0.90 0.9000900
+#&gt; 158 ballistic intensive    3   -1       0.90 0.8183306
+#&gt; 159  grinding    normal    3   -1       0.75 0.8824568
+#&gt; 160 ballistic    normal    3   -1       0.75 0.7896399
+#&gt; 161  grinding extensive    3   -1       0.60 0.8572653
+#&gt; 162 ballistic extensive    3   -1       0.60 0.7501875
+#&gt; 163  grinding intensive    4   -1       0.90 0.8710801
+#&gt; 164 ballistic intensive    4   -1       0.90 0.7716049
+#&gt; 165  grinding    normal    4   -1       0.75 0.8491848
+#&gt; 166 ballistic    normal    4   -1       0.75 0.7378985
+#&gt; 167  grinding extensive    4   -1       0.60 0.8183306
+#&gt; 168 ballistic extensive    4   -1       0.60 0.6925208
+#&gt; 169  grinding intensive    5   -1       0.90 0.8438819
+#&gt; 170 ballistic intensive    5   -1       0.90 0.7299270
+#&gt; 171  grinding    normal    5   -1       0.75 0.8183306
+#&gt; 172 ballistic    normal    5   -1       0.75 0.6925208
+#&gt; 173  grinding extensive    5   -1       0.60 0.7827789
+#&gt; 174 ballistic extensive    5   -1       0.60 0.6430868
+#&gt; 175  grinding intensive    6   -1       0.90 0.8183306
+#&gt; 176 ballistic intensive    6   -1       0.90 0.6925208
+#&gt; 177  grinding    normal    6   -1       0.75 0.7896399
+#&gt; 178 ballistic    normal    6   -1       0.75 0.6524008
+#&gt; 179  grinding extensive    6   -1       0.60 0.7501875
+#&gt; 180 ballistic extensive    6   -1       0.60 0.6002401
+#&gt; 181  grinding intensive    7   -1       0.90 0.7942812
+#&gt; 182 ballistic intensive    7   -1       0.90 0.6587615
+#&gt; 183  grinding    normal    7   -1       0.75 0.7628929
+#&gt; 184 ballistic    normal    7   -1       0.75 0.6166749
+#&gt; 185  grinding extensive    7   -1       0.60 0.7202017
+#&gt; 186 ballistic extensive    7   -1       0.60 0.5627462
+#&gt; 187  grinding intensive    8   -1       0.90 0.7716049
+#&gt; 188 ballistic intensive    8   -1       0.90 0.6281407
+#&gt; 189  grinding    normal    8   -1       0.75 0.7378985
+#&gt; 190 ballistic    normal    8   -1       0.75 0.5846586
+#&gt; 191  grinding extensive    8   -1       0.60 0.6925208
+#&gt; 192 ballistic extensive    8   -1       0.60 0.5296610
+#&gt; 193  grinding intensive    9   -1       0.90 0.7501875
+#&gt; 194 ballistic intensive    9   -1       0.90 0.6002401
+#&gt; 195  grinding    normal    9   -1       0.75 0.7144899
+#&gt; 196 ballistic    normal    9   -1       0.75 0.5558026
+#&gt; 197  grinding extensive    9   -1       0.60 0.6668890
+#&gt; 198 ballistic extensive    9   -1       0.60 0.5002501
+#&gt; 199  grinding intensive   10   -1       0.90 0.7299270
+#&gt; 200 ballistic intensive   10   -1       0.90 0.5747126
+#&gt; 201  grinding    normal   10   -1       0.75 0.6925208
+#&gt; 202 ballistic    normal   10   -1       0.75 0.5296610
+#&gt; 203  grinding extensive   10   -1       0.60 0.6430868
+#&gt; 204 ballistic extensive   10   -1       0.60 0.4739336
+#&gt; 205  grinding intensive   11   -1       0.90 0.7107321
+#&gt; 206 ballistic intensive   11   -1       0.90 0.5512679
+#&gt; 207  grinding    normal   11   -1       0.75 0.6718624
+#&gt; 208 ballistic    normal   11   -1       0.75 0.5058681
+#&gt; 209  grinding extensive   11   -1       0.60 0.6209252
+#&gt; 210 ballistic extensive   11   -1       0.60 0.4502476
+#&gt; 211  grinding intensive   12   -1       0.90 0.6925208
+#&gt; 212 ballistic intensive   12   -1       0.90 0.5296610
+#&gt; 213  grinding    normal   12   -1       0.75 0.6524008
+#&gt; 214 ballistic    normal   12   -1       0.75 0.4841208
+#&gt; 215  grinding extensive   12   -1       0.60 0.6002401
+#&gt; 216 ballistic extensive   12   -1       0.60 0.4288165
+#&gt; 217  grinding intensive    1    0       1.00 0.9677732
+#&gt; 218 ballistic intensive    1    0       1.00 0.9375586
+#&gt; 219  grinding    normal    1    0       0.85 0.9623005
+#&gt; 220 ballistic    normal    1    0       0.85 0.9273402
+#&gt; 221  grinding extensive    1    0       0.70 0.9545888
+#&gt; 222 ballistic extensive    1    0       0.70 0.9131229
+#&gt; 223  grinding intensive    2    0       1.00 0.9375586
+#&gt; 224 ballistic intensive    2    0       1.00 0.8824568
+#&gt; 225  grinding    normal    2    0       0.85 0.9273402
+#&gt; 226 ballistic    normal    2    0       0.85 0.8645240
+#&gt; 227  grinding extensive    2    0       0.70 0.9131229
+#&gt; 228 ballistic extensive    2    0       0.70 0.8401344
+#&gt; 229  grinding intensive    3    0       1.00 0.9091736
+#&gt; 230 ballistic intensive    3    0       1.00 0.8334722
+#&gt; 231  grinding    normal    3    0       0.85 0.8948310
+#&gt; 232 ballistic    normal    3    0       0.85 0.8096780
+#&gt; 233  grinding extensive    3    0       0.70 0.8751094
+#&gt; 234 ballistic extensive    3    0       0.70 0.7779507
+#&gt; 235  grinding intensive    4    0       1.00 0.8824568
+#&gt; 236 ballistic intensive    4    0       1.00 0.7896399
+#&gt; 237  grinding    normal    4    0       0.85 0.8645240
+#&gt; 238 ballistic    normal    4    0       0.85 0.7613759
+#&gt; 239  grinding extensive    4    0       0.70 0.8401344
+#&gt; 240 ballistic extensive    4    0       0.70 0.7243377
+#&gt; 241  grinding intensive    5    0       1.00 0.8572653
+#&gt; 242 ballistic intensive    5    0       1.00 0.7501875
+#&gt; 243  grinding    normal    5    0       0.85 0.8362027
+#&gt; 244 ballistic    normal    5    0       0.85 0.7185123
+#&gt; 245  grinding extensive    5    0       0.70 0.8078477
+#&gt; 246 ballistic extensive    5    0       0.70 0.6776379
+#&gt; 247  grinding intensive    6    0       1.00 0.8334722
+#&gt; 248 ballistic intensive    6    0       1.00 0.7144899
+#&gt; 249  grinding    normal    6    0       0.85 0.8096780
+#&gt; 250 ballistic    normal    6    0       0.85 0.6802177
+#&gt; 251  grinding extensive    6    0       0.70 0.7779507
+#&gt; 252 ballistic extensive    6    0       0.70 0.6365951
+#&gt; 253  grinding intensive    7    0       1.00 0.8109642
+#&gt; 254 ballistic intensive    7    0       1.00 0.6820352
+#&gt; 255  grinding    normal    7    0       0.85 0.7847844
+#&gt; 256 ballistic    normal    7    0       0.85 0.6457985
+#&gt; 257  grinding extensive    7    0       0.70 0.7501875
+#&gt; 258 ballistic extensive    7    0       0.70 0.6002401
+#&gt; 259  grinding intensive    8    0       1.00 0.7896399
+#&gt; 260 ballistic intensive    8    0       1.00 0.6524008
+#&gt; 261  grinding    normal    8    0       0.85 0.7613759
+#&gt; 262 ballistic    normal    8    0       0.85 0.6146948
+#&gt; 263  grinding extensive    8    0       0.70 0.7243377
+#&gt; 264 ballistic extensive    8    0       0.70 0.5678131
+#&gt; 265  grinding intensive    9    0       1.00 0.7694083
+#&gt; 266 ballistic intensive    9    0       1.00 0.6252345
+#&gt; 267  grinding    normal    9    0       0.85 0.7393233
+#&gt; 268 ballistic    normal    9    0       0.85 0.5864496
+#&gt; 269  grinding extensive    9    0       0.70 0.7002101
+#&gt; 270 ballistic extensive    9    0       0.70 0.5387102
+#&gt; 271  grinding intensive   10    0       1.00 0.7501875
+#&gt; 272 ballistic intensive   10    0       1.00 0.6002401
+#&gt; 273  grinding    normal   10    0       0.85 0.7185123
+#&gt; 274 ballistic    normal   10    0       0.85 0.5606860
+#&gt; 275  grinding extensive   10    0       0.70 0.6776379
+#&gt; 276 ballistic extensive   10    0       0.70 0.5124451
+#&gt; 277  grinding intensive   11    0       1.00 0.7319037
+#&gt; 278 ballistic intensive   11    0       1.00 0.5771673
+#&gt; 279  grinding    normal   11    0       0.85 0.6988407
+#&gt; 280 ballistic    normal   11    0       0.85 0.5370909
+#&gt; 281  grinding extensive   11    0       0.70 0.6564757
+#&gt; 282 ballistic extensive   11    0       0.70 0.4886221
+#&gt; 283  grinding intensive   12    0       1.00 0.7144899
+#&gt; 284 ballistic intensive   12    0       1.00 0.5558026
+#&gt; 285  grinding    normal   12    0       0.85 0.6802177
+#&gt; 286 ballistic    normal   12    0       0.85 0.5154014
+#&gt; 287  grinding extensive   12    0       0.70 0.6365951
+#&gt; 288 ballistic extensive   12    0       0.70 0.4669157</div><div class='input'>
+<span class='co'># Plot progression table</span>
+<span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>percMR_step</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>percMR_step</span>, <span class='st'>"adjustment"</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>RIR_increment</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
 #&gt; [1] 8.090909 6.272727 4.454545 2.636364
 #&gt; 
@@ -298,43 +603,928 @@ intensive schemes</p></li>
 #&gt; 
 #&gt; $perc_1RM
 #&gt; [1] 0.5517181 0.5907931 0.6358249 0.6882881
-#&gt; </div><div class='input'><span class='fu'>RIR_increment</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+#&gt; </div><div class='input'>
+<span class='co'># Generate progression table</span>
+<span class='fu'>generate_progression_table</span><span class='op'>(</span><span class='va'>RIR_increment</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          type    volume reps step adjustment  perc_1RM
+#&gt; 1    grinding intensive    1   -3   3.000000 0.8824568
+#&gt; 2   ballistic intensive    1   -3   3.000000 0.7896399
+#&gt; 3    grinding    normal    1   -3   4.000000 0.8572653
+#&gt; 4   ballistic    normal    1   -3   4.000000 0.7501875
+#&gt; 5    grinding extensive    1   -3   5.000000 0.8334722
+#&gt; 6   ballistic extensive    1   -3   5.000000 0.7144899
+#&gt; 7    grinding intensive    2   -3   3.272727 0.8506426
+#&gt; 8   ballistic intensive    2   -3   3.600000 0.7283533
+#&gt; 9    grinding    normal    2   -3   4.454545 0.8230884
+#&gt; 10  ballistic    normal    2   -3   4.800000 0.6882881
+#&gt; 11   grinding extensive    2   -3   5.636364 0.7972632
+#&gt; 12  ballistic extensive    2   -3   6.000000 0.6524008
+#&gt; 13   grinding intensive    3   -3   3.545455 0.8210426
+#&gt; 14  ballistic intensive    3   -3   4.200000 0.6758949
+#&gt; 15   grinding    normal    3   -3   4.909091 0.7915320
+#&gt; 16  ballistic    normal    3   -3   5.600000 0.6358249
+#&gt; 17   grinding extensive    3   -3   6.272727 0.7640693
+#&gt; 18  ballistic extensive    3   -3   7.000000 0.6002401
+#&gt; 19   grinding intensive    4   -3   3.818182 0.7934333
+#&gt; 20  ballistic intensive    4   -3   4.800000 0.6304852
+#&gt; 21   grinding    normal    4   -3   5.363636 0.7623060
+#&gt; 22  ballistic    normal    4   -3   6.400000 0.5907931
+#&gt; 23   grinding extensive    4   -3   6.909091 0.7335289
+#&gt; 24  ballistic extensive    4   -3   8.000000 0.5558026
+#&gt; 25   grinding intensive    5   -3   4.090909 0.7676204
+#&gt; 26  ballistic intensive    5   -3   5.400000 0.5907931
+#&gt; 27   grinding    normal    5   -3   5.818182 0.7351614
+#&gt; 28  ballistic    normal    5   -3   7.200000 0.5517181
+#&gt; 29   grinding extensive    5   -3   7.545455 0.7053362
+#&gt; 30  ballistic extensive    5   -3   9.000000 0.5174912
+#&gt; 31   grinding intensive    6   -3   4.363636 0.7434341
+#&gt; 32  ballistic intensive    6   -3   6.000000 0.5558026
+#&gt; 33   grinding    normal    6   -3   6.272727 0.7098835
+#&gt; 34  ballistic    normal    6   -3   8.000000 0.5174912
+#&gt; 35   grinding extensive    6   -3   8.181818 0.6792304
+#&gt; 36  ballistic extensive    6   -3  10.000000 0.4841208
+#&gt; 37   grinding intensive    7   -3   4.636364 0.7207254
+#&gt; 38  ballistic intensive    7   -3   6.600000 0.5247250
+#&gt; 39   grinding    normal    7   -3   6.727273 0.6862861
+#&gt; 40  ballistic    normal    7   -3   8.800000 0.4872629
+#&gt; 41   grinding extensive    7   -3   8.818182 0.6549880
+#&gt; 42  ballistic extensive    7   -3  11.000000 0.4547935
+#&gt; 43   grinding intensive    8   -3   4.909091 0.6993629
+#&gt; 44  ballistic intensive    8   -3   7.200000 0.4969389
+#&gt; 45   grinding    normal    8   -3   7.181818 0.6642071
+#&gt; 46  ballistic    normal    8   -3   9.600000 0.4603712
+#&gt; 47   grinding extensive    8   -3   9.454545 0.6324165
+#&gt; 48  ballistic extensive    8   -3  12.000000 0.4288165
+#&gt; 49   grinding intensive    9   -3   5.181818 0.6792304
+#&gt; 50  ballistic intensive    9   -3   7.800000 0.4719474
+#&gt; 51   grinding    normal    9   -3   7.636364 0.6435044
+#&gt; 52  ballistic    normal    9   -3  10.400000 0.4362926
+#&gt; 53   grinding extensive    9   -3  10.090909 0.6113489
+#&gt; 54  ballistic extensive    9   -3  13.000000 0.4056466
+#&gt; 55   grinding intensive   10   -3   5.454545 0.6602245
+#&gt; 56  ballistic intensive   10   -3   8.400000 0.4493493
+#&gt; 57   grinding    normal   10   -3   8.090909 0.6240533
+#&gt; 58  ballistic    normal   10   -3  11.200000 0.4146074
+#&gt; 59   grinding extensive   10   -3  10.727273 0.5916396
+#&gt; 60  ballistic extensive   10   -3  14.000000 0.3848522
+#&gt; 61   grinding intensive   11   -3   5.727273 0.6422533
+#&gt; 62  ballistic intensive   11   -3   9.000000 0.4288165
+#&gt; 63   grinding    normal   11   -3   8.545455 0.6057436
+#&gt; 64  ballistic    normal   11   -3  12.000000 0.3949759
+#&gt; 65   grinding extensive   11   -3  11.363636 0.5731615
+#&gt; 66  ballistic extensive   11   -3  15.000000 0.3660858
+#&gt; 67   grinding intensive   12   -3   6.000000 0.6252345
+#&gt; 68  ballistic intensive   12   -3   9.600000 0.4100781
+#&gt; 69   grinding    normal   12   -3   9.000000 0.5884776
+#&gt; 70  ballistic    normal   12   -3  12.800000 0.3771194
+#&gt; 71   grinding extensive   12   -3  12.000000 0.5558026
+#&gt; 72  ballistic extensive   12   -3  16.000000 0.3490645
+#&gt; 73   grinding intensive    1   -2   2.000000 0.9091736
+#&gt; 74  ballistic intensive    1   -2   2.000000 0.8334722
+#&gt; 75   grinding    normal    1   -2   3.000000 0.8824568
+#&gt; 76  ballistic    normal    1   -2   3.000000 0.7896399
+#&gt; 77   grinding extensive    1   -2   4.000000 0.8572653
+#&gt; 78  ballistic extensive    1   -2   4.000000 0.7501875
+#&gt; 79   grinding intensive    2   -2   2.181818 0.8777670
+#&gt; 80  ballistic intensive    2   -2   2.400000 0.7733713
+#&gt; 81   grinding    normal    2   -2   3.363636 0.8484577
+#&gt; 82  ballistic    normal    2   -2   3.600000 0.7283533
+#&gt; 83   grinding extensive    2   -2   4.545455 0.8210426
+#&gt; 84  ballistic extensive    2   -2   4.800000 0.6882881
+#&gt; 85   grinding intensive    3   -2   2.363636 0.8484577
+#&gt; 86  ballistic intensive    3   -2   2.800000 0.7213550
+#&gt; 87   grinding    normal    3   -2   3.727273 0.8169813
+#&gt; 88  ballistic    normal    3   -2   4.200000 0.6758949
+#&gt; 89   grinding extensive    3   -2   5.090909 0.7877568
+#&gt; 90  ballistic extensive    3   -2   5.600000 0.6358249
+#&gt; 91   grinding intensive    4   -2   2.545455 0.8210426
+#&gt; 92  ballistic intensive    4   -2   3.200000 0.6758949
+#&gt; 93   grinding    normal    4   -2   4.090909 0.7877568
+#&gt; 94  ballistic    normal    4   -2   4.800000 0.6304852
+#&gt; 95   grinding extensive    4   -2   5.636364 0.7570648
+#&gt; 96  ballistic extensive    4   -2   6.400000 0.5907931
+#&gt; 97   grinding intensive    5   -2   2.727273 0.7953436
+#&gt; 98  ballistic intensive    5   -2   3.600000 0.6358249
+#&gt; 99   grinding    normal    5   -2   4.454545 0.7605509
+#&gt; 100 ballistic    normal    5   -2   5.400000 0.5907931
+#&gt; 101  grinding extensive    5   -2   6.181818 0.7286747
+#&gt; 102 ballistic extensive    5   -2   7.200000 0.5517181
+#&gt; 103  grinding intensive    6   -2   2.909091 0.7712046
+#&gt; 104 ballistic intensive    6   -2   4.000000 0.6002401
+#&gt; 105  grinding    normal    6   -2   4.818182 0.7351614
+#&gt; 106 ballistic    normal    6   -2   6.000000 0.5558026
+#&gt; 107  grinding extensive    6   -2   6.727273 0.7023369
+#&gt; 108 ballistic extensive    6   -2   8.000000 0.5174912
+#&gt; 109  grinding intensive    7   -2   3.090909 0.7484877
+#&gt; 110 ballistic intensive    7   -2   4.400000 0.5684273
+#&gt; 111  grinding    normal    7   -2   5.181818 0.7114123
+#&gt; 112 ballistic    normal    7   -2   6.600000 0.5247250
+#&gt; 113  grinding extensive    7   -2   7.272727 0.6778366
+#&gt; 114 ballistic extensive    7   -2   8.800000 0.4872629
+#&gt; 115  grinding intensive    8   -2   3.272727 0.7270708
+#&gt; 116 ballistic intensive    8   -2   4.800000 0.5398169
+#&gt; 117  grinding    normal    8   -2   5.545455 0.6891497
+#&gt; 118 ballistic    normal    8   -2   7.200000 0.4969389
+#&gt; 119  grinding extensive    8   -2   7.818182 0.6549880
+#&gt; 120 ballistic extensive    8   -2   9.600000 0.4603712
+#&gt; 121  grinding intensive    9   -2   3.454545 0.7068455
+#&gt; 122 ballistic intensive    9   -2   5.200000 0.5139486
+#&gt; 123  grinding    normal    9   -2   5.909091 0.6682380
+#&gt; 124 ballistic    normal    9   -2   7.800000 0.4719474
+#&gt; 125  grinding extensive    9   -2   8.363636 0.6336296
+#&gt; 126 ballistic extensive    9   -2  10.400000 0.4362926
+#&gt; 127  grinding intensive   10   -2   3.636364 0.6877149
+#&gt; 128 ballistic intensive   10   -2   5.600000 0.4904461
+#&gt; 129  grinding    normal   10   -2   6.272727 0.6485581
+#&gt; 130 ballistic    normal   10   -2   8.400000 0.4493493
+#&gt; 131  grinding extensive   10   -2   8.909091 0.6136201
+#&gt; 132 ballistic extensive   10   -2  11.200000 0.4146074
+#&gt; 133  grinding intensive   11   -2   3.818182 0.6695926
+#&gt; 134 ballistic intensive   11   -2   6.000000 0.4689992
+#&gt; 135  grinding    normal   11   -2   6.636364 0.6300042
+#&gt; 136 ballistic    normal   11   -2   9.000000 0.4288165
+#&gt; 137  grinding extensive   11   -2   9.454545 0.5948357
+#&gt; 138 ballistic extensive   11   -2  12.000000 0.3949759
+#&gt; 139  grinding intensive   12   -2   4.000000 0.6524008
+#&gt; 140 ballistic intensive   12   -2   6.400000 0.4493493
+#&gt; 141  grinding    normal   12   -2   7.000000 0.6124824
+#&gt; 142 ballistic    normal   12   -2   9.600000 0.4100781
+#&gt; 143  grinding extensive   12   -2  10.000000 0.5771673
+#&gt; 144 ballistic extensive   12   -2  12.800000 0.3771194
+#&gt; 145  grinding intensive    1   -1   1.000000 0.9375586
+#&gt; 146 ballistic intensive    1   -1   1.000000 0.8824568
+#&gt; 147  grinding    normal    1   -1   2.000000 0.9091736
+#&gt; 148 ballistic    normal    1   -1   2.000000 0.8334722
+#&gt; 149  grinding extensive    1   -1   3.000000 0.8824568
+#&gt; 150 ballistic extensive    1   -1   3.000000 0.7896399
+#&gt; 151  grinding intensive    2   -1   1.090909 0.9066781
+#&gt; 152 ballistic intensive    2   -1   1.200000 0.8243208
+#&gt; 153  grinding    normal    2   -1   2.272727 0.8754407
+#&gt; 154 ballistic    normal    2   -1   2.400000 0.7733713
+#&gt; 155  grinding extensive    2   -1   3.454545 0.8462840
+#&gt; 156 ballistic extensive    2   -1   3.600000 0.7283533
+#&gt; 157  grinding intensive    3   -1   1.181818 0.8777670
+#&gt; 158 ballistic intensive    3   -1   1.400000 0.7733713
+#&gt; 159  grinding    normal    3   -1   2.545455 0.8441215
+#&gt; 160 ballistic    normal    3   -1   2.800000 0.7213550
+#&gt; 161  grinding extensive    3   -1   3.909091 0.8129601
+#&gt; 162 ballistic extensive    3   -1   4.200000 0.6758949
+#&gt; 163  grinding intensive    4   -1   1.272727 0.8506426
+#&gt; 164 ballistic intensive    4   -1   1.600000 0.7283533
+#&gt; 165  grinding    normal    4   -1   2.818182 0.8149657
+#&gt; 166 ballistic    normal    4   -1   3.200000 0.6758949
+#&gt; 167  grinding extensive    4   -1   4.363636 0.7821610
+#&gt; 168 ballistic extensive    4   -1   4.800000 0.6304852
+#&gt; 169  grinding intensive    5   -1   1.363636 0.8251444
+#&gt; 170 ballistic intensive    5   -1   1.800000 0.6882881
+#&gt; 171  grinding    normal    5   -1   3.090909 0.7877568
+#&gt; 172 ballistic    normal    5   -1   3.600000 0.6358249
+#&gt; 173  grinding extensive    5   -1   4.818182 0.7536105
+#&gt; 174 ballistic extensive    5   -1   5.400000 0.5907931
+#&gt; 175  grinding intensive    6   -1   1.454545 0.8011303
+#&gt; 176 ballistic intensive    6   -1   2.000000 0.6524008
+#&gt; 177  grinding    normal    6   -1   3.363636 0.7623060
+#&gt; 178 ballistic    normal    6   -1   4.000000 0.6002401
+#&gt; 179  grinding extensive    6   -1   5.272727 0.7270708
+#&gt; 180 ballistic extensive    6   -1   6.000000 0.5558026
+#&gt; 181  grinding intensive    7   -1   1.545455 0.7784745
+#&gt; 182 ballistic intensive    7   -1   2.200000 0.6200704
+#&gt; 183  grinding    normal    7   -1   3.636364 0.7384483
+#&gt; 184 ballistic    normal    7   -1   4.400000 0.5684273
+#&gt; 185  grinding extensive    7   -1   5.727273 0.7023369
+#&gt; 186 ballistic extensive    7   -1   6.600000 0.5247250
+#&gt; 187  grinding intensive    8   -1   1.636364 0.7570648
+#&gt; 188 ballistic intensive    8   -1   2.400000 0.5907931
+#&gt; 189  grinding    normal    8   -1   3.909091 0.7160386
+#&gt; 190 ballistic    normal    8   -1   4.800000 0.5398169
+#&gt; 191  grinding extensive    8   -1   6.181818 0.6792304
+#&gt; 192 ballistic extensive    8   -1   7.200000 0.4969389
+#&gt; 193  grinding intensive    9   -1   1.727273 0.7368012
+#&gt; 194 ballistic intensive    9   -1   2.600000 0.5641558
+#&gt; 195  grinding    normal    9   -1   4.181818 0.6949490
+#&gt; 196 ballistic    normal    9   -1   5.200000 0.5139486
+#&gt; 197  grinding extensive    9   -1   6.636364 0.6575958
+#&gt; 198 ballistic extensive    9   -1   7.800000 0.4719474
+#&gt; 199  grinding intensive   10   -1   1.818182 0.7175941
+#&gt; 200 ballistic intensive   10   -1   2.800000 0.5398169
+#&gt; 201  grinding    normal   10   -1   4.454545 0.6750661
+#&gt; 202 ballistic    normal   10   -1   5.600000 0.4904461
+#&gt; 203  grinding extensive   10   -1   7.090909 0.6372969
+#&gt; 204 ballistic extensive   10   -1   8.400000 0.4493493
+#&gt; 205  grinding intensive   11   -1   1.909091 0.6993629
+#&gt; 206 ballistic intensive   11   -1   3.000000 0.5174912
+#&gt; 207  grinding    normal   11   -1   4.727273 0.6562893
+#&gt; 208 ballistic    normal   11   -1   6.000000 0.4689992
+#&gt; 209  grinding extensive   11   -1   7.545455 0.6182137
+#&gt; 210 ballistic extensive   11   -1   9.000000 0.4288165
+#&gt; 211  grinding intensive   12   -1   2.000000 0.6820352
+#&gt; 212 ballistic intensive   12   -1   3.200000 0.4969389
+#&gt; 213  grinding    normal   12   -1   5.000000 0.6385288
+#&gt; 214 ballistic    normal   12   -1   6.400000 0.4493493
+#&gt; 215  grinding extensive   12   -1   8.000000 0.6002401
+#&gt; 216 ballistic extensive   12   -1   9.600000 0.4100781
+#&gt; 217  grinding intensive    1    0   0.000000 0.9677732
+#&gt; 218 ballistic intensive    1    0   0.000000 0.9375586
+#&gt; 219  grinding    normal    1    0   1.000000 0.9375586
+#&gt; 220 ballistic    normal    1    0   1.000000 0.8824568
+#&gt; 221  grinding extensive    1    0   2.000000 0.9091736
+#&gt; 222 ballistic extensive    1    0   2.000000 0.8334722
+#&gt; 223  grinding intensive    2    0   0.000000 0.9375586
+#&gt; 224 ballistic intensive    2    0   0.000000 0.8824568
+#&gt; 225  grinding    normal    2    0   1.181818 0.9041963
+#&gt; 226 ballistic    normal    2    0   1.200000 0.8243208
+#&gt; 227  grinding extensive    2    0   2.363636 0.8731267
+#&gt; 228 ballistic extensive    2    0   2.400000 0.7733713
+#&gt; 229  grinding intensive    3    0   0.000000 0.9091736
+#&gt; 230 ballistic intensive    3    0   0.000000 0.8334722
+#&gt; 231  grinding    normal    3    0   1.363636 0.8731267
+#&gt; 232 ballistic    normal    3    0   1.400000 0.7733713
+#&gt; 233  grinding extensive    3    0   2.727273 0.8398293
+#&gt; 234 ballistic extensive    3    0   2.800000 0.7213550
+#&gt; 235  grinding intensive    4    0   0.000000 0.8824568
+#&gt; 236 ballistic intensive    4    0   0.000000 0.7896399
+#&gt; 237  grinding    normal    4    0   1.545455 0.8441215
+#&gt; 238 ballistic    normal    4    0   1.600000 0.7283533
+#&gt; 239  grinding extensive    4    0   3.090909 0.8089782
+#&gt; 240 ballistic extensive    4    0   3.200000 0.6758949
+#&gt; 241  grinding intensive    5    0   0.000000 0.8572653
+#&gt; 242 ballistic intensive    5    0   0.000000 0.7501875
+#&gt; 243  grinding    normal    5    0   1.727273 0.8169813
+#&gt; 244 ballistic    normal    5    0   1.800000 0.6882881
+#&gt; 245  grinding extensive    5    0   3.454545 0.7803134
+#&gt; 246 ballistic extensive    5    0   3.600000 0.6358249
+#&gt; 247  grinding intensive    6    0   0.000000 0.8334722
+#&gt; 248 ballistic intensive    6    0   0.000000 0.7144899
+#&gt; 249  grinding    normal    6    0   1.909091 0.7915320
+#&gt; 250 ballistic    normal    6    0   2.000000 0.6524008
+#&gt; 251  grinding extensive    6    0   3.818182 0.7536105
+#&gt; 252 ballistic extensive    6    0   4.000000 0.6002401
+#&gt; 253  grinding intensive    7    0   0.000000 0.8109642
+#&gt; 254 ballistic intensive    7    0   0.000000 0.6820352
+#&gt; 255  grinding    normal    7    0   2.090909 0.7676204
+#&gt; 256 ballistic    normal    7    0   2.200000 0.6200704
+#&gt; 257  grinding extensive    7    0   4.181818 0.7286747
+#&gt; 258 ballistic extensive    7    0   4.400000 0.5684273
+#&gt; 259  grinding intensive    8    0   0.000000 0.7896399
+#&gt; 260 ballistic intensive    8    0   0.000000 0.6524008
+#&gt; 261  grinding    normal    8    0   2.272727 0.7451111
+#&gt; 262 ballistic    normal    8    0   2.400000 0.5907931
+#&gt; 263  grinding extensive    8    0   4.545455 0.7053362
+#&gt; 264 ballistic extensive    8    0   4.800000 0.5398169
+#&gt; 265  grinding intensive    9    0   0.000000 0.7694083
+#&gt; 266 ballistic intensive    9    0   0.000000 0.6252345
+#&gt; 267  grinding    normal    9    0   2.454545 0.7238842
+#&gt; 268 ballistic    normal    9    0   2.600000 0.5641558
+#&gt; 269  grinding extensive    9    0   4.909091 0.6834463
+#&gt; 270 ballistic extensive    9    0   5.200000 0.5139486
+#&gt; 271  grinding intensive   10    0   0.000000 0.7501875
+#&gt; 272 ballistic intensive   10    0   0.000000 0.6002401
+#&gt; 273  grinding    normal   10    0   2.636364 0.7038333
+#&gt; 274 ballistic    normal   10    0   2.800000 0.5398169
+#&gt; 275  grinding extensive   10    0   5.272727 0.6628742
+#&gt; 276 ballistic extensive   10    0   5.600000 0.4904461
+#&gt; 277  grinding intensive   11    0   0.000000 0.7319037
+#&gt; 278 ballistic intensive   11    0   0.000000 0.5771673
+#&gt; 279  grinding    normal   11    0   2.818182 0.6848633
+#&gt; 280 ballistic    normal   11    0   3.000000 0.5174912
+#&gt; 281  grinding extensive   11    0   5.636364 0.6435044
+#&gt; 282 ballistic extensive   11    0   6.000000 0.4689992
+#&gt; 283  grinding intensive   12    0   0.000000 0.7144899
+#&gt; 284 ballistic intensive   12    0   0.000000 0.5558026
+#&gt; 285  grinding    normal   12    0   3.000000 0.6668890
+#&gt; 286 ballistic    normal   12    0   3.200000 0.4969389
+#&gt; 287  grinding extensive   12    0   6.000000 0.6252345
+#&gt; 288 ballistic extensive   12    0   6.400000 0.4493493</div><div class='input'>
+<span class='co'># Plot progression table</span>
+<span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>RIR_increment</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>RIR_increment</span>, <span class='st'>"adjustment"</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-4.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>RIR_increment_fixed_2</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
-#&gt; [1] 8.090909 6.272727 4.454545 2.636364
+#&gt; [1] 8 6 4 2
 #&gt; 
 #&gt; $perc_1RM
-#&gt; [1] 0.6240533 0.6485581 0.6750661 0.7038333
-#&gt; </div><div class='input'><span class='fu'>RIR_increment</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span>
+#&gt; [1] 0.6252345 0.6524008 0.6820352 0.7144899
+#&gt; </div><div class='input'><span class='fu'>RIR_increment_fixed_2</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
-#&gt; [1] 10.727273  8.909091  7.090909  5.272727
+#&gt; [1] 10  8  6  4
 #&gt; 
 #&gt; $perc_1RM
-#&gt; [1] 0.5916396 0.6136201 0.6372969 0.6628742
-#&gt; </div><div class='input'><span class='fu'>RIR_increment</span><span class='op'>(</span><span class='fl'>5</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span>
+#&gt; [1] 0.6002401 0.6252345 0.6524008 0.6820352
+#&gt; </div><div class='input'><span class='fu'>RIR_increment_fixed_2</span><span class='op'>(</span><span class='fl'>5</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
-#&gt; [1] 7.2 5.4 3.6 1.8
+#&gt; [1] 8 6 4 2
 #&gt; 
 #&gt; $perc_1RM
-#&gt; [1] 0.5517181 0.5907931 0.6358249 0.6882881
-#&gt; </div><div class='input'><span class='fu'>RIR_increment</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+#&gt; [1] 0.5359631 0.5771673 0.6252345 0.6820352
+#&gt; </div><div class='input'>
+<span class='co'># Generate progression table</span>
+<span class='fu'>generate_progression_table</span><span class='op'>(</span><span class='va'>RIR_increment_fixed_2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          type    volume reps step adjustment  perc_1RM
+#&gt; 1    grinding intensive    1   -3          6 0.8109642
+#&gt; 2   ballistic intensive    1   -3          6 0.6820352
+#&gt; 3    grinding    normal    1   -3          8 0.7694083
+#&gt; 4   ballistic    normal    1   -3          8 0.6252345
+#&gt; 5    grinding extensive    1   -3         10 0.7319037
+#&gt; 6   ballistic extensive    1   -3         10 0.5771673
+#&gt; 7    grinding intensive    2   -3          6 0.7896399
+#&gt; 8   ballistic intensive    2   -3          6 0.6524008
+#&gt; 9    grinding    normal    2   -3          8 0.7501875
+#&gt; 10  ballistic    normal    2   -3          8 0.6002401
+#&gt; 11   grinding extensive    2   -3         10 0.7144899
+#&gt; 12  ballistic extensive    2   -3         10 0.5558026
+#&gt; 13   grinding intensive    3   -3          6 0.7694083
+#&gt; 14  ballistic intensive    3   -3          6 0.6252345
+#&gt; 15   grinding    normal    3   -3          8 0.7319037
+#&gt; 16  ballistic    normal    3   -3          8 0.5771673
+#&gt; 17   grinding extensive    3   -3         10 0.6978854
+#&gt; 18  ballistic extensive    3   -3         10 0.5359631
+#&gt; 19   grinding intensive    4   -3          6 0.7501875
+#&gt; 20  ballistic intensive    4   -3          6 0.6002401
+#&gt; 21   grinding    normal    4   -3          8 0.7144899
+#&gt; 22  ballistic    normal    4   -3          8 0.5558026
+#&gt; 23   grinding extensive    4   -3         10 0.6820352
+#&gt; 24  ballistic extensive    4   -3         10 0.5174912
+#&gt; 25   grinding intensive    5   -3          6 0.7319037
+#&gt; 26  ballistic intensive    5   -3          6 0.5771673
+#&gt; 27   grinding    normal    5   -3          8 0.6978854
+#&gt; 28  ballistic    normal    5   -3          8 0.5359631
+#&gt; 29   grinding extensive    5   -3         10 0.6668890
+#&gt; 30  ballistic extensive    5   -3         10 0.5002501
+#&gt; 31   grinding intensive    6   -3          6 0.7144899
+#&gt; 32  ballistic intensive    6   -3          6 0.5558026
+#&gt; 33   grinding    normal    6   -3          8 0.6820352
+#&gt; 34  ballistic    normal    6   -3          8 0.5174912
+#&gt; 35   grinding extensive    6   -3         10 0.6524008
+#&gt; 36  ballistic extensive    6   -3         10 0.4841208
+#&gt; 37   grinding intensive    7   -3          6 0.6978854
+#&gt; 38  ballistic intensive    7   -3          6 0.5359631
+#&gt; 39   grinding    normal    7   -3          8 0.6668890
+#&gt; 40  ballistic    normal    7   -3          8 0.5002501
+#&gt; 41   grinding extensive    7   -3         10 0.6385288
+#&gt; 42  ballistic extensive    7   -3         10 0.4689992
+#&gt; 43   grinding intensive    8   -3          6 0.6820352
+#&gt; 44  ballistic intensive    8   -3          6 0.5174912
+#&gt; 45   grinding    normal    8   -3          8 0.6524008
+#&gt; 46  ballistic    normal    8   -3          8 0.4841208
+#&gt; 47   grinding extensive    8   -3         10 0.6252345
+#&gt; 48  ballistic extensive    8   -3         10 0.4547935
+#&gt; 49   grinding intensive    9   -3          6 0.6668890
+#&gt; 50  ballistic intensive    9   -3          6 0.5002501
+#&gt; 51   grinding    normal    9   -3          8 0.6385288
+#&gt; 52  ballistic    normal    9   -3          8 0.4689992
+#&gt; 53   grinding extensive    9   -3         10 0.6124824
+#&gt; 54  ballistic extensive    9   -3         10 0.4414231
+#&gt; 55   grinding intensive   10   -3          6 0.6524008
+#&gt; 56  ballistic intensive   10   -3          6 0.4841208
+#&gt; 57   grinding    normal   10   -3          8 0.6252345
+#&gt; 58  ballistic    normal   10   -3          8 0.4547935
+#&gt; 59   grinding extensive   10   -3         10 0.6002401
+#&gt; 60  ballistic extensive   10   -3         10 0.4288165
+#&gt; 61   grinding intensive   11   -3          6 0.6385288
+#&gt; 62  ballistic intensive   11   -3          6 0.4689992
+#&gt; 63   grinding    normal   11   -3          8 0.6124824
+#&gt; 64  ballistic    normal   11   -3          8 0.4414231
+#&gt; 65   grinding extensive   11   -3         10 0.5884776
+#&gt; 66  ballistic extensive   11   -3         10 0.4169099
+#&gt; 67   grinding intensive   12   -3          6 0.6252345
+#&gt; 68  ballistic intensive   12   -3          6 0.4547935
+#&gt; 69   grinding    normal   12   -3          8 0.6002401
+#&gt; 70  ballistic    normal   12   -3          8 0.4288165
+#&gt; 71   grinding extensive   12   -3         10 0.5771673
+#&gt; 72  ballistic extensive   12   -3         10 0.4056466
+#&gt; 73   grinding intensive    1   -2          4 0.8572653
+#&gt; 74  ballistic intensive    1   -2          4 0.7501875
+#&gt; 75   grinding    normal    1   -2          6 0.8109642
+#&gt; 76  ballistic    normal    1   -2          6 0.6820352
+#&gt; 77   grinding extensive    1   -2          8 0.7694083
+#&gt; 78  ballistic extensive    1   -2          8 0.6252345
+#&gt; 79   grinding intensive    2   -2          4 0.8334722
+#&gt; 80  ballistic intensive    2   -2          4 0.7144899
+#&gt; 81   grinding    normal    2   -2          6 0.7896399
+#&gt; 82  ballistic    normal    2   -2          6 0.6524008
+#&gt; 83   grinding extensive    2   -2          8 0.7501875
+#&gt; 84  ballistic extensive    2   -2          8 0.6002401
+#&gt; 85   grinding intensive    3   -2          4 0.8109642
+#&gt; 86  ballistic intensive    3   -2          4 0.6820352
+#&gt; 87   grinding    normal    3   -2          6 0.7694083
+#&gt; 88  ballistic    normal    3   -2          6 0.6252345
+#&gt; 89   grinding extensive    3   -2          8 0.7319037
+#&gt; 90  ballistic extensive    3   -2          8 0.5771673
+#&gt; 91   grinding intensive    4   -2          4 0.7896399
+#&gt; 92  ballistic intensive    4   -2          4 0.6524008
+#&gt; 93   grinding    normal    4   -2          6 0.7501875
+#&gt; 94  ballistic    normal    4   -2          6 0.6002401
+#&gt; 95   grinding extensive    4   -2          8 0.7144899
+#&gt; 96  ballistic extensive    4   -2          8 0.5558026
+#&gt; 97   grinding intensive    5   -2          4 0.7694083
+#&gt; 98  ballistic intensive    5   -2          4 0.6252345
+#&gt; 99   grinding    normal    5   -2          6 0.7319037
+#&gt; 100 ballistic    normal    5   -2          6 0.5771673
+#&gt; 101  grinding extensive    5   -2          8 0.6978854
+#&gt; 102 ballistic extensive    5   -2          8 0.5359631
+#&gt; 103  grinding intensive    6   -2          4 0.7501875
+#&gt; 104 ballistic intensive    6   -2          4 0.6002401
+#&gt; 105  grinding    normal    6   -2          6 0.7144899
+#&gt; 106 ballistic    normal    6   -2          6 0.5558026
+#&gt; 107  grinding extensive    6   -2          8 0.6820352
+#&gt; 108 ballistic extensive    6   -2          8 0.5174912
+#&gt; 109  grinding intensive    7   -2          4 0.7319037
+#&gt; 110 ballistic intensive    7   -2          4 0.5771673
+#&gt; 111  grinding    normal    7   -2          6 0.6978854
+#&gt; 112 ballistic    normal    7   -2          6 0.5359631
+#&gt; 113  grinding extensive    7   -2          8 0.6668890
+#&gt; 114 ballistic extensive    7   -2          8 0.5002501
+#&gt; 115  grinding intensive    8   -2          4 0.7144899
+#&gt; 116 ballistic intensive    8   -2          4 0.5558026
+#&gt; 117  grinding    normal    8   -2          6 0.6820352
+#&gt; 118 ballistic    normal    8   -2          6 0.5174912
+#&gt; 119  grinding extensive    8   -2          8 0.6524008
+#&gt; 120 ballistic extensive    8   -2          8 0.4841208
+#&gt; 121  grinding intensive    9   -2          4 0.6978854
+#&gt; 122 ballistic intensive    9   -2          4 0.5359631
+#&gt; 123  grinding    normal    9   -2          6 0.6668890
+#&gt; 124 ballistic    normal    9   -2          6 0.5002501
+#&gt; 125  grinding extensive    9   -2          8 0.6385288
+#&gt; 126 ballistic extensive    9   -2          8 0.4689992
+#&gt; 127  grinding intensive   10   -2          4 0.6820352
+#&gt; 128 ballistic intensive   10   -2          4 0.5174912
+#&gt; 129  grinding    normal   10   -2          6 0.6524008
+#&gt; 130 ballistic    normal   10   -2          6 0.4841208
+#&gt; 131  grinding extensive   10   -2          8 0.6252345
+#&gt; 132 ballistic extensive   10   -2          8 0.4547935
+#&gt; 133  grinding intensive   11   -2          4 0.6668890
+#&gt; 134 ballistic intensive   11   -2          4 0.5002501
+#&gt; 135  grinding    normal   11   -2          6 0.6385288
+#&gt; 136 ballistic    normal   11   -2          6 0.4689992
+#&gt; 137  grinding extensive   11   -2          8 0.6124824
+#&gt; 138 ballistic extensive   11   -2          8 0.4414231
+#&gt; 139  grinding intensive   12   -2          4 0.6524008
+#&gt; 140 ballistic intensive   12   -2          4 0.4841208
+#&gt; 141  grinding    normal   12   -2          6 0.6252345
+#&gt; 142 ballistic    normal   12   -2          6 0.4547935
+#&gt; 143  grinding extensive   12   -2          8 0.6002401
+#&gt; 144 ballistic extensive   12   -2          8 0.4288165
+#&gt; 145  grinding intensive    1   -1          2 0.9091736
+#&gt; 146 ballistic intensive    1   -1          2 0.8334722
+#&gt; 147  grinding    normal    1   -1          4 0.8572653
+#&gt; 148 ballistic    normal    1   -1          4 0.7501875
+#&gt; 149  grinding extensive    1   -1          6 0.8109642
+#&gt; 150 ballistic extensive    1   -1          6 0.6820352
+#&gt; 151  grinding intensive    2   -1          2 0.8824568
+#&gt; 152 ballistic intensive    2   -1          2 0.7896399
+#&gt; 153  grinding    normal    2   -1          4 0.8334722
+#&gt; 154 ballistic    normal    2   -1          4 0.7144899
+#&gt; 155  grinding extensive    2   -1          6 0.7896399
+#&gt; 156 ballistic extensive    2   -1          6 0.6524008
+#&gt; 157  grinding intensive    3   -1          2 0.8572653
+#&gt; 158 ballistic intensive    3   -1          2 0.7501875
+#&gt; 159  grinding    normal    3   -1          4 0.8109642
+#&gt; 160 ballistic    normal    3   -1          4 0.6820352
+#&gt; 161  grinding extensive    3   -1          6 0.7694083
+#&gt; 162 ballistic extensive    3   -1          6 0.6252345
+#&gt; 163  grinding intensive    4   -1          2 0.8334722
+#&gt; 164 ballistic intensive    4   -1          2 0.7144899
+#&gt; 165  grinding    normal    4   -1          4 0.7896399
+#&gt; 166 ballistic    normal    4   -1          4 0.6524008
+#&gt; 167  grinding extensive    4   -1          6 0.7501875
+#&gt; 168 ballistic extensive    4   -1          6 0.6002401
+#&gt; 169  grinding intensive    5   -1          2 0.8109642
+#&gt; 170 ballistic intensive    5   -1          2 0.6820352
+#&gt; 171  grinding    normal    5   -1          4 0.7694083
+#&gt; 172 ballistic    normal    5   -1          4 0.6252345
+#&gt; 173  grinding extensive    5   -1          6 0.7319037
+#&gt; 174 ballistic extensive    5   -1          6 0.5771673
+#&gt; 175  grinding intensive    6   -1          2 0.7896399
+#&gt; 176 ballistic intensive    6   -1          2 0.6524008
+#&gt; 177  grinding    normal    6   -1          4 0.7501875
+#&gt; 178 ballistic    normal    6   -1          4 0.6002401
+#&gt; 179  grinding extensive    6   -1          6 0.7144899
+#&gt; 180 ballistic extensive    6   -1          6 0.5558026
+#&gt; 181  grinding intensive    7   -1          2 0.7694083
+#&gt; 182 ballistic intensive    7   -1          2 0.6252345
+#&gt; 183  grinding    normal    7   -1          4 0.7319037
+#&gt; 184 ballistic    normal    7   -1          4 0.5771673
+#&gt; 185  grinding extensive    7   -1          6 0.6978854
+#&gt; 186 ballistic extensive    7   -1          6 0.5359631
+#&gt; 187  grinding intensive    8   -1          2 0.7501875
+#&gt; 188 ballistic intensive    8   -1          2 0.6002401
+#&gt; 189  grinding    normal    8   -1          4 0.7144899
+#&gt; 190 ballistic    normal    8   -1          4 0.5558026
+#&gt; 191  grinding extensive    8   -1          6 0.6820352
+#&gt; 192 ballistic extensive    8   -1          6 0.5174912
+#&gt; 193  grinding intensive    9   -1          2 0.7319037
+#&gt; 194 ballistic intensive    9   -1          2 0.5771673
+#&gt; 195  grinding    normal    9   -1          4 0.6978854
+#&gt; 196 ballistic    normal    9   -1          4 0.5359631
+#&gt; 197  grinding extensive    9   -1          6 0.6668890
+#&gt; 198 ballistic extensive    9   -1          6 0.5002501
+#&gt; 199  grinding intensive   10   -1          2 0.7144899
+#&gt; 200 ballistic intensive   10   -1          2 0.5558026
+#&gt; 201  grinding    normal   10   -1          4 0.6820352
+#&gt; 202 ballistic    normal   10   -1          4 0.5174912
+#&gt; 203  grinding extensive   10   -1          6 0.6524008
+#&gt; 204 ballistic extensive   10   -1          6 0.4841208
+#&gt; 205  grinding intensive   11   -1          2 0.6978854
+#&gt; 206 ballistic intensive   11   -1          2 0.5359631
+#&gt; 207  grinding    normal   11   -1          4 0.6668890
+#&gt; 208 ballistic    normal   11   -1          4 0.5002501
+#&gt; 209  grinding extensive   11   -1          6 0.6385288
+#&gt; 210 ballistic extensive   11   -1          6 0.4689992
+#&gt; 211  grinding intensive   12   -1          2 0.6820352
+#&gt; 212 ballistic intensive   12   -1          2 0.5174912
+#&gt; 213  grinding    normal   12   -1          4 0.6524008
+#&gt; 214 ballistic    normal   12   -1          4 0.4841208
+#&gt; 215  grinding extensive   12   -1          6 0.6252345
+#&gt; 216 ballistic extensive   12   -1          6 0.4547935
+#&gt; 217  grinding intensive    1    0          0 0.9677732
+#&gt; 218 ballistic intensive    1    0          0 0.9375586
+#&gt; 219  grinding    normal    1    0          2 0.9091736
+#&gt; 220 ballistic    normal    1    0          2 0.8334722
+#&gt; 221  grinding extensive    1    0          4 0.8572653
+#&gt; 222 ballistic extensive    1    0          4 0.7501875
+#&gt; 223  grinding intensive    2    0          0 0.9375586
+#&gt; 224 ballistic intensive    2    0          0 0.8824568
+#&gt; 225  grinding    normal    2    0          2 0.8824568
+#&gt; 226 ballistic    normal    2    0          2 0.7896399
+#&gt; 227  grinding extensive    2    0          4 0.8334722
+#&gt; 228 ballistic extensive    2    0          4 0.7144899
+#&gt; 229  grinding intensive    3    0          0 0.9091736
+#&gt; 230 ballistic intensive    3    0          0 0.8334722
+#&gt; 231  grinding    normal    3    0          2 0.8572653
+#&gt; 232 ballistic    normal    3    0          2 0.7501875
+#&gt; 233  grinding extensive    3    0          4 0.8109642
+#&gt; 234 ballistic extensive    3    0          4 0.6820352
+#&gt; 235  grinding intensive    4    0          0 0.8824568
+#&gt; 236 ballistic intensive    4    0          0 0.7896399
+#&gt; 237  grinding    normal    4    0          2 0.8334722
+#&gt; 238 ballistic    normal    4    0          2 0.7144899
+#&gt; 239  grinding extensive    4    0          4 0.7896399
+#&gt; 240 ballistic extensive    4    0          4 0.6524008
+#&gt; 241  grinding intensive    5    0          0 0.8572653
+#&gt; 242 ballistic intensive    5    0          0 0.7501875
+#&gt; 243  grinding    normal    5    0          2 0.8109642
+#&gt; 244 ballistic    normal    5    0          2 0.6820352
+#&gt; 245  grinding extensive    5    0          4 0.7694083
+#&gt; 246 ballistic extensive    5    0          4 0.6252345
+#&gt; 247  grinding intensive    6    0          0 0.8334722
+#&gt; 248 ballistic intensive    6    0          0 0.7144899
+#&gt; 249  grinding    normal    6    0          2 0.7896399
+#&gt; 250 ballistic    normal    6    0          2 0.6524008
+#&gt; 251  grinding extensive    6    0          4 0.7501875
+#&gt; 252 ballistic extensive    6    0          4 0.6002401
+#&gt; 253  grinding intensive    7    0          0 0.8109642
+#&gt; 254 ballistic intensive    7    0          0 0.6820352
+#&gt; 255  grinding    normal    7    0          2 0.7694083
+#&gt; 256 ballistic    normal    7    0          2 0.6252345
+#&gt; 257  grinding extensive    7    0          4 0.7319037
+#&gt; 258 ballistic extensive    7    0          4 0.5771673
+#&gt; 259  grinding intensive    8    0          0 0.7896399
+#&gt; 260 ballistic intensive    8    0          0 0.6524008
+#&gt; 261  grinding    normal    8    0          2 0.7501875
+#&gt; 262 ballistic    normal    8    0          2 0.6002401
+#&gt; 263  grinding extensive    8    0          4 0.7144899
+#&gt; 264 ballistic extensive    8    0          4 0.5558026
+#&gt; 265  grinding intensive    9    0          0 0.7694083
+#&gt; 266 ballistic intensive    9    0          0 0.6252345
+#&gt; 267  grinding    normal    9    0          2 0.7319037
+#&gt; 268 ballistic    normal    9    0          2 0.5771673
+#&gt; 269  grinding extensive    9    0          4 0.6978854
+#&gt; 270 ballistic extensive    9    0          4 0.5359631
+#&gt; 271  grinding intensive   10    0          0 0.7501875
+#&gt; 272 ballistic intensive   10    0          0 0.6002401
+#&gt; 273  grinding    normal   10    0          2 0.7144899
+#&gt; 274 ballistic    normal   10    0          2 0.5558026
+#&gt; 275  grinding extensive   10    0          4 0.6820352
+#&gt; 276 ballistic extensive   10    0          4 0.5174912
+#&gt; 277  grinding intensive   11    0          0 0.7319037
+#&gt; 278 ballistic intensive   11    0          0 0.5771673
+#&gt; 279  grinding    normal   11    0          2 0.6978854
+#&gt; 280 ballistic    normal   11    0          2 0.5359631
+#&gt; 281  grinding extensive   11    0          4 0.6668890
+#&gt; 282 ballistic extensive   11    0          4 0.5002501
+#&gt; 283  grinding intensive   12    0          0 0.7144899
+#&gt; 284 ballistic intensive   12    0          0 0.5558026
+#&gt; 285  grinding    normal   12    0          2 0.6820352
+#&gt; 286 ballistic    normal   12    0          2 0.5174912
+#&gt; 287  grinding extensive   12    0          4 0.6524008
+#&gt; 288 ballistic extensive   12    0          4 0.4841208</div><div class='input'>
+<span class='co'># Plot progression table</span>
+<span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>RIR_increment_fixed_2</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-5.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>RIR_increment_fixed_2</span>, <span class='st'>"adjustment"</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-6.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>RIR_increment_fixed_4</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
-#&gt; [1] 8.090909 6.272727 4.454545 2.636364
+#&gt; [1] 16 12  8  4
 #&gt; 
 #&gt; $perc_1RM
-#&gt; [1] 0.6240533 0.6485581 0.6750661 0.7038333
-#&gt; </div><div class='input'><span class='fu'>RIR_increment</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span>
+#&gt; [1] 0.5359631 0.5771673 0.6252345 0.6820352
+#&gt; </div><div class='input'><span class='fu'>RIR_increment_fixed_4</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
-#&gt; [1] 10.727273  8.909091  7.090909  5.272727
+#&gt; [1] 20 16 12  8
 #&gt; 
 #&gt; $perc_1RM
-#&gt; [1] 0.5916396 0.6136201 0.6372969 0.6628742
-#&gt; </div><div class='input'><span class='fu'>RIR_increment</span><span class='op'>(</span><span class='fl'>5</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span>
+#&gt; [1] 0.5002501 0.5359631 0.5771673 0.6252345
+#&gt; </div><div class='input'><span class='fu'>RIR_increment_fixed_4</span><span class='op'>(</span><span class='fl'>5</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
-#&gt; [1] 7.2 5.4 3.6 1.8
+#&gt; [1] 16 12  8  4
 #&gt; 
 #&gt; $perc_1RM
-#&gt; [1] 0.5517181 0.5907931 0.6358249 0.6882881
-#&gt; </div><div class='input'><span class='fu'>perc_drop</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+#&gt; [1] 0.4169099 0.4689992 0.5359631 0.6252345
+#&gt; </div><div class='input'>
+<span class='co'># Generate progression table</span>
+<span class='fu'>generate_progression_table</span><span class='op'>(</span><span class='va'>RIR_increment_fixed_4</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          type    volume reps step adjustment  perc_1RM
+#&gt; 1    grinding intensive    1   -3         12 0.6978854
+#&gt; 2   ballistic intensive    1   -3         12 0.5359631
+#&gt; 3    grinding    normal    1   -3         16 0.6385288
+#&gt; 4   ballistic    normal    1   -3         16 0.4689992
+#&gt; 5    grinding extensive    1   -3         20 0.5884776
+#&gt; 6   ballistic extensive    1   -3         20 0.4169099
+#&gt; 7    grinding intensive    2   -3         12 0.6820352
+#&gt; 8   ballistic intensive    2   -3         12 0.5174912
+#&gt; 9    grinding    normal    2   -3         16 0.6252345
+#&gt; 10  ballistic    normal    2   -3         16 0.4547935
+#&gt; 11   grinding extensive    2   -3         20 0.5771673
+#&gt; 12  ballistic extensive    2   -3         20 0.4056466
+#&gt; 13   grinding intensive    3   -3         12 0.6668890
+#&gt; 14  ballistic intensive    3   -3         12 0.5002501
+#&gt; 15   grinding    normal    3   -3         16 0.6124824
+#&gt; 16  ballistic    normal    3   -3         16 0.4414231
+#&gt; 17   grinding extensive    3   -3         20 0.5662835
+#&gt; 18  ballistic extensive    3   -3         20 0.3949759
+#&gt; 19   grinding intensive    4   -3         12 0.6524008
+#&gt; 20  ballistic intensive    4   -3         12 0.4841208
+#&gt; 21   grinding    normal    4   -3         16 0.6002401
+#&gt; 22  ballistic    normal    4   -3         16 0.4288165
+#&gt; 23   grinding extensive    4   -3         20 0.5558026
+#&gt; 24  ballistic extensive    4   -3         20 0.3848522
+#&gt; 25   grinding intensive    5   -3         12 0.6385288
+#&gt; 26  ballistic intensive    5   -3         12 0.4689992
+#&gt; 27   grinding    normal    5   -3         16 0.5884776
+#&gt; 28  ballistic    normal    5   -3         16 0.4169099
+#&gt; 29   grinding extensive    5   -3         20 0.5457026
+#&gt; 30  ballistic extensive    5   -3         20 0.3752345
+#&gt; 31   grinding intensive    6   -3         12 0.6252345
+#&gt; 32  ballistic intensive    6   -3         12 0.4547935
+#&gt; 33   grinding    normal    6   -3         16 0.5771673
+#&gt; 34  ballistic    normal    6   -3         16 0.4056466
+#&gt; 35   grinding extensive    6   -3         20 0.5359631
+#&gt; 36  ballistic extensive    6   -3         20 0.3660858
+#&gt; 37   grinding intensive    7   -3         12 0.6124824
+#&gt; 38  ballistic intensive    7   -3         12 0.4414231
+#&gt; 39   grinding    normal    7   -3         16 0.5662835
+#&gt; 40  ballistic    normal    7   -3         16 0.3949759
+#&gt; 41   grinding extensive    7   -3         20 0.5265652
+#&gt; 42  ballistic extensive    7   -3         20 0.3573726
+#&gt; 43   grinding intensive    8   -3         12 0.6002401
+#&gt; 44  ballistic intensive    8   -3         12 0.4288165
+#&gt; 45   grinding    normal    8   -3         16 0.5558026
+#&gt; 46  ballistic    normal    8   -3         16 0.3848522
+#&gt; 47   grinding extensive    8   -3         20 0.5174912
+#&gt; 48  ballistic extensive    8   -3         20 0.3490645
+#&gt; 49   grinding intensive    9   -3         12 0.5884776
+#&gt; 50  ballistic intensive    9   -3         12 0.4169099
+#&gt; 51   grinding    normal    9   -3         16 0.5457026
+#&gt; 52  ballistic    normal    9   -3         16 0.3752345
+#&gt; 53   grinding extensive    9   -3         20 0.5087246
+#&gt; 54  ballistic extensive    9   -3         20 0.3411339
+#&gt; 55   grinding intensive   10   -3         12 0.5771673
+#&gt; 56  ballistic intensive   10   -3         12 0.4056466
+#&gt; 57   grinding    normal   10   -3         16 0.5359631
+#&gt; 58  ballistic    normal   10   -3         16 0.3660858
+#&gt; 59   grinding extensive   10   -3         20 0.5002501
+#&gt; 60  ballistic extensive   10   -3         20 0.3335557
+#&gt; 61   grinding intensive   11   -3         12 0.5662835
+#&gt; 62  ballistic intensive   11   -3         12 0.3949759
+#&gt; 63   grinding    normal   11   -3         16 0.5265652
+#&gt; 64  ballistic    normal   11   -3         16 0.3573726
+#&gt; 65   grinding extensive   11   -3         20 0.4920533
+#&gt; 66  ballistic extensive   11   -3         20 0.3263069
+#&gt; 67   grinding intensive   12   -3         12 0.5558026
+#&gt; 68  ballistic intensive   12   -3         12 0.3848522
+#&gt; 69   grinding    normal   12   -3         16 0.5174912
+#&gt; 70  ballistic    normal   12   -3         16 0.3490645
+#&gt; 71   grinding extensive   12   -3         20 0.4841208
+#&gt; 72  ballistic extensive   12   -3         20 0.3193664
+#&gt; 73   grinding intensive    1   -2          8 0.7694083
+#&gt; 74  ballistic intensive    1   -2          8 0.6252345
+#&gt; 75   grinding    normal    1   -2         12 0.6978854
+#&gt; 76  ballistic    normal    1   -2         12 0.5359631
+#&gt; 77   grinding extensive    1   -2         16 0.6385288
+#&gt; 78  ballistic extensive    1   -2         16 0.4689992
+#&gt; 79   grinding intensive    2   -2          8 0.7501875
+#&gt; 80  ballistic intensive    2   -2          8 0.6002401
+#&gt; 81   grinding    normal    2   -2         12 0.6820352
+#&gt; 82  ballistic    normal    2   -2         12 0.5174912
+#&gt; 83   grinding extensive    2   -2         16 0.6252345
+#&gt; 84  ballistic extensive    2   -2         16 0.4547935
+#&gt; 85   grinding intensive    3   -2          8 0.7319037
+#&gt; 86  ballistic intensive    3   -2          8 0.5771673
+#&gt; 87   grinding    normal    3   -2         12 0.6668890
+#&gt; 88  ballistic    normal    3   -2         12 0.5002501
+#&gt; 89   grinding extensive    3   -2         16 0.6124824
+#&gt; 90  ballistic extensive    3   -2         16 0.4414231
+#&gt; 91   grinding intensive    4   -2          8 0.7144899
+#&gt; 92  ballistic intensive    4   -2          8 0.5558026
+#&gt; 93   grinding    normal    4   -2         12 0.6524008
+#&gt; 94  ballistic    normal    4   -2         12 0.4841208
+#&gt; 95   grinding extensive    4   -2         16 0.6002401
+#&gt; 96  ballistic extensive    4   -2         16 0.4288165
+#&gt; 97   grinding intensive    5   -2          8 0.6978854
+#&gt; 98  ballistic intensive    5   -2          8 0.5359631
+#&gt; 99   grinding    normal    5   -2         12 0.6385288
+#&gt; 100 ballistic    normal    5   -2         12 0.4689992
+#&gt; 101  grinding extensive    5   -2         16 0.5884776
+#&gt; 102 ballistic extensive    5   -2         16 0.4169099
+#&gt; 103  grinding intensive    6   -2          8 0.6820352
+#&gt; 104 ballistic intensive    6   -2          8 0.5174912
+#&gt; 105  grinding    normal    6   -2         12 0.6252345
+#&gt; 106 ballistic    normal    6   -2         12 0.4547935
+#&gt; 107  grinding extensive    6   -2         16 0.5771673
+#&gt; 108 ballistic extensive    6   -2         16 0.4056466
+#&gt; 109  grinding intensive    7   -2          8 0.6668890
+#&gt; 110 ballistic intensive    7   -2          8 0.5002501
+#&gt; 111  grinding    normal    7   -2         12 0.6124824
+#&gt; 112 ballistic    normal    7   -2         12 0.4414231
+#&gt; 113  grinding extensive    7   -2         16 0.5662835
+#&gt; 114 ballistic extensive    7   -2         16 0.3949759
+#&gt; 115  grinding intensive    8   -2          8 0.6524008
+#&gt; 116 ballistic intensive    8   -2          8 0.4841208
+#&gt; 117  grinding    normal    8   -2         12 0.6002401
+#&gt; 118 ballistic    normal    8   -2         12 0.4288165
+#&gt; 119  grinding extensive    8   -2         16 0.5558026
+#&gt; 120 ballistic extensive    8   -2         16 0.3848522
+#&gt; 121  grinding intensive    9   -2          8 0.6385288
+#&gt; 122 ballistic intensive    9   -2          8 0.4689992
+#&gt; 123  grinding    normal    9   -2         12 0.5884776
+#&gt; 124 ballistic    normal    9   -2         12 0.4169099
+#&gt; 125  grinding extensive    9   -2         16 0.5457026
+#&gt; 126 ballistic extensive    9   -2         16 0.3752345
+#&gt; 127  grinding intensive   10   -2          8 0.6252345
+#&gt; 128 ballistic intensive   10   -2          8 0.4547935
+#&gt; 129  grinding    normal   10   -2         12 0.5771673
+#&gt; 130 ballistic    normal   10   -2         12 0.4056466
+#&gt; 131  grinding extensive   10   -2         16 0.5359631
+#&gt; 132 ballistic extensive   10   -2         16 0.3660858
+#&gt; 133  grinding intensive   11   -2          8 0.6124824
+#&gt; 134 ballistic intensive   11   -2          8 0.4414231
+#&gt; 135  grinding    normal   11   -2         12 0.5662835
+#&gt; 136 ballistic    normal   11   -2         12 0.3949759
+#&gt; 137  grinding extensive   11   -2         16 0.5265652
+#&gt; 138 ballistic extensive   11   -2         16 0.3573726
+#&gt; 139  grinding intensive   12   -2          8 0.6002401
+#&gt; 140 ballistic intensive   12   -2          8 0.4288165
+#&gt; 141  grinding    normal   12   -2         12 0.5558026
+#&gt; 142 ballistic    normal   12   -2         12 0.3848522
+#&gt; 143  grinding extensive   12   -2         16 0.5174912
+#&gt; 144 ballistic extensive   12   -2         16 0.3490645
+#&gt; 145  grinding intensive    1   -1          4 0.8572653
+#&gt; 146 ballistic intensive    1   -1          4 0.7501875
+#&gt; 147  grinding    normal    1   -1          8 0.7694083
+#&gt; 148 ballistic    normal    1   -1          8 0.6252345
+#&gt; 149  grinding extensive    1   -1         12 0.6978854
+#&gt; 150 ballistic extensive    1   -1         12 0.5359631
+#&gt; 151  grinding intensive    2   -1          4 0.8334722
+#&gt; 152 ballistic intensive    2   -1          4 0.7144899
+#&gt; 153  grinding    normal    2   -1          8 0.7501875
+#&gt; 154 ballistic    normal    2   -1          8 0.6002401
+#&gt; 155  grinding extensive    2   -1         12 0.6820352
+#&gt; 156 ballistic extensive    2   -1         12 0.5174912
+#&gt; 157  grinding intensive    3   -1          4 0.8109642
+#&gt; 158 ballistic intensive    3   -1          4 0.6820352
+#&gt; 159  grinding    normal    3   -1          8 0.7319037
+#&gt; 160 ballistic    normal    3   -1          8 0.5771673
+#&gt; 161  grinding extensive    3   -1         12 0.6668890
+#&gt; 162 ballistic extensive    3   -1         12 0.5002501
+#&gt; 163  grinding intensive    4   -1          4 0.7896399
+#&gt; 164 ballistic intensive    4   -1          4 0.6524008
+#&gt; 165  grinding    normal    4   -1          8 0.7144899
+#&gt; 166 ballistic    normal    4   -1          8 0.5558026
+#&gt; 167  grinding extensive    4   -1         12 0.6524008
+#&gt; 168 ballistic extensive    4   -1         12 0.4841208
+#&gt; 169  grinding intensive    5   -1          4 0.7694083
+#&gt; 170 ballistic intensive    5   -1          4 0.6252345
+#&gt; 171  grinding    normal    5   -1          8 0.6978854
+#&gt; 172 ballistic    normal    5   -1          8 0.5359631
+#&gt; 173  grinding extensive    5   -1         12 0.6385288
+#&gt; 174 ballistic extensive    5   -1         12 0.4689992
+#&gt; 175  grinding intensive    6   -1          4 0.7501875
+#&gt; 176 ballistic intensive    6   -1          4 0.6002401
+#&gt; 177  grinding    normal    6   -1          8 0.6820352
+#&gt; 178 ballistic    normal    6   -1          8 0.5174912
+#&gt; 179  grinding extensive    6   -1         12 0.6252345
+#&gt; 180 ballistic extensive    6   -1         12 0.4547935
+#&gt; 181  grinding intensive    7   -1          4 0.7319037
+#&gt; 182 ballistic intensive    7   -1          4 0.5771673
+#&gt; 183  grinding    normal    7   -1          8 0.6668890
+#&gt; 184 ballistic    normal    7   -1          8 0.5002501
+#&gt; 185  grinding extensive    7   -1         12 0.6124824
+#&gt; 186 ballistic extensive    7   -1         12 0.4414231
+#&gt; 187  grinding intensive    8   -1          4 0.7144899
+#&gt; 188 ballistic intensive    8   -1          4 0.5558026
+#&gt; 189  grinding    normal    8   -1          8 0.6524008
+#&gt; 190 ballistic    normal    8   -1          8 0.4841208
+#&gt; 191  grinding extensive    8   -1         12 0.6002401
+#&gt; 192 ballistic extensive    8   -1         12 0.4288165
+#&gt; 193  grinding intensive    9   -1          4 0.6978854
+#&gt; 194 ballistic intensive    9   -1          4 0.5359631
+#&gt; 195  grinding    normal    9   -1          8 0.6385288
+#&gt; 196 ballistic    normal    9   -1          8 0.4689992
+#&gt; 197  grinding extensive    9   -1         12 0.5884776
+#&gt; 198 ballistic extensive    9   -1         12 0.4169099
+#&gt; 199  grinding intensive   10   -1          4 0.6820352
+#&gt; 200 ballistic intensive   10   -1          4 0.5174912
+#&gt; 201  grinding    normal   10   -1          8 0.6252345
+#&gt; 202 ballistic    normal   10   -1          8 0.4547935
+#&gt; 203  grinding extensive   10   -1         12 0.5771673
+#&gt; 204 ballistic extensive   10   -1         12 0.4056466
+#&gt; 205  grinding intensive   11   -1          4 0.6668890
+#&gt; 206 ballistic intensive   11   -1          4 0.5002501
+#&gt; 207  grinding    normal   11   -1          8 0.6124824
+#&gt; 208 ballistic    normal   11   -1          8 0.4414231
+#&gt; 209  grinding extensive   11   -1         12 0.5662835
+#&gt; 210 ballistic extensive   11   -1         12 0.3949759
+#&gt; 211  grinding intensive   12   -1          4 0.6524008
+#&gt; 212 ballistic intensive   12   -1          4 0.4841208
+#&gt; 213  grinding    normal   12   -1          8 0.6002401
+#&gt; 214 ballistic    normal   12   -1          8 0.4288165
+#&gt; 215  grinding extensive   12   -1         12 0.5558026
+#&gt; 216 ballistic extensive   12   -1         12 0.3848522
+#&gt; 217  grinding intensive    1    0          0 0.9677732
+#&gt; 218 ballistic intensive    1    0          0 0.9375586
+#&gt; 219  grinding    normal    1    0          4 0.8572653
+#&gt; 220 ballistic    normal    1    0          4 0.7501875
+#&gt; 221  grinding extensive    1    0          8 0.7694083
+#&gt; 222 ballistic extensive    1    0          8 0.6252345
+#&gt; 223  grinding intensive    2    0          0 0.9375586
+#&gt; 224 ballistic intensive    2    0          0 0.8824568
+#&gt; 225  grinding    normal    2    0          4 0.8334722
+#&gt; 226 ballistic    normal    2    0          4 0.7144899
+#&gt; 227  grinding extensive    2    0          8 0.7501875
+#&gt; 228 ballistic extensive    2    0          8 0.6002401
+#&gt; 229  grinding intensive    3    0          0 0.9091736
+#&gt; 230 ballistic intensive    3    0          0 0.8334722
+#&gt; 231  grinding    normal    3    0          4 0.8109642
+#&gt; 232 ballistic    normal    3    0          4 0.6820352
+#&gt; 233  grinding extensive    3    0          8 0.7319037
+#&gt; 234 ballistic extensive    3    0          8 0.5771673
+#&gt; 235  grinding intensive    4    0          0 0.8824568
+#&gt; 236 ballistic intensive    4    0          0 0.7896399
+#&gt; 237  grinding    normal    4    0          4 0.7896399
+#&gt; 238 ballistic    normal    4    0          4 0.6524008
+#&gt; 239  grinding extensive    4    0          8 0.7144899
+#&gt; 240 ballistic extensive    4    0          8 0.5558026
+#&gt; 241  grinding intensive    5    0          0 0.8572653
+#&gt; 242 ballistic intensive    5    0          0 0.7501875
+#&gt; 243  grinding    normal    5    0          4 0.7694083
+#&gt; 244 ballistic    normal    5    0          4 0.6252345
+#&gt; 245  grinding extensive    5    0          8 0.6978854
+#&gt; 246 ballistic extensive    5    0          8 0.5359631
+#&gt; 247  grinding intensive    6    0          0 0.8334722
+#&gt; 248 ballistic intensive    6    0          0 0.7144899
+#&gt; 249  grinding    normal    6    0          4 0.7501875
+#&gt; 250 ballistic    normal    6    0          4 0.6002401
+#&gt; 251  grinding extensive    6    0          8 0.6820352
+#&gt; 252 ballistic extensive    6    0          8 0.5174912
+#&gt; 253  grinding intensive    7    0          0 0.8109642
+#&gt; 254 ballistic intensive    7    0          0 0.6820352
+#&gt; 255  grinding    normal    7    0          4 0.7319037
+#&gt; 256 ballistic    normal    7    0          4 0.5771673
+#&gt; 257  grinding extensive    7    0          8 0.6668890
+#&gt; 258 ballistic extensive    7    0          8 0.5002501
+#&gt; 259  grinding intensive    8    0          0 0.7896399
+#&gt; 260 ballistic intensive    8    0          0 0.6524008
+#&gt; 261  grinding    normal    8    0          4 0.7144899
+#&gt; 262 ballistic    normal    8    0          4 0.5558026
+#&gt; 263  grinding extensive    8    0          8 0.6524008
+#&gt; 264 ballistic extensive    8    0          8 0.4841208
+#&gt; 265  grinding intensive    9    0          0 0.7694083
+#&gt; 266 ballistic intensive    9    0          0 0.6252345
+#&gt; 267  grinding    normal    9    0          4 0.6978854
+#&gt; 268 ballistic    normal    9    0          4 0.5359631
+#&gt; 269  grinding extensive    9    0          8 0.6385288
+#&gt; 270 ballistic extensive    9    0          8 0.4689992
+#&gt; 271  grinding intensive   10    0          0 0.7501875
+#&gt; 272 ballistic intensive   10    0          0 0.6002401
+#&gt; 273  grinding    normal   10    0          4 0.6820352
+#&gt; 274 ballistic    normal   10    0          4 0.5174912
+#&gt; 275  grinding extensive   10    0          8 0.6252345
+#&gt; 276 ballistic extensive   10    0          8 0.4547935
+#&gt; 277  grinding intensive   11    0          0 0.7319037
+#&gt; 278 ballistic intensive   11    0          0 0.5771673
+#&gt; 279  grinding    normal   11    0          4 0.6668890
+#&gt; 280 ballistic    normal   11    0          4 0.5002501
+#&gt; 281  grinding extensive   11    0          8 0.6124824
+#&gt; 282 ballistic extensive   11    0          8 0.4414231
+#&gt; 283  grinding intensive   12    0          0 0.7144899
+#&gt; 284 ballistic intensive   12    0          0 0.5558026
+#&gt; 285  grinding    normal   12    0          4 0.6524008
+#&gt; 286 ballistic    normal   12    0          4 0.4841208
+#&gt; 287  grinding extensive   12    0          8 0.6002401
+#&gt; 288 ballistic extensive   12    0          8 0.4288165</div><div class='input'>
+<span class='co'># Plot progression table</span>
+<span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>RIR_increment_fixed_4</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-7.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>RIR_increment_fixed_4</span>, <span class='st'>"adjustment"</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-8.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>perc_drop</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
 #&gt; [1] -0.18181818 -0.13636364 -0.09090909 -0.04545455
 #&gt; 
@@ -352,7 +1542,302 @@ intensive schemes</p></li>
 #&gt; 
 #&gt; $perc_1RM
 #&gt; [1] 0.5801875 0.6251875 0.6701875 0.7151875
-#&gt; </div><div class='input'><span class='fu'>perc_drop_fixed_5</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+#&gt; </div><div class='input'>
+<span class='co'># Generate progression table</span>
+<span class='fu'>generate_progression_table</span><span class='op'>(</span><span class='va'>perc_drop</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          type    volume reps step  adjustment  perc_1RM
+#&gt; 1    grinding intensive    1   -3 -0.07500000 0.8927732
+#&gt; 2   ballistic intensive    1   -3 -0.07500000 0.8625586
+#&gt; 3    grinding    normal    1   -3 -0.10000000 0.8677732
+#&gt; 4   ballistic    normal    1   -3 -0.10000000 0.8375586
+#&gt; 5    grinding extensive    1   -3 -0.12500000 0.8427732
+#&gt; 6   ballistic extensive    1   -3 -0.12500000 0.8125586
+#&gt; 7    grinding intensive    2   -3 -0.08181818 0.8557404
+#&gt; 8   ballistic intensive    2   -3 -0.09000000 0.7924568
+#&gt; 9    grinding    normal    2   -3 -0.10909091 0.8284677
+#&gt; 10  ballistic    normal    2   -3 -0.11750000 0.7649568
+#&gt; 11   grinding extensive    2   -3 -0.13636364 0.8011950
+#&gt; 12  ballistic extensive    2   -3 -0.14500000 0.7374568
+#&gt; 13   grinding intensive    3   -3 -0.08863636 0.8205372
+#&gt; 14  ballistic intensive    3   -3 -0.10500000 0.7284722
+#&gt; 15   grinding    normal    3   -3 -0.11818182 0.7909917
+#&gt; 16  ballistic    normal    3   -3 -0.13500000 0.6984722
+#&gt; 17   grinding extensive    3   -3 -0.14772727 0.7614463
+#&gt; 18  ballistic extensive    3   -3 -0.16500000 0.6684722
+#&gt; 19   grinding intensive    4   -3 -0.09545455 0.7870022
+#&gt; 20  ballistic intensive    4   -3 -0.12000000 0.6696399
+#&gt; 21   grinding    normal    4   -3 -0.12727273 0.7551840
+#&gt; 22  ballistic    normal    4   -3 -0.15250000 0.6371399
+#&gt; 23   grinding extensive    4   -3 -0.15909091 0.7233659
+#&gt; 24  ballistic extensive    4   -3 -0.18500000 0.6046399
+#&gt; 25   grinding intensive    5   -3 -0.10227273 0.7549926
+#&gt; 26  ballistic intensive    5   -3 -0.13500000 0.6151875
+#&gt; 27   grinding    normal    5   -3 -0.13636364 0.7209017
+#&gt; 28  ballistic    normal    5   -3 -0.17000000 0.5801875
+#&gt; 29   grinding extensive    5   -3 -0.17045455 0.6868108
+#&gt; 30  ballistic extensive    5   -3 -0.20500000 0.5451875
+#&gt; 31   grinding intensive    6   -3 -0.10909091 0.7243813
+#&gt; 32  ballistic intensive    6   -3 -0.15000000 0.5644899
+#&gt; 33   grinding    normal    6   -3 -0.14545455 0.6880177
+#&gt; 34  ballistic    normal    6   -3 -0.18750000 0.5269899
+#&gt; 35   grinding extensive    6   -3 -0.18181818 0.6516541
+#&gt; 36  ballistic extensive    6   -3 -0.22500000 0.4894899
+#&gt; 37   grinding intensive    7   -3 -0.11590909 0.6950551
+#&gt; 38  ballistic intensive    7   -3 -0.16500000 0.5170352
+#&gt; 39   grinding    normal    7   -3 -0.15454545 0.6564188
+#&gt; 40  ballistic    normal    7   -3 -0.20500000 0.4770352
+#&gt; 41   grinding extensive    7   -3 -0.19318182 0.6177824
+#&gt; 42  ballistic extensive    7   -3 -0.24500000 0.4370352
+#&gt; 43   grinding intensive    8   -3 -0.12272727 0.6669127
+#&gt; 44  ballistic intensive    8   -3 -0.18000000 0.4724008
+#&gt; 45   grinding    normal    8   -3 -0.16363636 0.6260036
+#&gt; 46  ballistic    normal    8   -3 -0.22250000 0.4299008
+#&gt; 47   grinding extensive    8   -3 -0.20454545 0.5850945
+#&gt; 48  ballistic extensive    8   -3 -0.26500000 0.3874008
+#&gt; 49   grinding intensive    9   -3 -0.12954545 0.6398629
+#&gt; 50  ballistic intensive    9   -3 -0.19500000 0.4302345
+#&gt; 51   grinding    normal    9   -3 -0.17272727 0.5966811
+#&gt; 52  ballistic    normal    9   -3 -0.24000000 0.3852345
+#&gt; 53   grinding extensive    9   -3 -0.21590909 0.5534992
+#&gt; 54  ballistic extensive    9   -3 -0.28500000 0.3402345
+#&gt; 55   grinding intensive   10   -3 -0.13636364 0.6138239
+#&gt; 56  ballistic intensive   10   -3 -0.21000000 0.3902401
+#&gt; 57   grinding    normal   10   -3 -0.18181818 0.5683694
+#&gt; 58  ballistic    normal   10   -3 -0.25750000 0.3427401
+#&gt; 59   grinding extensive   10   -3 -0.22727273 0.5229148
+#&gt; 60  ballistic extensive   10   -3 -0.30500000 0.2952401
+#&gt; 61   grinding intensive   11   -3 -0.14318182 0.5887219
+#&gt; 62  ballistic intensive   11   -3 -0.22500000 0.3521673
+#&gt; 63   grinding    normal   11   -3 -0.19090909 0.5409946
+#&gt; 64  ballistic    normal   11   -3 -0.27500000 0.3021673
+#&gt; 65   grinding extensive   11   -3 -0.23863636 0.4932673
+#&gt; 66  ballistic extensive   11   -3 -0.32500000 0.2521673
+#&gt; 67   grinding intensive   12   -3 -0.15000000 0.5644899
+#&gt; 68  ballistic intensive   12   -3 -0.24000000 0.3158026
+#&gt; 69   grinding    normal   12   -3 -0.20000000 0.5144899
+#&gt; 70  ballistic    normal   12   -3 -0.29250000 0.2633026
+#&gt; 71   grinding extensive   12   -3 -0.25000000 0.4644899
+#&gt; 72  ballistic extensive   12   -3 -0.34500000 0.2108026
+#&gt; 73   grinding intensive    1   -2 -0.05000000 0.9177732
+#&gt; 74  ballistic intensive    1   -2 -0.05000000 0.8875586
+#&gt; 75   grinding    normal    1   -2 -0.07500000 0.8927732
+#&gt; 76  ballistic    normal    1   -2 -0.07500000 0.8625586
+#&gt; 77   grinding extensive    1   -2 -0.10000000 0.8677732
+#&gt; 78  ballistic extensive    1   -2 -0.10000000 0.8375586
+#&gt; 79   grinding intensive    2   -2 -0.05454545 0.8830131
+#&gt; 80  ballistic intensive    2   -2 -0.06000000 0.8224568
+#&gt; 81   grinding    normal    2   -2 -0.08181818 0.8557404
+#&gt; 82  ballistic    normal    2   -2 -0.08750000 0.7949568
+#&gt; 83   grinding extensive    2   -2 -0.10909091 0.8284677
+#&gt; 84  ballistic extensive    2   -2 -0.11500000 0.7674568
+#&gt; 85   grinding intensive    3   -2 -0.05909091 0.8500827
+#&gt; 86  ballistic intensive    3   -2 -0.07000000 0.7634722
+#&gt; 87   grinding    normal    3   -2 -0.08863636 0.8205372
+#&gt; 88  ballistic    normal    3   -2 -0.10000000 0.7334722
+#&gt; 89   grinding extensive    3   -2 -0.11818182 0.7909917
+#&gt; 90  ballistic extensive    3   -2 -0.13000000 0.7034722
+#&gt; 91   grinding intensive    4   -2 -0.06363636 0.8188204
+#&gt; 92  ballistic intensive    4   -2 -0.08000000 0.7096399
+#&gt; 93   grinding    normal    4   -2 -0.09545455 0.7870022
+#&gt; 94  ballistic    normal    4   -2 -0.11250000 0.6771399
+#&gt; 95   grinding extensive    4   -2 -0.12727273 0.7551840
+#&gt; 96  ballistic extensive    4   -2 -0.14500000 0.6446399
+#&gt; 97   grinding intensive    5   -2 -0.06818182 0.7890835
+#&gt; 98  ballistic intensive    5   -2 -0.09000000 0.6601875
+#&gt; 99   grinding    normal    5   -2 -0.10227273 0.7549926
+#&gt; 100 ballistic    normal    5   -2 -0.12500000 0.6251875
+#&gt; 101  grinding extensive    5   -2 -0.13636364 0.7209017
+#&gt; 102 ballistic extensive    5   -2 -0.16000000 0.5901875
+#&gt; 103  grinding intensive    6   -2 -0.07272727 0.7607450
+#&gt; 104 ballistic intensive    6   -2 -0.10000000 0.6144899
+#&gt; 105  grinding    normal    6   -2 -0.10909091 0.7243813
+#&gt; 106 ballistic    normal    6   -2 -0.13750000 0.5769899
+#&gt; 107  grinding extensive    6   -2 -0.14545455 0.6880177
+#&gt; 108 ballistic extensive    6   -2 -0.17500000 0.5394899
+#&gt; 109  grinding intensive    7   -2 -0.07727273 0.7336915
+#&gt; 110 ballistic intensive    7   -2 -0.11000000 0.5720352
+#&gt; 111  grinding    normal    7   -2 -0.11590909 0.6950551
+#&gt; 112 ballistic    normal    7   -2 -0.15000000 0.5320352
+#&gt; 113  grinding extensive    7   -2 -0.15454545 0.6564188
+#&gt; 114 ballistic extensive    7   -2 -0.19000000 0.4920352
+#&gt; 115  grinding intensive    8   -2 -0.08181818 0.7078217
+#&gt; 116 ballistic intensive    8   -2 -0.12000000 0.5324008
+#&gt; 117  grinding    normal    8   -2 -0.12272727 0.6669127
+#&gt; 118 ballistic    normal    8   -2 -0.16250000 0.4899008
+#&gt; 119  grinding extensive    8   -2 -0.16363636 0.6260036
+#&gt; 120 ballistic extensive    8   -2 -0.20500000 0.4474008
+#&gt; 121  grinding intensive    9   -2 -0.08636364 0.6830447
+#&gt; 122 ballistic intensive    9   -2 -0.13000000 0.4952345
+#&gt; 123  grinding    normal    9   -2 -0.12954545 0.6398629
+#&gt; 124 ballistic    normal    9   -2 -0.17500000 0.4502345
+#&gt; 125  grinding extensive    9   -2 -0.17272727 0.5966811
+#&gt; 126 ballistic extensive    9   -2 -0.22000000 0.4052345
+#&gt; 127  grinding intensive   10   -2 -0.09090909 0.6592785
+#&gt; 128 ballistic intensive   10   -2 -0.14000000 0.4602401
+#&gt; 129  grinding    normal   10   -2 -0.13636364 0.6138239
+#&gt; 130 ballistic    normal   10   -2 -0.18750000 0.4127401
+#&gt; 131  grinding extensive   10   -2 -0.18181818 0.5683694
+#&gt; 132 ballistic extensive   10   -2 -0.23500000 0.3652401
+#&gt; 133  grinding intensive   11   -2 -0.09545455 0.6364491
+#&gt; 134 ballistic intensive   11   -2 -0.15000000 0.4271673
+#&gt; 135  grinding    normal   11   -2 -0.14318182 0.5887219
+#&gt; 136 ballistic    normal   11   -2 -0.20000000 0.3771673
+#&gt; 137  grinding extensive   11   -2 -0.19090909 0.5409946
+#&gt; 138 ballistic extensive   11   -2 -0.25000000 0.3271673
+#&gt; 139  grinding intensive   12   -2 -0.10000000 0.6144899
+#&gt; 140 ballistic intensive   12   -2 -0.16000000 0.3958026
+#&gt; 141  grinding    normal   12   -2 -0.15000000 0.5644899
+#&gt; 142 ballistic    normal   12   -2 -0.21250000 0.3433026
+#&gt; 143  grinding extensive   12   -2 -0.20000000 0.5144899
+#&gt; 144 ballistic extensive   12   -2 -0.26500000 0.2908026
+#&gt; 145  grinding intensive    1   -1 -0.02500000 0.9427732
+#&gt; 146 ballistic intensive    1   -1 -0.02500000 0.9125586
+#&gt; 147  grinding    normal    1   -1 -0.05000000 0.9177732
+#&gt; 148 ballistic    normal    1   -1 -0.05000000 0.8875586
+#&gt; 149  grinding extensive    1   -1 -0.07500000 0.8927732
+#&gt; 150 ballistic extensive    1   -1 -0.07500000 0.8625586
+#&gt; 151  grinding intensive    2   -1 -0.02727273 0.9102859
+#&gt; 152 ballistic intensive    2   -1 -0.03000000 0.8524568
+#&gt; 153  grinding    normal    2   -1 -0.05454545 0.8830131
+#&gt; 154 ballistic    normal    2   -1 -0.05750000 0.8249568
+#&gt; 155  grinding extensive    2   -1 -0.08181818 0.8557404
+#&gt; 156 ballistic extensive    2   -1 -0.08500000 0.7974568
+#&gt; 157  grinding intensive    3   -1 -0.02954545 0.8796281
+#&gt; 158 ballistic intensive    3   -1 -0.03500000 0.7984722
+#&gt; 159  grinding    normal    3   -1 -0.05909091 0.8500827
+#&gt; 160 ballistic    normal    3   -1 -0.06500000 0.7684722
+#&gt; 161  grinding extensive    3   -1 -0.08863636 0.8205372
+#&gt; 162 ballistic extensive    3   -1 -0.09500000 0.7384722
+#&gt; 163  grinding intensive    4   -1 -0.03181818 0.8506386
+#&gt; 164 ballistic intensive    4   -1 -0.04000000 0.7496399
+#&gt; 165  grinding    normal    4   -1 -0.06363636 0.8188204
+#&gt; 166 ballistic    normal    4   -1 -0.07250000 0.7171399
+#&gt; 167  grinding extensive    4   -1 -0.09545455 0.7870022
+#&gt; 168 ballistic extensive    4   -1 -0.10500000 0.6846399
+#&gt; 169  grinding intensive    5   -1 -0.03409091 0.8231744
+#&gt; 170 ballistic intensive    5   -1 -0.04500000 0.7051875
+#&gt; 171  grinding    normal    5   -1 -0.06818182 0.7890835
+#&gt; 172 ballistic    normal    5   -1 -0.08000000 0.6701875
+#&gt; 173  grinding extensive    5   -1 -0.10227273 0.7549926
+#&gt; 174 ballistic extensive    5   -1 -0.11500000 0.6351875
+#&gt; 175  grinding intensive    6   -1 -0.03636364 0.7971086
+#&gt; 176 ballistic intensive    6   -1 -0.05000000 0.6644899
+#&gt; 177  grinding    normal    6   -1 -0.07272727 0.7607450
+#&gt; 178 ballistic    normal    6   -1 -0.08750000 0.6269899
+#&gt; 179  grinding extensive    6   -1 -0.10909091 0.7243813
+#&gt; 180 ballistic extensive    6   -1 -0.12500000 0.5894899
+#&gt; 181  grinding intensive    7   -1 -0.03863636 0.7723279
+#&gt; 182 ballistic intensive    7   -1 -0.05500000 0.6270352
+#&gt; 183  grinding    normal    7   -1 -0.07727273 0.7336915
+#&gt; 184 ballistic    normal    7   -1 -0.09500000 0.5870352
+#&gt; 185  grinding extensive    7   -1 -0.11590909 0.6950551
+#&gt; 186 ballistic extensive    7   -1 -0.13500000 0.5470352
+#&gt; 187  grinding intensive    8   -1 -0.04090909 0.7487308
+#&gt; 188 ballistic intensive    8   -1 -0.06000000 0.5924008
+#&gt; 189  grinding    normal    8   -1 -0.08181818 0.7078217
+#&gt; 190 ballistic    normal    8   -1 -0.10250000 0.5499008
+#&gt; 191  grinding extensive    8   -1 -0.12272727 0.6669127
+#&gt; 192 ballistic extensive    8   -1 -0.14500000 0.5074008
+#&gt; 193  grinding intensive    9   -1 -0.04318182 0.7262265
+#&gt; 194 ballistic intensive    9   -1 -0.06500000 0.5602345
+#&gt; 195  grinding    normal    9   -1 -0.08636364 0.6830447
+#&gt; 196 ballistic    normal    9   -1 -0.11000000 0.5152345
+#&gt; 197  grinding extensive    9   -1 -0.12954545 0.6398629
+#&gt; 198 ballistic extensive    9   -1 -0.15500000 0.4702345
+#&gt; 199  grinding intensive   10   -1 -0.04545455 0.7047330
+#&gt; 200 ballistic intensive   10   -1 -0.07000000 0.5302401
+#&gt; 201  grinding    normal   10   -1 -0.09090909 0.6592785
+#&gt; 202 ballistic    normal   10   -1 -0.11750000 0.4827401
+#&gt; 203  grinding extensive   10   -1 -0.13636364 0.6138239
+#&gt; 204 ballistic extensive   10   -1 -0.16500000 0.4352401
+#&gt; 205  grinding intensive   11   -1 -0.04772727 0.6841764
+#&gt; 206 ballistic intensive   11   -1 -0.07500000 0.5021673
+#&gt; 207  grinding    normal   11   -1 -0.09545455 0.6364491
+#&gt; 208 ballistic    normal   11   -1 -0.12500000 0.4521673
+#&gt; 209  grinding extensive   11   -1 -0.14318182 0.5887219
+#&gt; 210 ballistic extensive   11   -1 -0.17500000 0.4021673
+#&gt; 211  grinding intensive   12   -1 -0.05000000 0.6644899
+#&gt; 212 ballistic intensive   12   -1 -0.08000000 0.4758026
+#&gt; 213  grinding    normal   12   -1 -0.10000000 0.6144899
+#&gt; 214 ballistic    normal   12   -1 -0.13250000 0.4233026
+#&gt; 215  grinding extensive   12   -1 -0.15000000 0.5644899
+#&gt; 216 ballistic extensive   12   -1 -0.18500000 0.3708026
+#&gt; 217  grinding intensive    1    0  0.00000000 0.9677732
+#&gt; 218 ballistic intensive    1    0  0.00000000 0.9375586
+#&gt; 219  grinding    normal    1    0 -0.02500000 0.9427732
+#&gt; 220 ballistic    normal    1    0 -0.02500000 0.9125586
+#&gt; 221  grinding extensive    1    0 -0.05000000 0.9177732
+#&gt; 222 ballistic extensive    1    0 -0.05000000 0.8875586
+#&gt; 223  grinding intensive    2    0  0.00000000 0.9375586
+#&gt; 224 ballistic intensive    2    0  0.00000000 0.8824568
+#&gt; 225  grinding    normal    2    0 -0.02727273 0.9102859
+#&gt; 226 ballistic    normal    2    0 -0.02750000 0.8549568
+#&gt; 227  grinding extensive    2    0 -0.05454545 0.8830131
+#&gt; 228 ballistic extensive    2    0 -0.05500000 0.8274568
+#&gt; 229  grinding intensive    3    0  0.00000000 0.9091736
+#&gt; 230 ballistic intensive    3    0  0.00000000 0.8334722
+#&gt; 231  grinding    normal    3    0 -0.02954545 0.8796281
+#&gt; 232 ballistic    normal    3    0 -0.03000000 0.8034722
+#&gt; 233  grinding extensive    3    0 -0.05909091 0.8500827
+#&gt; 234 ballistic extensive    3    0 -0.06000000 0.7734722
+#&gt; 235  grinding intensive    4    0  0.00000000 0.8824568
+#&gt; 236 ballistic intensive    4    0  0.00000000 0.7896399
+#&gt; 237  grinding    normal    4    0 -0.03181818 0.8506386
+#&gt; 238 ballistic    normal    4    0 -0.03250000 0.7571399
+#&gt; 239  grinding extensive    4    0 -0.06363636 0.8188204
+#&gt; 240 ballistic extensive    4    0 -0.06500000 0.7246399
+#&gt; 241  grinding intensive    5    0  0.00000000 0.8572653
+#&gt; 242 ballistic intensive    5    0  0.00000000 0.7501875
+#&gt; 243  grinding    normal    5    0 -0.03409091 0.8231744
+#&gt; 244 ballistic    normal    5    0 -0.03500000 0.7151875
+#&gt; 245  grinding extensive    5    0 -0.06818182 0.7890835
+#&gt; 246 ballistic extensive    5    0 -0.07000000 0.6801875
+#&gt; 247  grinding intensive    6    0  0.00000000 0.8334722
+#&gt; 248 ballistic intensive    6    0  0.00000000 0.7144899
+#&gt; 249  grinding    normal    6    0 -0.03636364 0.7971086
+#&gt; 250 ballistic    normal    6    0 -0.03750000 0.6769899
+#&gt; 251  grinding extensive    6    0 -0.07272727 0.7607450
+#&gt; 252 ballistic extensive    6    0 -0.07500000 0.6394899
+#&gt; 253  grinding intensive    7    0  0.00000000 0.8109642
+#&gt; 254 ballistic intensive    7    0  0.00000000 0.6820352
+#&gt; 255  grinding    normal    7    0 -0.03863636 0.7723279
+#&gt; 256 ballistic    normal    7    0 -0.04000000 0.6420352
+#&gt; 257  grinding extensive    7    0 -0.07727273 0.7336915
+#&gt; 258 ballistic extensive    7    0 -0.08000000 0.6020352
+#&gt; 259  grinding intensive    8    0  0.00000000 0.7896399
+#&gt; 260 ballistic intensive    8    0  0.00000000 0.6524008
+#&gt; 261  grinding    normal    8    0 -0.04090909 0.7487308
+#&gt; 262 ballistic    normal    8    0 -0.04250000 0.6099008
+#&gt; 263  grinding extensive    8    0 -0.08181818 0.7078217
+#&gt; 264 ballistic extensive    8    0 -0.08500000 0.5674008
+#&gt; 265  grinding intensive    9    0  0.00000000 0.7694083
+#&gt; 266 ballistic intensive    9    0  0.00000000 0.6252345
+#&gt; 267  grinding    normal    9    0 -0.04318182 0.7262265
+#&gt; 268 ballistic    normal    9    0 -0.04500000 0.5802345
+#&gt; 269  grinding extensive    9    0 -0.08636364 0.6830447
+#&gt; 270 ballistic extensive    9    0 -0.09000000 0.5352345
+#&gt; 271  grinding intensive   10    0  0.00000000 0.7501875
+#&gt; 272 ballistic intensive   10    0  0.00000000 0.6002401
+#&gt; 273  grinding    normal   10    0 -0.04545455 0.7047330
+#&gt; 274 ballistic    normal   10    0 -0.04750000 0.5527401
+#&gt; 275  grinding extensive   10    0 -0.09090909 0.6592785
+#&gt; 276 ballistic extensive   10    0 -0.09500000 0.5052401
+#&gt; 277  grinding intensive   11    0  0.00000000 0.7319037
+#&gt; 278 ballistic intensive   11    0  0.00000000 0.5771673
+#&gt; 279  grinding    normal   11    0 -0.04772727 0.6841764
+#&gt; 280 ballistic    normal   11    0 -0.05000000 0.5271673
+#&gt; 281  grinding extensive   11    0 -0.09545455 0.6364491
+#&gt; 282 ballistic extensive   11    0 -0.10000000 0.4771673
+#&gt; 283  grinding intensive   12    0  0.00000000 0.7144899
+#&gt; 284 ballistic intensive   12    0  0.00000000 0.5558026
+#&gt; 285  grinding    normal   12    0 -0.05000000 0.6644899
+#&gt; 286 ballistic    normal   12    0 -0.05250000 0.5033026
+#&gt; 287  grinding extensive   12    0 -0.10000000 0.6144899
+#&gt; 288 ballistic extensive   12    0 -0.10500000 0.4508026</div><div class='input'>
+<span class='co'># Plot progression table</span>
+<span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>perc_drop</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-9.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>perc_drop</span>, <span class='st'>"adjustment"</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-10.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>perc_drop_fixed_5</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
 #&gt; [1] -0.20 -0.15 -0.10 -0.05
 #&gt; 
@@ -370,7 +1855,302 @@ intensive schemes</p></li>
 #&gt; 
 #&gt; $perc_1RM
 #&gt; [1] 0.5501875 0.6001875 0.6501875 0.7001875
-#&gt; </div><div class='input'><span class='fu'>perc_drop_fixed_25</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+#&gt; </div><div class='input'>
+<span class='co'># Generate progression table</span>
+<span class='fu'>generate_progression_table</span><span class='op'>(</span><span class='va'>perc_drop_fixed_5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          type    volume reps step adjustment  perc_1RM
+#&gt; 1    grinding intensive    1   -3      -0.15 0.8177732
+#&gt; 2   ballistic intensive    1   -3      -0.15 0.7875586
+#&gt; 3    grinding    normal    1   -3      -0.20 0.7677732
+#&gt; 4   ballistic    normal    1   -3      -0.20 0.7375586
+#&gt; 5    grinding extensive    1   -3      -0.16 0.8077732
+#&gt; 6   ballistic extensive    1   -3      -0.25 0.6875586
+#&gt; 7    grinding intensive    2   -3      -0.15 0.7875586
+#&gt; 8   ballistic intensive    2   -3      -0.15 0.7324568
+#&gt; 9    grinding    normal    2   -3      -0.20 0.7375586
+#&gt; 10  ballistic    normal    2   -3      -0.20 0.6824568
+#&gt; 11   grinding extensive    2   -3      -0.16 0.7775586
+#&gt; 12  ballistic extensive    2   -3      -0.25 0.6324568
+#&gt; 13   grinding intensive    3   -3      -0.15 0.7591736
+#&gt; 14  ballistic intensive    3   -3      -0.15 0.6834722
+#&gt; 15   grinding    normal    3   -3      -0.20 0.7091736
+#&gt; 16  ballistic    normal    3   -3      -0.20 0.6334722
+#&gt; 17   grinding extensive    3   -3      -0.16 0.7491736
+#&gt; 18  ballistic extensive    3   -3      -0.25 0.5834722
+#&gt; 19   grinding intensive    4   -3      -0.15 0.7324568
+#&gt; 20  ballistic intensive    4   -3      -0.15 0.6396399
+#&gt; 21   grinding    normal    4   -3      -0.20 0.6824568
+#&gt; 22  ballistic    normal    4   -3      -0.20 0.5896399
+#&gt; 23   grinding extensive    4   -3      -0.16 0.7224568
+#&gt; 24  ballistic extensive    4   -3      -0.25 0.5396399
+#&gt; 25   grinding intensive    5   -3      -0.15 0.7072653
+#&gt; 26  ballistic intensive    5   -3      -0.15 0.6001875
+#&gt; 27   grinding    normal    5   -3      -0.20 0.6572653
+#&gt; 28  ballistic    normal    5   -3      -0.20 0.5501875
+#&gt; 29   grinding extensive    5   -3      -0.16 0.6972653
+#&gt; 30  ballistic extensive    5   -3      -0.25 0.5001875
+#&gt; 31   grinding intensive    6   -3      -0.15 0.6834722
+#&gt; 32  ballistic intensive    6   -3      -0.15 0.5644899
+#&gt; 33   grinding    normal    6   -3      -0.20 0.6334722
+#&gt; 34  ballistic    normal    6   -3      -0.20 0.5144899
+#&gt; 35   grinding extensive    6   -3      -0.16 0.6734722
+#&gt; 36  ballistic extensive    6   -3      -0.25 0.4644899
+#&gt; 37   grinding intensive    7   -3      -0.15 0.6609642
+#&gt; 38  ballistic intensive    7   -3      -0.15 0.5320352
+#&gt; 39   grinding    normal    7   -3      -0.20 0.6109642
+#&gt; 40  ballistic    normal    7   -3      -0.20 0.4820352
+#&gt; 41   grinding extensive    7   -3      -0.16 0.6509642
+#&gt; 42  ballistic extensive    7   -3      -0.25 0.4320352
+#&gt; 43   grinding intensive    8   -3      -0.15 0.6396399
+#&gt; 44  ballistic intensive    8   -3      -0.15 0.5024008
+#&gt; 45   grinding    normal    8   -3      -0.20 0.5896399
+#&gt; 46  ballistic    normal    8   -3      -0.20 0.4524008
+#&gt; 47   grinding extensive    8   -3      -0.16 0.6296399
+#&gt; 48  ballistic extensive    8   -3      -0.25 0.4024008
+#&gt; 49   grinding intensive    9   -3      -0.15 0.6194083
+#&gt; 50  ballistic intensive    9   -3      -0.15 0.4752345
+#&gt; 51   grinding    normal    9   -3      -0.20 0.5694083
+#&gt; 52  ballistic    normal    9   -3      -0.20 0.4252345
+#&gt; 53   grinding extensive    9   -3      -0.16 0.6094083
+#&gt; 54  ballistic extensive    9   -3      -0.25 0.3752345
+#&gt; 55   grinding intensive   10   -3      -0.15 0.6001875
+#&gt; 56  ballistic intensive   10   -3      -0.15 0.4502401
+#&gt; 57   grinding    normal   10   -3      -0.20 0.5501875
+#&gt; 58  ballistic    normal   10   -3      -0.20 0.4002401
+#&gt; 59   grinding extensive   10   -3      -0.16 0.5901875
+#&gt; 60  ballistic extensive   10   -3      -0.25 0.3502401
+#&gt; 61   grinding intensive   11   -3      -0.15 0.5819037
+#&gt; 62  ballistic intensive   11   -3      -0.15 0.4271673
+#&gt; 63   grinding    normal   11   -3      -0.20 0.5319037
+#&gt; 64  ballistic    normal   11   -3      -0.20 0.3771673
+#&gt; 65   grinding extensive   11   -3      -0.16 0.5719037
+#&gt; 66  ballistic extensive   11   -3      -0.25 0.3271673
+#&gt; 67   grinding intensive   12   -3      -0.15 0.5644899
+#&gt; 68  ballistic intensive   12   -3      -0.15 0.4058026
+#&gt; 69   grinding    normal   12   -3      -0.20 0.5144899
+#&gt; 70  ballistic    normal   12   -3      -0.20 0.3558026
+#&gt; 71   grinding extensive   12   -3      -0.16 0.5544899
+#&gt; 72  ballistic extensive   12   -3      -0.25 0.3058026
+#&gt; 73   grinding intensive    1   -2      -0.10 0.8677732
+#&gt; 74  ballistic intensive    1   -2      -0.10 0.8375586
+#&gt; 75   grinding    normal    1   -2      -0.15 0.8177732
+#&gt; 76  ballistic    normal    1   -2      -0.15 0.7875586
+#&gt; 77   grinding extensive    1   -2      -0.11 0.8577732
+#&gt; 78  ballistic extensive    1   -2      -0.20 0.7375586
+#&gt; 79   grinding intensive    2   -2      -0.10 0.8375586
+#&gt; 80  ballistic intensive    2   -2      -0.10 0.7824568
+#&gt; 81   grinding    normal    2   -2      -0.15 0.7875586
+#&gt; 82  ballistic    normal    2   -2      -0.15 0.7324568
+#&gt; 83   grinding extensive    2   -2      -0.11 0.8275586
+#&gt; 84  ballistic extensive    2   -2      -0.20 0.6824568
+#&gt; 85   grinding intensive    3   -2      -0.10 0.8091736
+#&gt; 86  ballistic intensive    3   -2      -0.10 0.7334722
+#&gt; 87   grinding    normal    3   -2      -0.15 0.7591736
+#&gt; 88  ballistic    normal    3   -2      -0.15 0.6834722
+#&gt; 89   grinding extensive    3   -2      -0.11 0.7991736
+#&gt; 90  ballistic extensive    3   -2      -0.20 0.6334722
+#&gt; 91   grinding intensive    4   -2      -0.10 0.7824568
+#&gt; 92  ballistic intensive    4   -2      -0.10 0.6896399
+#&gt; 93   grinding    normal    4   -2      -0.15 0.7324568
+#&gt; 94  ballistic    normal    4   -2      -0.15 0.6396399
+#&gt; 95   grinding extensive    4   -2      -0.11 0.7724568
+#&gt; 96  ballistic extensive    4   -2      -0.20 0.5896399
+#&gt; 97   grinding intensive    5   -2      -0.10 0.7572653
+#&gt; 98  ballistic intensive    5   -2      -0.10 0.6501875
+#&gt; 99   grinding    normal    5   -2      -0.15 0.7072653
+#&gt; 100 ballistic    normal    5   -2      -0.15 0.6001875
+#&gt; 101  grinding extensive    5   -2      -0.11 0.7472653
+#&gt; 102 ballistic extensive    5   -2      -0.20 0.5501875
+#&gt; 103  grinding intensive    6   -2      -0.10 0.7334722
+#&gt; 104 ballistic intensive    6   -2      -0.10 0.6144899
+#&gt; 105  grinding    normal    6   -2      -0.15 0.6834722
+#&gt; 106 ballistic    normal    6   -2      -0.15 0.5644899
+#&gt; 107  grinding extensive    6   -2      -0.11 0.7234722
+#&gt; 108 ballistic extensive    6   -2      -0.20 0.5144899
+#&gt; 109  grinding intensive    7   -2      -0.10 0.7109642
+#&gt; 110 ballistic intensive    7   -2      -0.10 0.5820352
+#&gt; 111  grinding    normal    7   -2      -0.15 0.6609642
+#&gt; 112 ballistic    normal    7   -2      -0.15 0.5320352
+#&gt; 113  grinding extensive    7   -2      -0.11 0.7009642
+#&gt; 114 ballistic extensive    7   -2      -0.20 0.4820352
+#&gt; 115  grinding intensive    8   -2      -0.10 0.6896399
+#&gt; 116 ballistic intensive    8   -2      -0.10 0.5524008
+#&gt; 117  grinding    normal    8   -2      -0.15 0.6396399
+#&gt; 118 ballistic    normal    8   -2      -0.15 0.5024008
+#&gt; 119  grinding extensive    8   -2      -0.11 0.6796399
+#&gt; 120 ballistic extensive    8   -2      -0.20 0.4524008
+#&gt; 121  grinding intensive    9   -2      -0.10 0.6694083
+#&gt; 122 ballistic intensive    9   -2      -0.10 0.5252345
+#&gt; 123  grinding    normal    9   -2      -0.15 0.6194083
+#&gt; 124 ballistic    normal    9   -2      -0.15 0.4752345
+#&gt; 125  grinding extensive    9   -2      -0.11 0.6594083
+#&gt; 126 ballistic extensive    9   -2      -0.20 0.4252345
+#&gt; 127  grinding intensive   10   -2      -0.10 0.6501875
+#&gt; 128 ballistic intensive   10   -2      -0.10 0.5002401
+#&gt; 129  grinding    normal   10   -2      -0.15 0.6001875
+#&gt; 130 ballistic    normal   10   -2      -0.15 0.4502401
+#&gt; 131  grinding extensive   10   -2      -0.11 0.6401875
+#&gt; 132 ballistic extensive   10   -2      -0.20 0.4002401
+#&gt; 133  grinding intensive   11   -2      -0.10 0.6319037
+#&gt; 134 ballistic intensive   11   -2      -0.10 0.4771673
+#&gt; 135  grinding    normal   11   -2      -0.15 0.5819037
+#&gt; 136 ballistic    normal   11   -2      -0.15 0.4271673
+#&gt; 137  grinding extensive   11   -2      -0.11 0.6219037
+#&gt; 138 ballistic extensive   11   -2      -0.20 0.3771673
+#&gt; 139  grinding intensive   12   -2      -0.10 0.6144899
+#&gt; 140 ballistic intensive   12   -2      -0.10 0.4558026
+#&gt; 141  grinding    normal   12   -2      -0.15 0.5644899
+#&gt; 142 ballistic    normal   12   -2      -0.15 0.4058026
+#&gt; 143  grinding extensive   12   -2      -0.11 0.6044899
+#&gt; 144 ballistic extensive   12   -2      -0.20 0.3558026
+#&gt; 145  grinding intensive    1   -1      -0.05 0.9177732
+#&gt; 146 ballistic intensive    1   -1      -0.05 0.8875586
+#&gt; 147  grinding    normal    1   -1      -0.10 0.8677732
+#&gt; 148 ballistic    normal    1   -1      -0.10 0.8375586
+#&gt; 149  grinding extensive    1   -1      -0.06 0.9077732
+#&gt; 150 ballistic extensive    1   -1      -0.15 0.7875586
+#&gt; 151  grinding intensive    2   -1      -0.05 0.8875586
+#&gt; 152 ballistic intensive    2   -1      -0.05 0.8324568
+#&gt; 153  grinding    normal    2   -1      -0.10 0.8375586
+#&gt; 154 ballistic    normal    2   -1      -0.10 0.7824568
+#&gt; 155  grinding extensive    2   -1      -0.06 0.8775586
+#&gt; 156 ballistic extensive    2   -1      -0.15 0.7324568
+#&gt; 157  grinding intensive    3   -1      -0.05 0.8591736
+#&gt; 158 ballistic intensive    3   -1      -0.05 0.7834722
+#&gt; 159  grinding    normal    3   -1      -0.10 0.8091736
+#&gt; 160 ballistic    normal    3   -1      -0.10 0.7334722
+#&gt; 161  grinding extensive    3   -1      -0.06 0.8491736
+#&gt; 162 ballistic extensive    3   -1      -0.15 0.6834722
+#&gt; 163  grinding intensive    4   -1      -0.05 0.8324568
+#&gt; 164 ballistic intensive    4   -1      -0.05 0.7396399
+#&gt; 165  grinding    normal    4   -1      -0.10 0.7824568
+#&gt; 166 ballistic    normal    4   -1      -0.10 0.6896399
+#&gt; 167  grinding extensive    4   -1      -0.06 0.8224568
+#&gt; 168 ballistic extensive    4   -1      -0.15 0.6396399
+#&gt; 169  grinding intensive    5   -1      -0.05 0.8072653
+#&gt; 170 ballistic intensive    5   -1      -0.05 0.7001875
+#&gt; 171  grinding    normal    5   -1      -0.10 0.7572653
+#&gt; 172 ballistic    normal    5   -1      -0.10 0.6501875
+#&gt; 173  grinding extensive    5   -1      -0.06 0.7972653
+#&gt; 174 ballistic extensive    5   -1      -0.15 0.6001875
+#&gt; 175  grinding intensive    6   -1      -0.05 0.7834722
+#&gt; 176 ballistic intensive    6   -1      -0.05 0.6644899
+#&gt; 177  grinding    normal    6   -1      -0.10 0.7334722
+#&gt; 178 ballistic    normal    6   -1      -0.10 0.6144899
+#&gt; 179  grinding extensive    6   -1      -0.06 0.7734722
+#&gt; 180 ballistic extensive    6   -1      -0.15 0.5644899
+#&gt; 181  grinding intensive    7   -1      -0.05 0.7609642
+#&gt; 182 ballistic intensive    7   -1      -0.05 0.6320352
+#&gt; 183  grinding    normal    7   -1      -0.10 0.7109642
+#&gt; 184 ballistic    normal    7   -1      -0.10 0.5820352
+#&gt; 185  grinding extensive    7   -1      -0.06 0.7509642
+#&gt; 186 ballistic extensive    7   -1      -0.15 0.5320352
+#&gt; 187  grinding intensive    8   -1      -0.05 0.7396399
+#&gt; 188 ballistic intensive    8   -1      -0.05 0.6024008
+#&gt; 189  grinding    normal    8   -1      -0.10 0.6896399
+#&gt; 190 ballistic    normal    8   -1      -0.10 0.5524008
+#&gt; 191  grinding extensive    8   -1      -0.06 0.7296399
+#&gt; 192 ballistic extensive    8   -1      -0.15 0.5024008
+#&gt; 193  grinding intensive    9   -1      -0.05 0.7194083
+#&gt; 194 ballistic intensive    9   -1      -0.05 0.5752345
+#&gt; 195  grinding    normal    9   -1      -0.10 0.6694083
+#&gt; 196 ballistic    normal    9   -1      -0.10 0.5252345
+#&gt; 197  grinding extensive    9   -1      -0.06 0.7094083
+#&gt; 198 ballistic extensive    9   -1      -0.15 0.4752345
+#&gt; 199  grinding intensive   10   -1      -0.05 0.7001875
+#&gt; 200 ballistic intensive   10   -1      -0.05 0.5502401
+#&gt; 201  grinding    normal   10   -1      -0.10 0.6501875
+#&gt; 202 ballistic    normal   10   -1      -0.10 0.5002401
+#&gt; 203  grinding extensive   10   -1      -0.06 0.6901875
+#&gt; 204 ballistic extensive   10   -1      -0.15 0.4502401
+#&gt; 205  grinding intensive   11   -1      -0.05 0.6819037
+#&gt; 206 ballistic intensive   11   -1      -0.05 0.5271673
+#&gt; 207  grinding    normal   11   -1      -0.10 0.6319037
+#&gt; 208 ballistic    normal   11   -1      -0.10 0.4771673
+#&gt; 209  grinding extensive   11   -1      -0.06 0.6719037
+#&gt; 210 ballistic extensive   11   -1      -0.15 0.4271673
+#&gt; 211  grinding intensive   12   -1      -0.05 0.6644899
+#&gt; 212 ballistic intensive   12   -1      -0.05 0.5058026
+#&gt; 213  grinding    normal   12   -1      -0.10 0.6144899
+#&gt; 214 ballistic    normal   12   -1      -0.10 0.4558026
+#&gt; 215  grinding extensive   12   -1      -0.06 0.6544899
+#&gt; 216 ballistic extensive   12   -1      -0.15 0.4058026
+#&gt; 217  grinding intensive    1    0       0.00 0.9677732
+#&gt; 218 ballistic intensive    1    0       0.00 0.9375586
+#&gt; 219  grinding    normal    1    0      -0.05 0.9177732
+#&gt; 220 ballistic    normal    1    0      -0.05 0.8875586
+#&gt; 221  grinding extensive    1    0      -0.01 0.9577732
+#&gt; 222 ballistic extensive    1    0      -0.10 0.8375586
+#&gt; 223  grinding intensive    2    0       0.00 0.9375586
+#&gt; 224 ballistic intensive    2    0       0.00 0.8824568
+#&gt; 225  grinding    normal    2    0      -0.05 0.8875586
+#&gt; 226 ballistic    normal    2    0      -0.05 0.8324568
+#&gt; 227  grinding extensive    2    0      -0.01 0.9275586
+#&gt; 228 ballistic extensive    2    0      -0.10 0.7824568
+#&gt; 229  grinding intensive    3    0       0.00 0.9091736
+#&gt; 230 ballistic intensive    3    0       0.00 0.8334722
+#&gt; 231  grinding    normal    3    0      -0.05 0.8591736
+#&gt; 232 ballistic    normal    3    0      -0.05 0.7834722
+#&gt; 233  grinding extensive    3    0      -0.01 0.8991736
+#&gt; 234 ballistic extensive    3    0      -0.10 0.7334722
+#&gt; 235  grinding intensive    4    0       0.00 0.8824568
+#&gt; 236 ballistic intensive    4    0       0.00 0.7896399
+#&gt; 237  grinding    normal    4    0      -0.05 0.8324568
+#&gt; 238 ballistic    normal    4    0      -0.05 0.7396399
+#&gt; 239  grinding extensive    4    0      -0.01 0.8724568
+#&gt; 240 ballistic extensive    4    0      -0.10 0.6896399
+#&gt; 241  grinding intensive    5    0       0.00 0.8572653
+#&gt; 242 ballistic intensive    5    0       0.00 0.7501875
+#&gt; 243  grinding    normal    5    0      -0.05 0.8072653
+#&gt; 244 ballistic    normal    5    0      -0.05 0.7001875
+#&gt; 245  grinding extensive    5    0      -0.01 0.8472653
+#&gt; 246 ballistic extensive    5    0      -0.10 0.6501875
+#&gt; 247  grinding intensive    6    0       0.00 0.8334722
+#&gt; 248 ballistic intensive    6    0       0.00 0.7144899
+#&gt; 249  grinding    normal    6    0      -0.05 0.7834722
+#&gt; 250 ballistic    normal    6    0      -0.05 0.6644899
+#&gt; 251  grinding extensive    6    0      -0.01 0.8234722
+#&gt; 252 ballistic extensive    6    0      -0.10 0.6144899
+#&gt; 253  grinding intensive    7    0       0.00 0.8109642
+#&gt; 254 ballistic intensive    7    0       0.00 0.6820352
+#&gt; 255  grinding    normal    7    0      -0.05 0.7609642
+#&gt; 256 ballistic    normal    7    0      -0.05 0.6320352
+#&gt; 257  grinding extensive    7    0      -0.01 0.8009642
+#&gt; 258 ballistic extensive    7    0      -0.10 0.5820352
+#&gt; 259  grinding intensive    8    0       0.00 0.7896399
+#&gt; 260 ballistic intensive    8    0       0.00 0.6524008
+#&gt; 261  grinding    normal    8    0      -0.05 0.7396399
+#&gt; 262 ballistic    normal    8    0      -0.05 0.6024008
+#&gt; 263  grinding extensive    8    0      -0.01 0.7796399
+#&gt; 264 ballistic extensive    8    0      -0.10 0.5524008
+#&gt; 265  grinding intensive    9    0       0.00 0.7694083
+#&gt; 266 ballistic intensive    9    0       0.00 0.6252345
+#&gt; 267  grinding    normal    9    0      -0.05 0.7194083
+#&gt; 268 ballistic    normal    9    0      -0.05 0.5752345
+#&gt; 269  grinding extensive    9    0      -0.01 0.7594083
+#&gt; 270 ballistic extensive    9    0      -0.10 0.5252345
+#&gt; 271  grinding intensive   10    0       0.00 0.7501875
+#&gt; 272 ballistic intensive   10    0       0.00 0.6002401
+#&gt; 273  grinding    normal   10    0      -0.05 0.7001875
+#&gt; 274 ballistic    normal   10    0      -0.05 0.5502401
+#&gt; 275  grinding extensive   10    0      -0.01 0.7401875
+#&gt; 276 ballistic extensive   10    0      -0.10 0.5002401
+#&gt; 277  grinding intensive   11    0       0.00 0.7319037
+#&gt; 278 ballistic intensive   11    0       0.00 0.5771673
+#&gt; 279  grinding    normal   11    0      -0.05 0.6819037
+#&gt; 280 ballistic    normal   11    0      -0.05 0.5271673
+#&gt; 281  grinding extensive   11    0      -0.01 0.7219037
+#&gt; 282 ballistic extensive   11    0      -0.10 0.4771673
+#&gt; 283  grinding intensive   12    0       0.00 0.7144899
+#&gt; 284 ballistic intensive   12    0       0.00 0.5558026
+#&gt; 285  grinding    normal   12    0      -0.05 0.6644899
+#&gt; 286 ballistic    normal   12    0      -0.05 0.5058026
+#&gt; 287  grinding extensive   12    0      -0.01 0.7044899
+#&gt; 288 ballistic extensive   12    0      -0.10 0.4558026</div><div class='input'>
+<span class='co'># Plot progression table</span>
+<span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>perc_drop_fixed_5</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-11.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>perc_drop_fixed_5</span>, <span class='st'>"adjustment"</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-12.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>perc_drop_fixed_25</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $adjustment
 #&gt; [1] -0.100 -0.075 -0.050 -0.025
 #&gt; 
@@ -388,7 +2168,302 @@ intensive schemes</p></li>
 #&gt; 
 #&gt; $perc_1RM
 #&gt; [1] 0.6501875 0.6751875 0.7001875 0.7251875
-#&gt; </div><div class='input'><span class='fu'>generate_progression_table</span><span class='op'>(</span><span class='op'>)</span>
+#&gt; </div><div class='input'>
+<span class='co'># Generate progression table</span>
+<span class='fu'>generate_progression_table</span><span class='op'>(</span><span class='va'>perc_drop_fixed_25</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          type    volume reps step adjustment  perc_1RM
+#&gt; 1    grinding intensive    1   -3     -0.075 0.8927732
+#&gt; 2   ballistic intensive    1   -3     -0.075 0.8625586
+#&gt; 3    grinding    normal    1   -3     -0.100 0.8677732
+#&gt; 4   ballistic    normal    1   -3     -0.100 0.8375586
+#&gt; 5    grinding extensive    1   -3     -0.125 0.8427732
+#&gt; 6   ballistic extensive    1   -3     -0.125 0.8125586
+#&gt; 7    grinding intensive    2   -3     -0.075 0.8625586
+#&gt; 8   ballistic intensive    2   -3     -0.075 0.8074568
+#&gt; 9    grinding    normal    2   -3     -0.100 0.8375586
+#&gt; 10  ballistic    normal    2   -3     -0.100 0.7824568
+#&gt; 11   grinding extensive    2   -3     -0.125 0.8125586
+#&gt; 12  ballistic extensive    2   -3     -0.125 0.7574568
+#&gt; 13   grinding intensive    3   -3     -0.075 0.8341736
+#&gt; 14  ballistic intensive    3   -3     -0.075 0.7584722
+#&gt; 15   grinding    normal    3   -3     -0.100 0.8091736
+#&gt; 16  ballistic    normal    3   -3     -0.100 0.7334722
+#&gt; 17   grinding extensive    3   -3     -0.125 0.7841736
+#&gt; 18  ballistic extensive    3   -3     -0.125 0.7084722
+#&gt; 19   grinding intensive    4   -3     -0.075 0.8074568
+#&gt; 20  ballistic intensive    4   -3     -0.075 0.7146399
+#&gt; 21   grinding    normal    4   -3     -0.100 0.7824568
+#&gt; 22  ballistic    normal    4   -3     -0.100 0.6896399
+#&gt; 23   grinding extensive    4   -3     -0.125 0.7574568
+#&gt; 24  ballistic extensive    4   -3     -0.125 0.6646399
+#&gt; 25   grinding intensive    5   -3     -0.075 0.7822653
+#&gt; 26  ballistic intensive    5   -3     -0.075 0.6751875
+#&gt; 27   grinding    normal    5   -3     -0.100 0.7572653
+#&gt; 28  ballistic    normal    5   -3     -0.100 0.6501875
+#&gt; 29   grinding extensive    5   -3     -0.125 0.7322653
+#&gt; 30  ballistic extensive    5   -3     -0.125 0.6251875
+#&gt; 31   grinding intensive    6   -3     -0.075 0.7584722
+#&gt; 32  ballistic intensive    6   -3     -0.075 0.6394899
+#&gt; 33   grinding    normal    6   -3     -0.100 0.7334722
+#&gt; 34  ballistic    normal    6   -3     -0.100 0.6144899
+#&gt; 35   grinding extensive    6   -3     -0.125 0.7084722
+#&gt; 36  ballistic extensive    6   -3     -0.125 0.5894899
+#&gt; 37   grinding intensive    7   -3     -0.075 0.7359642
+#&gt; 38  ballistic intensive    7   -3     -0.075 0.6070352
+#&gt; 39   grinding    normal    7   -3     -0.100 0.7109642
+#&gt; 40  ballistic    normal    7   -3     -0.100 0.5820352
+#&gt; 41   grinding extensive    7   -3     -0.125 0.6859642
+#&gt; 42  ballistic extensive    7   -3     -0.125 0.5570352
+#&gt; 43   grinding intensive    8   -3     -0.075 0.7146399
+#&gt; 44  ballistic intensive    8   -3     -0.075 0.5774008
+#&gt; 45   grinding    normal    8   -3     -0.100 0.6896399
+#&gt; 46  ballistic    normal    8   -3     -0.100 0.5524008
+#&gt; 47   grinding extensive    8   -3     -0.125 0.6646399
+#&gt; 48  ballistic extensive    8   -3     -0.125 0.5274008
+#&gt; 49   grinding intensive    9   -3     -0.075 0.6944083
+#&gt; 50  ballistic intensive    9   -3     -0.075 0.5502345
+#&gt; 51   grinding    normal    9   -3     -0.100 0.6694083
+#&gt; 52  ballistic    normal    9   -3     -0.100 0.5252345
+#&gt; 53   grinding extensive    9   -3     -0.125 0.6444083
+#&gt; 54  ballistic extensive    9   -3     -0.125 0.5002345
+#&gt; 55   grinding intensive   10   -3     -0.075 0.6751875
+#&gt; 56  ballistic intensive   10   -3     -0.075 0.5252401
+#&gt; 57   grinding    normal   10   -3     -0.100 0.6501875
+#&gt; 58  ballistic    normal   10   -3     -0.100 0.5002401
+#&gt; 59   grinding extensive   10   -3     -0.125 0.6251875
+#&gt; 60  ballistic extensive   10   -3     -0.125 0.4752401
+#&gt; 61   grinding intensive   11   -3     -0.075 0.6569037
+#&gt; 62  ballistic intensive   11   -3     -0.075 0.5021673
+#&gt; 63   grinding    normal   11   -3     -0.100 0.6319037
+#&gt; 64  ballistic    normal   11   -3     -0.100 0.4771673
+#&gt; 65   grinding extensive   11   -3     -0.125 0.6069037
+#&gt; 66  ballistic extensive   11   -3     -0.125 0.4521673
+#&gt; 67   grinding intensive   12   -3     -0.075 0.6394899
+#&gt; 68  ballistic intensive   12   -3     -0.075 0.4808026
+#&gt; 69   grinding    normal   12   -3     -0.100 0.6144899
+#&gt; 70  ballistic    normal   12   -3     -0.100 0.4558026
+#&gt; 71   grinding extensive   12   -3     -0.125 0.5894899
+#&gt; 72  ballistic extensive   12   -3     -0.125 0.4308026
+#&gt; 73   grinding intensive    1   -2     -0.050 0.9177732
+#&gt; 74  ballistic intensive    1   -2     -0.050 0.8875586
+#&gt; 75   grinding    normal    1   -2     -0.075 0.8927732
+#&gt; 76  ballistic    normal    1   -2     -0.075 0.8625586
+#&gt; 77   grinding extensive    1   -2     -0.100 0.8677732
+#&gt; 78  ballistic extensive    1   -2     -0.100 0.8375586
+#&gt; 79   grinding intensive    2   -2     -0.050 0.8875586
+#&gt; 80  ballistic intensive    2   -2     -0.050 0.8324568
+#&gt; 81   grinding    normal    2   -2     -0.075 0.8625586
+#&gt; 82  ballistic    normal    2   -2     -0.075 0.8074568
+#&gt; 83   grinding extensive    2   -2     -0.100 0.8375586
+#&gt; 84  ballistic extensive    2   -2     -0.100 0.7824568
+#&gt; 85   grinding intensive    3   -2     -0.050 0.8591736
+#&gt; 86  ballistic intensive    3   -2     -0.050 0.7834722
+#&gt; 87   grinding    normal    3   -2     -0.075 0.8341736
+#&gt; 88  ballistic    normal    3   -2     -0.075 0.7584722
+#&gt; 89   grinding extensive    3   -2     -0.100 0.8091736
+#&gt; 90  ballistic extensive    3   -2     -0.100 0.7334722
+#&gt; 91   grinding intensive    4   -2     -0.050 0.8324568
+#&gt; 92  ballistic intensive    4   -2     -0.050 0.7396399
+#&gt; 93   grinding    normal    4   -2     -0.075 0.8074568
+#&gt; 94  ballistic    normal    4   -2     -0.075 0.7146399
+#&gt; 95   grinding extensive    4   -2     -0.100 0.7824568
+#&gt; 96  ballistic extensive    4   -2     -0.100 0.6896399
+#&gt; 97   grinding intensive    5   -2     -0.050 0.8072653
+#&gt; 98  ballistic intensive    5   -2     -0.050 0.7001875
+#&gt; 99   grinding    normal    5   -2     -0.075 0.7822653
+#&gt; 100 ballistic    normal    5   -2     -0.075 0.6751875
+#&gt; 101  grinding extensive    5   -2     -0.100 0.7572653
+#&gt; 102 ballistic extensive    5   -2     -0.100 0.6501875
+#&gt; 103  grinding intensive    6   -2     -0.050 0.7834722
+#&gt; 104 ballistic intensive    6   -2     -0.050 0.6644899
+#&gt; 105  grinding    normal    6   -2     -0.075 0.7584722
+#&gt; 106 ballistic    normal    6   -2     -0.075 0.6394899
+#&gt; 107  grinding extensive    6   -2     -0.100 0.7334722
+#&gt; 108 ballistic extensive    6   -2     -0.100 0.6144899
+#&gt; 109  grinding intensive    7   -2     -0.050 0.7609642
+#&gt; 110 ballistic intensive    7   -2     -0.050 0.6320352
+#&gt; 111  grinding    normal    7   -2     -0.075 0.7359642
+#&gt; 112 ballistic    normal    7   -2     -0.075 0.6070352
+#&gt; 113  grinding extensive    7   -2     -0.100 0.7109642
+#&gt; 114 ballistic extensive    7   -2     -0.100 0.5820352
+#&gt; 115  grinding intensive    8   -2     -0.050 0.7396399
+#&gt; 116 ballistic intensive    8   -2     -0.050 0.6024008
+#&gt; 117  grinding    normal    8   -2     -0.075 0.7146399
+#&gt; 118 ballistic    normal    8   -2     -0.075 0.5774008
+#&gt; 119  grinding extensive    8   -2     -0.100 0.6896399
+#&gt; 120 ballistic extensive    8   -2     -0.100 0.5524008
+#&gt; 121  grinding intensive    9   -2     -0.050 0.7194083
+#&gt; 122 ballistic intensive    9   -2     -0.050 0.5752345
+#&gt; 123  grinding    normal    9   -2     -0.075 0.6944083
+#&gt; 124 ballistic    normal    9   -2     -0.075 0.5502345
+#&gt; 125  grinding extensive    9   -2     -0.100 0.6694083
+#&gt; 126 ballistic extensive    9   -2     -0.100 0.5252345
+#&gt; 127  grinding intensive   10   -2     -0.050 0.7001875
+#&gt; 128 ballistic intensive   10   -2     -0.050 0.5502401
+#&gt; 129  grinding    normal   10   -2     -0.075 0.6751875
+#&gt; 130 ballistic    normal   10   -2     -0.075 0.5252401
+#&gt; 131  grinding extensive   10   -2     -0.100 0.6501875
+#&gt; 132 ballistic extensive   10   -2     -0.100 0.5002401
+#&gt; 133  grinding intensive   11   -2     -0.050 0.6819037
+#&gt; 134 ballistic intensive   11   -2     -0.050 0.5271673
+#&gt; 135  grinding    normal   11   -2     -0.075 0.6569037
+#&gt; 136 ballistic    normal   11   -2     -0.075 0.5021673
+#&gt; 137  grinding extensive   11   -2     -0.100 0.6319037
+#&gt; 138 ballistic extensive   11   -2     -0.100 0.4771673
+#&gt; 139  grinding intensive   12   -2     -0.050 0.6644899
+#&gt; 140 ballistic intensive   12   -2     -0.050 0.5058026
+#&gt; 141  grinding    normal   12   -2     -0.075 0.6394899
+#&gt; 142 ballistic    normal   12   -2     -0.075 0.4808026
+#&gt; 143  grinding extensive   12   -2     -0.100 0.6144899
+#&gt; 144 ballistic extensive   12   -2     -0.100 0.4558026
+#&gt; 145  grinding intensive    1   -1     -0.025 0.9427732
+#&gt; 146 ballistic intensive    1   -1     -0.025 0.9125586
+#&gt; 147  grinding    normal    1   -1     -0.050 0.9177732
+#&gt; 148 ballistic    normal    1   -1     -0.050 0.8875586
+#&gt; 149  grinding extensive    1   -1     -0.075 0.8927732
+#&gt; 150 ballistic extensive    1   -1     -0.075 0.8625586
+#&gt; 151  grinding intensive    2   -1     -0.025 0.9125586
+#&gt; 152 ballistic intensive    2   -1     -0.025 0.8574568
+#&gt; 153  grinding    normal    2   -1     -0.050 0.8875586
+#&gt; 154 ballistic    normal    2   -1     -0.050 0.8324568
+#&gt; 155  grinding extensive    2   -1     -0.075 0.8625586
+#&gt; 156 ballistic extensive    2   -1     -0.075 0.8074568
+#&gt; 157  grinding intensive    3   -1     -0.025 0.8841736
+#&gt; 158 ballistic intensive    3   -1     -0.025 0.8084722
+#&gt; 159  grinding    normal    3   -1     -0.050 0.8591736
+#&gt; 160 ballistic    normal    3   -1     -0.050 0.7834722
+#&gt; 161  grinding extensive    3   -1     -0.075 0.8341736
+#&gt; 162 ballistic extensive    3   -1     -0.075 0.7584722
+#&gt; 163  grinding intensive    4   -1     -0.025 0.8574568
+#&gt; 164 ballistic intensive    4   -1     -0.025 0.7646399
+#&gt; 165  grinding    normal    4   -1     -0.050 0.8324568
+#&gt; 166 ballistic    normal    4   -1     -0.050 0.7396399
+#&gt; 167  grinding extensive    4   -1     -0.075 0.8074568
+#&gt; 168 ballistic extensive    4   -1     -0.075 0.7146399
+#&gt; 169  grinding intensive    5   -1     -0.025 0.8322653
+#&gt; 170 ballistic intensive    5   -1     -0.025 0.7251875
+#&gt; 171  grinding    normal    5   -1     -0.050 0.8072653
+#&gt; 172 ballistic    normal    5   -1     -0.050 0.7001875
+#&gt; 173  grinding extensive    5   -1     -0.075 0.7822653
+#&gt; 174 ballistic extensive    5   -1     -0.075 0.6751875
+#&gt; 175  grinding intensive    6   -1     -0.025 0.8084722
+#&gt; 176 ballistic intensive    6   -1     -0.025 0.6894899
+#&gt; 177  grinding    normal    6   -1     -0.050 0.7834722
+#&gt; 178 ballistic    normal    6   -1     -0.050 0.6644899
+#&gt; 179  grinding extensive    6   -1     -0.075 0.7584722
+#&gt; 180 ballistic extensive    6   -1     -0.075 0.6394899
+#&gt; 181  grinding intensive    7   -1     -0.025 0.7859642
+#&gt; 182 ballistic intensive    7   -1     -0.025 0.6570352
+#&gt; 183  grinding    normal    7   -1     -0.050 0.7609642
+#&gt; 184 ballistic    normal    7   -1     -0.050 0.6320352
+#&gt; 185  grinding extensive    7   -1     -0.075 0.7359642
+#&gt; 186 ballistic extensive    7   -1     -0.075 0.6070352
+#&gt; 187  grinding intensive    8   -1     -0.025 0.7646399
+#&gt; 188 ballistic intensive    8   -1     -0.025 0.6274008
+#&gt; 189  grinding    normal    8   -1     -0.050 0.7396399
+#&gt; 190 ballistic    normal    8   -1     -0.050 0.6024008
+#&gt; 191  grinding extensive    8   -1     -0.075 0.7146399
+#&gt; 192 ballistic extensive    8   -1     -0.075 0.5774008
+#&gt; 193  grinding intensive    9   -1     -0.025 0.7444083
+#&gt; 194 ballistic intensive    9   -1     -0.025 0.6002345
+#&gt; 195  grinding    normal    9   -1     -0.050 0.7194083
+#&gt; 196 ballistic    normal    9   -1     -0.050 0.5752345
+#&gt; 197  grinding extensive    9   -1     -0.075 0.6944083
+#&gt; 198 ballistic extensive    9   -1     -0.075 0.5502345
+#&gt; 199  grinding intensive   10   -1     -0.025 0.7251875
+#&gt; 200 ballistic intensive   10   -1     -0.025 0.5752401
+#&gt; 201  grinding    normal   10   -1     -0.050 0.7001875
+#&gt; 202 ballistic    normal   10   -1     -0.050 0.5502401
+#&gt; 203  grinding extensive   10   -1     -0.075 0.6751875
+#&gt; 204 ballistic extensive   10   -1     -0.075 0.5252401
+#&gt; 205  grinding intensive   11   -1     -0.025 0.7069037
+#&gt; 206 ballistic intensive   11   -1     -0.025 0.5521673
+#&gt; 207  grinding    normal   11   -1     -0.050 0.6819037
+#&gt; 208 ballistic    normal   11   -1     -0.050 0.5271673
+#&gt; 209  grinding extensive   11   -1     -0.075 0.6569037
+#&gt; 210 ballistic extensive   11   -1     -0.075 0.5021673
+#&gt; 211  grinding intensive   12   -1     -0.025 0.6894899
+#&gt; 212 ballistic intensive   12   -1     -0.025 0.5308026
+#&gt; 213  grinding    normal   12   -1     -0.050 0.6644899
+#&gt; 214 ballistic    normal   12   -1     -0.050 0.5058026
+#&gt; 215  grinding extensive   12   -1     -0.075 0.6394899
+#&gt; 216 ballistic extensive   12   -1     -0.075 0.4808026
+#&gt; 217  grinding intensive    1    0      0.000 0.9677732
+#&gt; 218 ballistic intensive    1    0      0.000 0.9375586
+#&gt; 219  grinding    normal    1    0     -0.025 0.9427732
+#&gt; 220 ballistic    normal    1    0     -0.025 0.9125586
+#&gt; 221  grinding extensive    1    0     -0.050 0.9177732
+#&gt; 222 ballistic extensive    1    0     -0.050 0.8875586
+#&gt; 223  grinding intensive    2    0      0.000 0.9375586
+#&gt; 224 ballistic intensive    2    0      0.000 0.8824568
+#&gt; 225  grinding    normal    2    0     -0.025 0.9125586
+#&gt; 226 ballistic    normal    2    0     -0.025 0.8574568
+#&gt; 227  grinding extensive    2    0     -0.050 0.8875586
+#&gt; 228 ballistic extensive    2    0     -0.050 0.8324568
+#&gt; 229  grinding intensive    3    0      0.000 0.9091736
+#&gt; 230 ballistic intensive    3    0      0.000 0.8334722
+#&gt; 231  grinding    normal    3    0     -0.025 0.8841736
+#&gt; 232 ballistic    normal    3    0     -0.025 0.8084722
+#&gt; 233  grinding extensive    3    0     -0.050 0.8591736
+#&gt; 234 ballistic extensive    3    0     -0.050 0.7834722
+#&gt; 235  grinding intensive    4    0      0.000 0.8824568
+#&gt; 236 ballistic intensive    4    0      0.000 0.7896399
+#&gt; 237  grinding    normal    4    0     -0.025 0.8574568
+#&gt; 238 ballistic    normal    4    0     -0.025 0.7646399
+#&gt; 239  grinding extensive    4    0     -0.050 0.8324568
+#&gt; 240 ballistic extensive    4    0     -0.050 0.7396399
+#&gt; 241  grinding intensive    5    0      0.000 0.8572653
+#&gt; 242 ballistic intensive    5    0      0.000 0.7501875
+#&gt; 243  grinding    normal    5    0     -0.025 0.8322653
+#&gt; 244 ballistic    normal    5    0     -0.025 0.7251875
+#&gt; 245  grinding extensive    5    0     -0.050 0.8072653
+#&gt; 246 ballistic extensive    5    0     -0.050 0.7001875
+#&gt; 247  grinding intensive    6    0      0.000 0.8334722
+#&gt; 248 ballistic intensive    6    0      0.000 0.7144899
+#&gt; 249  grinding    normal    6    0     -0.025 0.8084722
+#&gt; 250 ballistic    normal    6    0     -0.025 0.6894899
+#&gt; 251  grinding extensive    6    0     -0.050 0.7834722
+#&gt; 252 ballistic extensive    6    0     -0.050 0.6644899
+#&gt; 253  grinding intensive    7    0      0.000 0.8109642
+#&gt; 254 ballistic intensive    7    0      0.000 0.6820352
+#&gt; 255  grinding    normal    7    0     -0.025 0.7859642
+#&gt; 256 ballistic    normal    7    0     -0.025 0.6570352
+#&gt; 257  grinding extensive    7    0     -0.050 0.7609642
+#&gt; 258 ballistic extensive    7    0     -0.050 0.6320352
+#&gt; 259  grinding intensive    8    0      0.000 0.7896399
+#&gt; 260 ballistic intensive    8    0      0.000 0.6524008
+#&gt; 261  grinding    normal    8    0     -0.025 0.7646399
+#&gt; 262 ballistic    normal    8    0     -0.025 0.6274008
+#&gt; 263  grinding extensive    8    0     -0.050 0.7396399
+#&gt; 264 ballistic extensive    8    0     -0.050 0.6024008
+#&gt; 265  grinding intensive    9    0      0.000 0.7694083
+#&gt; 266 ballistic intensive    9    0      0.000 0.6252345
+#&gt; 267  grinding    normal    9    0     -0.025 0.7444083
+#&gt; 268 ballistic    normal    9    0     -0.025 0.6002345
+#&gt; 269  grinding extensive    9    0     -0.050 0.7194083
+#&gt; 270 ballistic extensive    9    0     -0.050 0.5752345
+#&gt; 271  grinding intensive   10    0      0.000 0.7501875
+#&gt; 272 ballistic intensive   10    0      0.000 0.6002401
+#&gt; 273  grinding    normal   10    0     -0.025 0.7251875
+#&gt; 274 ballistic    normal   10    0     -0.025 0.5752401
+#&gt; 275  grinding extensive   10    0     -0.050 0.7001875
+#&gt; 276 ballistic extensive   10    0     -0.050 0.5502401
+#&gt; 277  grinding intensive   11    0      0.000 0.7319037
+#&gt; 278 ballistic intensive   11    0      0.000 0.5771673
+#&gt; 279  grinding    normal   11    0     -0.025 0.7069037
+#&gt; 280 ballistic    normal   11    0     -0.025 0.5521673
+#&gt; 281  grinding extensive   11    0     -0.050 0.6819037
+#&gt; 282 ballistic extensive   11    0     -0.050 0.5271673
+#&gt; 283  grinding intensive   12    0      0.000 0.7144899
+#&gt; 284 ballistic intensive   12    0      0.000 0.5558026
+#&gt; 285  grinding    normal   12    0     -0.025 0.6894899
+#&gt; 286 ballistic    normal   12    0     -0.025 0.5308026
+#&gt; 287  grinding extensive   12    0     -0.050 0.6644899
+#&gt; 288 ballistic extensive   12    0     -0.050 0.5058026</div><div class='input'>
+<span class='co'># Plot progression table</span>
+<span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>perc_drop_fixed_25</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-13.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>perc_drop_fixed_25</span>, <span class='st'>"adjustment"</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-14.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>generate_progression_table</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;          type    volume reps step adjustment  perc_1RM
 #&gt; 1    grinding intensive    1   -3   3.000000 0.8824568
 #&gt; 2   ballistic intensive    1   -3   3.000000 0.7896399
@@ -764,7 +2839,320 @@ intensive schemes</p></li>
 #&gt; 27 grinding normal    2    0   1.181818 0.9041963
 #&gt; 28 grinding normal    3    0   1.363636 0.8731267
 #&gt; 29 grinding normal    4    0   1.545455 0.8441215
-#&gt; 30 grinding normal    5    0   1.727273 0.8169813</div></pre>
+#&gt; 30 grinding normal    5    0   1.727273 0.8169813</div><div class='input'><span class='fu'>relInt</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $adjustment
+#&gt; [1] 0.875 0.900 0.925 0.950
+#&gt; 
+#&gt; $perc_1RM
+#&gt; [1] 0.6564141 0.6751688 0.6939235 0.7126782
+#&gt; </div><div class='input'><span class='fu'>relInt</span><span class='op'>(</span><span class='fl'>10</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, volume <span class='op'>=</span> <span class='st'>"extensive"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $adjustment
+#&gt; [1] 0.825 0.850 0.875 0.900
+#&gt; 
+#&gt; $perc_1RM
+#&gt; [1] 0.6189047 0.6376594 0.6564141 0.6751688
+#&gt; </div><div class='input'><span class='fu'>relInt</span><span class='op'>(</span><span class='fl'>5</span>, step <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>3</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, type <span class='op'>=</span> <span class='st'>"ballistic"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $adjustment
+#&gt; [1] 0.875 0.900 0.925 0.950
+#&gt; 
+#&gt; $perc_1RM
+#&gt; [1] 0.6564141 0.6751688 0.6939235 0.7126782
+#&gt; </div><div class='input'>
+<span class='co'># Generate progression table</span>
+<span class='fu'>generate_progression_table</span><span class='op'>(</span><span class='va'>relInt</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;          type    volume reps step adjustment  perc_1RM
+#&gt; 1    grinding intensive    1   -3      0.925 0.8951902
+#&gt; 2   ballistic intensive    1   -3      0.925 0.8672417
+#&gt; 3    grinding    normal    1   -3      0.875 0.8468015
+#&gt; 4   ballistic    normal    1   -3      0.875 0.8203638
+#&gt; 5    grinding extensive    1   -3      0.825 0.7984129
+#&gt; 6   ballistic extensive    1   -3      0.825 0.7734858
+#&gt; 7    grinding intensive    2   -3      0.925 0.8672417
+#&gt; 8   ballistic intensive    2   -3      0.925 0.8162725
+#&gt; 9    grinding    normal    2   -3      0.875 0.8203638
+#&gt; 10  ballistic    normal    2   -3      0.875 0.7721497
+#&gt; 11   grinding extensive    2   -3      0.825 0.7734858
+#&gt; 12  ballistic extensive    2   -3      0.825 0.7280268
+#&gt; 13   grinding intensive    3   -3      0.925 0.8409855
+#&gt; 14  ballistic intensive    3   -3      0.925 0.7709618
+#&gt; 15   grinding    normal    3   -3      0.875 0.7955269
+#&gt; 16  ballistic    normal    3   -3      0.875 0.7292882
+#&gt; 17   grinding extensive    3   -3      0.825 0.7500682
+#&gt; 18  ballistic extensive    3   -3      0.825 0.6876146
+#&gt; 19   grinding intensive    4   -3      0.925 0.8162725
+#&gt; 20  ballistic intensive    4   -3      0.925 0.7304169
+#&gt; 21   grinding    normal    4   -3      0.875 0.7721497
+#&gt; 22  ballistic    normal    4   -3      0.875 0.6909349
+#&gt; 23   grinding extensive    4   -3      0.825 0.7280268
+#&gt; 24  ballistic extensive    4   -3      0.825 0.6514529
+#&gt; 25   grinding intensive    5   -3      0.925 0.7929704
+#&gt; 26  ballistic intensive    5   -3      0.925 0.6939235
+#&gt; 27   grinding    normal    5   -3      0.875 0.7501072
+#&gt; 28  ballistic    normal    5   -3      0.875 0.6564141
+#&gt; 29   grinding extensive    5   -3      0.825 0.7072439
+#&gt; 30  ballistic extensive    5   -3      0.825 0.6189047
+#&gt; 31   grinding intensive    6   -3      0.925 0.7709618
+#&gt; 32  ballistic intensive    6   -3      0.925 0.6609031
+#&gt; 33   grinding    normal    6   -3      0.875 0.7292882
+#&gt; 34  ballistic    normal    6   -3      0.875 0.6251786
+#&gt; 35   grinding extensive    6   -3      0.825 0.6876146
+#&gt; 36  ballistic extensive    6   -3      0.825 0.5894541
+#&gt; 37   grinding intensive    7   -3      0.925 0.7501419
+#&gt; 38  ballistic intensive    7   -3      0.925 0.6308826
+#&gt; 39   grinding    normal    7   -3      0.875 0.7095937
+#&gt; 40  ballistic    normal    7   -3      0.875 0.5967808
+#&gt; 41   grinding extensive    7   -3      0.825 0.6690455
+#&gt; 42  ballistic extensive    7   -3      0.825 0.5626790
+#&gt; 43   grinding intensive    8   -3      0.925 0.7304169
+#&gt; 44  ballistic intensive    8   -3      0.925 0.6034708
+#&gt; 45   grinding    normal    8   -3      0.875 0.6909349
+#&gt; 46  ballistic    normal    8   -3      0.875 0.5708507
+#&gt; 47   grinding extensive    8   -3      0.825 0.6514529
+#&gt; 48  ballistic extensive    8   -3      0.825 0.5382307
+#&gt; 49   grinding intensive    9   -3      0.925 0.7117027
+#&gt; 50  ballistic intensive    9   -3      0.925 0.5783419
+#&gt; 51   grinding    normal    9   -3      0.875 0.6732323
+#&gt; 52  ballistic    normal    9   -3      0.875 0.5470802
+#&gt; 53   grinding extensive    9   -3      0.825 0.6347619
+#&gt; 54  ballistic extensive    9   -3      0.825 0.5158184
+#&gt; 55   grinding intensive   10   -3      0.925 0.6939235
+#&gt; 56  ballistic intensive   10   -3      0.925 0.5552221
+#&gt; 57   grinding    normal   10   -3      0.875 0.6564141
+#&gt; 58  ballistic    normal   10   -3      0.875 0.5252101
+#&gt; 59   grinding extensive   10   -3      0.825 0.6189047
+#&gt; 60  ballistic extensive   10   -3      0.825 0.4951981
+#&gt; 61   grinding intensive   11   -3      0.925 0.6770109
+#&gt; 62  ballistic intensive   11   -3      0.925 0.5338797
+#&gt; 63   grinding    normal   11   -3      0.875 0.6404157
+#&gt; 64  ballistic    normal   11   -3      0.875 0.5050214
+#&gt; 65   grinding extensive   11   -3      0.825 0.6038205
+#&gt; 66  ballistic extensive   11   -3      0.825 0.4761630
+#&gt; 67   grinding intensive   12   -3      0.925 0.6609031
+#&gt; 68  ballistic intensive   12   -3      0.925 0.5141174
+#&gt; 69   grinding    normal   12   -3      0.875 0.6251786
+#&gt; 70  ballistic    normal   12   -3      0.875 0.4863273
+#&gt; 71   grinding extensive   12   -3      0.825 0.5894541
+#&gt; 72  ballistic extensive   12   -3      0.825 0.4585371
+#&gt; 73   grinding intensive    1   -2      0.950 0.9193845
+#&gt; 74  ballistic intensive    1   -2      0.950 0.8906807
+#&gt; 75   grinding    normal    1   -2      0.900 0.8709958
+#&gt; 76  ballistic    normal    1   -2      0.900 0.8438027
+#&gt; 77   grinding extensive    1   -2      0.850 0.8226072
+#&gt; 78  ballistic extensive    1   -2      0.850 0.7969248
+#&gt; 79   grinding intensive    2   -2      0.950 0.8906807
+#&gt; 80  ballistic intensive    2   -2      0.950 0.8383339
+#&gt; 81   grinding    normal    2   -2      0.900 0.8438027
+#&gt; 82  ballistic    normal    2   -2      0.900 0.7942111
+#&gt; 83   grinding extensive    2   -2      0.850 0.7969248
+#&gt; 84  ballistic extensive    2   -2      0.850 0.7500882
+#&gt; 85   grinding intensive    3   -2      0.950 0.8637149
+#&gt; 86  ballistic intensive    3   -2      0.950 0.7917986
+#&gt; 87   grinding    normal    3   -2      0.900 0.8182562
+#&gt; 88  ballistic    normal    3   -2      0.900 0.7501250
+#&gt; 89   grinding extensive    3   -2      0.850 0.7727975
+#&gt; 90  ballistic extensive    3   -2      0.850 0.7084514
+#&gt; 91   grinding intensive    4   -2      0.950 0.8383339
+#&gt; 92  ballistic intensive    4   -2      0.950 0.7501579
+#&gt; 93   grinding    normal    4   -2      0.900 0.7942111
+#&gt; 94  ballistic    normal    4   -2      0.900 0.7106759
+#&gt; 95   grinding extensive    4   -2      0.850 0.7500882
+#&gt; 96  ballistic extensive    4   -2      0.850 0.6711939
+#&gt; 97   grinding intensive    5   -2      0.950 0.8144021
+#&gt; 98  ballistic intensive    5   -2      0.950 0.7126782
+#&gt; 99   grinding    normal    5   -2      0.900 0.7715388
+#&gt; 100 ballistic    normal    5   -2      0.900 0.6751688
+#&gt; 101  grinding extensive    5   -2      0.850 0.7286755
+#&gt; 102 ballistic extensive    5   -2      0.850 0.6376594
+#&gt; 103  grinding intensive    6   -2      0.950 0.7917986
+#&gt; 104 ballistic intensive    6   -2      0.950 0.6787654
+#&gt; 105  grinding    normal    6   -2      0.900 0.7501250
+#&gt; 106 ballistic    normal    6   -2      0.900 0.6430409
+#&gt; 107  grinding extensive    6   -2      0.850 0.7084514
+#&gt; 108 ballistic extensive    6   -2      0.850 0.6073164
+#&gt; 109  grinding intensive    7   -2      0.950 0.7704160
+#&gt; 110 ballistic intensive    7   -2      0.950 0.6479334
+#&gt; 111  grinding    normal    7   -2      0.900 0.7298678
+#&gt; 112 ballistic    normal    7   -2      0.900 0.6138317
+#&gt; 113  grinding extensive    7   -2      0.850 0.6893196
+#&gt; 114 ballistic extensive    7   -2      0.850 0.5797299
+#&gt; 115  grinding intensive    8   -2      0.950 0.7501579
+#&gt; 116 ballistic intensive    8   -2      0.950 0.6197808
+#&gt; 117  grinding    normal    8   -2      0.900 0.7106759
+#&gt; 118 ballistic    normal    8   -2      0.900 0.5871608
+#&gt; 119  grinding extensive    8   -2      0.850 0.6711939
+#&gt; 120 ballistic extensive    8   -2      0.850 0.5545407
+#&gt; 121  grinding intensive    9   -2      0.950 0.7309379
+#&gt; 122 ballistic intensive    9   -2      0.950 0.5939727
+#&gt; 123  grinding    normal    9   -2      0.900 0.6924675
+#&gt; 124 ballistic    normal    9   -2      0.900 0.5627110
+#&gt; 125  grinding extensive    9   -2      0.850 0.6539971
+#&gt; 126 ballistic extensive    9   -2      0.850 0.5314493
+#&gt; 127  grinding intensive   10   -2      0.950 0.7126782
+#&gt; 128 ballistic intensive   10   -2      0.950 0.5702281
+#&gt; 129  grinding    normal   10   -2      0.900 0.6751688
+#&gt; 130 ballistic    normal   10   -2      0.900 0.5402161
+#&gt; 131  grinding extensive   10   -2      0.850 0.6376594
+#&gt; 132 ballistic extensive   10   -2      0.850 0.5102041
+#&gt; 133  grinding intensive   11   -2      0.950 0.6953085
+#&gt; 134 ballistic intensive   11   -2      0.950 0.5483089
+#&gt; 135  grinding    normal   11   -2      0.900 0.6587133
+#&gt; 136 ballistic    normal   11   -2      0.900 0.5194505
+#&gt; 137  grinding extensive   11   -2      0.850 0.6221181
+#&gt; 138 ballistic extensive   11   -2      0.850 0.4905922
+#&gt; 139  grinding intensive   12   -2      0.950 0.6787654
+#&gt; 140 ballistic intensive   12   -2      0.950 0.5280124
+#&gt; 141  grinding    normal   12   -2      0.900 0.6430409
+#&gt; 142 ballistic    normal   12   -2      0.900 0.5002223
+#&gt; 143  grinding extensive   12   -2      0.850 0.6073164
+#&gt; 144 ballistic extensive   12   -2      0.850 0.4724322
+#&gt; 145  grinding intensive    1   -1      0.975 0.9435788
+#&gt; 146 ballistic intensive    1   -1      0.975 0.9141196
+#&gt; 147  grinding    normal    1   -1      0.925 0.8951902
+#&gt; 148 ballistic    normal    1   -1      0.925 0.8672417
+#&gt; 149  grinding extensive    1   -1      0.875 0.8468015
+#&gt; 150 ballistic extensive    1   -1      0.875 0.8203638
+#&gt; 151  grinding intensive    2   -1      0.975 0.9141196
+#&gt; 152 ballistic intensive    2   -1      0.975 0.8603953
+#&gt; 153  grinding    normal    2   -1      0.925 0.8672417
+#&gt; 154 ballistic    normal    2   -1      0.925 0.8162725
+#&gt; 155  grinding extensive    2   -1      0.875 0.8203638
+#&gt; 156 ballistic extensive    2   -1      0.875 0.7721497
+#&gt; 157  grinding intensive    3   -1      0.975 0.8864442
+#&gt; 158 ballistic intensive    3   -1      0.975 0.8126354
+#&gt; 159  grinding    normal    3   -1      0.925 0.8409855
+#&gt; 160 ballistic    normal    3   -1      0.925 0.7709618
+#&gt; 161  grinding extensive    3   -1      0.875 0.7955269
+#&gt; 162 ballistic extensive    3   -1      0.875 0.7292882
+#&gt; 163  grinding intensive    4   -1      0.975 0.8603953
+#&gt; 164 ballistic intensive    4   -1      0.975 0.7698989
+#&gt; 165  grinding    normal    4   -1      0.925 0.8162725
+#&gt; 166 ballistic    normal    4   -1      0.925 0.7304169
+#&gt; 167  grinding extensive    4   -1      0.875 0.7721497
+#&gt; 168 ballistic extensive    4   -1      0.875 0.6909349
+#&gt; 169  grinding intensive    5   -1      0.975 0.8358337
+#&gt; 170 ballistic intensive    5   -1      0.975 0.7314329
+#&gt; 171  grinding    normal    5   -1      0.925 0.7929704
+#&gt; 172 ballistic    normal    5   -1      0.925 0.6939235
+#&gt; 173  grinding extensive    5   -1      0.875 0.7501072
+#&gt; 174 ballistic extensive    5   -1      0.875 0.6564141
+#&gt; 175  grinding intensive    6   -1      0.975 0.8126354
+#&gt; 176 ballistic intensive    6   -1      0.975 0.6966276
+#&gt; 177  grinding    normal    6   -1      0.925 0.7709618
+#&gt; 178 ballistic    normal    6   -1      0.925 0.6609031
+#&gt; 179  grinding extensive    6   -1      0.875 0.7292882
+#&gt; 180 ballistic extensive    6   -1      0.875 0.6251786
+#&gt; 181  grinding intensive    7   -1      0.975 0.7906901
+#&gt; 182 ballistic intensive    7   -1      0.975 0.6649843
+#&gt; 183  grinding    normal    7   -1      0.925 0.7501419
+#&gt; 184 ballistic    normal    7   -1      0.925 0.6308826
+#&gt; 185  grinding extensive    7   -1      0.875 0.7095937
+#&gt; 186 ballistic extensive    7   -1      0.875 0.5967808
+#&gt; 187  grinding intensive    8   -1      0.975 0.7698989
+#&gt; 188 ballistic intensive    8   -1      0.975 0.6360908
+#&gt; 189  grinding    normal    8   -1      0.925 0.7304169
+#&gt; 190 ballistic    normal    8   -1      0.925 0.6034708
+#&gt; 191  grinding extensive    8   -1      0.875 0.6909349
+#&gt; 192 ballistic extensive    8   -1      0.875 0.5708507
+#&gt; 193  grinding intensive    9   -1      0.975 0.7501731
+#&gt; 194 ballistic intensive    9   -1      0.975 0.6096036
+#&gt; 195  grinding    normal    9   -1      0.925 0.7117027
+#&gt; 196 ballistic    normal    9   -1      0.925 0.5783419
+#&gt; 197  grinding extensive    9   -1      0.875 0.6732323
+#&gt; 198 ballistic extensive    9   -1      0.875 0.5470802
+#&gt; 199  grinding intensive   10   -1      0.975 0.7314329
+#&gt; 200 ballistic intensive   10   -1      0.975 0.5852341
+#&gt; 201  grinding    normal   10   -1      0.925 0.6939235
+#&gt; 202 ballistic    normal   10   -1      0.925 0.5552221
+#&gt; 203  grinding extensive   10   -1      0.875 0.6564141
+#&gt; 204 ballistic extensive   10   -1      0.875 0.5252101
+#&gt; 205  grinding intensive   11   -1      0.975 0.7136061
+#&gt; 206 ballistic intensive   11   -1      0.975 0.5627381
+#&gt; 207  grinding    normal   11   -1      0.925 0.6770109
+#&gt; 208 ballistic    normal   11   -1      0.925 0.5338797
+#&gt; 209  grinding extensive   11   -1      0.875 0.6404157
+#&gt; 210 ballistic extensive   11   -1      0.875 0.5050214
+#&gt; 211  grinding intensive   12   -1      0.975 0.6966276
+#&gt; 212 ballistic intensive   12   -1      0.975 0.5419075
+#&gt; 213  grinding    normal   12   -1      0.925 0.6609031
+#&gt; 214 ballistic    normal   12   -1      0.925 0.5141174
+#&gt; 215  grinding extensive   12   -1      0.875 0.6251786
+#&gt; 216 ballistic extensive   12   -1      0.875 0.4863273
+#&gt; 217  grinding intensive    1    0      1.000 0.9677732
+#&gt; 218 ballistic intensive    1    0      1.000 0.9375586
+#&gt; 219  grinding    normal    1    0      0.950 0.9193845
+#&gt; 220 ballistic    normal    1    0      0.950 0.8906807
+#&gt; 221  grinding extensive    1    0      0.900 0.8709958
+#&gt; 222 ballistic extensive    1    0      0.900 0.8438027
+#&gt; 223  grinding intensive    2    0      1.000 0.9375586
+#&gt; 224 ballistic intensive    2    0      1.000 0.8824568
+#&gt; 225  grinding    normal    2    0      0.950 0.8906807
+#&gt; 226 ballistic    normal    2    0      0.950 0.8383339
+#&gt; 227  grinding extensive    2    0      0.900 0.8438027
+#&gt; 228 ballistic extensive    2    0      0.900 0.7942111
+#&gt; 229  grinding intensive    3    0      1.000 0.9091736
+#&gt; 230 ballistic intensive    3    0      1.000 0.8334722
+#&gt; 231  grinding    normal    3    0      0.950 0.8637149
+#&gt; 232 ballistic    normal    3    0      0.950 0.7917986
+#&gt; 233  grinding extensive    3    0      0.900 0.8182562
+#&gt; 234 ballistic extensive    3    0      0.900 0.7501250
+#&gt; 235  grinding intensive    4    0      1.000 0.8824568
+#&gt; 236 ballistic intensive    4    0      1.000 0.7896399
+#&gt; 237  grinding    normal    4    0      0.950 0.8383339
+#&gt; 238 ballistic    normal    4    0      0.950 0.7501579
+#&gt; 239  grinding extensive    4    0      0.900 0.7942111
+#&gt; 240 ballistic extensive    4    0      0.900 0.7106759
+#&gt; 241  grinding intensive    5    0      1.000 0.8572653
+#&gt; 242 ballistic intensive    5    0      1.000 0.7501875
+#&gt; 243  grinding    normal    5    0      0.950 0.8144021
+#&gt; 244 ballistic    normal    5    0      0.950 0.7126782
+#&gt; 245  grinding extensive    5    0      0.900 0.7715388
+#&gt; 246 ballistic extensive    5    0      0.900 0.6751688
+#&gt; 247  grinding intensive    6    0      1.000 0.8334722
+#&gt; 248 ballistic intensive    6    0      1.000 0.7144899
+#&gt; 249  grinding    normal    6    0      0.950 0.7917986
+#&gt; 250 ballistic    normal    6    0      0.950 0.6787654
+#&gt; 251  grinding extensive    6    0      0.900 0.7501250
+#&gt; 252 ballistic extensive    6    0      0.900 0.6430409
+#&gt; 253  grinding intensive    7    0      1.000 0.8109642
+#&gt; 254 ballistic intensive    7    0      1.000 0.6820352
+#&gt; 255  grinding    normal    7    0      0.950 0.7704160
+#&gt; 256 ballistic    normal    7    0      0.950 0.6479334
+#&gt; 257  grinding extensive    7    0      0.900 0.7298678
+#&gt; 258 ballistic extensive    7    0      0.900 0.6138317
+#&gt; 259  grinding intensive    8    0      1.000 0.7896399
+#&gt; 260 ballistic intensive    8    0      1.000 0.6524008
+#&gt; 261  grinding    normal    8    0      0.950 0.7501579
+#&gt; 262 ballistic    normal    8    0      0.950 0.6197808
+#&gt; 263  grinding extensive    8    0      0.900 0.7106759
+#&gt; 264 ballistic extensive    8    0      0.900 0.5871608
+#&gt; 265  grinding intensive    9    0      1.000 0.7694083
+#&gt; 266 ballistic intensive    9    0      1.000 0.6252345
+#&gt; 267  grinding    normal    9    0      0.950 0.7309379
+#&gt; 268 ballistic    normal    9    0      0.950 0.5939727
+#&gt; 269  grinding extensive    9    0      0.900 0.6924675
+#&gt; 270 ballistic extensive    9    0      0.900 0.5627110
+#&gt; 271  grinding intensive   10    0      1.000 0.7501875
+#&gt; 272 ballistic intensive   10    0      1.000 0.6002401
+#&gt; 273  grinding    normal   10    0      0.950 0.7126782
+#&gt; 274 ballistic    normal   10    0      0.950 0.5702281
+#&gt; 275  grinding extensive   10    0      0.900 0.6751688
+#&gt; 276 ballistic extensive   10    0      0.900 0.5402161
+#&gt; 277  grinding intensive   11    0      1.000 0.7319037
+#&gt; 278 ballistic intensive   11    0      1.000 0.5771673
+#&gt; 279  grinding    normal   11    0      0.950 0.6953085
+#&gt; 280 ballistic    normal   11    0      0.950 0.5483089
+#&gt; 281  grinding extensive   11    0      0.900 0.6587133
+#&gt; 282 ballistic extensive   11    0      0.900 0.5194505
+#&gt; 283  grinding intensive   12    0      1.000 0.7144899
+#&gt; 284 ballistic intensive   12    0      1.000 0.5558026
+#&gt; 285  grinding    normal   12    0      0.950 0.6787654
+#&gt; 286 ballistic    normal   12    0      0.950 0.5280124
+#&gt; 287  grinding extensive   12    0      0.900 0.6430409
+#&gt; 288 ballistic extensive   12    0      0.900 0.5002223</div><div class='input'>
+<span class='co'># Plot progression table</span>
+<span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>relInt</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-15.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='plot_progression_table.html'>plot_progression_table</a></span><span class='op'>(</span><span class='va'>relInt</span>, <span class='st'>"adjustment"</span><span class='op'>)</span>
+</div><div class='img'><img src='progression_table-16.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
