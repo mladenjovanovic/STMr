@@ -1,4 +1,4 @@
-#' @describeIn generic_progression_table %RM Step generic table
+#' @describeIn generic_progression_table %MR Step generic table
 #' @export
 #' @examples
 #' percRM_step_generic(10, step = seq(-3, 0, 1))
@@ -30,7 +30,7 @@ percRM_step_generic <- function(reps,
 }
 
 
-#' @describeIn progression_table %RM Step progression table
+#' @describeIn progression_table %MR Step progression table
 #' @export
 #' @examples
 #' percRM_step(10, step = seq(-3, 0, 1))
