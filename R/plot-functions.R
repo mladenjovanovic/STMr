@@ -6,7 +6,8 @@
 #' @param signif_digits Rounding numbers for plotting. Default is 3
 #' @param adjustment_multiplier Factor to multiply the adjustment. Useful when converting to percentage.
 #'     Default is 1
-#' @param type Character string. Options include "%1RM" (default) and "adjustment"
+#' @param plot Character string. Options include "%1RM" (default) and "adjustment"
+#' @param ... Forwarder to the \code{\link{generate_progression_table}} function
 #' @return \code{ggplot2} object
 #' @export
 #' @examples
@@ -15,9 +16,10 @@
 
 plot_progression_table <- function(
   progression_table = RIR_increment,
-  type = "%1RM",
+  plot = "%1RM",
   signif_digits = 3,
-  adjustment_multiplier = 1) {
+  adjustment_multiplier = 1,
+  ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
@@ -28,7 +30,8 @@ plot_progression_table <- function(
   # +++++++++++++++++++++++++++++++++++++++++++
 
   progression_tbl <- generate_progression_table(
-    progression_table = progression_table)
+    progression_table = progression_table,
+    ...)
 
   progression_tbl$volume <- factor(
     progression_tbl$volume,
@@ -46,12 +49,11 @@ plot_progression_table <- function(
     progression_tbl$adjustment * adjustment_multiplier,
     signif_digits)
 
-  switch(type,
+  gg <- switch(plot,
          "%1RM" = ggplot2::ggplot(progression_tbl, ggplot2::aes(x = step, y = reps)) +
            ggplot2::theme_linedraw() +
            #geom_tile(fill = "transparent", color = "black") +
            ggplot2::geom_text(ggplot2::aes(label = perc_1RM)) +
-           ggplot2::facet_grid(type~volume) +
            ggplot2::scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
            ggplot2::theme(
              legend.position = "none",
@@ -69,7 +71,6 @@ plot_progression_table <- function(
            ggplot2::theme_linedraw() +
            #ggplot2::geom_tile(fill = "transparent", color = "black") +
            ggplot2::geom_text(ggplot2::aes(label = adjustment)) +
-           ggplot2::facet_grid(type~volume) +
            ggplot2::scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
            ggplot2::theme(
              legend.position = "none",
@@ -82,8 +83,18 @@ plot_progression_table <- function(
            ggplot2::xlab(NULL) +
            ggplot2::ylab(NULL) +
            ggplot2::ggtitle("Adjustment", "Depends on the progression table utilized"),
-         stop("Invalid `type` value. Please use `%1RM` or `adjustment`", call. = FALSE)
+         stop("Invalid `plot` value. Please use `%1RM` or `adjustment`", call. = FALSE)
   )
+
+  if(length(unique(progression_tbl$type)) == 1 && length(unique(progression_tbl$volume)) > 1) {
+    gg <- gg + ggplot2::facet_grid(~volume)
+  } else if(length(unique(progression_tbl$type)) > 1 && length(unique(progression_tbl$volume)) == 1) {
+    gg <- gg + ggplot2::facet_grid(~type)
+  } else if(length(unique(progression_tbl$type)) > 1 && length(unique(progression_tbl$volume)) > 1) {
+    gg <- gg + ggplot2::facet_grid(type~volume)
+  }
+
+  gg
 }
 
 #' Plotting of the Set and Reps Scheme
