@@ -54,9 +54,9 @@ relInt <- function(reps,
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
-    rep_start = c(0, 0.05, 0.1, 0, 0.05, 0.1),
+    rep_start = c(0, 0.075, 0.15, 0, 0.075, 0.15),
     rep_step = c(0, 0, 0, 0, 0, 0),
-    inc_start = c(-0.025, -0.025, -0.025, -0.025, -0.025, -0.025),
+    inc_start = c(-0.05, -0.05, -0.05, -0.05, -0.05, -0.05),
     inc_step = c(0, 0, 0, 0, 0, 0)
   )
 
