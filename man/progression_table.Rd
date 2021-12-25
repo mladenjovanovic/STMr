@@ -6,6 +6,7 @@
 \alias{percMR_step_const}
 \alias{progression_table}
 \alias{RIR_increment}
+\alias{RIR_increment_fixed_1}
 \alias{RIR_increment_fixed_2}
 \alias{RIR_increment_fixed_4}
 \alias{perc_drop}
@@ -34,6 +35,15 @@ percMR_step_const(
 )
 
 RIR_increment(
+  reps,
+  step = 0,
+  volume = "normal",
+  type = "grinding",
+  adjustment = 0,
+  func_max_perc_1RM = get_max_perc_1RM
+)
+
+RIR_increment_fixed_1(
   reps,
   step = 0,
   volume = "normal",
@@ -139,6 +149,10 @@ Progression table explained in the 'Strength Training Manual' Chapter 6.
 \item \code{RIR_increment}: RIR Increment progression table. This is the original
 progression table from the Strength Training Manual
 
+\item \code{RIR_increment_fixed_1}: Fixed 1 RIR Increment progression table. This variant have fixed RIR
+increment across reps from phases to phases (1RIR) and 1RIR difference between extensive, normal, and
+intensive schemes
+
 \item \code{RIR_increment_fixed_2}: Fixed 2 RIR Increment progression table. This variant have fixed RIR
 increment across reps from phases to phases (2RIR) and 2RIR difference between extensive, normal, and
 intensive schemes
@@ -194,6 +208,16 @@ generate_progression_table(RIR_increment)
 # Plot progression table
 plot_progression_table(RIR_increment)
 plot_progression_table(RIR_increment, "adjustment")
+RIR_increment_fixed_1(10, step = seq(-3, 0, 1))
+RIR_increment_fixed_1(10, step = seq(-3, 0, 1), volume = "extensive")
+RIR_increment_fixed_1(5, step = seq(-3, 0, 1), type = "ballistic")
+
+# Generate progression table
+generate_progression_table(RIR_increment_fixed_2)
+
+# Plot progression table
+plot_progression_table(RIR_increment_fixed_1)
+plot_progression_table(RIR_increment_fixed_1, "adjustment")
 RIR_increment_fixed_2(10, step = seq(-3, 0, 1))
 RIR_increment_fixed_2(10, step = seq(-3, 0, 1), volume = "extensive")
 RIR_increment_fixed_2(5, step = seq(-3, 0, 1), type = "ballistic")

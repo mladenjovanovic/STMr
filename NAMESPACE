@@ -2,6 +2,7 @@
 
 export("%>%")
 export(RIR_increment)
+export(RIR_increment_fixed_1)
 export(RIR_increment_fixed_2)
 export(RIR_increment_fixed_4)
 export(RIR_increment_generic)

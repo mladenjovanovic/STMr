@@ -148,6 +148,52 @@ RIR_increment <- function(reps,
   )
 }
 
+#' @describeIn progression_table Fixed 1 RIR Increment progression table. This variant have fixed RIR
+#'     increment across reps from phases to phases (1RIR) and 1RIR difference between extensive, normal, and
+#'     intensive schemes
+#' @export
+#' @examples
+#' RIR_increment_fixed_1(10, step = seq(-3, 0, 1))
+#' RIR_increment_fixed_1(10, step = seq(-3, 0, 1), volume = "extensive")
+#' RIR_increment_fixed_1(5, step = seq(-3, 0, 1), type = "ballistic")
+#'
+#' # Generate progression table
+#' generate_progression_table(RIR_increment_fixed_2)
+#'
+#' # Plot progression table
+#' plot_progression_table(RIR_increment_fixed_1)
+#' plot_progression_table(RIR_increment_fixed_1, "adjustment")
+RIR_increment_fixed_1 <- function(reps,
+                                  step = 0,
+                                  volume = "normal",
+                                  type = "grinding",
+                                  adjustment = 0,
+                                  func_max_perc_1RM = get_max_perc_1RM) {
+  params <- data.frame(
+    volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
+    type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
+    rep_start = c(0, 1, 2, 0, 1, 2),
+    rep_step = c(0, 0, 0, 0, 0, 0),
+    inc_start = c(1, 1, 1, 1, 1, 1),
+    inc_step = c(0, 0, 0, 0, 0, 0)
+  )
+
+  params <- params[params$volume == volume, ]
+  params <- params[params$type == type, ]
+
+  RIR_increment_generic(
+    reps = reps,
+    step = step,
+    rep_start = params$rep_start[1],
+    rep_step = params$rep_step[1],
+    inc_start = params$inc_start[1],
+    inc_step = params$inc_step[1],
+    adjustment = adjustment,
+    func_max_perc_1RM = func_max_perc_1RM,
+    type = type
+  )
+}
+
 #' @describeIn progression_table Fixed 2 RIR Increment progression table. This variant have fixed RIR
 #'     increment across reps from phases to phases (2RIR) and 2RIR difference between extensive, normal, and
 #'     intensive schemes
