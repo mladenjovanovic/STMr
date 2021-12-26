@@ -20,4 +20,5 @@ Imports:
     ggplot2,
     ggstance,
     magrittr,
+    stats,
     tidyr
