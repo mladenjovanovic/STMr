@@ -58,7 +58,8 @@ get_max_perc_1RM_k <- function(max_reps, adjustment = 0, type = "grinding", k = 
   )
 }
 
-#' @describeIn max_reps_tables Get predicted 1RM using the RIR method (\code{adjustment})
+#' @describeIn max_reps_tables Get predicted 1RM using the RIR method (\code{adjustment}), but
+#'     with user provided \code{k} parameter
 #' @export
 #' @examples
 #' # Get predicted 1RM when lifting 100kg for 5 reps to failure
