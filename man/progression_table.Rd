@@ -22,7 +22,8 @@ percMR_step_var(
   volume = "normal",
   type = "grinding",
   adjustment = 0,
-  func_max_perc_1RM = get_max_perc_1RM_percMR
+  func_max_perc_1RM = get_max_perc_1RM_percMR,
+  ...
 )
 
 percMR_step_const(
@@ -31,7 +32,8 @@ percMR_step_const(
   volume = "normal",
   type = "grinding",
   adjustment = 0,
-  func_max_perc_1RM = get_max_perc_1RM_percMR
+  func_max_perc_1RM = get_max_perc_1RM_percMR,
+  ...
 )
 
 RIR_increment(
@@ -40,7 +42,8 @@ RIR_increment(
   volume = "normal",
   type = "grinding",
   adjustment = 0,
-  func_max_perc_1RM = get_max_perc_1RM
+  func_max_perc_1RM = get_max_perc_1RM,
+  ...
 )
 
 RIR_increment_fixed_1(
@@ -49,7 +52,8 @@ RIR_increment_fixed_1(
   volume = "normal",
   type = "grinding",
   adjustment = 0,
-  func_max_perc_1RM = get_max_perc_1RM
+  func_max_perc_1RM = get_max_perc_1RM,
+  ...
 )
 
 RIR_increment_fixed_2(
@@ -58,7 +62,8 @@ RIR_increment_fixed_2(
   volume = "normal",
   type = "grinding",
   adjustment = 0,
-  func_max_perc_1RM = get_max_perc_1RM
+  func_max_perc_1RM = get_max_perc_1RM,
+  ...
 )
 
 RIR_increment_fixed_4(
@@ -67,7 +72,8 @@ RIR_increment_fixed_4(
   volume = "normal",
   type = "grinding",
   adjustment = 0,
-  func_max_perc_1RM = get_max_perc_1RM
+  func_max_perc_1RM = get_max_perc_1RM,
+  ...
 )
 
 perc_drop(
@@ -76,7 +82,8 @@ perc_drop(
   volume = "normal",
   type = "grinding",
   adjustment = 0,
-  func_max_perc_1RM = get_max_perc_1RM
+  func_max_perc_1RM = get_max_perc_1RM,
+  ...
 )
 
 perc_drop_fixed_5(
@@ -85,7 +92,8 @@ perc_drop_fixed_5(
   volume = "normal",
   type = "grinding",
   adjustment = 0,
-  func_max_perc_1RM = get_max_perc_1RM
+  func_max_perc_1RM = get_max_perc_1RM,
+  ...
 )
 
 perc_drop_fixed_25(
@@ -94,7 +102,8 @@ perc_drop_fixed_25(
   volume = "normal",
   type = "grinding",
   adjustment = 0,
-  func_max_perc_1RM = get_max_perc_1RM
+  func_max_perc_1RM = get_max_perc_1RM,
+  ...
 )
 
 generate_progression_table(
@@ -112,7 +121,8 @@ relInt(
   volume = "normal",
   type = "grinding",
   adjustment = 0,
-  func_max_perc_1RM = get_max_perc_1RM_relInt
+  func_max_perc_1RM = get_max_perc_1RM_relInt,
+  ...
 )
 }
 \arguments{
@@ -129,10 +139,10 @@ relInt(
 \item{func_max_perc_1RM}{What max rep table should be used?
 Default is \code{\link{get_max_perc_1RM}}}
 
+\item{...}{Forwarded to \code{progression_table} for using different rep max function}
+
 \item{progression_table}{Progression table function to use. Default is
 \code{\link{RIR_increment}}}
-
-\item{...}{Forwarded to \code{progression_table} for using different rep max function}
 }
 \value{
 List with two elements: \code{adjustment} and \code{perc_1RM}

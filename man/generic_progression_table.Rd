@@ -79,7 +79,8 @@ For example, lower reps can have bigger jumps than high reps.}
 Default is \code{\link{get_max_perc_1RM}}}
 
 \item{...}{Forwarded to \code{func_max_perc_1RM}. Used to differentiate between
-'grinding' and 'ballistic' max reps schemes.}
+'grinding' and 'ballistic' max reps schemes, or use other parameters in user
+defined functions}
 }
 \value{
 List with two elements: \code{adjustment} and \code{perc_1RM}

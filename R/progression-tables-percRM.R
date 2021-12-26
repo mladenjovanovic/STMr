@@ -48,7 +48,8 @@ percMR_step_var <- function(reps,
                       volume = "normal",
                       type = "grinding",
                       adjustment = 0,
-                      func_max_perc_1RM = get_max_perc_1RM_percMR) {
+                      func_max_perc_1RM = get_max_perc_1RM_percMR,
+                      ...) {
 
 
   params <- data.frame(
@@ -72,7 +73,8 @@ percMR_step_var <- function(reps,
     inc_step = params$inc_step[1],
     adjustment = adjustment,
     func_max_perc_1RM = func_max_perc_1RM,
-    type = type
+    type = type,
+    ...
   )
 }
 
@@ -94,7 +96,8 @@ percMR_step_const <- function(reps,
                             volume = "normal",
                             type = "grinding",
                             adjustment = 0,
-                            func_max_perc_1RM = get_max_perc_1RM_percMR) {
+                            func_max_perc_1RM = get_max_perc_1RM_percMR,
+                            ...) {
 
 
   params <- data.frame(
@@ -118,7 +121,8 @@ percMR_step_const <- function(reps,
     inc_step = params$inc_step[1],
     adjustment = adjustment,
     func_max_perc_1RM = func_max_perc_1RM,
-    type = type
+    type = type,
+    ...
   )
 }
 

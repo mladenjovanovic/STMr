@@ -8,6 +8,7 @@
 #' @param reps Number of repetitions done
 #' @param weight Weight used
 #' @param type Type of max rep table. Options are grinding (Default) and ballistic.
+#' @param k User define k parameter in the Epley's equation. Default is 0.0333
 #' @name max_reps_tables
 NULL
 
