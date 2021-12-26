@@ -216,12 +216,12 @@ RIR_increment_fixed_1 <- function(reps,
 #' plot_progression_table(RIR_increment_fixed_2)
 #' plot_progression_table(RIR_increment_fixed_2, "adjustment")
 RIR_increment_fixed_2 <- function(reps,
-                          step = 0,
-                          volume = "normal",
-                          type = "grinding",
-                          adjustment = 0,
-                          func_max_perc_1RM = get_max_perc_1RM,
-                          ...) {
+                                  step = 0,
+                                  volume = "normal",
+                                  type = "grinding",
+                                  adjustment = 0,
+                                  func_max_perc_1RM = get_max_perc_1RM,
+                                  ...) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
@@ -359,12 +359,12 @@ perc_drop <- function(reps,
 #' plot_progression_table(perc_drop_fixed_5)
 #' plot_progression_table(perc_drop_fixed_5, "adjustment")
 perc_drop_fixed_5 <- function(reps,
-                      step = 0,
-                      volume = "normal",
-                      type = "grinding",
-                      adjustment = 0,
-                      func_max_perc_1RM = get_max_perc_1RM,
-                      ...) {
+                              step = 0,
+                              volume = "normal",
+                              type = "grinding",
+                              adjustment = 0,
+                              func_max_perc_1RM = get_max_perc_1RM,
+                              ...) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
@@ -407,12 +407,12 @@ perc_drop_fixed_5 <- function(reps,
 #' plot_progression_table(perc_drop_fixed_25)
 #' plot_progression_table(perc_drop_fixed_25, "adjustment")
 perc_drop_fixed_25 <- function(reps,
-                              step = 0,
-                              volume = "normal",
-                              type = "grinding",
-                              adjustment = 0,
-                              func_max_perc_1RM = get_max_perc_1RM,
-                              ...) {
+                               step = 0,
+                               volume = "normal",
+                               type = "grinding",
+                               adjustment = 0,
+                               func_max_perc_1RM = get_max_perc_1RM,
+                               ...) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
@@ -485,8 +485,9 @@ generate_progression_table <- function(progression_table = RIR_increment,
     val_perc[i] <- val$perc_1RM
   }
 
-    data.frame(
-      params,
-      adjustment = val_adj,
-      perc_1RM = val_perc)
+  data.frame(
+    params,
+    adjustment = val_adj,
+    perc_1RM = val_perc
+  )
 }

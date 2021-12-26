@@ -13,13 +13,11 @@
 #' @examples
 #' plot_progression_table(RIR_increment, "%1RM")
 #' plot_progression_table(RIR_increment, "adjustment")
-
-plot_progression_table <- function(
-  progression_table = RIR_increment,
-  plot = "%1RM",
-  signif_digits = 3,
-  adjustment_multiplier = 1,
-  ...) {
+plot_progression_table <- function(progression_table = RIR_increment,
+                                   plot = "%1RM",
+                                   signif_digits = 3,
+                                   adjustment_multiplier = 1,
+                                   ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
@@ -31,11 +29,13 @@ plot_progression_table <- function(
 
   progression_tbl <- generate_progression_table(
     progression_table = progression_table,
-    ...)
+    ...
+  )
 
   progression_tbl$volume <- factor(
     progression_tbl$volume,
-    levels = c("intensive", "normal", "extensive"))
+    levels = c("intensive", "normal", "extensive")
+  )
 
   progression_tbl$type <- factor(
     progression_tbl$type,
@@ -47,51 +47,51 @@ plot_progression_table <- function(
   progression_tbl$perc_1RM <- signif(progression_tbl$perc_1RM * 100, signif_digits)
   progression_tbl$adjustment <- signif(
     progression_tbl$adjustment * adjustment_multiplier,
-    signif_digits)
-
-  gg <- switch(plot,
-         "%1RM" = ggplot2::ggplot(progression_tbl, ggplot2::aes(x = step, y = reps)) +
-           ggplot2::theme_linedraw() +
-           #geom_tile(fill = "transparent", color = "black") +
-           ggplot2::geom_text(ggplot2::aes(label = perc_1RM)) +
-           ggplot2::scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
-           ggplot2::theme(
-             legend.position = "none",
-             axis.title = ggplot2::element_blank(),
-             #axis.text = element_blank(),
-             axis.ticks = ggplot2::element_blank(),
-             panel.grid.major = ggplot2::element_blank(),
-             panel.grid.minor = ggplot2::element_blank()
-           ) +
-           ggplot2::xlab(NULL) +
-           ggplot2::ylab(NULL) +
-           ggplot2::ggtitle("%1RM"),
-
-         "adjustment" = ggplot2::ggplot(progression_tbl, ggplot2::aes(x = step, y = reps)) +
-           ggplot2::theme_linedraw() +
-           #ggplot2::geom_tile(fill = "transparent", color = "black") +
-           ggplot2::geom_text(ggplot2::aes(label = adjustment)) +
-           ggplot2::scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
-           ggplot2::theme(
-             legend.position = "none",
-             axis.title = ggplot2::element_blank(),
-             #axis.text = ggplot2::element_blank(),
-             axis.ticks = ggplot2::element_blank(),
-             panel.grid.major = ggplot2::element_blank(),
-             panel.grid.minor = ggplot2::element_blank()
-           ) +
-           ggplot2::xlab(NULL) +
-           ggplot2::ylab(NULL) +
-           ggplot2::ggtitle("Adjustment", "Depends on the progression table utilized"),
-         stop("Invalid `plot` value. Please use `%1RM` or `adjustment`", call. = FALSE)
+    signif_digits
   )
 
-  if(length(unique(progression_tbl$type)) == 1 && length(unique(progression_tbl$volume)) > 1) {
+  gg <- switch(plot,
+    "%1RM" = ggplot2::ggplot(progression_tbl, ggplot2::aes(x = step, y = reps)) +
+      ggplot2::theme_linedraw() +
+      # geom_tile(fill = "transparent", color = "black") +
+      ggplot2::geom_text(ggplot2::aes(label = perc_1RM)) +
+      ggplot2::scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
+      ggplot2::theme(
+        legend.position = "none",
+        axis.title = ggplot2::element_blank(),
+        # axis.text = element_blank(),
+        axis.ticks = ggplot2::element_blank(),
+        panel.grid.major = ggplot2::element_blank(),
+        panel.grid.minor = ggplot2::element_blank()
+      ) +
+      ggplot2::xlab(NULL) +
+      ggplot2::ylab(NULL) +
+      ggplot2::ggtitle("%1RM"),
+    "adjustment" = ggplot2::ggplot(progression_tbl, ggplot2::aes(x = step, y = reps)) +
+      ggplot2::theme_linedraw() +
+      # ggplot2::geom_tile(fill = "transparent", color = "black") +
+      ggplot2::geom_text(ggplot2::aes(label = adjustment)) +
+      ggplot2::scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
+      ggplot2::theme(
+        legend.position = "none",
+        axis.title = ggplot2::element_blank(),
+        # axis.text = ggplot2::element_blank(),
+        axis.ticks = ggplot2::element_blank(),
+        panel.grid.major = ggplot2::element_blank(),
+        panel.grid.minor = ggplot2::element_blank()
+      ) +
+      ggplot2::xlab(NULL) +
+      ggplot2::ylab(NULL) +
+      ggplot2::ggtitle("Adjustment", "Depends on the progression table utilized"),
+    stop("Invalid `plot` value. Please use `%1RM` or `adjustment`", call. = FALSE)
+  )
+
+  if (length(unique(progression_tbl$type)) == 1 && length(unique(progression_tbl$volume)) > 1) {
     gg <- gg + ggplot2::facet_grid(~volume)
-  } else if(length(unique(progression_tbl$type)) > 1 && length(unique(progression_tbl$volume)) == 1) {
+  } else if (length(unique(progression_tbl$type)) > 1 && length(unique(progression_tbl$volume)) == 1) {
     gg <- gg + ggplot2::facet_grid(~type)
-  } else if(length(unique(progression_tbl$type)) > 1 && length(unique(progression_tbl$volume)) > 1) {
-    gg <- gg + ggplot2::facet_grid(type~volume)
+  } else if (length(unique(progression_tbl$type)) > 1 && length(unique(progression_tbl$volume)) > 1) {
+    gg <- gg + ggplot2::facet_grid(type ~ volume)
   }
 
   gg
@@ -120,7 +120,6 @@ plot_progression_table <- function(
 #' )
 #'
 #' plot_scheme(scheme)
-
 plot_scheme <- function(scheme,
                         label_size = 3,
                         signif_digits = 3,
@@ -156,7 +155,8 @@ plot_scheme <- function(scheme,
     tidyr::pivot_longer(cols = c("Reps", "Adjustment", "%1RM"), names_to = "param") %>%
     dplyr::mutate(
       param = factor(param, levels = c("Reps", "Adjustment", "%1RM")),
-      hjust = ifelse(value < 0, -0.5, 1.5))
+      hjust = ifelse(value < 0, -0.5, 1.5)
+    )
 
   # Plot
   ggplot2::ggplot(scheme, ggplot2::aes(x = value, y = set, fill = param)) +

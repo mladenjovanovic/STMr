@@ -4,15 +4,14 @@
 #' percMR_step_generic(10, step = seq(-3, 0, 1))
 #' percMR_step_generic(5, step = seq(-3, 0, 1), type = "ballistic")
 percMR_step_generic <- function(reps,
-                                  step = 0,
-                                  rep_start = 0,
-                                  rep_step = 0,
-                                  inc_start = 1,
-                                  inc_step = ((2 - 1) / 11),
-                                  adjustment = 0,
-                                  func_max_perc_1RM = get_max_perc_1RM_percMR,
-                                  ...) {
-
+                                step = 0,
+                                rep_start = 0,
+                                rep_step = 0,
+                                inc_start = 1,
+                                inc_step = ((2 - 1) / 11),
+                                adjustment = 0,
+                                func_max_perc_1RM = get_max_perc_1RM_percMR,
+                                ...) {
   rep_percMR <- rep_start + (reps - 1) * rep_step
   step_percMR <- step * (inc_start + (reps - 1) * inc_step)
 
@@ -44,21 +43,19 @@ percMR_step_generic <- function(reps,
 #' plot_progression_table(percMR_step_var)
 #' plot_progression_table(percMR_step_var, "adjustment")
 percMR_step_var <- function(reps,
-                      step = 0,
-                      volume = "normal",
-                      type = "grinding",
-                      adjustment = 0,
-                      func_max_perc_1RM = get_max_perc_1RM_percMR,
-                      ...) {
-
-
+                            step = 0,
+                            volume = "normal",
+                            type = "grinding",
+                            adjustment = 0,
+                            func_max_perc_1RM = get_max_perc_1RM_percMR,
+                            ...) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
     rep_start = c(0, 0.3, 0.5, 0, 0.3, 0.5),
-    rep_step = c(0, -(0.1/11), -(0.1/11), 0, -(0.1/11), -(0.1/11)),
-    inc_start = c(-0.4/3, -0.3/3, -0.3/3, -0.4/3, -0.3/3, -0.3/3),
-    inc_step = c((0.7 - 0.6)/(11*3), (0.5 - 0.5)/(11*3), (0.3 - 0.3)/(11*3), (0.7 - 0.6)/(11*3), (0.5 - 0.5)/(11*3), (0.3 - 0.3)/(11*3))
+    rep_step = c(0, -(0.1 / 11), -(0.1 / 11), 0, -(0.1 / 11), -(0.1 / 11)),
+    inc_start = c(-0.4 / 3, -0.3 / 3, -0.3 / 3, -0.4 / 3, -0.3 / 3, -0.3 / 3),
+    inc_step = c((0.7 - 0.6) / (11 * 3), (0.5 - 0.5) / (11 * 3), (0.3 - 0.3) / (11 * 3), (0.7 - 0.6) / (11 * 3), (0.5 - 0.5) / (11 * 3), (0.3 - 0.3) / (11 * 3))
   )
 
   params <- params[params$volume == volume, ]
@@ -92,14 +89,12 @@ percMR_step_var <- function(reps,
 #' plot_progression_table(percMR_step_const)
 #' plot_progression_table(percMR_step_const, "adjustment")
 percMR_step_const <- function(reps,
-                            step = 0,
-                            volume = "normal",
-                            type = "grinding",
-                            adjustment = 0,
-                            func_max_perc_1RM = get_max_perc_1RM_percMR,
-                            ...) {
-
-
+                              step = 0,
+                              volume = "normal",
+                              type = "grinding",
+                              adjustment = 0,
+                              func_max_perc_1RM = get_max_perc_1RM_percMR,
+                              ...) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
@@ -125,4 +120,3 @@ percMR_step_const <- function(reps,
     ...
   )
 }
-

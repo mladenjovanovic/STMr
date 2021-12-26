@@ -4,15 +4,14 @@
 #' relInt_generic(10, step = seq(-3, 0, 1))
 #' relInt_generic(5, step = seq(-3, 0, 1), type = "ballistic")
 relInt_generic <- function(reps,
-                                step = 0,
-                                rep_start = 0,
-                                rep_step = 0,
-                                inc_start = 1,
-                                inc_step = ((2 - 1) / 11),
-                                adjustment = 0,
-                                func_max_perc_1RM = get_max_perc_1RM_relInt,
-                                ...) {
-
+                           step = 0,
+                           rep_start = 0,
+                           rep_step = 0,
+                           inc_start = 1,
+                           inc_step = ((2 - 1) / 11),
+                           adjustment = 0,
+                           func_max_perc_1RM = get_max_perc_1RM_relInt,
+                           ...) {
   rep_percMR <- rep_start + (reps - 1) * rep_step
   step_percMR <- step * (inc_start + (reps - 1) * inc_step)
 
@@ -44,14 +43,12 @@ relInt_generic <- function(reps,
 #' plot_progression_table(relInt)
 #' plot_progression_table(relInt, "adjustment")
 relInt <- function(reps,
-                        step = 0,
-                        volume = "normal",
-                        type = "grinding",
-                        adjustment = 0,
-                        func_max_perc_1RM = get_max_perc_1RM_relInt,
-                        ...) {
-
-
+                   step = 0,
+                   volume = "normal",
+                   type = "grinding",
+                   adjustment = 0,
+                   func_max_perc_1RM = get_max_perc_1RM_relInt,
+                   ...) {
   params <- data.frame(
     volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
     type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
