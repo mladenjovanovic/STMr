@@ -29,7 +29,7 @@ hline <- function(y = 0, color = "black") {
     xref = "paper",
     y0 = y,
     y1 = y,
-    line = list(color = color,  dash="dot")
+    line = list(color = color, dash = "dot")
   )
 }
 
@@ -109,7 +109,8 @@ ui <- dashboardPage(
               selectInput(
                 "model_estimate_1RM_plot_type",
                 label = "Plot",
-                choices = c("Weight", "Estimated %1RMs")),
+                choices = c("Weight", "Estimated %1RMs")
+              ),
               plotlyOutput("model_estimate_1RM_plot")
             ) # Estimated 1RM plot
           ) # Column
@@ -211,16 +212,18 @@ server <- function(input, output) {
 
   ###################################
   # Get rep-max profiles
-  known_1RM_value <- eventReactive(input$data_entry_known_1RM_button, {
-    input$data_entry_known_1RM_value
+  known_1RM_value <- eventReactive(input$data_entry_known_1RM_button,
+    {
+      input$data_entry_known_1RM_value
     },
     ignoreNULL = FALSE
   )
 
-  known_1RM_table_react <- eventReactive(input$data_entry_known_1RM_button, {
-    known_1RM_table$data
-  },
-  ignoreNULL = FALSE
+  known_1RM_table_react <- eventReactive(input$data_entry_known_1RM_button,
+    {
+      known_1RM_table$data
+    },
+    ignoreNULL = FALSE
   )
 
   known_1RM_models <- eventReactive(input$data_entry_known_1RM_button,
@@ -261,10 +264,11 @@ server <- function(input, output) {
   )
 
 
-  estimate_1RM_table_react <- eventReactive(input$data_entry_estimate_1RM_button, {
-    estimate_1RM_table$data
-  },
-  ignoreNULL = FALSE
+  estimate_1RM_table_react <- eventReactive(input$data_entry_estimate_1RM_button,
+    {
+      estimate_1RM_table$data
+    },
+    ignoreNULL = FALSE
   )
 
   estimate_1RM_models <- eventReactive(input$data_entry_estimate_1RM_button,
@@ -381,7 +385,6 @@ server <- function(input, output) {
       )
 
     gg
-
   })
 
   output$model_estimate_1RM_plot <- renderPlotly({
