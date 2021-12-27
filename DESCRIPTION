@@ -20,5 +20,6 @@ Imports:
     ggplot2,
     ggstance,
     magrittr,
+    shiny,
     stats,
     tidyr
