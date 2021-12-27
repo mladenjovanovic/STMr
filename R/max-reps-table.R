@@ -10,6 +10,7 @@
 #' @param type Type of max rep table. Options are grinding (Default) and ballistic.
 #' @param k User defined \code{k} parameter in the Epley's equation. Default is 0.0333
 #' @param kmod User defined \code{kmod} parameter in the modified Epley's equation. Default is 0.0353
+#' @param klin User defined \code{klin} parameter in the linear equation. Default is 33
 #' @name max_reps_tables
 NULL
 

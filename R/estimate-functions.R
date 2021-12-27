@@ -1,5 +1,5 @@
 #' Estimate relationship between reps and %1RM used using Epley's and modified
-#'     Epley's equation
+#'     Epley's equation, as well as using the linear model
 #'
 #' @param weight Weight used
 #' @param perc_1RM Percent of 1RM
@@ -11,7 +11,7 @@
 NULL
 
 
-#' @describeIn estimate_functions Estimate the parameter k in the Epley's equation
+#' @describeIn estimate_functions Estimate the parameter \code{k} in the Epley's equation
 #' @export
 #' @examples
 #'
@@ -36,7 +36,7 @@ estimate_k <- function(perc_1RM, reps, adjustment = 0, ...) {
   m1
 }
 
-#' @describeIn estimate_functions Estimate the parameter kmod in the modified Epley's equation
+#' @describeIn estimate_functions Estimate the parameter \code{kmod} in the modified Epley's equation
 #' @export
 #' @examples
 #'
@@ -61,8 +61,8 @@ estimate_kmod <- function(perc_1RM, reps, adjustment = 0, ...) {
   m1
 }
 
-#' @describeIn estimate_functions Estimate the parameter k in the Epley's equation, as well as
-#'     1RM. This is a novel estimation function that uses the absolute weights
+#' @describeIn estimate_functions Estimate the parameter \code{k} in the Epley's equation, as well as
+#'     \code{1RM}. This is a novel estimation function that uses the absolute weights
 #' @export
 #' @examples
 #'
@@ -87,8 +87,8 @@ estimate_k_1RM <- function(weight, reps, adjustment = 0, ...) {
   m1
 }
 
-#' @describeIn estimate_functions Estimate the parameter kmod in the modified Epley's equation, as well as
-#'     1RM. This is a novel estimation function that uses the absolute weights
+#' @describeIn estimate_functions Estimate the parameter \code{kmod} in the modified Epley's equation, as well as
+#'     \code{1RM}. This is a novel estimation function that uses the absolute weights
 #' @export
 #' @examples
 #'
@@ -107,6 +107,57 @@ estimate_kmod_1RM <- function(weight, reps, adjustment = 0, ...) {
     nRM ~ (((weight / `1RM`) * (kmod - 1)) + 1) / (kmod * (weight / `1RM`)),
     data =  df,
     start = list(`1RM` = max(weight), kmod = 1),
+    ...
+  )
+
+  m1
+}
+
+#' @describeIn estimate_functions Estimate the parameter \code{klin} using the linear model
+#' @export
+#' @examples
+#'
+#' m1 <- estimate_klin(
+#'   perc_1RM = c(0.7, 0.8, 0.9),
+#'   reps = c(10, 5, 3)
+#' )
+#'
+#' coef(m1)
+estimate_klin <- function(perc_1RM, reps, adjustment = 0, ...) {
+  df <- data.frame(perc_1RM = perc_1RM, reps = reps, adjustment = adjustment)
+
+  df$nRM <- df$reps + df$adjustment
+
+  m1 <- stats::nls(
+    nRM ~ (1 - perc_1RM) * klin + 1,
+    data =  df,
+    start = list(klin = 1),
+    ...
+  )
+
+  m1
+}
+
+#' @describeIn estimate_functions Estimate the parameter \code{klin} in the linear equation, as well as
+#'     \code{1RM}. This is a novel estimation function that uses the absolute weights
+#' @export
+#' @examples
+#'
+#' m1 <- estimate_klin_1RM(
+#'   weight = c(70, 110, 140),
+#'   reps = c(10, 5, 3)
+#' )
+#'
+#' coef(m1)
+estimate_klin_1RM <- function(weight, reps, adjustment = 0, ...) {
+  df <- data.frame(weight = weight, reps = reps, adjustment = adjustment)
+
+  df$nRM <- df$reps + df$adjustment
+
+  m1 <- stats::nls(
+    nRM ~ (1 - (weight / `1RM`)) * klin + 1,
+    data =  df,
+    start = list(`1RM` = max(weight), klin = 1),
     ...
   )
 

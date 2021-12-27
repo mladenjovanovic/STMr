@@ -6,8 +6,10 @@
 \alias{estimate_kmod}
 \alias{estimate_k_1RM}
 \alias{estimate_kmod_1RM}
+\alias{estimate_klin}
+\alias{estimate_klin_1RM}
 \title{Estimate relationship between reps and \%1RM used using Epley's and modified
-Epley's equation}
+Epley's equation, as well as using the linear model}
 \usage{
 estimate_k(perc_1RM, reps, adjustment = 0, ...)
 
@@ -16,6 +18,10 @@ estimate_kmod(perc_1RM, reps, adjustment = 0, ...)
 estimate_k_1RM(weight, reps, adjustment = 0, ...)
 
 estimate_kmod_1RM(weight, reps, adjustment = 0, ...)
+
+estimate_klin(perc_1RM, reps, adjustment = 0, ...)
+
+estimate_klin_1RM(weight, reps, adjustment = 0, ...)
 }
 \arguments{
 \item{perc_1RM}{Percent of 1RM}
@@ -33,19 +39,24 @@ estimate_kmod_1RM(weight, reps, adjustment = 0, ...)
 }
 \description{
 Estimate relationship between reps and \%1RM used using Epley's and modified
-Epley's equation
+Epley's equation, as well as using the linear model
 }
 \section{Functions}{
 \itemize{
-\item \code{estimate_k}: Estimate the parameter k in the Epley's equation
+\item \code{estimate_k}: Estimate the parameter \code{k} in the Epley's equation
 
-\item \code{estimate_kmod}: Estimate the parameter kmod in the modified Epley's equation
+\item \code{estimate_kmod}: Estimate the parameter \code{kmod} in the modified Epley's equation
 
-\item \code{estimate_k_1RM}: Estimate the parameter k in the Epley's equation, as well as
-1RM. This is a novel estimation function that uses the absolute weights
+\item \code{estimate_k_1RM}: Estimate the parameter \code{k} in the Epley's equation, as well as
+\code{1RM}. This is a novel estimation function that uses the absolute weights
 
-\item \code{estimate_kmod_1RM}: Estimate the parameter kmod in the modified Epley's equation, as well as
-1RM. This is a novel estimation function that uses the absolute weights
+\item \code{estimate_kmod_1RM}: Estimate the parameter \code{kmod} in the modified Epley's equation, as well as
+\code{1RM}. This is a novel estimation function that uses the absolute weights
+
+\item \code{estimate_klin}: Estimate the parameter \code{klin} using the linear model
+
+\item \code{estimate_klin_1RM}: Estimate the parameter \code{klin} in the linear equation, as well as
+\code{1RM}. This is a novel estimation function that uses the absolute weights
 }}
 
 \examples{
@@ -57,14 +68,12 @@ m1 <- estimate_k(
 
 coef(m1)
 
-
 m1 <- estimate_kmod(
   perc_1RM = c(0.7, 0.8, 0.9),
   reps = c(10, 5, 3)
 )
 
 coef(m1)
-
 
 m1 <- estimate_k_1RM(
   weight = c(70, 110, 140),
@@ -73,7 +82,6 @@ m1 <- estimate_k_1RM(
 
 coef(m1)
 
-
 m1 <- estimate_kmod_1RM(
   weight = c(70, 110, 140),
   reps = c(10, 5, 3)
@@ -81,4 +89,17 @@ m1 <- estimate_kmod_1RM(
 
 coef(m1)
 
+m1 <- estimate_klin(
+  perc_1RM = c(0.7, 0.8, 0.9),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
+
+m1 <- estimate_klin_1RM(
+  weight = c(70, 110, 140),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
 }
