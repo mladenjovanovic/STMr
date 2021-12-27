@@ -4,21 +4,29 @@
 \alias{estimate_functions}
 \alias{estimate_k}
 \alias{estimate_kmod}
+\alias{estimate_k_1RM}
+\alias{estimate_kmod_1RM}
 \title{Estimate relationship between reps and \%1RM used using Epley's and modified
 Epley's equation}
 \usage{
 estimate_k(perc_1RM, reps, adjustment = 0, ...)
 
 estimate_kmod(perc_1RM, reps, adjustment = 0, ...)
+
+estimate_k_1RM(weight, reps, adjustment = 0, ...)
+
+estimate_kmod_1RM(weight, reps, adjustment = 0, ...)
 }
 \arguments{
 \item{perc_1RM}{Percent of 1RM}
 
 \item{reps}{Number of repetitions done}
 
-\item{adjustment}{Adjustment to be implemented, specific to the method}
+\item{adjustment}{Subjective estimation of reps-in-reserve (eRIR)}
 
 \item{...}{Forwarded to \code{\link[stats]{nls}} functions}
+
+\item{weight}{Weight used}
 }
 \value{
 \code{\link[stats]{nls}} object
@@ -32,6 +40,12 @@ Epley's equation
 \item \code{estimate_k}: Estimate the parameter k in the Epley's equation
 
 \item \code{estimate_kmod}: Estimate the parameter kmod in the modified Epley's equation
+
+\item \code{estimate_k_1RM}: Estimate the parameter k in the Epley's equation, as well as
+1RM. This is a novel estimation function that uses the absolute weights
+
+\item \code{estimate_kmod_1RM}: Estimate the parameter kmod in the modified Epley's equation, as well as
+1RM. This is a novel estimation function that uses the absolute weights
 }}
 
 \examples{
@@ -43,10 +57,28 @@ m1 <- estimate_k(
 
 coef(m1)
 
+
 m1 <- estimate_kmod(
   perc_1RM = c(0.7, 0.8, 0.9),
   reps = c(10, 5, 3)
 )
 
 coef(m1)
+
+
+m1 <- estimate_k_1RM(
+  weight = c(70, 110, 140),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
+
+
+m1 <- estimate_kmod_1RM(
+  weight = c(70, 110, 140),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
+
 }
