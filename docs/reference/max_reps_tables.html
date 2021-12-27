@@ -59,6 +59,18 @@
   k <span class="op">=</span> <span class="fl">0.0333</span>
 <span class="op">)</span>
 
+<span class="fu">get_max_reps_klin</span><span class="op">(</span><span class="va">perc_1RM</span>, adjustment <span class="op">=</span> <span class="fl">0</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, klin <span class="op">=</span> <span class="fl">33</span><span class="op">)</span>
+
+<span class="fu">get_max_perc_1RM_klin</span><span class="op">(</span><span class="va">max_reps</span>, adjustment <span class="op">=</span> <span class="fl">0</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, klin <span class="op">=</span> <span class="fl">33</span><span class="op">)</span>
+
+<span class="fu">get_predicted_1RM_klin</span><span class="op">(</span>
+  <span class="va">weight</span>,
+  <span class="va">reps</span>,
+  adjustment <span class="op">=</span> <span class="fl">0</span>,
+  type <span class="op">=</span> <span class="st">"grinding"</span>,
+  klin <span class="op">=</span> <span class="fl">33</span>
+<span class="op">)</span>
+
 <span class="fu">get_max_reps_kmod</span><span class="op">(</span><span class="va">perc_1RM</span>, adjustment <span class="op">=</span> <span class="fl">0</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, kmod <span class="op">=</span> <span class="fl">0.0353</span><span class="op">)</span>
 
 <span class="fu">get_max_perc_1RM_kmod</span><span class="op">(</span>
@@ -109,6 +121,8 @@
 <dd><p>Weight used</p></dd>
 <dt>reps</dt>
 <dd><p>Number of repetitions done</p></dd>
+<dt>klin</dt>
+<dd><p>User defined <code>klin</code> parameter in the linear equation. Default is 33</p></dd>
 <dt>kmod</dt>
 <dd><p>User defined <code>kmod</code> parameter in the modified Epley's equation. Default is 0.0353</p></dd>
 </dl></div>
@@ -121,6 +135,12 @@ with user provided <code>k</code> parameter</p></li>
 with user provided <code>k</code> parameter</p></li>
 <li><p><code>get_predicted_1RM_k</code>: Get predicted 1RM using the RIR method (<code>adjustment</code>), but
 with user provided <code>k</code> parameter</p></li>
+<li><p><code>get_max_reps_klin</code>: Get maximum number of repetitions using the RIR method (<code>adjustment</code>), but
+with user provided <code>klin</code> parameter using linear equation</p></li>
+<li><p><code>get_max_perc_1RM_klin</code>: Get maximum %1RM using the RIR method (<code>adjustment</code>), but
+with user provided <code>klin</code> parameter using linear equation</p></li>
+<li><p><code>get_predicted_1RM_klin</code>: Get predicted 1RM using the RIR method (<code>adjustment</code>), but
+with user provided <code>klin</code> parameter using linear equation</p></li>
 <li><p><code>get_max_reps_kmod</code>: Get maximum number of repetitions using the RIR method (<code>adjustment</code>), but
 with user provided <code>kmod</code> parameter using modified Epley's equation</p></li>
 <li><p><code>get_max_perc_1RM_kmod</code>: Get maximum %1RM using the RIR method (<code>adjustment</code>), but
@@ -208,6 +228,75 @@ with user provided <code>kmod</code> parameter using modified Epley's equation</
 <span class="r-in">  k <span class="op">=</span> <span class="fl">0.05</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 156</span>
+<span class="r-in"><span class="co"># Get max reps that can be done with 75% 1RM</span></span>
+<span class="r-in"><span class="fu">get_max_reps_klin</span><span class="op">(</span><span class="fl">0.75</span>, klin <span class="op">=</span> <span class="fl">33</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9.25</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max reps that can be done with 80% 1RM with 2 reps in reserve</span></span>
+<span class="r-in"><span class="fu">get_max_reps_klin</span><span class="op">(</span></span>
+<span class="r-in">  perc_1RM <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">33</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4.6</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max reps that can be done with 90% 1RM with 2 reps in reserve</span></span>
+<span class="r-in"><span class="co"># using ballistic table</span></span>
+<span class="r-in"><span class="fu">get_max_reps_klin</span><span class="op">(</span></span>
+<span class="r-in">  perc_1RM <span class="op">=</span> <span class="fl">0.9</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">2</span>,</span>
+<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">33</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.15</span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 5 reps to failure</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_klin</span><span class="op">(</span><span class="fl">5</span>, klin <span class="op">=</span> <span class="fl">33</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8787879</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 3 reps with 2 reps in reserve</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_klin</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">2</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">33</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8787879</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 2 reps with 3 reps in reserve</span></span>
+<span class="r-in"><span class="co"># using ballistic table</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_klin</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">2</span>,</span>
+<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">33</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7272727</span>
+<span class="r-in"><span class="co"># Get predicted 1RM when lifting 100kg for 5 reps to failure</span></span>
+<span class="r-in"><span class="fu">get_predicted_1RM_klin</span><span class="op">(</span></span>
+<span class="r-in">  weight <span class="op">=</span> <span class="fl">100</span>,</span>
+<span class="r-in">  reps <span class="op">=</span> <span class="fl">5</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">33</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 113.7931</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get predicted 1RM when lifting 120kg for 3 reps with 2 reps in reserve</span></span>
+<span class="r-in"><span class="fu">get_predicted_1RM_klin</span><span class="op">(</span></span>
+<span class="r-in">  weight <span class="op">=</span> <span class="fl">120</span>,</span>
+<span class="r-in">  reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">2</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">33</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 136.5517</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get predicted 1RM when lifting 120kg for 2 reps with 1 reps in reserve</span></span>
+<span class="r-in"><span class="co"># using ballistic table</span></span>
+<span class="r-in"><span class="fu">get_predicted_1RM_klin</span><span class="op">(</span></span>
+<span class="r-in">  weight <span class="op">=</span> <span class="fl">120</span>,</span>
+<span class="r-in">  reps <span class="op">=</span> <span class="fl">2</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">1</span>,</span>
+<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">33</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 141.4286</span>
 <span class="r-in"><span class="co"># Get max reps that can be done with 75% 1RM</span></span>
 <span class="r-in"><span class="fu">get_max_reps_kmod</span><span class="op">(</span><span class="fl">0.75</span>, kmod <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7.666667</span>
