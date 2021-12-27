@@ -21,7 +21,6 @@ NULL
 #' )
 #'
 #' coef(m1)
-#'
 estimate_k <- function(perc_1RM, reps, adjustment = 0, ...) {
   df <- data.frame(perc_1RM = perc_1RM, reps = reps, adjustment = adjustment)
 
@@ -47,7 +46,6 @@ estimate_k <- function(perc_1RM, reps, adjustment = 0, ...) {
 #' )
 #'
 #' coef(m1)
-#'
 estimate_kmod <- function(perc_1RM, reps, adjustment = 0, ...) {
   df <- data.frame(perc_1RM = perc_1RM, reps = reps, adjustment = adjustment)
 
@@ -74,14 +72,13 @@ estimate_kmod <- function(perc_1RM, reps, adjustment = 0, ...) {
 #' )
 #'
 #' coef(m1)
-#'
 estimate_k_1RM <- function(weight, reps, adjustment = 0, ...) {
   df <- data.frame(weight = weight, reps = reps, adjustment = adjustment)
 
   df$nRM <- df$reps + df$adjustment
 
   m1 <- stats::nls(
-    nRM ~  ((1 / k) / (weight/`1RM`)) - (1 / k),
+    nRM ~ ((1 / k) / (weight / `1RM`)) - (1 / k),
     data =  df,
     start = list(`1RM` = max(weight), k = 1),
     ...
@@ -101,14 +98,13 @@ estimate_k_1RM <- function(weight, reps, adjustment = 0, ...) {
 #' )
 #'
 #' coef(m1)
-#'
 estimate_kmod_1RM <- function(weight, reps, adjustment = 0, ...) {
   df <- data.frame(weight = weight, reps = reps, adjustment = adjustment)
 
   df$nRM <- df$reps + df$adjustment
 
   m1 <- stats::nls(
-    nRM ~  (((weight/`1RM`) * (kmod - 1)) + 1) / (kmod * (weight/`1RM`)),
+    nRM ~ (((weight / `1RM`) * (kmod - 1)) + 1) / (kmod * (weight / `1RM`)),
     data =  df,
     start = list(`1RM` = max(weight), kmod = 1),
     ...
