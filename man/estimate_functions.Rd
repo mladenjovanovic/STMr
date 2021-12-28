@@ -9,19 +9,19 @@
 \alias{estimate_klin}
 \alias{estimate_klin_1RM}
 \title{Estimate relationship between reps and \%1RM used using Epley's and modified
-Epley's equation, as well as using the linear model}
+Epley's equation, as well as using the linear model.}
 \usage{
-estimate_k(perc_1RM, reps, adjustment = 0, ...)
+estimate_k(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...)
 
-estimate_kmod(perc_1RM, reps, adjustment = 0, ...)
+estimate_kmod(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...)
 
-estimate_k_1RM(weight, reps, adjustment = 0, ...)
+estimate_k_1RM(weight, reps, adjustment = 0, reverse = FALSE, ...)
 
-estimate_kmod_1RM(weight, reps, adjustment = 0, ...)
+estimate_kmod_1RM(weight, reps, adjustment = 0, reverse = FALSE, ...)
 
-estimate_klin(perc_1RM, reps, adjustment = 0, ...)
+estimate_klin(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...)
 
-estimate_klin_1RM(weight, reps, adjustment = 0, ...)
+estimate_klin_1RM(weight, reps, adjustment = 0, reverse = FALSE, ...)
 }
 \arguments{
 \item{perc_1RM}{Percent of 1RM}
@@ -29,6 +29,8 @@ estimate_klin_1RM(weight, reps, adjustment = 0, ...)
 \item{reps}{Number of repetitions done}
 
 \item{adjustment}{Subjective estimation of reps-in-reserve (eRIR)}
+
+\item{reverse}{Logical, default is \code{FALSE}. Should reps be used as predictor instead as a target?}
 
 \item{...}{Forwarded to \code{\link[stats]{nls}} functions}
 
@@ -38,8 +40,8 @@ estimate_klin_1RM(weight, reps, adjustment = 0, ...)
 \code{\link[stats]{nls}} object
 }
 \description{
-Estimate relationship between reps and \%1RM used using Epley's and modified
-Epley's equation, as well as using the linear model
+By default, target variable is the reps performed, while the predictors is the \code{perc_1RM} or
+\code{weight}. To reverse this, use the \code{reverse = TRUE} argument
 }
 \section{Functions}{
 \itemize{
