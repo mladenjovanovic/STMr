@@ -53,7 +53,7 @@ get_max_reps_kmod <- function(perc_1RM, adjustment = 0, type = "grinding", kmod 
 get_max_perc_1RM_kmod <- function(max_reps, adjustment = 0, type = "grinding", kmod = 0.0353) {
   switch(type,
     grinding = 1 / (kmod * (max_reps + adjustment - 1) + 1),
-    ballistic = 1 / (2 * kmod * (max_reps + adjustment - 1) + 1),
+    ballistic = 1 / (kmod * (2 * max_reps + adjustment - 1) + 1),
     stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
   )
 }
@@ -93,3 +93,64 @@ get_predicted_1RM_kmod <- function(weight, reps, adjustment = 0, type = "grindin
     stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
   )
 }
+
+#' @describeIn max_reps_tables Get maximum %1RM using the Relative Intensity (\code{adjustment}), but
+#'     with user provided \code{kmod} parameter
+#' @export
+#' @examples
+#' # Get max %1RM to be used when doing 5 reps to failure
+#' get_max_perc_1RM_kmod_relInt(5, kmod = 0.0333)
+#'
+#' # Get max %1RM to be used when doing 3 reps with 60% of Relative Intensity
+#' get_max_perc_1RM_kmod_relInt(
+#'   max_reps = 3,
+#'   adjustment = 0.6,
+#'   kmod = 0.05
+#' )
+#'
+#' # Get max %1RM to be used when doing 2 reps with 60% of Relative Intensity
+#' # using ballistic table
+#' get_max_perc_1RM_kmod_relInt(
+#'   max_reps = 3,
+#'   adjustment = 0.6,
+#'   type = "ballistic",
+#'   kmod = 0.05
+#' )
+get_max_perc_1RM_kmod_relInt <- function(max_reps, adjustment = 1, type = "grinding", kmod = 0.0353) {
+  switch(type,
+         grinding = adjustment / (kmod * (max_reps - 1) + 1),
+         ballistic = adjustment / (kmod * (2 * max_reps + adjustment - 1) + 1),
+         stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
+  )
+}
+
+#' @describeIn max_reps_tables Get maximum %1RM using the %MR method (\code{adjustment}), but
+#'     with user provided \code{kmod} parameter
+#' @export
+#' @examples
+#' # Get max %1RM to be used when doing 5 reps to failure
+#' get_max_perc_1RM_kmod_percMR(5, kmod = 0.0353)
+#'
+#' # Get max %1RM to be used when doing 3 reps with 60% of maximum reps
+#' get_max_perc_1RM_kmod_percMR(
+#'   max_reps = 3,
+#'   adjustment = 0.6,
+#'   kmod = 0.05
+#' )
+#'
+#' # Get max %1RM to be used when doing 2 reps with 60% of maximum reps
+#' # using ballistic table
+#' get_max_perc_1RM_kmod_percMR(
+#'   max_reps = 3,
+#'   adjustment = 0.6,
+#'   type = "ballistic",
+#'   kmod = 0.05
+#' )
+get_max_perc_1RM_kmod_percMR <- function(max_reps, adjustment = 1, type = "grinding", kmod = 0.0353) {
+  switch(type,
+         grinding = 1 / (kmod * (max_reps / adjustment - 1) + 1),
+         ballistic = 1 / (kmod * (2 * max_reps / adjustment - 1) + 1),
+         stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
+  )
+}
+
