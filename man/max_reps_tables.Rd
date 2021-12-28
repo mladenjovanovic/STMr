@@ -11,6 +11,8 @@
 \alias{get_max_reps_klin}
 \alias{get_max_perc_1RM_klin}
 \alias{get_predicted_1RM_klin}
+\alias{get_max_perc_1RM_klin_relInt}
+\alias{get_max_perc_1RM_klin_percMR}
 \alias{get_max_reps_kmod}
 \alias{get_max_perc_1RM_kmod}
 \alias{get_predicted_1RM_kmod}
@@ -61,6 +63,20 @@ get_predicted_1RM_klin(
   weight,
   reps,
   adjustment = 0,
+  type = "grinding",
+  klin = 33
+)
+
+get_max_perc_1RM_klin_relInt(
+  max_reps,
+  adjustment = 1,
+  type = "grinding",
+  klin = 33
+)
+
+get_max_perc_1RM_klin_percMR(
+  max_reps,
+  adjustment = 1,
   type = "grinding",
   klin = 33
 )
@@ -158,6 +174,12 @@ with user provided \code{klin} parameter using linear equation
 with user provided \code{klin} parameter using linear equation
 
 \item \code{get_predicted_1RM_klin}: Get predicted 1RM using the RIR method (\code{adjustment}), but
+with user provided \code{klin} parameter using linear equation
+
+\item \code{get_max_perc_1RM_klin_relInt}: Get maximum \%1RM using the Relative Intensity (\code{adjustment}), but
+with user provided \code{klin} parameter using linear equation
+
+\item \code{get_max_perc_1RM_klin_percMR}: Get maximum \%1RM using the \%MR (\code{adjustment}), but
 with user provided \code{klin} parameter using linear equation
 
 \item \code{get_max_reps_kmod}: Get maximum number of repetitions using the RIR method (\code{adjustment}), but
@@ -348,6 +370,42 @@ get_predicted_1RM_klin(
   adjustment = 1,
   type = "ballistic",
   klin = 33
+)
+# Get max \%1RM to be used when doing 5 reps to failure
+get_max_perc_1RM_klin_relInt(5, klin = 35)
+
+# Get max \%1RM to be used when doing 3 reps with 60\% of Relative Intensity
+get_max_perc_1RM_klin_relInt(
+  max_reps = 3,
+  adjustment = 0.6,
+  klin = 35
+)
+
+# Get max \%1RM to be used when doing 2 reps with 60\% of Relative Intensity
+# using ballistic table
+get_max_perc_1RM_klin_relInt(
+  max_reps = 3,
+  adjustment = 0.6,
+  type = "ballistic",
+  klin = 35
+)
+# Get max \%1RM to be used when doing 5 reps to failure
+get_max_perc_1RM_klin_percMR(5, klin = 35)
+
+# Get max \%1RM to be used when doing 3 reps with 60\% of maximum reps
+get_max_perc_1RM_klin_percMR(
+  max_reps = 3,
+  adjustment = 0.6,
+  klin = 35
+)
+
+# Get max \%1RM to be used when doing 2 reps with 60\% of maximum reps
+# using ballistic table
+get_max_perc_1RM_klin_percMR(
+  max_reps = 3,
+  adjustment = 0.6,
+  type = "ballistic",
+  klin = 35
 )
 # Get max reps that can be done with 75\% 1RM
 get_max_reps_kmod(0.75, kmod = 0.05)
