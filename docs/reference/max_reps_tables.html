@@ -59,6 +59,20 @@
   k <span class="op">=</span> <span class="fl">0.0333</span>
 <span class="op">)</span>
 
+<span class="fu">get_max_perc_1RM_k_relInt</span><span class="op">(</span>
+  <span class="va">max_reps</span>,
+  adjustment <span class="op">=</span> <span class="fl">1</span>,
+  type <span class="op">=</span> <span class="st">"grinding"</span>,
+  k <span class="op">=</span> <span class="fl">0.0333</span>
+<span class="op">)</span>
+
+<span class="fu">get_max_perc_1RM_k_percMR</span><span class="op">(</span>
+  <span class="va">max_reps</span>,
+  adjustment <span class="op">=</span> <span class="fl">1</span>,
+  type <span class="op">=</span> <span class="st">"grinding"</span>,
+  k <span class="op">=</span> <span class="fl">0.0333</span>
+<span class="op">)</span>
+
 <span class="fu">get_max_reps_klin</span><span class="op">(</span><span class="va">perc_1RM</span>, adjustment <span class="op">=</span> <span class="fl">0</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, klin <span class="op">=</span> <span class="fl">33</span><span class="op">)</span>
 
 <span class="fu">get_max_perc_1RM_klin</span><span class="op">(</span><span class="va">max_reps</span>, adjustment <span class="op">=</span> <span class="fl">0</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, klin <span class="op">=</span> <span class="fl">33</span><span class="op">)</span>
@@ -67,6 +81,20 @@
   <span class="va">weight</span>,
   <span class="va">reps</span>,
   adjustment <span class="op">=</span> <span class="fl">0</span>,
+  type <span class="op">=</span> <span class="st">"grinding"</span>,
+  klin <span class="op">=</span> <span class="fl">33</span>
+<span class="op">)</span>
+
+<span class="fu">get_max_perc_1RM_klin_relInt</span><span class="op">(</span>
+  <span class="va">max_reps</span>,
+  adjustment <span class="op">=</span> <span class="fl">1</span>,
+  type <span class="op">=</span> <span class="st">"grinding"</span>,
+  klin <span class="op">=</span> <span class="fl">33</span>
+<span class="op">)</span>
+
+<span class="fu">get_max_perc_1RM_klin_percMR</span><span class="op">(</span>
+  <span class="va">max_reps</span>,
+  adjustment <span class="op">=</span> <span class="fl">1</span>,
   type <span class="op">=</span> <span class="st">"grinding"</span>,
   klin <span class="op">=</span> <span class="fl">33</span>
 <span class="op">)</span>
@@ -84,6 +112,20 @@
   <span class="va">weight</span>,
   <span class="va">reps</span>,
   adjustment <span class="op">=</span> <span class="fl">0</span>,
+  type <span class="op">=</span> <span class="st">"grinding"</span>,
+  kmod <span class="op">=</span> <span class="fl">0.0353</span>
+<span class="op">)</span>
+
+<span class="fu">get_max_perc_1RM_kmod_relInt</span><span class="op">(</span>
+  <span class="va">max_reps</span>,
+  adjustment <span class="op">=</span> <span class="fl">1</span>,
+  type <span class="op">=</span> <span class="st">"grinding"</span>,
+  kmod <span class="op">=</span> <span class="fl">0.0353</span>
+<span class="op">)</span>
+
+<span class="fu">get_max_perc_1RM_kmod_percMR</span><span class="op">(</span>
+  <span class="va">max_reps</span>,
+  adjustment <span class="op">=</span> <span class="fl">1</span>,
   type <span class="op">=</span> <span class="st">"grinding"</span>,
   kmod <span class="op">=</span> <span class="fl">0.0353</span>
 <span class="op">)</span>
@@ -135,11 +177,19 @@ with user provided <code>k</code> parameter</p></li>
 with user provided <code>k</code> parameter</p></li>
 <li><p><code>get_predicted_1RM_k</code>: Get predicted 1RM using the RIR method (<code>adjustment</code>), but
 with user provided <code>k</code> parameter</p></li>
+<li><p><code>get_max_perc_1RM_k_relInt</code>: Get maximum %1RM using the Relative Intensity (<code>adjustment</code>), but
+with user provided <code>k</code> parameter</p></li>
+<li><p><code>get_max_perc_1RM_k_percMR</code>: Get maximum %1RM using the %MR method (<code>adjustment</code>), but
+with user provided <code>k</code> parameter</p></li>
 <li><p><code>get_max_reps_klin</code>: Get maximum number of repetitions using the RIR method (<code>adjustment</code>), but
 with user provided <code>klin</code> parameter using linear equation</p></li>
 <li><p><code>get_max_perc_1RM_klin</code>: Get maximum %1RM using the RIR method (<code>adjustment</code>), but
 with user provided <code>klin</code> parameter using linear equation</p></li>
 <li><p><code>get_predicted_1RM_klin</code>: Get predicted 1RM using the RIR method (<code>adjustment</code>), but
+with user provided <code>klin</code> parameter using linear equation</p></li>
+<li><p><code>get_max_perc_1RM_klin_relInt</code>: Get maximum %1RM using the Relative Intensity (<code>adjustment</code>), but
+with user provided <code>klin</code> parameter using linear equation</p></li>
+<li><p><code>get_max_perc_1RM_klin_percMR</code>: Get maximum %1RM using the %MR (<code>adjustment</code>), but
 with user provided <code>klin</code> parameter using linear equation</p></li>
 <li><p><code>get_max_reps_kmod</code>: Get maximum number of repetitions using the RIR method (<code>adjustment</code>), but
 with user provided <code>kmod</code> parameter using modified Epley's equation</p></li>
@@ -147,6 +197,10 @@ with user provided <code>kmod</code> parameter using modified Epley's equation</
 with user provided <code>kmod</code> parameter using modified Epley's equation</p></li>
 <li><p><code>get_predicted_1RM_kmod</code>: Get predicted 1RM using the RIR method (<code>adjustment</code>), but
 with user provided <code>kmod</code> parameter using modified Epley's equation</p></li>
+<li><p><code>get_max_perc_1RM_kmod_relInt</code>: Get maximum %1RM using the Relative Intensity (<code>adjustment</code>), but
+with user provided <code>kmod</code> parameter</p></li>
+<li><p><code>get_max_perc_1RM_kmod_percMR</code>: Get maximum %1RM using the %MR method (<code>adjustment</code>), but
+with user provided <code>kmod</code> parameter</p></li>
 <li><p><code>get_max_reps_percMR</code>: Get maximum number of repetitions using the %MR (<code>adjustment</code>)</p></li>
 <li><p><code>get_max_perc_1RM_percMR</code>: Get maximum %1RM using the %MR (<code>adjustment</code>)</p></li>
 <li><p><code>get_predicted_1RM_percMR</code>: Get predicted 1RM using the %MR (<code>adjustment</code>)</p></li>
@@ -228,6 +282,48 @@ with user provided <code>kmod</code> parameter using modified Epley's equation</
 <span class="r-in">  k <span class="op">=</span> <span class="fl">0.05</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 156</span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 5 reps to failure</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_k_relInt</span><span class="op">(</span><span class="fl">5</span>, k <span class="op">=</span> <span class="fl">0.0333</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8572653</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 3 reps with 60% of Relative Intensity</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_k_relInt</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  k <span class="op">=</span> <span class="fl">0.05</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5217391</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 2 reps with 60% of Relative Intensity</span></span>
+<span class="r-in"><span class="co"># using ballistic table</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_k_relInt</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
+<span class="r-in">  k <span class="op">=</span> <span class="fl">0.05</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4615385</span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 5 reps to failure</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_k_percMR</span><span class="op">(</span><span class="fl">5</span>, k <span class="op">=</span> <span class="fl">0.0333</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8572653</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 3 reps with 60% of maximum reps</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_k_percMR</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  k <span class="op">=</span> <span class="fl">0.05</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 2 reps with 60% of maximum reps</span></span>
+<span class="r-in"><span class="co"># using ballistic table</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_k_percMR</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
+<span class="r-in">  k <span class="op">=</span> <span class="fl">0.05</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6666667</span>
 <span class="r-in"><span class="co"># Get max reps that can be done with 75% 1RM</span></span>
 <span class="r-in"><span class="fu">get_max_reps_klin</span><span class="op">(</span><span class="fl">0.75</span>, klin <span class="op">=</span> <span class="fl">33</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9.25</span>
@@ -297,6 +393,48 @@ with user provided <code>kmod</code> parameter using modified Epley's equation</
 <span class="r-in">  klin <span class="op">=</span> <span class="fl">33</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 141.4286</span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 5 reps to failure</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_klin_relInt</span><span class="op">(</span><span class="fl">5</span>, klin <span class="op">=</span> <span class="fl">35</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8857143</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 3 reps with 60% of Relative Intensity</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_klin_relInt</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">35</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5657143</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 2 reps with 60% of Relative Intensity</span></span>
+<span class="r-in"><span class="co"># using ballistic table</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_klin_relInt</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">35</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5142857</span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 5 reps to failure</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_klin_percMR</span><span class="op">(</span><span class="fl">5</span>, klin <span class="op">=</span> <span class="fl">35</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8857143</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 3 reps with 60% of maximum reps</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_klin_percMR</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">35</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8857143</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 2 reps with 60% of maximum reps</span></span>
+<span class="r-in"><span class="co"># using ballistic table</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_klin_percMR</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
+<span class="r-in">  klin <span class="op">=</span> <span class="fl">35</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7428571</span>
 <span class="r-in"><span class="co"># Get max reps that can be done with 75% 1RM</span></span>
 <span class="r-in"><span class="fu">get_max_reps_kmod</span><span class="op">(</span><span class="fl">0.75</span>, kmod <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7.666667</span>
@@ -317,7 +455,7 @@ with user provided <code>kmod</code> parameter using modified Epley's equation</
 <span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
 <span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.05</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1111111</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.3888889</span>
 <span class="r-in"><span class="co"># Get max %1RM to be used when doing 5 reps to failure</span></span>
 <span class="r-in"><span class="fu">get_max_perc_1RM_kmod</span><span class="op">(</span><span class="fl">5</span>, kmod <span class="op">=</span> <span class="fl">0.0353</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8762706</span>
@@ -338,7 +476,7 @@ with user provided <code>kmod</code> parameter using modified Epley's equation</
 <span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
 <span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.05</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7142857</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6896552</span>
 <span class="r-in"><span class="co"># Get predicted 1RM when lifting 100kg for 5 reps to failure</span></span>
 <span class="r-in"><span class="fu">get_predicted_1RM_kmod</span><span class="op">(</span></span>
 <span class="r-in">  weight <span class="op">=</span> <span class="fl">100</span>,</span>
@@ -365,7 +503,49 @@ with user provided <code>kmod</code> parameter using modified Epley's equation</
 <span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
 <span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.05</span></span>
 <span class="r-in"><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 150</span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 5 reps to failure</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_kmod_relInt</span><span class="op">(</span><span class="fl">5</span>, kmod <span class="op">=</span> <span class="fl">0.0333</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8824568</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 3 reps with 60% of Relative Intensity</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_kmod_relInt</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.05</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5454545</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 2 reps with 60% of Relative Intensity</span></span>
+<span class="r-in"><span class="co"># using ballistic table</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_kmod_relInt</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
+<span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.05</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.48</span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 5 reps to failure</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_kmod_percMR</span><span class="op">(</span><span class="fl">5</span>, kmod <span class="op">=</span> <span class="fl">0.0353</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8762706</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 3 reps with 60% of maximum reps</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_kmod_percMR</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.05</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8333333</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Get max %1RM to be used when doing 2 reps with 60% of maximum reps</span></span>
+<span class="r-in"><span class="co"># using ballistic table</span></span>
+<span class="r-in"><span class="fu">get_max_perc_1RM_kmod_percMR</span><span class="op">(</span></span>
+<span class="r-in">  max_reps <span class="op">=</span> <span class="fl">3</span>,</span>
+<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
+<span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.05</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6896552</span>
 <span class="r-in"><span class="co"># Get max reps that can be done with 75% 1RM</span></span>
 <span class="r-in"><span class="fu">get_max_reps_percMR</span><span class="op">(</span><span class="fl">0.75</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10.01</span>
