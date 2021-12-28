@@ -27,11 +27,9 @@ check_get_max_perc1RM_percMR_functions <- function(max_perc1RM_func, ...) {
     max_perc1RM_func(test_data$reps, adjustment = test_data$adjustment, type = "ballistic", ...),
     max_perc1RM_func(test_data$reps / test_data$adjustment, adjustment = 1, type = "ballistic", ...)
   )
-
 }
 
 check_get_max_reps_percMR_functions <- function(max_reps_func, ...) {
-
   test_data <- expand.grid(
     perc_1RM = seq(0.3, 1, length.out = 20),
     adjustment = seq(0, 1, length.out = 20)
@@ -53,7 +51,6 @@ check_get_max_reps_percMR_functions <- function(max_reps_func, ...) {
     max_reps_func(test_data$perc_1RM, adjustment = 1, type = "ballistic", ...) * test_data$adjustment,
     max_reps_func(test_data$perc_1RM, adjustment = test_data$adjustment, type = "ballistic", ...)
   )
-
 }
 
 

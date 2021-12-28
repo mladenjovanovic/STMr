@@ -50,7 +50,7 @@ check_get_max_reps_RIR_functions <- function(max_reps_func, ...) {
 
   expect_equal(
     max_reps_func(test_data$perc_1RM, adjustment = test_data$adjustment, type = "grinding", ...),
-    2 * max_reps_func(test_data$perc_1RM, adjustment = 1/2 * test_data$adjustment, type = "ballistic", ...)
+    2 * max_reps_func(test_data$perc_1RM, adjustment = 1 / 2 * test_data$adjustment, type = "ballistic", ...)
   )
 
   # When using the RIR method, the adjustment used in the function should be equal to
@@ -64,7 +64,6 @@ check_get_max_reps_RIR_functions <- function(max_reps_func, ...) {
     max_reps_func(test_data$perc_1RM, adjustment = test_data$adjustment, type = "ballistic", ...),
     max_reps_func(test_data$perc_1RM, adjustment = 0, type = "ballistic", ...) - test_data$adjustment
   )
-
 }
 
 # Function to check 1RM predictions
@@ -77,8 +76,8 @@ check_get_predicted_1RM_RIR_functions <- function(predicted_1RM_func, ...) {
 
   # Predicted 1RM using the ballistic should same as grinding, but using the double reps
   expect_equal(
-  predicted_1RM_func(weight = test_data$weight, reps = test_data$reps * 2, adjustment = 0, type = "grinding"),
-  predicted_1RM_func(weight = test_data$weight, reps = test_data$reps, adjustment = 0, type = "ballistic")
+    predicted_1RM_func(weight = test_data$weight, reps = test_data$reps * 2, adjustment = 0, type = "grinding"),
+    predicted_1RM_func(weight = test_data$weight, reps = test_data$reps, adjustment = 0, type = "ballistic")
   )
 
   # Predicted 1RM using the reps + RIR (as total reps) and RIR as parameter should be same

@@ -23,7 +23,7 @@
 get_max_reps_kmod <- function(perc_1RM, adjustment = 0, type = "grinding", kmod = 0.0353) {
   switch(type,
     grinding = ((perc_1RM * (-adjustment * kmod + kmod - 1)) + 1) / (kmod * perc_1RM),
-    ballistic = (perc_1RM * (-2 * adjustment * kmod + kmod - 1) + 1)/(2 * kmod * perc_1RM),
+    ballistic = (perc_1RM * (-2 * adjustment * kmod + kmod - 1) + 1) / (2 * kmod * perc_1RM),
     stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
   )
 }
@@ -56,7 +56,7 @@ get_max_reps_kmod <- function(perc_1RM, adjustment = 0, type = "grinding", kmod 
 get_max_perc_1RM_kmod <- function(max_reps, adjustment = 0, type = "grinding", kmod = 0.0353) {
   switch(type,
     grinding = 1 / (kmod * (max_reps + adjustment - 1) + 1),
-    ballistic = 1 / (kmod * (2*max_reps + 2*adjustment - 1) + 1),
+    ballistic = 1 / (kmod * (2 * max_reps + 2 * adjustment - 1) + 1),
     stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
   )
 }
@@ -117,9 +117,9 @@ get_predicted_1RM_kmod <- function(weight, reps, adjustment = 0, type = "grindin
 #' )
 get_max_perc_1RM_kmod_relInt <- function(max_reps, adjustment = 1, type = "grinding", kmod = 0.0353) {
   switch(type,
-         grinding = adjustment / (kmod * (max_reps - 1) + 1),
-         ballistic = adjustment / (kmod * (2 * max_reps - 1) + 1),
-         stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
+    grinding = adjustment / (kmod * (max_reps - 1) + 1),
+    ballistic = adjustment / (kmod * (2 * max_reps - 1) + 1),
+    stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
   )
 }
 
@@ -147,9 +147,8 @@ get_max_perc_1RM_kmod_relInt <- function(max_reps, adjustment = 1, type = "grind
 #' )
 get_max_perc_1RM_kmod_percMR <- function(max_reps, adjustment = 1, type = "grinding", kmod = 0.0353) {
   switch(type,
-         grinding = 1 / (kmod * (max_reps / adjustment - 1) + 1),
-         ballistic = 1 / (kmod * (2 * max_reps / adjustment - 1) + 1),
-         stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
+    grinding = 1 / (kmod * (max_reps / adjustment - 1) + 1),
+    ballistic = 1 / (kmod * (2 * max_reps / adjustment - 1) + 1),
+    stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
   )
 }
-

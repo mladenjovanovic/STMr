@@ -118,9 +118,9 @@ get_predicted_1RM_k <- function(weight, reps, adjustment = 0, type = "grinding",
 #' )
 get_max_perc_1RM_k_relInt <- function(max_reps, adjustment = 1, type = "grinding", k = 0.0333) {
   switch(type,
-         grinding = adjustment / (k * max_reps + 1),
-         ballistic = adjustment / (k * 2 * max_reps + 1),
-         stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
+    grinding = adjustment / (k * max_reps + 1),
+    ballistic = adjustment / (k * 2 * max_reps + 1),
+    stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
   )
 }
 
@@ -148,8 +148,8 @@ get_max_perc_1RM_k_relInt <- function(max_reps, adjustment = 1, type = "grinding
 #' )
 get_max_perc_1RM_k_percMR <- function(max_reps, adjustment = 1, type = "grinding", k = 0.0333) {
   switch(type,
-         grinding = adjustment / (adjustment + k * max_reps),
-         ballistic = adjustment / (adjustment + k * 2 * max_reps),
-         stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
+    grinding = adjustment / (adjustment + k * max_reps),
+    ballistic = adjustment / (adjustment + k * 2 * max_reps),
+    stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
   )
 }

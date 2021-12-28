@@ -28,7 +28,6 @@ check_get_max_perc1RM_relInt_functions <- function(max_perc1RM_func, ...) {
     max_perc1RM_func(test_data$reps, adjustment = test_data$adjustment, type = "ballistic", ...),
     max_perc1RM_func(test_data$reps, adjustment = 1, type = "ballistic", ...) * test_data$adjustment
   )
-
 }
 
 check_get_max_reps_relInt_functions <- function(max_reps_func, ...) {
@@ -53,7 +52,6 @@ check_get_max_reps_relInt_functions <- function(max_reps_func, ...) {
     max_reps_func(test_data$perc_1RM / test_data$adjustment, adjustment = 1, type = "ballistic", ...),
     max_reps_func(test_data$perc_1RM, adjustment = test_data$adjustment, type = "ballistic", ...)
   )
-
 }
 
 
