@@ -93,3 +93,63 @@ get_predicted_1RM_k <- function(weight, reps, adjustment = 0, type = "grinding",
     stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
   )
 }
+
+#' @describeIn max_reps_tables Get maximum %1RM using the Relative Intensity (\code{adjustment}), but
+#'     with user provided \code{k} parameter
+#' @export
+#' @examples
+#' # Get max %1RM to be used when doing 5 reps to failure
+#' get_max_perc_1RM_k_relInt(5, k = 0.0333)
+#'
+#' # Get max %1RM to be used when doing 3 reps with 60% of Relative Intensity
+#' get_max_perc_1RM_k_relInt(
+#'   max_reps = 3,
+#'   adjustment = 0.6,
+#'   k = 0.05
+#' )
+#'
+#' # Get max %1RM to be used when doing 2 reps with 60% of Relative Intensity
+#' # using ballistic table
+#' get_max_perc_1RM_k_relInt(
+#'   max_reps = 3,
+#'   adjustment = 0.6,
+#'   type = "ballistic",
+#'   k = 0.05
+#' )
+get_max_perc_1RM_k_relInt <- function(max_reps, adjustment = 1, type = "grinding", k = 0.0333) {
+  switch(type,
+         grinding = adjustment / (k * max_reps + 1),
+         ballistic = adjustment / (k * 2 * max_reps + 1),
+         stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
+  )
+}
+
+#' @describeIn max_reps_tables Get maximum %1RM using the %MR method (\code{adjustment}), but
+#'     with user provided \code{k} parameter
+#' @export
+#' @examples
+#' # Get max %1RM to be used when doing 5 reps to failure
+#' get_max_perc_1RM_k_percMR(5, k = 0.0333)
+#'
+#' # Get max %1RM to be used when doing 3 reps with 60% of maximum reps
+#' get_max_perc_1RM_k_percMR(
+#'   max_reps = 3,
+#'   adjustment = 0.6,
+#'   k = 0.05
+#' )
+#'
+#' # Get max %1RM to be used when doing 2 reps with 60% of maximum reps
+#' # using ballistic table
+#' get_max_perc_1RM_k_percMR(
+#'   max_reps = 3,
+#'   adjustment = 0.6,
+#'   type = "ballistic",
+#'   k = 0.05
+#' )
+get_max_perc_1RM_k_percMR <- function(max_reps, adjustment = 1, type = "grinding", k = 0.0333) {
+  switch(type,
+         grinding = adjustment / (adjustment + k * max_reps),
+         ballistic = adjustment / (adjustment + k * 2 * max_reps),
+         stop("Invalid `type` value. Please use `grinding` or `ballistic`", call. = FALSE)
+  )
+}
