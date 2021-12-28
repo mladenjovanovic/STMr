@@ -33,6 +33,18 @@ hline <- function(y = 0, color = "black") {
   )
 }
 
+vline <- function(x = 0, color = "black") {
+  list(
+    type = "line",
+    y0 = 0,
+    y1 = 1,
+    yref = "paper",
+    x0 = x,
+    x1 = x,
+    line = list(color = color, dash = "dot")
+  )
+}
+
 RMSE <- function(model) {
   sqrt(mean(resid(model)^2))
 }
@@ -45,7 +57,8 @@ ui <- dashboardPage(
   # Sidebar items
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Data Entry", tabName = "data_entry_menu_item", icon = icon("dumbbell"))
+      menuItem("Data Entry", tabName = "data_entry_menu_item", icon = icon("dumbbell")),
+      menuItem("Progression Tables", tabName = "progression_tables_menu_item", icon = icon("table"))
     ) # sidebarMenu
   ), # DashboardSidebar
 
@@ -56,16 +69,12 @@ ui <- dashboardPage(
         # ================================
         tabItem(
           tabName = "data_entry_menu_item",
-          box(
-            title = "Settings",
-            id = "data_entry_settings",
-            width = 12
-          ), # Data Entry Settings
           column(
             6,
             box(
               title = "Known 1RM",
               id = "data_entry_known_1RM",
+              collapsible = TRUE,
               width = 12,
               numericInput("data_entry_known_1RM_value", label = "1RM", value = 150, min = 0, max = 1000, step = 1),
               br(),
@@ -74,47 +83,68 @@ ui <- dashboardPage(
               actionButton("data_entry_known_1RM_button", "Model", class = "btn-success", icon = icon("hourglass-start"))
             ), # Box Known 1RM
             box(
-              title = "Model estimates",
+              title = "Model using reps (nRM) as target",
               id = "model_known_1RM_estimates",
+              collapsible = TRUE,
               width = 12,
-              dataTableOutput("model_known_1RM_estimates_table")
+              dataTableOutput("model_known_1RM_estimates_table"),
+              br(),
+              plotlyOutput("model_known_1RM_plot")
             ), # Known 1RM estimates
             box(
-              title = "Model predictions",
-              id = "model_known_1RM_predictions",
+              title = "Model using reps (nRM) as predictor",
+              id = "model_known_1RM_estimates_reverse",
+              collapsible = TRUE,
               width = 12,
-              plotlyOutput("model_known_1RM_plot")
-            ) # Known 1RM plots
+              dataTableOutput("model_known_1RM_estimates_table_reverse"),
+              br(),
+              plotlyOutput("model_known_1RM_plot_reverse")
+            ), # Known 1RM estimates REVERSE
           ), # Column
           column(
             6,
             box(
               title = "Estimate 1RM",
               id = "data_entry_estimate_1RM",
+              collapsible = TRUE,
               width = 12,
               DTOutput("data_entry_estimate_1RM_table"),
               br(),
               actionButton("data_entry_estimate_1RM_button", "Model", class = "btn-success", icon = icon("hourglass-start"))
             ), # Box Estimate 1RM
             box(
-              title = "Model estimates",
+              title = "Model using reps (nRM) as target",
               id = "model_estimate_1RM_estimates",
+              collapsible = TRUE,
               width = 12,
-              dataTableOutput("model_estimate_1RM_estimates_table")
-            ), # Estimate 1RM estimates
-            box(
-              title = "Model preditions",
-              id = "model_estimate_1RM_predictions",
-              width = 12,
+              dataTableOutput("model_estimate_1RM_estimates_table"),
+              br(),
               selectInput(
                 "model_estimate_1RM_plot_type",
                 label = "Plot",
                 choices = c("Weight", "Estimated %1RMs")
               ),
               plotlyOutput("model_estimate_1RM_plot")
-            ) # Estimated 1RM plot
+            ), # Estimate 1RM estimates
+            box(
+              title = "Model using reps (nRM) as predictor",
+              id = "model_estimate_1RM_estimates_reverse",
+              collapsible = TRUE,
+              width = 12,
+              dataTableOutput("model_estimate_1RM_estimates_table_reverse"),
+              br(),
+              selectInput(
+                "model_estimate_1RM_plot_type_reverse",
+                label = "Plot",
+                choices = c("Weight", "Estimated %1RMs")
+              ),
+              plotlyOutput("model_estimate_1RM_plot_reverse")
+            ) # Estimate 1RM estimates REVERSE
           ) # Column
-        ) # Data Entry Tab
+        ), # Data Entry Tab
+        tabItem(
+          tabName = "progression_tables_menu_item"
+        ) #
       ) # tabItems
     ) # FluidPage
   ) # Dashboard Body
@@ -247,17 +277,41 @@ server <- function(input, output) {
         reps = model_data$nRM
       )
 
-      # Modified Epley's model
+      # Linear model
       linear <- estimate_klin(
         perc_1RM = model_data$perc_1RM,
         reps = model_data$nRM
+      )
+
+      # Epley's model reverse
+      epley_reverse <- estimate_k(
+        perc_1RM = model_data$perc_1RM,
+        reps = model_data$nRM,
+        reverse = TRUE
+      )
+
+      # Modified Epley's model reverse
+      epley_mod_reverse <- estimate_kmod(
+        perc_1RM = model_data$perc_1RM,
+        reps = model_data$nRM,
+        reverse = TRUE
+      )
+
+      # Linear model reverse
+      linear_reverse  <- estimate_klin(
+        perc_1RM = model_data$perc_1RM,
+        reps = model_data$nRM,
+        reverse = TRUE
       )
 
       # Return
       list(
         epley = epley,
         epley_mod = epley_mod,
-        linear = linear
+        linear = linear,
+        epley_reverse = epley_reverse,
+        epley_mod_reverse = epley_mod_reverse,
+        linear_reverse = linear_reverse
       )
     },
     ignoreNULL = FALSE
@@ -291,17 +345,41 @@ server <- function(input, output) {
         reps = model_data$nRM
       )
 
-      # Modified Epley's model
+      # Linear model
       linear <- estimate_klin_1RM(
         weight = model_data$Weight,
         reps = model_data$nRM
+      )
+
+      # Epley's model Reverse
+      epley_reverse <- estimate_k_1RM(
+        weight = model_data$Weight,
+        reps = model_data$nRM,
+        reverse = TRUE
+      )
+
+      # Modified Epley's model Reverse
+      epley_mod_reverse <- estimate_kmod_1RM(
+        weight = model_data$Weight,
+        reps = model_data$nRM,
+        reverse = TRUE
+      )
+
+      # Linear model Reverse
+      linear_reverse <- estimate_klin_1RM(
+        weight = model_data$Weight,
+        reps = model_data$nRM,
+        reverse = TRUE
       )
 
       # Return
       list(
         epley = epley,
         epley_mod = epley_mod,
-        linear = linear
+        linear = linear,
+        epley_reverse = epley_reverse,
+        epley_mod_reverse = epley_mod_reverse,
+        linear_reverse = linear_reverse
       )
     },
     ignoreNULL = FALSE
@@ -552,7 +630,7 @@ server <- function(input, output) {
     models <- known_1RM_models()
 
     summary_table <- tribble(
-      ~model, ~k, ~RMSE,
+      ~model, ~k, ~`RMSE (nRM)`,
       "Epley's", round(coef(models$epley)[[1]], 5), round(RMSE(models$epley), 3),
       "Modified Epley's", round(coef(models$epley_mod)[[1]], 5), round(RMSE(models$epley_mod), 3),
       "Linear", round(coef(models$linear)[[1]], 5), round(RMSE(models$linear), 3)
@@ -573,7 +651,7 @@ server <- function(input, output) {
     models <- estimate_1RM_models()
 
     summary_table <- tribble(
-      ~model, ~`1RM`, ~k, ~RMSE,
+      ~model, ~`1RM`, ~k, ~`RMSE (nRM)`,
       "Epley's", round(coef(models$epley)[[1]], 2), round(coef(models$epley)[[2]], 5), round(RMSE(models$epley), 3),
       "Modified Epley's", round(coef(models$epley_mod)[[1]], 2), round(coef(models$epley_mod)[[2]], 5), round(RMSE(models$epley_mod), 3),
       "Linear", round(coef(models$linear)[[1]], 2), round(coef(models$linear)[[2]], 5), round(RMSE(models$linear), 3)
@@ -588,6 +666,289 @@ server <- function(input, output) {
         info = FALSE
       )
     )
+  })
+
+  output$model_known_1RM_estimates_table_reverse <- renderDT({
+    models <- known_1RM_models()
+
+    summary_table <- tribble(
+      ~model, ~k, ~`RMSE (%1RM)`,
+      "Epley's", round(coef(models$epley_reverse)[[1]], 5), round(100 * RMSE(models$epley_reverse), 3),
+      "Modified Epley's", round(coef(models$epley_mod_reverse)[[1]], 5), round(100 * RMSE(models$epley_mod_reverse), 3),
+      "Linear", round(coef(models$linear_reverse)[[1]], 5), round(100 * RMSE(models$linear_reverse), 3)
+    )
+    datatable(
+      summary_table,
+      rownames = FALSE, selection = "none",
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+  output$model_estimate_1RM_estimates_table_reverse <- renderDT({
+    models <- estimate_1RM_models()
+
+    summary_table <- tribble(
+      ~model, ~`1RM`, ~k, ~`RMSE (weight)`,
+      "Epley's", round(coef(models$epley_reverse)[[1]], 2), round(coef(models$epley_reverse)[[2]], 5), round(RMSE(models$epley_reverse), 3),
+      "Modified Epley's", round(coef(models$epley_mod_reverse)[[1]], 2), round(coef(models$epley_mod_reverse)[[2]], 5), round(RMSE(models$epley_mod_reverse), 3),
+      "Linear", round(coef(models$linear_reverse)[[1]], 2), round(coef(models$linear_reverse)[[2]], 5), round(RMSE(models$linear_reverse), 3)
+    )
+    datatable(
+      summary_table,
+      rownames = FALSE, selection = "none",
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+  # Model plots
+  output$model_known_1RM_plot_reverse <- renderPlotly({
+    models <- known_1RM_models()
+
+    model_data <- known_1RM_table_react()
+
+    model_data <- na.omit(model_data)
+
+    model_data$perc_1RM <- 100 * (model_data$Weight / known_1RM_value())
+    model_data$nRM <- model_data$Reps + model_data$eRIR
+
+    # Model predictions
+    model_predictions <- data.frame(
+      nRM = seq(1, 20, length.out = 1000)
+    )
+
+    model_predictions$epley <- 100 * predict(models$epley_reverse, newdata = data.frame(nRM = model_predictions$nRM))
+    model_predictions$epley_mod <- 100 * predict(models$epley_mod_reverse, newdata = data.frame(nRM = model_predictions$nRM))
+    model_predictions$linear <- 100 * predict(models$linear_reverse, newdata = data.frame(nRM = model_predictions$nRM))
+
+    gg <- plot_ly() %>%
+      add_markers(
+        data = model_data, y = ~perc_1RM, x = ~nRM,
+        hoverinfo = "text", opacity = 0.9, marker = list(color = "black"),
+        text = ~ paste(
+          "Observed data\n",
+          paste("Weight =", round(model_data$Weight, 2), "\n"),
+          paste("%1RM =", round(model_data$perc_1RM, 2), "\n"),
+          paste("Reps =", round(model_data$nRM, 2))
+        )
+      ) %>%
+      add_lines(
+        data = model_predictions, y = ~epley, x = ~nRM,
+        hoverinfo = "text", line = list(color = "#FAA43A"), opacity = 0.9,
+        text = ~ paste(
+          "Epley's model\n",
+          paste("Weight =", round(known_1RM_value() * model_predictions$epley / 100, 2), "\n"),
+          paste("%1RM =", round(model_predictions$epley, 2), "\n"),
+          paste("Reps =", round(model_predictions$nRM, 2))
+        )
+      ) %>%
+      add_lines(
+        data = model_predictions, y = ~epley_mod, x = ~nRM,
+        hoverinfo = "text", line = list(color = "#5DA5DA"), opacity = 0.9,
+        text = ~ paste(
+          "Modified Epley's model\n",
+          paste("Weight =", round(known_1RM_value() * model_predictions$epley_mod / 100, 2), "\n"),
+          paste("%1RM =", round(model_predictions$epley_mod, 2), "\n"),
+          paste("Reps =", round(model_predictions$nRM, 2))
+        )
+      ) %>%
+      add_lines(
+        data = model_predictions, y = ~linear, x = ~nRM,
+        hoverinfo = "text", line = list(color = "#60BD68"), opacity = 0.9,
+        text = ~ paste(
+          "Linear model\n",
+          paste("Weight =", round(known_1RM_value() * model_predictions$linear / 100, 2), "\n"),
+          paste("%1RM =", round(model_predictions$linear, 2), "\n"),
+          paste("Reps =", round(model_predictions$nRM, 2))
+        )
+      ) %>%
+      layout(
+        showlegend = FALSE,
+        xaxis = list(
+          side = "left", title = "Max number of reps",
+          autorange = "reversed",
+          showgrid = TRUE, zeroline = TRUE
+        ),
+        yaxis = list(
+          side = "left", title = "%1RM",
+          showgrid = TRUE, zeroline = FALSE
+        ),
+        shapes = list(vline(1))
+      )
+
+    gg
+  })
+
+
+  output$model_estimate_1RM_plot_reverse <- renderPlotly({
+    models <- estimate_1RM_models()
+
+    model_data <- estimate_1RM_table_react()
+
+    model_data <- na.omit(model_data)
+    model_data$nRM <- model_data$Reps + model_data$eRIR
+
+    # Model predictions
+    model_predictions <- data.frame(
+      nRM =  seq(1, 20, length.out = 1000)
+    )
+
+    model_predictions$epley <- predict(models$epley_reverse, newdata = data.frame(nRM = model_predictions$nRM))
+    model_predictions$epley_mod <- predict(models$epley_mod_reverse, newdata = data.frame(nRM = model_predictions$nRM))
+    model_predictions$linear <- predict(models$linear_reverse, newdata = data.frame(nRM = model_predictions$nRM))
+
+    model_predictions$epley_perc1RM <- 100 * model_predictions$epley / coef(models$epley)[[1]]
+    model_predictions$epley_mod_perc1RM <- 100 * model_predictions$epley_mod / coef(models$epley_mod)[[1]]
+    model_predictions$linear_perc1RM <- 100 * model_predictions$linear / coef(models$linear)[[1]]
+
+    model_data$epley_perc1RM <- 100 * model_data$Weight / coef(models$epley)[[1]]
+    model_data$epley_mod_perc1RM <- 100 * model_data$Weight / coef(models$epley_mod)[[1]]
+    model_data$linear_perc1RM <- 100 * model_data$Weight / coef(models$linear)[[1]]
+
+    if (input$model_estimate_1RM_plot_type_reverse == "Weight") {
+      gg <- plot_ly() %>%
+        add_markers(
+          data = model_data, y = ~Weight, x = ~nRM,
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "black"),
+          text = ~ paste(
+            "Observed data\n",
+            paste("Weight =", round(model_data$Weight, 2), "\n"),
+            paste("Epley's %1RM =", round(model_data$epley_perc1RM, 2), "\n"),
+            paste("Modified Epley's %1RM =", round(model_data$epley_mod_perc1RM, 2), "\n"),
+            paste("Linear %1RM =", round(model_data$linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(model_data$nRM, 2))
+          )
+        ) %>%
+        add_lines(
+          data = model_predictions, y = ~epley, x = ~nRM,
+          hoverinfo = "text", line = list(color = "#FAA43A"), opacity = 0.9,
+          text = ~ paste(
+            "Epley's model\n",
+            paste("Weight =", round(model_predictions$epley, 2), "\n"),
+            paste("%1RM =", round(model_predictions$epley_perc1RM, 2), "\n"),
+            paste("Reps =", round(model_predictions$nRM, 2))
+          )
+        ) %>%
+        add_lines(
+          data = model_predictions, y = ~epley_mod, x = ~nRM,
+          hoverinfo = "text", line = list(color = "#5DA5DA"), opacity = 0.9,
+          text = ~ paste(
+            "Modified Epley's model\n",
+            paste("Weight =", round(model_predictions$epley_mod, 2), "\n"),
+            paste("%1RM =", round(model_predictions$epley_mod_perc1RM, 2), "\n"),
+            paste("Reps =", round(model_predictions$nRM, 2))
+          )
+        ) %>%
+        add_lines(
+          data = model_predictions, y = ~linear, x = ~nRM,
+          hoverinfo = "text", line = list(color = "#60BD68"), opacity = 0.9,
+          text = ~ paste(
+            "Linear model\n",
+            paste("Weight =", round(model_predictions$linear, 2), "\n"),
+            paste("%1RM =", round(model_predictions$linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(model_predictions$nRM, 2))
+          )
+        ) %>%
+        layout(
+          showlegend = FALSE,
+          xaxis = list(
+            side = "left", title = "Max number of reps",
+            autorange = "reversed",
+            showgrid = TRUE, zeroline = TRUE
+          ),
+          yaxis = list(
+            side = "left", title = "Weight",
+            showgrid = TRUE, zeroline = FALSE
+          ),
+          shapes = list(vline(1))
+        )
+    } else {
+      gg <- plot_ly() %>%
+        add_markers(
+          data = model_data, y = ~epley_perc1RM, x = ~nRM,
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "#FAA43A"),
+          text = ~ paste(
+            "Epley's prediction\n",
+            paste("Weight =", round(model_data$Weight, 2), "\n"),
+            paste("%1RM =", round(model_data$epley_perc1RM, 2), "\n"),
+            paste("Reps =", round(model_data$nRM, 2))
+          )
+        ) %>%
+        add_markers(
+          data = model_data, y = ~epley_mod_perc1RM, x = ~nRM,
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "#5DA5DA"),
+          text = ~ paste(
+            "Modified Epley's prediction\n",
+            paste("Weight =", round(model_data$Weight, 2), "\n"),
+            paste("%1RM =", round(model_data$epley_mod_perc1RM, 2), "\n"),
+            paste("Reps =", round(model_data$nRM, 2))
+          )
+        ) %>%
+        add_markers(
+          data = model_data, y = ~linear_perc1RM, x = ~nRM,
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "#60BD68"),
+          text = ~ paste(
+            "Linear prediction\n",
+            paste("Weight =", round(model_data$Weight, 2), "\n"),
+            paste("%1RM =", round(model_data$linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(model_data$nRM, 2))
+          )
+        ) %>%
+        add_lines(
+          data = model_predictions, y = ~epley_perc1RM, x = ~nRM,
+          hoverinfo = "text", line = list(color = "#FAA43A"), opacity = 0.9,
+          text = ~ paste(
+            "Epley's model\n",
+            paste("Weight =", round(model_predictions$epley, 2), "\n"),
+            paste("%1RM =", round(model_predictions$epley_perc1RM, 2), "\n"),
+            paste("Reps =", round(model_predictions$nRM, 2))
+          )
+        ) %>%
+        add_lines(
+          data = model_predictions, y = ~epley_mod_perc1RM, x = ~nRM,
+          hoverinfo = "text", line = list(color = "#5DA5DA"), opacity = 0.9,
+          text = ~ paste(
+            "Modified Epley's model\n",
+            paste("Weight =", round(model_predictions$epley_mod, 2), "\n"),
+            paste("%1RM =", round(model_predictions$epley_mod_perc1RM, 2), "\n"),
+            paste("Reps =", round(model_predictions$nRM, 2))
+          )
+        ) %>%
+        add_lines(
+          data = model_predictions, y = ~linear_perc1RM, x = ~nRM,
+          hoverinfo = "text", line = list(color = "#60BD68"), opacity = 0.9,
+          text = ~ paste(
+            "Linear model\n",
+            paste("Weight =", round(model_predictions$linear, 2), "\n"),
+            paste("%1RM =", round(model_predictions$linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(model_predictions$nRM, 2))
+          )
+        ) %>%
+        layout(
+          showlegend = FALSE,
+          xaxis = list(
+            side = "left", title = "Max number of reps",
+            autorange = "reversed",
+            showgrid = TRUE, zeroline = TRUE
+          ),
+          yaxis = list(
+            side = "left", title = "%1RM",
+            showgrid = TRUE, zeroline = FALSE
+          ),
+          shapes = list(vline(1))
+        )
+    }
+
+    gg
   })
 }
 
