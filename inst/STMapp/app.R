@@ -481,71 +481,97 @@ server <- function(input, output) {
   output$model_estimate_1RM_plot <- renderPlotly({
     models <- estimate_1RM_models()
 
-    model_data <- estimate_1RM_table_react()
+    observed_data <- estimate_1RM_table_react()
 
-    model_data <- na.omit(model_data)
-    model_data$nRM <- model_data$Reps + model_data$eRIR
+    observed_data <- na.omit(observed_data)
+
+    observed_data$nRM <- observed_data$Reps + observed_data$eRIR
 
     # Model predictions
+    estimated_k_0RM <- coef(models$epley)[[1]]
+    estimated_kmod_1RM <- coef(models$epley_mod)[[1]]
+    estimated_klin_1RM <- coef(models$linear)[[1]]
+
+    estimated_k <- coef(models$epley)[[2]]
+    estimated_kmod <- coef(models$epley_mod)[[2]]
+    estimated_klin <- coef(models$linear)[[2]]
+
+    graph_max_weight = max(estimated_k_0RM, estimated_kmod_1RM, estimated_klin_1RM)
+
+    graph_min_weight = graph_max_weight * min(
+      get_max_perc_1RM_k(20, k = estimated_k),
+      get_max_perc_1RM_kmod(20, k = estimated_kmod),
+      get_max_perc_1RM_klin(20, k = estimated_klin))
+
+    observed_data <- observed_data %>%
+      mutate(
+        epley_nRM = predict(models$epley, newdata = data.frame(weight = Weight)),
+        epley_mod_nRM = predict(models$epley_mod, newdata = data.frame(weight = Weight)),
+        linear_nRM = predict(models$linear, newdata = data.frame(weight = Weight)),
+        epley_perc1RM = 100 * get_max_perc_1RM_k(epley_nRM, k = estimated_k),
+        epley_mod_perc1RM = 100 * get_max_perc_1RM_kmod(epley_mod_nRM, kmod = estimated_kmod),
+        linear_perc1RM = 100 * get_max_perc_1RM_klin(linear_nRM, klin = estimated_klin)
+      )
+
     model_predictions <- data.frame(
-      weight = seq(0.8 * min(model_data$Weight), max(coef(models$epley)[[1]], coef(models$epley_mod)[[1]]), length.out = 1000)
+      weight = seq(
+        graph_min_weight,
+        graph_max_weight,
+        length.out = 1000)
     )
 
-    model_predictions$epley <- predict(models$epley, newdata = data.frame(weight = model_predictions$weight))
-    model_predictions$epley_mod <- predict(models$epley_mod, newdata = data.frame(weight = model_predictions$weight))
-    model_predictions$linear <- predict(models$linear, newdata = data.frame(weight = model_predictions$weight))
-
-
-    model_predictions$epley_perc1RM <- 100 * model_predictions$weight / coef(models$epley)[[1]]
-    model_predictions$epley_mod_perc1RM <- 100 * model_predictions$weight / coef(models$epley_mod)[[1]]
-    model_predictions$linear_perc1RM <- 100 * model_predictions$weight / coef(models$linear)[[1]]
-
-    model_data$epley_perc1RM <- 100 * model_data$Weight / coef(models$epley)[[1]]
-    model_data$epley_mod_perc1RM <- 100 * model_data$Weight / coef(models$epley_mod)[[1]]
-    model_data$linear_perc1RM <- 100 * model_data$Weight / coef(models$linear)[[1]]
+    model_predictions <- model_predictions %>%
+      mutate(
+        epley_nRM = predict(models$epley, newdata = data.frame(weight = weight)),
+        epley_mod_nRM = predict(models$epley_mod, newdata = data.frame(weight = weight)),
+        linear_nRM = predict(models$linear, newdata = data.frame(weight = weight)),
+        epley_perc1RM = 100 * get_max_perc_1RM_k(epley_nRM, k = estimated_k),
+        epley_mod_perc1RM = 100 * get_max_perc_1RM_kmod(epley_mod_nRM, kmod = estimated_kmod),
+        linear_perc1RM = 100 * get_max_perc_1RM_klin(linear_nRM, klin = estimated_klin)
+      )
 
     if (input$model_estimate_1RM_plot_type == "Weight") {
       gg <- plot_ly() %>%
         add_markers(
-          data = model_data, x = ~Weight, y = ~nRM,
+          data = observed_data, x = ~Weight, y = ~nRM,
           hoverinfo = "text", opacity = 0.9, marker = list(color = "black"),
           text = ~ paste(
             "Observed data\n",
-            paste("Weight =", round(model_data$Weight, 2), "\n"),
-            paste("Epley's %1RM =", round(model_data$epley_perc1RM, 2), "\n"),
-            paste("Modified Epley's %1RM =", round(model_data$epley_mod_perc1RM, 2), "\n"),
-            paste("Linear %1RM =", round(model_data$linear_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_data$nRM, 2))
+            paste("Weight =", round(Weight, 2), "\n"),
+            paste("Epley's %1RM =", round(epley_perc1RM, 2), "\n"),
+            paste("Modified Epley's %1RM =", round(epley_mod_perc1RM, 2), "\n"),
+            paste("Linear %1RM =", round(linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         add_lines(
-          data = model_predictions, x = ~weight, y = ~epley,
+          data = model_predictions, x = ~weight, y = ~epley_nRM,
           hoverinfo = "text", line = list(color = "#FAA43A"), opacity = 0.9,
           text = ~ paste(
             "Epley's model\n",
-            paste("Weight =", round(model_predictions$weight, 2), "\n"),
-            paste("%1RM =", round(model_predictions$epley_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$epley, 2))
+            paste("Weight =", round(weight, 2), "\n"),
+            paste("%1RM =", round(epley_perc1RM, 2), "\n"),
+            paste("Reps =", round(epley_nRM, 2))
           )
         ) %>%
         add_lines(
-          data = model_predictions, x = ~weight, y = ~epley_mod,
+          data = model_predictions, x = ~weight, y = ~epley_mod_nRM,
           hoverinfo = "text", line = list(color = "#5DA5DA"), opacity = 0.9,
           text = ~ paste(
             "Modified Epley's model\n",
-            paste("Weight =", round(model_predictions$weight, 2), "\n"),
-            paste("%1RM =", round(model_predictions$epley_mod_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$epley_mod, 2))
+            paste("Weight =", round(weight, 2), "\n"),
+            paste("%1RM =", round(epley_mod_perc1RM, 2), "\n"),
+            paste("Reps =", round(epley_mod_nRM, 2))
           )
         ) %>%
         add_lines(
-          data = model_predictions, x = ~weight, y = ~linear,
+          data = model_predictions, x = ~weight, y = ~linear_nRM,
           hoverinfo = "text", line = list(color = "#60BD68"), opacity = 0.9,
           text = ~ paste(
             "Linear model\n",
-            paste("Weight =", round(model_predictions$weight, 2), "\n"),
-            paste("%1RM =", round(model_predictions$linear_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$linear, 2))
+            paste("Weight =", round(weight, 2), "\n"),
+            paste("%1RM =", round(linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(linear_nRM, 2))
           )
         ) %>%
         layout(
@@ -563,63 +589,63 @@ server <- function(input, output) {
     } else {
       gg <- plot_ly() %>%
         add_markers(
-          data = model_data, x = ~epley_perc1RM, y = ~nRM,
+          data = observed_data, x = ~epley_perc1RM, y = ~epley_nRM,
           hoverinfo = "text", opacity = 0.9, marker = list(color = "#FAA43A"),
           text = ~ paste(
             "Epley's prediction\n",
-            paste("Weight =", round(model_data$Weight, 2), "\n"),
-            paste("%1RM =", round(model_data$epley_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_data$nRM, 2))
+            paste("Weight =", round(Weight, 2), "\n"),
+            paste("%1RM =", round(epley_perc1RM, 2), "\n"),
+            paste("Reps =", round(epley_nRM, 2))
           )
         ) %>%
         add_markers(
-          data = model_data, x = ~epley_mod_perc1RM, y = ~nRM,
+          data = observed_data, x = ~epley_mod_perc1RM, y = ~epley_mod_nRM,
           hoverinfo = "text", opacity = 0.9, marker = list(color = "#5DA5DA"),
           text = ~ paste(
             "Modified Epley's prediction\n",
-            paste("Weight =", round(model_data$Weight, 2), "\n"),
-            paste("%1RM =", round(model_data$epley_mod_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_data$nRM, 2))
+            paste("Weight =", round(Weight, 2), "\n"),
+            paste("%1RM =", round(epley_mod_perc1RM, 2), "\n"),
+            paste("Reps =", round(epley_mod_nRM, 2))
           )
         ) %>%
         add_markers(
-          data = model_data, x = ~linear_perc1RM, y = ~nRM,
+          data = observed_data, x = ~linear_perc1RM, y = ~linear_nRM,
           hoverinfo = "text", opacity = 0.9, marker = list(color = "#60BD68"),
           text = ~ paste(
             "Linear prediction\n",
-            paste("Weight =", round(model_data$Weight, 2), "\n"),
-            paste("%1RM =", round(model_data$linear_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_data$nRM, 2))
+            paste("Weight =", round(Weight, 2), "\n"),
+            paste("%1RM =", round(linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(linear_nRM, 2))
           )
         ) %>%
         add_lines(
-          data = model_predictions, x = ~epley_perc1RM, y = ~epley,
+          data = model_predictions, x = ~epley_perc1RM, y = ~epley_nRM,
           hoverinfo = "text", line = list(color = "#FAA43A"), opacity = 0.9,
           text = ~ paste(
             "Epley's model\n",
-            paste("Weight =", round(model_predictions$weight, 2), "\n"),
-            paste("%1RM =", round(model_predictions$epley_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$epley, 2))
+            paste("Weight =", round(weight, 2), "\n"),
+            paste("%1RM =", round(epley_perc1RM, 2), "\n"),
+            paste("Reps =", round(epley_nRM, 2))
           )
         ) %>%
         add_lines(
-          data = model_predictions, x = ~epley_mod_perc1RM, y = ~epley_mod,
+          data = model_predictions, x = ~epley_mod_perc1RM, y = ~epley_mod_nRM,
           hoverinfo = "text", line = list(color = "#5DA5DA"), opacity = 0.9,
           text = ~ paste(
             "Modified Epley's model\n",
-            paste("Weight =", round(model_predictions$weight, 2), "\n"),
-            paste("%1RM =", round(model_predictions$epley_mod_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$epley_mod, 2))
+            paste("Weight =", round(weight, 2), "\n"),
+            paste("%1RM =", round(epley_mod_perc1RM, 2), "\n"),
+            paste("Reps =", round(epley_mod_nRM, 2))
           )
         ) %>%
         add_lines(
-          data = model_predictions, x = ~linear_perc1RM, y = ~linear,
+          data = model_predictions, x = ~linear_perc1RM, y = ~linear_nRM,
           hoverinfo = "text", line = list(color = "#60BD68"), opacity = 0.9,
           text = ~ paste(
             "Linear model\n",
-            paste("Weight =", round(model_predictions$weight, 2), "\n"),
-            paste("%1RM =", round(model_predictions$linear_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$linear, 2))
+            paste("Weight =", round(weight, 2), "\n"),
+            paste("%1RM =", round(linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(linear_nRM, 2))
           )
         ) %>%
         layout(
@@ -632,7 +658,7 @@ server <- function(input, output) {
             side = "left", title = "%1RM",
             showgrid = TRUE, zeroline = FALSE
           ),
-          shapes = list(hline(1))
+          shapes = list(hline(1), vline(100))
         )
     }
 
@@ -815,70 +841,87 @@ server <- function(input, output) {
   output$model_estimate_1RM_plot_reverse <- renderPlotly({
     models <- estimate_1RM_models()
 
-    model_data <- estimate_1RM_table_react()
+    observed_data <- estimate_1RM_table_react()
 
-    model_data <- na.omit(model_data)
-    model_data$nRM <- model_data$Reps + model_data$eRIR
+    observed_data <- na.omit(observed_data)
+
+    observed_data$nRM <- observed_data$Reps + observed_data$eRIR
 
     # Model predictions
+    estimated_k_0RM <- coef(models$epley_reverse)[[1]]
+    estimated_kmod_1RM <- coef(models$epley_mod_reverse)[[1]]
+    estimated_klin_1RM <- coef(models$linear_reverse)[[1]]
+
+    estimated_k <- coef(models$epley_reverse)[[2]]
+    estimated_kmod <- coef(models$epley_mod_reverse)[[2]]
+    estimated_klin <- coef(models$linear_reverse)[[2]]
+
+    observed_data <- observed_data %>%
+      mutate(
+        epley_weight = predict(models$epley_reverse, newdata = data.frame(nRM = nRM)),
+        epley_mod_weight = predict(models$epley_mod_reverse, newdata = data.frame(nRM = nRM)),
+        linear_weight = predict(models$linear_reverse, newdata = data.frame(nRM = nRM)),
+        epley_perc1RM = 100 * epley_weight / estimated_k_0RM,
+        epley_mod_perc1RM = 100 * epley_mod_weight / estimated_kmod_1RM,
+        linear_perc1RM = 100 * linear_weight / estimated_klin_1RM
+      )
+
     model_predictions <- data.frame(
-      nRM =  seq(1, 20, length.out = 1000)
+      nRM = seq(0, 20, length.out = 1000)
     )
 
-    model_predictions$epley <- predict(models$epley_reverse, newdata = data.frame(nRM = model_predictions$nRM))
-    model_predictions$epley_mod <- predict(models$epley_mod_reverse, newdata = data.frame(nRM = model_predictions$nRM))
-    model_predictions$linear <- predict(models$linear_reverse, newdata = data.frame(nRM = model_predictions$nRM))
-
-    model_predictions$epley_perc1RM <- 100 * model_predictions$epley / coef(models$epley)[[1]]
-    model_predictions$epley_mod_perc1RM <- 100 * model_predictions$epley_mod / coef(models$epley_mod)[[1]]
-    model_predictions$linear_perc1RM <- 100 * model_predictions$linear / coef(models$linear)[[1]]
-
-    model_data$epley_perc1RM <- 100 * model_data$Weight / coef(models$epley)[[1]]
-    model_data$epley_mod_perc1RM <- 100 * model_data$Weight / coef(models$epley_mod)[[1]]
-    model_data$linear_perc1RM <- 100 * model_data$Weight / coef(models$linear)[[1]]
+    model_predictions <- model_predictions %>%
+      mutate(
+        epley_weight = predict(models$epley_reverse, newdata = data.frame(nRM = nRM)),
+        epley_mod_weight = predict(models$epley_mod_reverse, newdata = data.frame(nRM = nRM)),
+        linear_weight = predict(models$linear_reverse, newdata = data.frame(nRM = nRM)),
+        epley_perc1RM = 100 * epley_weight / estimated_k_0RM,
+        epley_mod_perc1RM = 100 * epley_mod_weight / estimated_kmod_1RM,
+        linear_perc1RM = 100 * linear_weight / estimated_klin_1RM
+      )
 
     if (input$model_estimate_1RM_plot_type_reverse == "Weight") {
       gg <- plot_ly() %>%
         add_markers(
-          data = model_data, y = ~Weight, x = ~nRM,
+          data = observed_data, y = ~Weight, x = ~nRM,
           hoverinfo = "text", opacity = 0.9, marker = list(color = "black"),
           text = ~ paste(
             "Observed data\n",
-            paste("Weight =", round(model_data$Weight, 2), "\n"),
-            paste("Epley's %1RM =", round(model_data$epley_perc1RM, 2), "\n"),
-            paste("Modified Epley's %1RM =", round(model_data$epley_mod_perc1RM, 2), "\n"),
-            paste("Linear %1RM =", round(model_data$linear_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_data$nRM, 2))
+            paste("Weight =", round(Weight, 2), "\n"),
+            paste("Epley's %1RM =", round(epley_perc1RM, 2), "\n"),
+            paste("Modified Epley's %1RM =", round(epley_mod_perc1RM, 2), "\n"),
+            paste("Linear %1RM =", round(linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         add_lines(
-          data = model_predictions, y = ~epley, x = ~nRM,
+          data = model_predictions, y = ~epley_weight, x = ~nRM,
           hoverinfo = "text", line = list(color = "#FAA43A"), opacity = 0.9,
           text = ~ paste(
             "Epley's model\n",
-            paste("Weight =", round(model_predictions$epley, 2), "\n"),
-            paste("%1RM =", round(model_predictions$epley_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$nRM, 2))
+            paste("Weight =", round(epley_weight, 2), "\n"),
+            paste("%1RM =", round(epley_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         add_lines(
-          data = model_predictions, y = ~epley_mod, x = ~nRM,
+          data = model_predictions, y = ~epley_mod_weight, x = ~nRM,
           hoverinfo = "text", line = list(color = "#5DA5DA"), opacity = 0.9,
           text = ~ paste(
             "Modified Epley's model\n",
-            paste("Weight =", round(model_predictions$epley_mod, 2), "\n"),
-            paste("%1RM =", round(model_predictions$epley_mod_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$nRM, 2))
+            paste("Weight =", round(epley_mod_weight, 2), "\n"),
+            paste("%1RM =", round(epley_mod_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         add_lines(
-          data = model_predictions, y = ~linear, x = ~nRM,
+          data = model_predictions, y = ~linear_weight, x = ~nRM,
           hoverinfo = "text", line = list(color = "#60BD68"), opacity = 0.9,
           text = ~ paste(
             "Linear model\n",
-            paste("Weight =", round(model_predictions$linear, 2), "\n"),
-            paste("%1RM =", round(model_predictions$linear_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$nRM, 2))
+            paste("Weight =", round(linear_weight, 2), "\n"),
+            paste("%1RM =", round(linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         layout(
@@ -897,33 +940,33 @@ server <- function(input, output) {
     } else {
       gg <- plot_ly() %>%
         add_markers(
-          data = model_data, y = ~epley_perc1RM, x = ~nRM,
+          data = observed_data, y = ~epley_perc1RM, x = ~nRM,
           hoverinfo = "text", opacity = 0.9, marker = list(color = "#FAA43A"),
           text = ~ paste(
             "Epley's prediction\n",
-            paste("Weight =", round(model_data$Weight, 2), "\n"),
-            paste("%1RM =", round(model_data$epley_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_data$nRM, 2))
+            paste("Weight =", round(Weight, 2), "\n"),
+            paste("%1RM =", round(epley_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         add_markers(
-          data = model_data, y = ~epley_mod_perc1RM, x = ~nRM,
+          data = observed_data, y = ~epley_mod_perc1RM, x = ~nRM,
           hoverinfo = "text", opacity = 0.9, marker = list(color = "#5DA5DA"),
           text = ~ paste(
             "Modified Epley's prediction\n",
-            paste("Weight =", round(model_data$Weight, 2), "\n"),
-            paste("%1RM =", round(model_data$epley_mod_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_data$nRM, 2))
+            paste("Weight =", round(Weight, 2), "\n"),
+            paste("%1RM =", round(epley_mod_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         add_markers(
-          data = model_data, y = ~linear_perc1RM, x = ~nRM,
+          data = observed_data, y = ~linear_perc1RM, x = ~nRM,
           hoverinfo = "text", opacity = 0.9, marker = list(color = "#60BD68"),
           text = ~ paste(
             "Linear prediction\n",
-            paste("Weight =", round(model_data$Weight, 2), "\n"),
-            paste("%1RM =", round(model_data$linear_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_data$nRM, 2))
+            paste("Weight =", round(Weight, 2), "\n"),
+            paste("%1RM =", round(linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         add_lines(
@@ -931,9 +974,9 @@ server <- function(input, output) {
           hoverinfo = "text", line = list(color = "#FAA43A"), opacity = 0.9,
           text = ~ paste(
             "Epley's model\n",
-            paste("Weight =", round(model_predictions$epley, 2), "\n"),
-            paste("%1RM =", round(model_predictions$epley_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$nRM, 2))
+            paste("Weight =", round(epley_weight, 2), "\n"),
+            paste("%1RM =", round(epley_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         add_lines(
@@ -941,9 +984,9 @@ server <- function(input, output) {
           hoverinfo = "text", line = list(color = "#5DA5DA"), opacity = 0.9,
           text = ~ paste(
             "Modified Epley's model\n",
-            paste("Weight =", round(model_predictions$epley_mod, 2), "\n"),
-            paste("%1RM =", round(model_predictions$epley_mod_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$nRM, 2))
+            paste("Weight =", round(epley_mod_weight, 2), "\n"),
+            paste("%1RM =", round(epley_mod_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         add_lines(
@@ -951,9 +994,9 @@ server <- function(input, output) {
           hoverinfo = "text", line = list(color = "#60BD68"), opacity = 0.9,
           text = ~ paste(
             "Linear model\n",
-            paste("Weight =", round(model_predictions$linear, 2), "\n"),
-            paste("%1RM =", round(model_predictions$linear_perc1RM, 2), "\n"),
-            paste("Reps =", round(model_predictions$nRM, 2))
+            paste("Weight =", round(linear_weight, 2), "\n"),
+            paste("%1RM =", round(linear_perc1RM, 2), "\n"),
+            paste("Reps =", round(nRM, 2))
           )
         ) %>%
         layout(
@@ -967,7 +1010,7 @@ server <- function(input, output) {
             side = "left", title = "%1RM",
             showgrid = TRUE, zeroline = FALSE
           ),
-          shapes = list(vline(1))
+          shapes = list(vline(1), hline(100))
         )
     }
 
