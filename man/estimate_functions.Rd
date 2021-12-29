@@ -12,17 +12,59 @@
 \title{Estimate relationship between reps and \%1RM used using Epley's and modified
 Epley's equation, as well as using the linear model.}
 \usage{
-estimate_k(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...)
+estimate_k(
+  perc_1RM,
+  reps,
+  adjustment = 0,
+  reverse = FALSE,
+  weighted = FALSE,
+  ...
+)
 
-estimate_kmod(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...)
+estimate_kmod(
+  perc_1RM,
+  reps,
+  adjustment = 0,
+  reverse = FALSE,
+  weighted = FALSE,
+  ...
+)
 
-estimate_k_1RM(weight, reps, adjustment = 0, reverse = FALSE, ...)
+estimate_k_1RM(
+  weight,
+  reps,
+  adjustment = 0,
+  reverse = FALSE,
+  weighted = FALSE,
+  ...
+)
 
-estimate_kmod_1RM(weight, reps, adjustment = 0, reverse = FALSE, ...)
+estimate_kmod_1RM(
+  weight,
+  reps,
+  adjustment = 0,
+  reverse = FALSE,
+  weighted = FALSE,
+  ...
+)
 
-estimate_klin(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...)
+estimate_klin(
+  perc_1RM,
+  reps,
+  adjustment = 0,
+  reverse = FALSE,
+  weighted = FALSE,
+  ...
+)
 
-estimate_klin_1RM(weight, reps, adjustment = 0, reverse = FALSE, ...)
+estimate_klin_1RM(
+  weight,
+  reps,
+  adjustment = 0,
+  reverse = FALSE,
+  weighted = FALSE,
+  ...
+)
 
 get_predicted_1RM_from_k_model(model)
 }
@@ -34,6 +76,9 @@ get_predicted_1RM_from_k_model(model)
 \item{adjustment}{Subjective estimation of reps-in-reserve (eRIR)}
 
 \item{reverse}{Logical, default is \code{FALSE}. Should reps be used as predictor instead as a target?}
+
+\item{weighted}{Should weighted non-linear regression be used? Default is \code{FALSE}. If \code{TRUE}
+then either \code{perc_1RM} or \code{weight} is used for weighting}
 
 \item{...}{Forwarded to \code{\link[stats]{nls}} functions}
 

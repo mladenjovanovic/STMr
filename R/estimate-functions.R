@@ -9,6 +9,8 @@
 #' @param reps Number of repetitions done
 #' @param adjustment Subjective estimation of reps-in-reserve (eRIR)
 #' @param reverse Logical, default is \code{FALSE}. Should reps be used as predictor instead as a target?
+#' @param weighted Should weighted non-linear regression be used? Default is \code{FALSE}. If \code{TRUE}
+#'     then either \code{perc_1RM} or \code{weight} is used for weighting
 #' @param ... Forwarded to \code{\link[stats]{nls}} functions
 #' @return \code{\link[stats]{nls}} object
 #' @name estimate_functions
@@ -25,16 +27,23 @@ NULL
 #' )
 #'
 #' coef(m1)
-estimate_k <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...) {
+estimate_k <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, weighted = FALSE, ...) {
   df <- data.frame(perc_1RM = perc_1RM, reps = reps, adjustment = adjustment)
 
   df$nRM <- df$reps + df$adjustment
+
+  if (weighted == FALSE) {
+    df$reg_weights <- 1
+  } else {
+    df$reg_weights <- df$perc_1RM
+  }
 
   if (reverse == FALSE) {
     m1 <- stats::nls(
       nRM ~ (1 - perc_1RM) / (k * perc_1RM),
       data =  df,
       start = list(k = 1),
+      weights = df$reg_weights,
       ...
     )
   } else {
@@ -42,6 +51,7 @@ estimate_k <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...) {
       perc_1RM ~ 1 / (k * nRM + 1),
       data =  df,
       start = list(k = 1),
+      weights = df$reg_weights,
       ...
     )
   }
@@ -59,16 +69,23 @@ estimate_k <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...) {
 #' )
 #'
 #' coef(m1)
-estimate_kmod <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...) {
+estimate_kmod <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, weighted = FALSE, ...) {
   df <- data.frame(perc_1RM = perc_1RM, reps = reps, adjustment = adjustment)
 
   df$nRM <- df$reps + df$adjustment
+
+  if (weighted == FALSE) {
+    df$reg_weights <- 1
+  } else {
+    df$reg_weights <- df$perc_1RM
+  }
 
   if (reverse == FALSE) {
     m1 <- stats::nls(
       nRM ~ ((kmod - 1) * perc_1RM + 1) / (kmod * perc_1RM),
       data =  df,
       start = list(kmod = 1),
+      weights = df$reg_weights,
       ...
     )
   } else {
@@ -76,6 +93,7 @@ estimate_kmod <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...) 
       perc_1RM ~ 1 / (kmod * (nRM - 1) + 1),
       data =  df,
       start = list(kmod = 1),
+      weights = df$reg_weights,
       ...
     )
   }
@@ -94,16 +112,23 @@ estimate_kmod <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...) 
 #' )
 #'
 #' coef(m1)
-estimate_k_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, ...) {
+estimate_k_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, weighted = FALSE, ...) {
   df <- data.frame(weight = weight, reps = reps, adjustment = adjustment)
 
   df$nRM <- df$reps + df$adjustment
+
+  if (weighted == FALSE) {
+    df$reg_weights <- 1
+  } else {
+    df$reg_weights <- df$weight
+  }
 
   if (reverse == FALSE) {
     m1 <- stats::nls(
       nRM ~ ((1 / k) / (weight / `0RM`)) - (1 / k),
       data =  df,
       start = list(`0RM` = max(weight), k = 1),
+      weights = df$reg_weights,
       ...
     )
   } else {
@@ -111,6 +136,7 @@ estimate_k_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, ...) {
       weight ~ `0RM` / (k * nRM + 1),
       data =  df,
       start = list(`0RM` = max(weight), k = 1),
+      weights = df$reg_weights,
       ...
     )
   }
@@ -129,16 +155,23 @@ estimate_k_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, ...) {
 #' )
 #'
 #' coef(m1)
-estimate_kmod_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, ...) {
+estimate_kmod_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, weighted = FALSE, ...) {
   df <- data.frame(weight = weight, reps = reps, adjustment = adjustment)
 
   df$nRM <- df$reps + df$adjustment
+
+  if (weighted == FALSE) {
+    df$reg_weights <- 1
+  } else {
+    df$reg_weights <- df$weight
+  }
 
   if (reverse == FALSE) {
     m1 <- stats::nls(
       nRM ~ (((weight / `1RM`) * (kmod - 1)) + 1) / (kmod * (weight / `1RM`)),
       data =  df,
       start = list(`1RM` = max(weight), kmod = 1),
+      weights = df$reg_weights,
       ...
     )
   } else {
@@ -146,6 +179,7 @@ estimate_kmod_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, ...
       weight ~ `1RM` / (kmod * (nRM - 1) + 1),
       data =  df,
       start = list(`1RM` = max(weight), kmod = 1),
+      weights = df$reg_weights,
       ...
     )
   }
@@ -164,16 +198,23 @@ estimate_kmod_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, ...
 #' )
 #'
 #' coef(m1)
-estimate_klin <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...) {
+estimate_klin <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, weighted = FALSE, ...) {
   df <- data.frame(perc_1RM = perc_1RM, reps = reps, adjustment = adjustment)
 
   df$nRM <- df$reps + df$adjustment
+
+  if (weighted == FALSE) {
+    df$reg_weights <- 1
+  } else {
+    df$reg_weights <- df$perc_1RM
+  }
 
   if (reverse == FALSE) {
     m1 <- stats::nls(
       nRM ~ (1 - perc_1RM) * klin + 1,
       data =  df,
       start = list(klin = 1),
+      weights = df$reg_weights,
       ...
     )
   } else {
@@ -181,6 +222,7 @@ estimate_klin <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...) 
       perc_1RM ~ (klin - nRM + 1) / klin,
       data =  df,
       start = list(klin = 1),
+      weights = df$reg_weights,
       ...
     )
   }
@@ -200,16 +242,23 @@ estimate_klin <- function(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...) 
 #' )
 #'
 #' coef(m1)
-estimate_klin_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, ...) {
+estimate_klin_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, weighted = FALSE, ...) {
   df <- data.frame(weight = weight, reps = reps, adjustment = adjustment)
 
   df$nRM <- df$reps + df$adjustment
+
+  if (weighted == FALSE) {
+    df$reg_weights <- 1
+  } else {
+    df$reg_weights <- df$weight
+  }
 
   if (reverse == FALSE) {
     m1 <- stats::nls(
       nRM ~ (1 - (weight / `1RM`)) * klin + 1,
       data =  df,
       start = list(`1RM` = max(weight), klin = 1),
+      weights = df$reg_weights,
       ...
     )
   } else {
@@ -217,6 +266,7 @@ estimate_klin_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, ...
       weight ~ (`1RM` * (klin - nRM + 1)) / klin,
       data =  df,
       start = list(`1RM` = max(weight), klin = 1),
+      weights = df$reg_weights,
       ...
     )
   }
@@ -251,7 +301,6 @@ estimate_klin_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, ...
 #'
 #' # It also works for the "reverse" model
 #' get_predicted_1RM_from_k_model(m2)
-
 get_predicted_1RM_from_k_model <- function(model) {
-  stats::coef(model)[[1]]/(stats::coef(model)[[2]]+ 1)
+  stats::coef(model)[[1]] / (stats::coef(model)[[2]] + 1)
 }
