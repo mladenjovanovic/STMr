@@ -65,7 +65,8 @@ ui <- dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Data Entry", tabName = "data_entry_menu_item", icon = icon("dumbbell")),
-      menuItem("Progression Tables", tabName = "progression_tables_menu_item", icon = icon("table"))
+      menuItem("Progression Tables", tabName = "progression_tables_menu_item", icon = icon("table")),
+      menuItem("Schemes", tabName = "schemes_menu_item", icon = icon("signal"))
     ) # sidebarMenu
   ), # DashboardSidebar
 
@@ -150,8 +151,134 @@ ui <- dashboardPage(
           ) # Column
         ), # Data Entry Tab
         tabItem(
-          tabName = "progression_tables_menu_item"
-        ) #
+          tabName = "progression_tables_menu_item",
+          box(
+            title = "Settings",
+            id = "settings_progression_tables",
+            collapsible = TRUE,
+            width = 12,
+            h4("Select model you want to utilize"),
+            # br(),
+            column(
+              4,
+              selectInput(
+                "settings_data",
+                label = "Data from:",
+                choices = c("Known 1RM", "Unknown 1RM")
+              )
+            ),
+            column(
+              4,
+              selectInput(
+                "settings_model",
+                label = "Model:",
+                choices = c("Epley's", "Modified Epley's", "Linear"),
+                selected = 2
+              )
+            ),
+            column(
+              4,
+              selectInput(
+                "settings_model_type",
+                label = "Type:",
+                choices = c("nRM as Target variable", "nRM sa Predictor variable")
+              )
+            ),
+            br(),
+            h4("Select progression table to be utilize"),
+            column(
+              6,
+              selectInput(
+                "settings_progression_table",
+                label = "Progression table:",
+                choices = c(
+                  "Deducted Intensity 2.5%",
+                  "Deducted Intensity 5%",
+                  "Relative Intensity",
+                  "Perc Drop",
+                  "RIR 1",
+                  "RIR 2",
+                  "RIR Inc",
+                  "%MR Step Const",
+                  "%MR Step Var"
+                ),
+                selected = "RIR Inc"
+              )
+            ),
+            column(
+              6,
+              selectInput(
+                "settings_progression_table_type",
+                label = "Table type:",
+                choices = c(
+                  "Grinding",
+                  "Ballistic"
+                )
+              )
+            )
+          ), # Settings box
+          box(
+            title = "Reps-Max Table",
+            id = "reps_max_table",
+            collapsible = TRUE,
+            width = 12,
+            dataTableOutput("reps_max_table")
+          ), # Reps max table
+          box(
+            title = "Progression Table (%1RM)",
+            id = "progression_table",
+            collapsible = TRUE,
+            width = 12,
+            # Estimated %1RMS
+            column(
+              4,
+              h5("Intensive variant"),
+              dataTableOutput("progression_table_intensive_perc1RM")
+            ),
+            column(
+              4,
+              h5("Normal variant"),
+              dataTableOutput("progression_table_normal_perc1RM")
+            ),
+            column(
+              4,
+              h5("Extensive variant"),
+              dataTableOutput("progression_table_extensive_perc1RM")
+            ), # Estimated %1RMS
+          ),
+          box(
+            title = "Progression Table (Adjustments)",
+            id = "progression_table",
+            collapsible = TRUE,
+            width = 12,
+            # Estimated Adjustments
+            column(
+              4,
+              h5("Intensive variant"),
+              dataTableOutput("progression_table_intensive_adjustment")
+            ),
+            column(
+              4,
+              h5("Normal variant"),
+              dataTableOutput("progression_table_normal_adjustment")
+            ),
+            column(
+              4,
+              h5("Extensive variant"),
+              dataTableOutput("progression_table_extensive_adjustment")
+            ), # Estimated Adjustments
+          ), # Progression table
+          box(
+            title = "Example set and rep schemes",
+            id = "example_schemes_table",
+            collapsible = TRUE,
+            width = 12,
+            dataTableOutput("progression_table_example_scheme")
+          ), # Reps max table
+        ), # Progression tables
+        tabItem(
+          tabName = "schemes_menu_item"
+        ) # Schemes
       ) # tabItems
     ) # FluidPage
   ) # Dashboard Body
@@ -305,7 +432,7 @@ server <- function(input, output) {
       )
 
       # Linear model reverse
-      linear_reverse  <- estimate_klin(
+      linear_reverse <- estimate_klin(
         perc_1RM = model_data$perc_1RM,
         reps = model_data$nRM,
         reverse = TRUE
@@ -343,40 +470,46 @@ server <- function(input, output) {
       # Epley's model
       epley <- estimate_k_1RM(
         weight = model_data$Weight,
-        reps = model_data$nRM
+        reps = model_data$nRM,
+        weighted = TRUE
       )
 
       # Modified Epley's model
       epley_mod <- estimate_kmod_1RM(
         weight = model_data$Weight,
-        reps = model_data$nRM
+        reps = model_data$nRM,
+        weighted = TRUE
       )
 
       # Linear model
       linear <- estimate_klin_1RM(
         weight = model_data$Weight,
-        reps = model_data$nRM
+        reps = model_data$nRM,
+        weighted = TRUE
       )
 
       # Epley's model Reverse
       epley_reverse <- estimate_k_1RM(
         weight = model_data$Weight,
         reps = model_data$nRM,
-        reverse = TRUE
+        reverse = TRUE,
+        weighted = TRUE
       )
 
       # Modified Epley's model Reverse
       epley_mod_reverse <- estimate_kmod_1RM(
         weight = model_data$Weight,
         reps = model_data$nRM,
-        reverse = TRUE
+        reverse = TRUE,
+        weighted = TRUE
       )
 
       # Linear model Reverse
       linear_reverse <- estimate_klin_1RM(
         weight = model_data$Weight,
         reps = model_data$nRM,
-        reverse = TRUE
+        reverse = TRUE,
+        weighted = TRUE
       )
 
       # Return
@@ -496,12 +629,13 @@ server <- function(input, output) {
     estimated_kmod <- coef(models$epley_mod)[[2]]
     estimated_klin <- coef(models$linear)[[2]]
 
-    graph_max_weight = max(estimated_k_0RM, estimated_kmod_1RM, estimated_klin_1RM)
+    graph_max_weight <- max(estimated_k_0RM, estimated_kmod_1RM, estimated_klin_1RM)
 
-    graph_min_weight = graph_max_weight * min(
+    graph_min_weight <- graph_max_weight * min(
       get_max_perc_1RM_k(20, k = estimated_k),
       get_max_perc_1RM_kmod(20, k = estimated_kmod),
-      get_max_perc_1RM_klin(20, k = estimated_klin))
+      get_max_perc_1RM_klin(20, k = estimated_klin)
+    )
 
     observed_data <- observed_data %>%
       mutate(
@@ -517,7 +651,8 @@ server <- function(input, output) {
       weight = seq(
         graph_min_weight,
         graph_max_weight,
-        length.out = 1000)
+        length.out = 1000
+      )
     )
 
     model_predictions <- model_predictions %>%
@@ -1015,6 +1150,231 @@ server <- function(input, output) {
     }
 
     gg
+  })
+
+  # ================================================
+  # Progression tables
+
+  # Function to create example
+  create_example <- function(progression_table, ...) {
+    example_data <- expand_grid(
+      reps = c(3, 5, 10),
+      sets = c(1, 3, 5),
+      step = c(-3, -2, -1, 0)
+    ) %>%
+      mutate(
+        volume = ifelse(sets == 1, "intensive",
+                        ifelse(sets == 3, "normal",
+                               ifelse(sets == 5, "extensive", NA)
+                        )
+        ),
+        volume = factor(volume, levels = c("intensive", "normal", "extensive"))
+      ) %>%
+      rowwise() %>%
+      mutate(
+        `%1RM` = round(100 * progression_table(reps = reps, step = step, volume = volume, ...)$perc_1RM, 1)
+      ) %>%
+      ungroup() %>%
+      mutate(
+        Scheme = paste0(sets, " x ", reps, " (", volume, ")"),
+        step = paste0("Step ", length(unique(step)) + step)
+      )
+
+    example_data_wide <- pivot_wider(example_data, id_cols = Scheme, names_from = step, values_from = `%1RM`) %>%
+      mutate(
+        `Step 2-1 Diff` = round(`Step 2` - `Step 1`, 1),
+        `Step 3-2 Diff` = round(`Step 3` - `Step 2`, 1),
+        `Step 4-3 Diff` = round(`Step 4` - `Step 3`, 1)
+      )
+
+    example_data_wide
+  }
+
+  # Function that is reactive and returns all needed objects
+  progression_table_data <- reactive({
+    reps_max_tbl <- expand.grid(
+      Reps = seq(1, 12),
+      RIR = seq(0, 10)
+    ) %>%
+      mutate(
+        perc_1RM = round(100 * get_max_perc_1RM(Reps, adjustment = RIR), 1)
+      ) %>%
+      pivot_wider(id_cols = Reps, names_from = RIR, values_from = perc_1RM)
+
+    progression_tbl <- generate_progression_table(
+      progression_table = RIR_increment,
+      type = "grinding",
+      # volume = "intensive",
+      reps = 1:12,
+      step = c(-3, -2, -1, 0)
+    ) %>%
+      mutate(
+        perc_1RM = round(100 * perc_1RM, 1),
+        adjustment = round(adjustment, 1),
+        step = length(unique(step)) + step) %>%
+      rename(Step = step, Reps = reps)
+
+    example_schemes <- create_example(RIR_increment)
+
+    list(
+      reps_max_tbl = reps_max_tbl,
+      progression_tbl = progression_tbl,
+      example_schemes = example_schemes
+    )
+  })
+
+
+  # Reps-max plot
+  output$reps_max_table <- renderDT({
+    reps_max_tbl <- progression_table_data()$reps_max_tbl
+
+    DT::datatable(
+      reps_max_tbl,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+  # Estimated 1RMs
+  output$progression_table_intensive_perc1RM <- renderDT({
+    progression_tbl <- progression_table_data()$progression_tbl %>%
+      filter(volume == "intensive") %>%
+      pivot_wider(id_cols = Reps, names_from = Step, values_from = perc_1RM)
+
+    DT::datatable(
+      progression_tbl,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+  output$progression_table_normal_perc1RM <- renderDT({
+    progression_tbl <- progression_table_data()$progression_tbl %>%
+      filter(volume == "normal") %>%
+      pivot_wider(id_cols = Reps, names_from = Step, values_from = perc_1RM)
+
+    DT::datatable(
+      progression_tbl,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+  output$progression_table_extensive_perc1RM <- renderDT({
+    progression_tbl <- progression_table_data()$progression_tbl %>%
+      filter(volume == "extensive") %>%
+      pivot_wider(id_cols = Reps, names_from = Step, values_from = perc_1RM)
+
+    DT::datatable(
+      progression_tbl,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+
+  # Used Adjustments
+  output$progression_table_intensive_adjustment <- renderDT({
+    progression_tbl <- progression_table_data()$progression_tbl %>%
+      filter(volume == "intensive") %>%
+      pivot_wider(id_cols = Reps, names_from = Step, values_from = adjustment)
+
+    DT::datatable(
+      progression_tbl,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+  output$progression_table_normal_adjustment <- renderDT({
+    progression_tbl <- progression_table_data()$progression_tbl %>%
+      filter(volume == "normal") %>%
+      pivot_wider(id_cols = Reps, names_from = Step, values_from = adjustment)
+
+    DT::datatable(
+      progression_tbl,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+  output$progression_table_extensive_adjustment <- renderDT({
+    progression_tbl <- progression_table_data()$progression_tbl %>%
+      filter(volume == "extensive") %>%
+      pivot_wider(id_cols = Reps, names_from = Step, values_from = adjustment)
+
+    DT::datatable(
+      progression_tbl,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+  # Example schemes
+  output$progression_table_example_scheme <- renderDT({
+    example_schemes <- progression_table_data()$example_schemes
+
+    DT::datatable(
+      example_schemes,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
   })
 }
 
