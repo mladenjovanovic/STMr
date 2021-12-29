@@ -8,6 +8,7 @@
 \alias{estimate_kmod_1RM}
 \alias{estimate_klin}
 \alias{estimate_klin_1RM}
+\alias{get_predicted_1RM_from_k_model}
 \title{Estimate relationship between reps and \%1RM used using Epley's and modified
 Epley's equation, as well as using the linear model.}
 \usage{
@@ -22,6 +23,8 @@ estimate_kmod_1RM(weight, reps, adjustment = 0, reverse = FALSE, ...)
 estimate_klin(perc_1RM, reps, adjustment = 0, reverse = FALSE, ...)
 
 estimate_klin_1RM(weight, reps, adjustment = 0, reverse = FALSE, ...)
+
+get_predicted_1RM_from_k_model(model)
 }
 \arguments{
 \item{perc_1RM}{Percent of 1RM}
@@ -35,6 +38,8 @@ estimate_klin_1RM(weight, reps, adjustment = 0, reverse = FALSE, ...)
 \item{...}{Forwarded to \code{\link[stats]{nls}} functions}
 
 \item{weight}{Weight used}
+
+\item{model}{Object returned from the  \code{\link{estimate_k_1RM}} function}
 }
 \value{
 \code{\link[stats]{nls}} object
@@ -59,6 +64,13 @@ By default, target variable is the reps performed, while the predictors is the \
 
 \item \code{estimate_klin_1RM}: Estimate the parameter \code{klin} in the linear equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
+
+\item \code{get_predicted_1RM_from_k_model}: Estimate the 1RM from \code{\link{estimate_k_1RM}} function
+
+The problem with Epley's estimation model (implemented in \code{\link{estimate_k_1RM}} function)
+is that it predicts the 1RM when nRM = 0. Thus, the estimated parameter in the model produced
+by the \code{\link{estimate_k_1RM}} function is not 1RM, but 0RM. This function calculates the
+weight at nRM = 1 for both the normal and reverse model. See Examples for code
 }}
 
 \examples{
@@ -104,4 +116,21 @@ m1 <- estimate_klin_1RM(
 )
 
 coef(m1)
+m1 <- estimate_k_1RM(150 * c(0.9, 0.8, 0.7), c(3, 6, 12))
+m2 <- estimate_k_1RM(150 * c(0.9, 0.8, 0.7), c(3, 6, 12), reverse = TRUE)
+
+# Estimated 0RM values from both model
+c(coef(m1)[[1]], coef(m2)[[1]])
+
+# But these are not 1RMs!!!
+# Using the "reverse" model, where nRM is the predictor (in this case m2)
+# makes it easier to predict 1RM
+predict(m2, newdata = data.frame(nRM = 1))
+
+# But for the normal model it involve reversing the formula
+# To spare you from the math pain, use this
+get_predicted_1RM_from_k_model(m1)
+
+# It also works for the "reverse" model
+get_predicted_1RM_from_k_model(m2)
 }
