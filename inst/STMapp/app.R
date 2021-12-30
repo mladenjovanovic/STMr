@@ -1155,6 +1155,8 @@ server <- function(input, output) {
   # ================================================
   # Progression tables
 
+  # Function to generate
+
   # Function to create example
   create_example <- function(progression_table, ...) {
     example_data <- expand_grid(
@@ -1238,41 +1240,33 @@ server <- function(input, output) {
       }
     }
 
-
-    table_type <- switch(
-      input$settings_progression_table_type,
-      "Grinding" = "grinding",
-      "Ballistic" = "ballistic"
-    )
-
     # Function factory for the reps-max equation
-
     get_max_perc_1RM_RIR_func <- switch (
         input$settings_model,
-        "Epley's" = function(...) get_max_perc_1RM_k(..., k = parameter_value, type = table_type),
-        "Modified Epley's" = function(...) get_max_perc_1RM_kmod(..., kmod = parameter_value, type = table_type),
-        "Linear" =  function(...) get_max_perc_1RM_klin(..., klin = parameter_value, type = table_type)
+        "Epley's" = function(...) get_max_perc_1RM_k(..., k = parameter_value),
+        "Modified Epley's" = function(...) get_max_perc_1RM_kmod(..., kmod = parameter_value),
+        "Linear" =  function(...) get_max_perc_1RM_klin(..., klin = parameter_value)
       )
 
     get_max_perc_1RM_relInt_func <- switch (
       input$settings_model,
-      "Epley's" = function(...) get_max_perc_1RM_k_relInt(..., k = parameter_value, type = table_type),
-      "Modified Epley's" = function(...) get_max_perc_1RM_kmod_relInt(..., kmod = parameter_value, type = table_type),
-      "Linear" =  function(...) get_max_perc_1RM_klin_relInt(..., klin = parameter_value, type = table_type)
+      "Epley's" = function(...) get_max_perc_1RM_k_relInt(..., k = parameter_value),
+      "Modified Epley's" = function(...) get_max_perc_1RM_kmod_relInt(..., kmod = parameter_value),
+      "Linear" =  function(...) get_max_perc_1RM_klin_relInt(..., klin = parameter_value)
     )
 
     get_max_perc_1RM_percMR_func <- switch (
       input$settings_model,
-      "Epley's" = function(...) get_max_perc_1RM_k_percMR(..., k = parameter_value, type = table_type),
-      "Modified Epley's" = function(...) get_max_perc_1RM_kmod_percMR(..., kmod = parameter_value, type = table_type),
-      "Linear" =  function(...) get_max_perc_1RM_klin_percMR(..., klin = parameter_value, type = table_type)
+      "Epley's" = function(...) get_max_perc_1RM_k_percMR(..., k = parameter_value),
+      "Modified Epley's" = function(...) get_max_perc_1RM_kmod_percMR(..., kmod = parameter_value),
+      "Linear" =  function(...) get_max_perc_1RM_klin_percMR(..., klin = parameter_value)
     )
 
     get_max_perc_1RM_DI_func <- switch (
       input$settings_model,
-      "Epley's" = function(..., adjustment) get_max_perc_1RM_k(..., k = parameter_value, type = table_type) + adjustment,
-      "Modified Epley's" = function(..., adjustment) get_max_perc_1RM_kmod(..., kmod = parameter_value, type = table_type) + adjustment,
-      "Linear" =  function(..., adjustment) get_max_perc_1RM_klin(..., klin = parameter_value, type = table_type) + adjustment
+      "Epley's" = function(..., adjustment) get_max_perc_1RM_k(..., k = parameter_value) + adjustment,
+      "Modified Epley's" = function(..., adjustment) get_max_perc_1RM_kmod(..., kmod = parameter_value) + adjustment,
+      "Linear" =  function(..., adjustment) get_max_perc_1RM_klin(..., klin = parameter_value) + adjustment
     )
 
     # Function factory for the progression table
@@ -1328,32 +1322,50 @@ server <- function(input, output) {
       "%MR Step Var" = get_max_perc_1RM_percMR_func
     )
 
+    # Table types
+    table_type <- switch(
+      input$settings_progression_table_type,
+      "Grinding" = "grinding",
+      "Ballistic" = "ballistic"
+    )
+
     reps_max_tbl <- expand_grid(
       Reps = seq(1, 12),
       data.frame(adjustment = adjustment_seq, adjustment_val = adjustment_values)
     ) %>%
       mutate(
-        perc_1RM = round(100 * get_max_perc_1RM_func(max_reps = Reps, adjustment = adjustment), 1)
+        perc_1RM = round(100 * get_max_perc_1RM_func(max_reps = Reps, adjustment = adjustment, type = table_type), 1)
       ) %>%
       pivot_wider(id_cols = Reps, names_from = adjustment_val, values_from = perc_1RM)
 
-    browser()
+    example_schemes <- create_example(progression_table_func, type = table_type)
+
     progression_tbl <- generate_progression_table(
-      progression_table = RIR_increment,
-      type = "grinding",
+      progression_table = progression_table_func,
+      type = table_type,
       reps = 1:12,
       step = c(-3, -2, -1, 0)
     ) %>%
       mutate(
         perc_1RM = round(100 * perc_1RM, 1),
-        adjustment = round(adjustment, 1),
+        adjustment = switch(
+          input$settings_progression_table,
+          "Deducted Intensity 2.5%" = round(adjustment * 100, 1),
+          "Deducted Intensity 5%" = round(adjustment * 100, 1),
+          "Relative Intensity" = round(adjustment * 100, 1),
+          "Perc Drop" = round(adjustment * 100, 1),
+          "RIR 1" = round(adjustment, 1),
+          "RIR 2" = round(adjustment, 1),
+          "RIR Inc" = round(adjustment, 1),
+          "%MR Step Const" = round(adjustment * 100, 1),
+          "%MR Step Var" = round(adjustment * 100, 1)
+        ),
         step = length(unique(step)) + step
       ) %>%
       rename(Step = step, Reps = reps)
 
-    example_schemes <- create_example(progression_table_func)
-
     list(
+      reps_max_tbl = reps_max_tbl,
       reps_max_tbl = reps_max_tbl,
       progression_tbl = progression_tbl,
       example_schemes = example_schemes,
