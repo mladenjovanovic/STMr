@@ -164,7 +164,7 @@ ui <- dashboardPage(
               selectInput(
                 "settings_data",
                 label = "Data from:",
-                choices = c("Known 1RM", "Unknown 1RM")
+                choices = c("Known 1RM", "Estimated 1RM", "Generic values")
               )
             ),
             column(
@@ -181,7 +181,7 @@ ui <- dashboardPage(
               selectInput(
                 "settings_model_type",
                 label = "Type:",
-                choices = c("nRM as Target variable", "nRM sa Predictor variable")
+                choices = c("nRM as Target variable", "nRM as Predictor variable")
               )
             ),
             br(),
@@ -225,6 +225,28 @@ ui <- dashboardPage(
             dataTableOutput("reps_max_table")
           ), # Reps max table
           box(
+            title = "Progression Table (Adjustments)",
+            id = "progression_table",
+            collapsible = TRUE,
+            width = 12,
+            # Estimated Adjustments
+            column(
+              4,
+              h5("Intensive variant"),
+              dataTableOutput("progression_table_intensive_adjustment")
+            ),
+            column(
+              4,
+              h5("Normal variant"),
+              dataTableOutput("progression_table_normal_adjustment")
+            ),
+            column(
+              4,
+              h5("Extensive variant"),
+              dataTableOutput("progression_table_extensive_adjustment")
+            )
+          ), # Estimated Adjustments
+          box(
             title = "Progression Table (%1RM)",
             id = "progression_table",
             collapsible = TRUE,
@@ -245,28 +267,6 @@ ui <- dashboardPage(
               h5("Extensive variant"),
               dataTableOutput("progression_table_extensive_perc1RM")
             ), # Estimated %1RMS
-          ),
-          box(
-            title = "Progression Table (Adjustments)",
-            id = "progression_table",
-            collapsible = TRUE,
-            width = 12,
-            # Estimated Adjustments
-            column(
-              4,
-              h5("Intensive variant"),
-              dataTableOutput("progression_table_intensive_adjustment")
-            ),
-            column(
-              4,
-              h5("Normal variant"),
-              dataTableOutput("progression_table_normal_adjustment")
-            ),
-            column(
-              4,
-              h5("Extensive variant"),
-              dataTableOutput("progression_table_extensive_adjustment")
-            ), # Estimated Adjustments
           ), # Progression table
           box(
             title = "Example set and rep schemes",
@@ -1164,9 +1164,9 @@ server <- function(input, output) {
     ) %>%
       mutate(
         volume = ifelse(sets == 1, "intensive",
-                        ifelse(sets == 3, "normal",
-                               ifelse(sets == 5, "extensive", NA)
-                        )
+          ifelse(sets == 3, "normal",
+            ifelse(sets == 5, "extensive", NA)
+          )
         ),
         volume = factor(volume, levels = c("intensive", "normal", "extensive"))
       ) %>%
@@ -1192,34 +1192,173 @@ server <- function(input, output) {
 
   # Function that is reactive and returns all needed objects
   progression_table_data <- reactive({
-    reps_max_tbl <- expand.grid(
+    # Get the parameter value
+    if (input$settings_data == "Generic values") {
+      parameter_value <- switch (
+        input$settings_model,
+        "Epley's" = 0.0333,
+        "Modified Epley's" = 0.0353,
+        "Linear" = 33
+      )
+    } else if ((input$settings_data == "Known 1RM")) {
+      models <- known_1RM_models()
+
+      if (input$settings_model_type == "nRM as Target variable") {
+        parameter_value <- switch (
+          input$settings_model,
+          "Epley's" = coef(models$epley)[[1]],
+          "Modified Epley's" = coef(models$epley_mod)[[1]],
+          "Linear" = coef(models$linear)[[1]]
+        )
+      } else if (input$settings_model_type == "nRM as Predictor variable") {
+        parameter_value <- switch (
+          input$settings_model,
+          "Epley's" = coef(models$epley_reverse)[[1]],
+          "Modified Epley's" = coef(models$epley_mod_reverse)[[1]],
+          "Linear" = coef(models$linear_reverse)[[1]]
+        )
+      }
+    } else if ((input$settings_data == "Estimated 1RM")) {
+      models <- estimate_1RM_models()
+
+      if (input$settings_model_type == "nRM as Target variable") {
+        parameter_value <- switch (
+          input$settings_model,
+          "Epley's" = coef(models$epley)[[2]],
+          "Modified Epley's" = coef(models$epley_mod)[[2]],
+          "Linear" = coef(models$linear)[[2]]
+        )
+      } else if (input$settings_model_type == "nRM as Predictor variable") {
+        parameter_value <- switch (
+          input$settings_model,
+          "Epley's" = coef(models$epley_reverse)[[2]],
+          "Modified Epley's" = coef(models$epley_mod_reverse)[[2]],
+          "Linear" = coef(models$linear_reverse)[[2]]
+        )
+      }
+    }
+
+
+    table_type <- switch(
+      input$settings_progression_table_type,
+      "Grinding" = "grinding",
+      "Ballistic" = "ballistic"
+    )
+
+    # Function factory for the reps-max equation
+
+    get_max_perc_1RM_RIR_func <- switch (
+        input$settings_model,
+        "Epley's" = function(...) get_max_perc_1RM_k(..., k = parameter_value, type = table_type),
+        "Modified Epley's" = function(...) get_max_perc_1RM_kmod(..., kmod = parameter_value, type = table_type),
+        "Linear" =  function(...) get_max_perc_1RM_klin(..., klin = parameter_value, type = table_type)
+      )
+
+    get_max_perc_1RM_relInt_func <- switch (
+      input$settings_model,
+      "Epley's" = function(...) get_max_perc_1RM_k_relInt(..., k = parameter_value, type = table_type),
+      "Modified Epley's" = function(...) get_max_perc_1RM_kmod_relInt(..., kmod = parameter_value, type = table_type),
+      "Linear" =  function(...) get_max_perc_1RM_klin_relInt(..., klin = parameter_value, type = table_type)
+    )
+
+    get_max_perc_1RM_percMR_func <- switch (
+      input$settings_model,
+      "Epley's" = function(...) get_max_perc_1RM_k_percMR(..., k = parameter_value, type = table_type),
+      "Modified Epley's" = function(...) get_max_perc_1RM_kmod_percMR(..., kmod = parameter_value, type = table_type),
+      "Linear" =  function(...) get_max_perc_1RM_klin_percMR(..., klin = parameter_value, type = table_type)
+    )
+
+    get_max_perc_1RM_DI_func <- switch (
+      input$settings_model,
+      "Epley's" = function(..., adjustment) get_max_perc_1RM_k(..., k = parameter_value, type = table_type) + adjustment,
+      "Modified Epley's" = function(..., adjustment) get_max_perc_1RM_kmod(..., kmod = parameter_value, type = table_type) + adjustment,
+      "Linear" =  function(..., adjustment) get_max_perc_1RM_klin(..., klin = parameter_value, type = table_type) + adjustment
+    )
+
+    # Function factory for the progression table
+    progression_table_func <- switch(
+      input$settings_progression_table,
+      "Deducted Intensity 2.5%" = function(...) perc_drop_fixed_25(..., func_max_perc_1RM = get_max_perc_1RM_RIR_func),
+      "Deducted Intensity 5%" = function(...) perc_drop_fixed_5(..., func_max_perc_1RM = get_max_perc_1RM_RIR_func),
+      "Relative Intensity" = function(...) relInt(..., func_max_perc_1RM = get_max_perc_1RM_relInt_func),
+      "Perc Drop" = function(...) perc_drop(..., func_max_perc_1RM = get_max_perc_1RM_RIR_func),
+      "RIR 1" = function(...) RIR_increment_fixed_1(..., func_max_perc_1RM = get_max_perc_1RM_RIR_func),
+      "RIR 2" = function(...) RIR_increment_fixed_2(..., func_max_perc_1RM = get_max_perc_1RM_RIR_func),
+      "RIR Inc" = function(...) RIR_increment(..., func_max_perc_1RM = get_max_perc_1RM_RIR_func),
+      "%MR Step Const" = function(...) percMR_step_const(..., func_max_perc_1RM = get_max_perc_1RM_percMR_func),
+      "%MR Step Var" = function(...) percMR_step_var(..., func_max_perc_1RM = get_max_perc_1RM_percMR_func)
+    )
+
+    adjustment_seq <- switch(
+      input$settings_progression_table,
+      "Deducted Intensity 2.5%" = seq(0, -30, by = -2.5) / 100,
+      "Deducted Intensity 5%" = seq(0, -60, by = -5) / 100,
+      "Relative Intensity" = seq(100, 60, by = -2.5) / 100,
+      "Perc Drop" = seq(0, -30, by = -2.5) / 100,
+      "RIR 1" = seq(0, 15, by = 1),
+      "RIR 2" = seq(0, 15, by = 1),
+      "RIR Inc" = seq(0, 15, by = 1),
+      "%MR Step Const" = seq(100, 30, by = -5) / 100,
+      "%MR Step Var" = seq(100, 30, by = -5) / 100
+    )
+
+    adjustment_values <- switch(
+      input$settings_progression_table,
+      "Deducted Intensity 2.5%" = paste0(seq(0, -30, by = -2.5), "%"),
+      "Deducted Intensity 5%" = paste0(seq(0, -60, by = -5), "%"),
+      "Relative Intensity" = paste0(seq(100, 60, by = -2.5), "%"),
+      "Perc Drop" = paste0(seq(0, -30, by = -2.5), "%"),
+      "RIR 1" = paste0(seq(0, 15, by = 1), "RIR"),
+      "RIR 2" = paste0(seq(0, 15, by = 1), "RIR"),
+      "RIR Inc" = paste0(seq(0, 15, by = 1), "RIR"),
+      "%MR Step Const" = paste0(seq(100, 30, by = -5), "%MR"),
+      "%MR Step Var" = paste0(seq(100, 30, by = -5), "%MR")
+    )
+
+    get_max_perc_1RM_func <- switch(
+      input$settings_progression_table,
+      "Deducted Intensity 2.5%" = get_max_perc_1RM_DI_func,
+      "Deducted Intensity 5%" = get_max_perc_1RM_DI_func,
+      "Relative Intensity" = get_max_perc_1RM_relInt_func,
+      "Perc Drop" = get_max_perc_1RM_RIR_func,
+      "RIR 1" = get_max_perc_1RM_RIR_func,
+      "RIR 2" = get_max_perc_1RM_RIR_func,
+      "RIR Inc" = get_max_perc_1RM_RIR_func,
+      "%MR Step Const" = get_max_perc_1RM_percMR_func,
+      "%MR Step Var" = get_max_perc_1RM_percMR_func
+    )
+
+    reps_max_tbl <- expand_grid(
       Reps = seq(1, 12),
-      RIR = seq(0, 10)
+      data.frame(adjustment = adjustment_seq, adjustment_val = adjustment_values)
     ) %>%
       mutate(
-        perc_1RM = round(100 * get_max_perc_1RM(Reps, adjustment = RIR), 1)
+        perc_1RM = round(100 * get_max_perc_1RM_func(max_reps = Reps, adjustment = adjustment), 1)
       ) %>%
-      pivot_wider(id_cols = Reps, names_from = RIR, values_from = perc_1RM)
+      pivot_wider(id_cols = Reps, names_from = adjustment_val, values_from = perc_1RM)
 
+    browser()
     progression_tbl <- generate_progression_table(
       progression_table = RIR_increment,
       type = "grinding",
-      # volume = "intensive",
       reps = 1:12,
       step = c(-3, -2, -1, 0)
     ) %>%
       mutate(
         perc_1RM = round(100 * perc_1RM, 1),
         adjustment = round(adjustment, 1),
-        step = length(unique(step)) + step) %>%
+        step = length(unique(step)) + step
+      ) %>%
       rename(Step = step, Reps = reps)
 
-    example_schemes <- create_example(RIR_increment)
+    example_schemes <- create_example(progression_table_func)
 
     list(
       reps_max_tbl = reps_max_tbl,
       progression_tbl = progression_tbl,
-      example_schemes = example_schemes
+      example_schemes = example_schemes,
+      get_max_perc_1RM_func = get_max_perc_1RM_func,
+      progression_table_func = progression_table_func
     )
   })
 
