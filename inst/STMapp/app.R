@@ -4,6 +4,8 @@ library(DT)
 library(tidyverse)
 library(STM)
 library(plotly)
+library(QWUtils)
+
 
 # Extension for the DT
 js <- c(
@@ -58,100 +60,92 @@ maxErr <- function(model) {
 #################################################
 # UI
 #################################################
+
 ui <- dashboardPage(
   dashboardHeader(title = "STMapp"),
-
-  # Sidebar items
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Data Entry", tabName = "data_entry_menu_item", icon = icon("dumbbell")),
-      menuItem("Progression Tables", tabName = "progression_tables_menu_item", icon = icon("table")),
-      menuItem("Schemes", tabName = "schemes_menu_item", icon = icon("signal"))
-    ) # sidebarMenu
-  ), # DashboardSidebar
-
+      menuItem("Data Entry", tabName = "menu-item-data-entry", icon = icon("dumbbell")),
+      menuItem("Progression Tables", tabName = "menu-item-progression-tables", icon = icon("table"))
+    ) # Sidebar menu
+  ), # Dashboard sidebar
   # Body
   dashboardBody(
     fluidPage(
       tabItems(
-        # ================================
         tabItem(
-          tabName = "data_entry_menu_item",
-          column(
-            6,
-            box(
+          tabName = "menu-item-data-entry",
+          tabBox(
+            id = "tabbox-data-entry",
+            title = "Data Entry", width = 12,
+            # Known 1RM data entry
+            tabPanel(
               title = "Known 1RM",
-              id = "data_entry_known_1RM",
-              collapsible = TRUE,
-              width = 12,
-              numericInput("data_entry_known_1RM_value", label = "1RM", value = 150, min = 0, max = 1000, step = 1),
-              br(),
-              DTOutput("data_entry_known_1RM_table"),
-              br(),
-              actionButton("data_entry_known_1RM_button", "Model", class = "btn-success", icon = icon("hourglass-start"))
-            ), # Box Known 1RM
-            box(
-              title = "Model using reps (nRM) as target",
-              id = "model_known_1RM_estimates",
-              collapsible = TRUE,
-              width = 12,
-              dataTableOutput("model_known_1RM_estimates_table"),
-              br(),
-              plotlyOutput("model_known_1RM_plot")
-            ), # Known 1RM estimates
-            box(
-              title = "Model using reps (nRM) as predictor",
-              id = "model_known_1RM_estimates_reverse",
-              collapsible = TRUE,
-              width = 12,
-              dataTableOutput("model_known_1RM_estimates_table_reverse"),
-              br(),
-              plotlyOutput("model_known_1RM_plot_reverse")
-            ), # Known 1RM estimates REVERSE
-          ), # Column
-          column(
-            6,
-            box(
+              fluidPage(
+                column(
+                  5,
+                  h4("Use this approach when you have known 1RM value"),
+                  numericInput("data_entry_known_1RM_value", label = "1RM", value = 150, min = 0, max = 1000, step = 1),
+                  h5("Enter known 1RM. This will be used to estimate %1RM from weights used"),
+                  br(),
+                  DTOutput("data_entry_known_1RM_table"),
+                  h5("Enter weights and reps done. If needed, you can also enter estimated reps-in-reserve (eRIR). If not used, leave 0"),
+                  br(),
+                  actionButton("data_entry_known_1RM_button", "Model", class = "btn-success", icon = icon("hourglass-start"))
+                ),
+                column(1),
+                column(
+                  6,
+                  h3("Model using %1RM as predictor and nRM as target variable"),
+                  dataTableOutput("model_known_1RM_estimates_table"),
+                  br(),
+                  plotlyOutput("model_known_1RM_plot"),
+                  br(),
+                  h3("Model using nRM as predictor and %1RM as target variable"),
+                  dataTableOutput("model_known_1RM_estimates_table_reverse"),
+                  br(),
+                  plotlyOutput("model_known_1RM_plot_reverse")
+                )
+              ) # Fluid Page
+            ), # Known 1RM data entry
+            tabPanel(
               title = "Estimate 1RM",
-              id = "data_entry_estimate_1RM",
-              collapsible = TRUE,
-              width = 12,
-              DTOutput("data_entry_estimate_1RM_table"),
-              br(),
-              actionButton("data_entry_estimate_1RM_button", "Model", class = "btn-success", icon = icon("hourglass-start"))
-            ), # Box Estimate 1RM
-            box(
-              title = "Model using reps (nRM) as target",
-              id = "model_estimate_1RM_estimates",
-              collapsible = TRUE,
-              width = 12,
-              dataTableOutput("model_estimate_1RM_estimates_table"),
-              br(),
-              selectInput(
-                "model_estimate_1RM_plot_type",
-                label = "Plot",
-                choices = c("Weight", "Estimated %1RMs")
-              ),
-              plotlyOutput("model_estimate_1RM_plot")
-            ), # Estimate 1RM estimates
-            box(
-              title = "Model using reps (nRM) as predictor",
-              id = "model_estimate_1RM_estimates_reverse",
-              collapsible = TRUE,
-              width = 12,
-              dataTableOutput("model_estimate_1RM_estimates_table_reverse"),
-              br(),
-              selectInput(
-                "model_estimate_1RM_plot_type_reverse",
-                label = "Plot",
-                choices = c("Weight", "Estimated %1RMs")
-              ),
-              plotlyOutput("model_estimate_1RM_plot_reverse")
-            ) # Estimate 1RM estimates REVERSE
-          ) # Column
-        ), # Data Entry Tab
+              fluidPage(
+                column(
+                  5,
+                  h4("Use this approach when you do not know athlete's 1RM, but want to estimate it"),
+                  DTOutput("data_entry_estimate_1RM_table"),
+                  h5("Enter weights and reps done. If needed, you can also enter estimated reps-in-reserve (eRIR). If not used, leave 0"),
+                  br(),
+                  actionButton("data_entry_estimate_1RM_button", "Model", class = "btn-success", icon = icon("hourglass-start")),
+                  br(),
+                  br(),
+                  selectInput(
+                    "model_estimate_1RM_plot_type",
+                    label = "Plot",
+                    choices = c("Weight", "Estimated %1RMs")
+                  ),
+                  h5("Select if you want weight plotted or estimated %1RM")
+                ),
+                column(1),
+                column(
+                  6,
+                  h3("Model using weight as predictor and nRM as target variable"),
+                  dataTableOutput("model_estimate_1RM_estimates_table"),
+                  br(),
+                  plotlyOutput("model_estimate_1RM_plot"),
+                  br(),
+                  h3("Model using nRM as predictor and weight as target variable"),
+                  dataTableOutput("model_estimate_1RM_estimates_table_reverse"),
+                  br(),
+                  plotlyOutput("model_estimate_1RM_plot_reverse")
+                )
+              ) # Fluid Page
+            ) # Estimate 1RM data entry
+          ) #
+        ), # Data Entry end
         tabItem(
-          tabName = "progression_tables_menu_item",
+          tabName = "menu-item-progression-tables",
           box(
             title = "Settings",
             id = "settings_progression_tables",
@@ -216,123 +210,120 @@ ui <- dashboardPage(
                 )
               )
             )
-          ), # Settings box
-          box(
-            title = "Reps-Max Table",
-            id = "reps_max_table",
-            collapsible = TRUE,
-            width = 12,
-            dataTableOutput("reps_max_table")
-          ), # Reps max table
-          box(
-            title = "Progression Table (Adjustments)",
-            id = "progression_table",
-            collapsible = TRUE,
-            width = 12,
-            # Estimated Adjustments
-            column(
-              4,
-              h5("Intensive variant"),
-              dataTableOutput("progression_table_intensive_adjustment")
-            ),
-            column(
-              4,
-              h5("Normal variant"),
-              dataTableOutput("progression_table_normal_adjustment")
-            ),
-            column(
-              4,
-              h5("Extensive variant"),
-              dataTableOutput("progression_table_extensive_adjustment")
+          ), # Setting box
+          collapsible_tabBox(
+            id = "schemes-tables",
+            title = "Progression Table", width = 12,
+            # Reps Max Table
+            tabPanel(
+              title = "Reps-Max Table",
+              fluidPage(
+                dataTableOutput("reps_max_table")
+              )
+            ), # Reps Max Table Panel
+            # Adjustments
+            tabPanel(
+              title = "Progressions Adjustments",
+              fluidPage(
+                column(
+                  4,
+                  h5("Intensive variant"),
+                  dataTableOutput("progression_table_intensive_adjustment")
+                ),
+                column(
+                  4,
+                  h5("Normal variant"),
+                  dataTableOutput("progression_table_normal_adjustment")
+                ),
+                column(
+                  4,
+                  h5("Extensive variant"),
+                  dataTableOutput("progression_table_extensive_adjustment")
+                )
+              )
+            ), # Adjustments
+            # Progression %1RMs
+            tabPanel(
+              title = "Progressions %1RM",
+              fluidPage(
+                column(
+                  4,
+                  h5("Intensive variant"),
+                  dataTableOutput("progression_table_intensive_perc1RM")
+                ),
+                column(
+                  4,
+                  h5("Normal variant"),
+                  dataTableOutput("progression_table_normal_perc1RM")
+                ),
+                column(
+                  4,
+                  h5("Extensive variant"),
+                  dataTableOutput("progression_table_extensive_perc1RM")
+                )
+              )
+            ) # Progression %1RMs
+          ), # Tab box Progressions
+          collapsible_tabBox(
+            id = "schemes-examples",
+            title = "Set and Rep Schemes", width = 12,
+            # Generic
+            tabPanel(
+              title = "Example",
+              fluidPage(
+                dataTableOutput("progression_table_example_scheme")
+              )
+            ), # Examples tab
+            tabPanel(
+              title = "Custom Set and Rep Scheme",
+              fluidPage(
+                column(
+                  3,
+                  h5("When entering numerics use ',' to delimitate (e.g., '5, 3, 1')"),
+                  textInput(
+                    "schemes_reps",
+                    "Reps",
+                    value = "5, 5, 5, 5"
+                  ),
+                  textInput(
+                    "schemes_adjustment",
+                    "Adjustment",
+                    value = "0"
+                  ),
+                  h6("Use DI, RI, RIR, %MR as adjustment depending on the selected progression table"),
+                  br(),
+                  selectInput(
+                    "schemes_volume",
+                    "Volume",
+                    choices = c("Intensive", "Normal", "Extensive"), selected = 2
+                  ),
+                  textInput(
+                    "schemes_reps_change",
+                    "Reps change",
+                    value = ""
+                  ),
+                  textInput(
+                    "schemes_steps",
+                    "Steps",
+                    value = "-3, -2, -1, 0"
+                  ),
+                  actionButton("schemes_generate_button", "Generate", class = "btn-success", icon = icon("hourglass-start"))
+                ),
+                column(
+                  1
+                ),
+                column(
+                  8,
+                  plotOutput("schemes_generate_scheme", height = "600px", width = "800px") # Plot generate scheme
+                )
+              )
             )
-          ), # Estimated Adjustments
-          box(
-            title = "Progression Table (%1RM)",
-            id = "progression_table",
-            collapsible = TRUE,
-            width = 12,
-            # Estimated %1RMS
-            column(
-              4,
-              h5("Intensive variant"),
-              dataTableOutput("progression_table_intensive_perc1RM")
-            ),
-            column(
-              4,
-              h5("Normal variant"),
-              dataTableOutput("progression_table_normal_perc1RM")
-            ),
-            column(
-              4,
-              h5("Extensive variant"),
-              dataTableOutput("progression_table_extensive_perc1RM")
-            ), # Estimated %1RMS
-          ), # Progression table
-          box(
-            title = "Example set and rep schemes",
-            id = "example_schemes_table",
-            collapsible = TRUE,
-            width = 12,
-            dataTableOutput("progression_table_example_scheme")
-          ) # Reps max table
-        ), # Progression tables
-        tabItem(
-          tabName = "schemes_menu_item",
-          box(
-            title = "Generate Set and Rep Scheme",
-            id = "schemes_generate",
-            collapsible = TRUE,
-            width = 12,
-            column(
-              3,
-              h5("When entering numerics use ',' to delimitate (e.g., '5, 3, 1')"),
-              textInput(
-                "schemes_reps",
-                "Reps",
-                value = "5, 5, 5, 5"
-              ),
-              textInput(
-                "schemes_adjustment",
-                "Adjustment",
-                value = "0"
-              ),
-              h6("Use DI, RI, RIR, %MR as adjustment depending on the selected progression table"),
-              br(),
-              selectInput(
-                "schemes_volume",
-                "Volume",
-                choices = c("Intensive", "Normal", "Extensive"), selected = 2
-              ),
-              selectInput(
-                "schemes_vertical_planning",
-                "Vertical Planning",
-                choices = LETTERS[1:10]
-              ),
-              textInput(
-                "schemes_reps_change",
-                "Reps change",
-                value = ""
-              ),
-              textInput(
-                "schemes_steps",
-                "Steps",
-                value = "-3, -2, -1, 0"
-              ),
-              actionButton("schemes_generate_button", "Generate", class = "btn-success", icon = icon("hourglass-start"))
-            ),
-            column(
-              1
-            ),
-            column(
-              8,
-              plotOutput("schemes_generate_scheme", height = "600px", width = "800px") # Plot generate scheme
-            )
-          ), # Plateau scheme
-        ) # Schemes
-      ) # tabItems
-    ) # FluidPage
-  ) # Dashboard Body
-)
+          ) # Schemes
+        ) # Progression Tables tab item
+      ) # Tab items
+    ) # Fluid Page
+  ) # Dashboard body
+) # Dashboard page
 
 #################################################
 # SERVER
@@ -1065,7 +1056,7 @@ server <- function(input, output) {
         linear_perc1RM = 100 * linear_weight / estimated_klin_1RM
       )
 
-    if (input$model_estimate_1RM_plot_type_reverse == "Weight") {
+    if (input$model_estimate_1RM_plot_type == "Weight") {
       gg <- plot_ly() %>%
         add_markers(
           data = observed_data, y = ~Weight, x = ~nRM,
@@ -1229,14 +1220,14 @@ server <- function(input, output) {
       ungroup() %>%
       mutate(
         Scheme = paste0(sets, " x ", reps, " (", volume, ")"),
-        step = paste0("Step ", length(unique(step)) + step)
+        step = paste0("Step ", step)
       )
 
     example_data_wide <- pivot_wider(example_data, id_cols = Scheme, names_from = step, values_from = `%1RM`) %>%
       mutate(
-        `Step 2-1 Diff` = round(`Step 2` - `Step 1`, 1),
-        `Step 3-2 Diff` = round(`Step 3` - `Step 2`, 1),
-        `Step 4-3 Diff` = round(`Step 4` - `Step 3`, 1)
+        `Step (-2)-(-3) Diff` = round(`Step -2` - `Step -3`, 1),
+        `Step (-1)-(-2) Diff` = round(`Step -1` - `Step -2`, 1),
+        `Step (0)-(-1) Diff` = round(`Step 0` - `Step -1`, 1)
       )
 
     example_data_wide
@@ -1395,7 +1386,7 @@ server <- function(input, output) {
           "%MR Step Const" = round(adjustment * 100, 1),
           "%MR Step Var" = round(adjustment * 100, 1)
         ),
-        step = length(unique(step)) + step
+        step = step # length(unique(step)) + step
       ) %>%
       rename(Step = step, Reps = reps)
 
