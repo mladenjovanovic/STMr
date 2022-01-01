@@ -274,10 +274,54 @@ ui <- dashboardPage(
             collapsible = TRUE,
             width = 12,
             dataTableOutput("progression_table_example_scheme")
-          ), # Reps max table
+          ) # Reps max table
         ), # Progression tables
         tabItem(
-          tabName = "schemes_menu_item"
+          tabName = "schemes_menu_item",
+          box(
+            title = "Generate Set and Rep Scheme",
+            id = "schemes_generate",
+            collapsible = TRUE,
+            width = 12,
+            column(
+              3,
+              h5("When entering numerics use ',' to delimitate (e.g., '5, 3, 1')"),
+              textInput(
+                "schemes_reps",
+                "Reps",
+                value = "5, 5, 5, 5"),
+              textInput(
+                "schemes_adjustment",
+                "Adjustment",
+                value = "0"),
+              h6("Use DI, RI, RIR, %MR as adjustment depending on the selected progression table"),
+              br(),
+              selectInput(
+                "schemes_volume",
+                "Volume",
+                choices = c("Intensive", "Normal", "Extensive"), selected = 2),
+              selectInput(
+                "schemes_vertical_planning",
+                "Vertical Planning",
+                choices = LETTERS[1:10]),
+              textInput(
+                "schemes_reps_change",
+                "Reps change",
+                value = ""),
+              textInput(
+                "schemes_steps",
+                "Steps",
+                value = "-3, -2, -1, 0"),
+              actionButton("schemes_generate_button", "Generate", class = "btn-success", icon = icon("hourglass-start"))
+            ),
+            column(
+              1
+            ),
+            column(
+              8,
+              plotOutput("schemes_generate_scheme", height = "600px", width = "800px") # Plot generate scheme
+            )
+          ), # Plateau scheme
         ) # Schemes
       ) # tabItems
     ) # FluidPage
@@ -1527,6 +1571,28 @@ server <- function(input, output) {
       )
     )
   })
+
+
+  # ===================================================
+  #
+  # Schemes
+  #
+  # ===================================================
+
+  output$schemes_generate_scheme <- renderPlot({
+    scheme <- scheme_wave(
+      reps = c(12, 10, 8, 12, 10, 8),
+      # Adjusting sets to use lower %1RM (RIR Inc method used, so RIR adjusted)
+      adjustment = c(4, 2, 0, 6, 4, 2),
+      vertical_planning = vertical_linear,
+      vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
+      progression_table = RIR_increment,
+      progression_table_control = list(volume = "extensive")
+    )
+
+    plot_scheme(scheme)
+  })
+
 }
 
 # Run the application
