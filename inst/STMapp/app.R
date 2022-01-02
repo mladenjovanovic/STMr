@@ -158,7 +158,7 @@ ui <- dashboardPage(
               selectInput(
                 "settings_data",
                 label = "Data from:",
-                choices = c("Known 1RM", "Estimated 1RM", "Generic values")
+                choices = c("Known 1RM", "Estimated 1RM", "Generic values", "User provided")
               )
             ),
             column(
@@ -181,7 +181,7 @@ ui <- dashboardPage(
             br(),
             h4("Select progression table to be utilize"),
             column(
-              6,
+              4,
               selectInput(
                 "settings_progression_table",
                 label = "Progression table:",
@@ -200,7 +200,7 @@ ui <- dashboardPage(
               )
             ),
             column(
-              6,
+              4,
               selectInput(
                 "settings_progression_table_type",
                 label = "Table type:",
@@ -208,6 +208,14 @@ ui <- dashboardPage(
                   "Grinding",
                   "Ballistic"
                 )
+              )
+            ),
+            column(
+              4,
+              numericInput(
+                "settings_user_provided_value",
+                label = "User Parameter Value:",
+                value = 0.0333, min = 0.001, max = 100, step = 0.0001
               )
             )
           ), # Setting box
@@ -1270,6 +1278,9 @@ server <- function(input, output) {
         "Modified Epley's" = 0.0353,
         "Linear" = 33
       )
+    } else if (input$settings_data == "User provided") {
+      parameter_value <- input$settings_user_provided_value
+
     } else if ((input$settings_data == "Known 1RM")) {
       models <- known_1RM_models()
 
