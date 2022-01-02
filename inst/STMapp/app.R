@@ -297,20 +297,21 @@ ui <- dashboardPage(
                     "Extra Adjustment",
                     value = "0"
                   ),
-                  h6("Use DI, RI, RIR, %MR as extra adjustment to be added to progression table. Value depends on the selected progression table"),
+                  h6("Use DI, RI, RIR, %MR as extra adjustment to be added to progression table. Value depends on the selected progression table. This will affect the calculation of the %1RM"),
                   br(),
                   textInput(
                     "schemes_adjustment_in_perc1RM",
                     "Extra Adjustment in %1RM",
                     value = "0"
                   ),
-                  h6("Use extra adjustment to be added to estimated %1RM"),
+                  h6("Use extra adjustment to be added to estimated %1RM (after everything is calculated)"),
                   br(),
                   selectInput(
                     "schemes_volume",
                     "Volume",
                     choices = c("Intensive", "Normal", "Extensive"), selected = "Normal"
                   ),
+                  br(),
                   textInput(
                     "schemes_reps_change",
                     "Reps change",
@@ -324,6 +325,13 @@ ui <- dashboardPage(
                     value = "-3, -2, -1, 0"
                   ),
                   h6("Enter progression steps to be utilized. If empty, number of 'reps change' items will be used"),
+                  br(),
+                  textInput(
+                    "schemes_reps_adjustment",
+                    "Reps adjustment",
+                    value = ""
+                  ),
+                  h6("Extra adjustment for the reps after everything is calculated"),
                   # actionButton("schemes_generate_button", "Generate", class = "btn-success", icon = icon("hourglass-start"))
                 ),
                 column(
@@ -1727,6 +1735,8 @@ server <- function(input, output) {
       adjustment <- as.numeric(str_split(input$schemes_adjustment, ",", simplify = TRUE))
       adjustment_perc1RM <- as.numeric(str_split(input$schemes_adjustment_in_perc1RM, ",", simplify = TRUE))
 
+      adjustment_reps <- as.numeric(str_split(input$schemes_reps_adjustment, ",", simplify = TRUE))
+
       volume <- switch(input$schemes_volume,
         "Intensive" = "intensive",
         "Normal" = "normal",
@@ -1739,6 +1749,7 @@ server <- function(input, output) {
       if (any(is.na(reps))) reps <- NULL
       if (any(is.na(adjustment))) adjustment <- 0
       if (any(is.na(adjustment_perc1RM))) adjustment_perc1RM <- 0
+      if (any(is.na(adjustment_reps))) adjustment_reps <- 0
       if (any(is.na(reps_change))) reps_change <- NULL
       if (any(is.na(steps))) steps <- NULL
 
@@ -1763,7 +1774,8 @@ server <- function(input, output) {
         progression_table_control = list(volume = volume, type = progression_data$table_type)
       ) %>%
         mutate(
-          perc_1RM = perc_1RM + (adjustment_perc1RM / 100)
+          perc_1RM = perc_1RM + (adjustment_perc1RM / 100),
+          reps = reps + adjustment_reps,
         )
     } # ,
     # ignoreNULL = FALSE
