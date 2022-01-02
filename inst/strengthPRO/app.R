@@ -635,7 +635,7 @@ server <- function(input, output) {
     gg <- plot_ly() %>%
       add_markers(
         data = observed_data, x = ~perc_1RM, y = ~nRM,
-        hoverinfo = "text", opacity = 0.9, marker = list(color = "black"),
+        hoverinfo = "text", opacity = 0.9, marker = list(color = "black", size = 10),
         text = ~ paste(
           "Observed data\n",
           paste("Weight =", round(Weight, 2), "\n"),
@@ -757,7 +757,7 @@ server <- function(input, output) {
       gg <- plot_ly() %>%
         add_markers(
           data = observed_data, x = ~Weight, y = ~nRM,
-          hoverinfo = "text", opacity = 0.9, marker = list(color = "black"),
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "black", size = 10),
           text = ~ paste(
             "Observed data\n",
             paste("Weight =", round(Weight, 2), "\n"),
@@ -813,7 +813,7 @@ server <- function(input, output) {
       gg <- plot_ly() %>%
         add_markers(
           data = observed_data, x = ~epley_perc1RM, y = ~epley_nRM,
-          hoverinfo = "text", opacity = 0.9, marker = list(color = "#FAA43A"),
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "#FAA43A", size = 10),
           text = ~ paste(
             "Epley's prediction\n",
             paste("Weight =", round(Weight, 2), "\n"),
@@ -823,7 +823,7 @@ server <- function(input, output) {
         ) %>%
         add_markers(
           data = observed_data, x = ~epley_mod_perc1RM, y = ~epley_mod_nRM,
-          hoverinfo = "text", opacity = 0.9, marker = list(color = "#5DA5DA"),
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "#5DA5DA", size = 10),
           text = ~ paste(
             "Modified Epley's prediction\n",
             paste("Weight =", round(Weight, 2), "\n"),
@@ -833,7 +833,7 @@ server <- function(input, output) {
         ) %>%
         add_markers(
           data = observed_data, x = ~linear_perc1RM, y = ~linear_nRM,
-          hoverinfo = "text", opacity = 0.9, marker = list(color = "#60BD68"),
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "#60BD68", size = 10),
           text = ~ paste(
             "Linear prediction\n",
             paste("Weight =", round(Weight, 2), "\n"),
@@ -1007,7 +1007,7 @@ server <- function(input, output) {
     gg <- plot_ly() %>%
       add_markers(
         data = observed_data, y = ~perc_1RM, x = ~nRM,
-        hoverinfo = "text", opacity = 0.9, marker = list(color = "black"),
+        hoverinfo = "text", opacity = 0.9, marker = list(color = "black", size = 10),
         text = ~ paste(
           "Observed data\n",
           paste("Weight =", round(Weight, 2), "\n"),
@@ -1119,7 +1119,7 @@ server <- function(input, output) {
       gg <- plot_ly() %>%
         add_markers(
           data = observed_data, y = ~Weight, x = ~nRM,
-          hoverinfo = "text", opacity = 0.9, marker = list(color = "black"),
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "black", size = 10),
           text = ~ paste(
             "Observed data\n",
             paste("Weight =", round(Weight, 2), "\n"),
@@ -1176,7 +1176,7 @@ server <- function(input, output) {
       gg <- plot_ly() %>%
         add_markers(
           data = observed_data, y = ~epley_perc1RM, x = ~nRM,
-          hoverinfo = "text", opacity = 0.9, marker = list(color = "#FAA43A"),
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "#FAA43A", size = 10),
           text = ~ paste(
             "Epley's prediction\n",
             paste("Weight =", round(Weight, 2), "\n"),
@@ -1186,7 +1186,7 @@ server <- function(input, output) {
         ) %>%
         add_markers(
           data = observed_data, y = ~epley_mod_perc1RM, x = ~nRM,
-          hoverinfo = "text", opacity = 0.9, marker = list(color = "#5DA5DA"),
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "#5DA5DA", size = 10),
           text = ~ paste(
             "Modified Epley's prediction\n",
             paste("Weight =", round(Weight, 2), "\n"),
@@ -1196,7 +1196,7 @@ server <- function(input, output) {
         ) %>%
         add_markers(
           data = observed_data, y = ~linear_perc1RM, x = ~nRM,
-          hoverinfo = "text", opacity = 0.9, marker = list(color = "#60BD68"),
+          hoverinfo = "text", opacity = 0.9, marker = list(color = "#60BD68", size = 10),
           text = ~ paste(
             "Linear prediction\n",
             paste("Weight =", round(Weight, 2), "\n"),

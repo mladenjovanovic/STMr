@@ -1,0 +1,13 @@
+name: strengthPRO
+title: strengthPRO
+username:
+account: athletess
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5386807
+bundleId: 5426984
+url: https://athletess.shinyapps.io/strengthPRO/
+when: 1641138200.2436
+lastSyncTime: 1641138200.24361
+asMultiple: FALSE
+asStatic: FALSE
