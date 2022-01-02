@@ -1,3 +1,5 @@
+# STM 0.0.2.9000
+
 # STM 0.0.2
 
 * Added functionality to forward extra arguments to a custom max-reps functions (i.e., `get_max_perc_1RM()`). Also see `get_max_perc_1RM_k()` functions
