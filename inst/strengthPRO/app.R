@@ -62,7 +62,7 @@ maxErr <- function(model) {
 #################################################
 
 ui <- dashboardPage(
-  dashboardHeader(title = "STMapp"),
+  dashboardHeader(title = "strengthPRO"),
   dashboardSidebar(
     sidebarMenu(
       menuItem("Data Entry", tabName = "menu-item-data-entry", icon = icon("dumbbell")),
@@ -1284,7 +1284,7 @@ server <- function(input, output) {
 
     example_data_wide <- pivot_wider(example_data, id_cols = Scheme, names_from = step, values_from = `%1RM`) %>%
       mutate(
-        `Step 2-1 Diff` = round(`Step 2` - `Step 1` , 2),
+        `Step 2-1 Diff` = round(`Step 2` - `Step 1`, 2),
         `Step 3-2 Diff` = round(`Step 3` - `Step 2`, 2),
         `Step 4-3 Diff` = round(`Step 4` - `Step 3`, 2)
       )
@@ -1303,7 +1303,6 @@ server <- function(input, output) {
       )
     } else if (input$settings_data == "User provided") {
       parameter_value <- input$settings_user_provided_value
-
     } else if ((input$settings_data == "Known 1RM")) {
       models <- known_1RM_models()
 
@@ -1597,8 +1596,6 @@ server <- function(input, output) {
     } else {
       sprintf(print_text, parameter_value)
     }
-
-
   })
 
   # Reps-max plot
@@ -1822,7 +1819,8 @@ server <- function(input, output) {
       mutate(
         perc_1RM = round(perc_1RM * 100, 0),
         set_label = paste0(perc_1RM, "% x ", reps),
-        step = paste0("Step ", index)) %>%
+        step = paste0("Step ", index)
+      ) %>%
       group_by(index) %>%
       mutate(Set = seq(1, n())) %>%
       ungroup() %>%

@@ -3,7 +3,7 @@ citHeader("To cite 'STM' in publications use:")
 citEntry(entry = "Manual",
   title        = "{STM}: Strength Training Manual R Functions",
   author       = personList(as.person("Mladen Jovanović")),
-  note         = "R package version 0.0.1.9000",
+  note         = "R package version 0.0.2",
   year         = "2020",
   address      = "Belgrade, Serbia",
   url          = "https://github.com/mladenjovanovic/STM",
@@ -12,7 +12,7 @@ citEntry(entry = "Manual",
   textVersion  =
   paste("Mladen Jovanović (2020).",
         "STMP: Strength Training Manual R Functions.",
-        "R package version 0.0.1.9000.",
+        "R package version 0.0.2.",
         "url: https://github.com/mladenjovanovic/STM",
         "doi: 10.5281/zenodo.4155015")
 )
