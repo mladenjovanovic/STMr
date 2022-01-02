@@ -627,6 +627,7 @@ server <- function(input, output) {
         epley_nRM = get_max_reps_k(perc_1RM, k = estimated_k),
         epley_mod_nRM = get_max_reps_kmod(perc_1RM, k = estimated_kmod),
         linear_nRM = get_max_reps_klin(perc_1RM, k = estimated_klin),
+        generic_nRM = get_max_reps(perc_1RM),
         weight = perc_1RM * known_1RM_value(),
         perc_1RM = perc_1RM * 100
       )
@@ -670,6 +671,16 @@ server <- function(input, output) {
           paste("Weight =", round(weight, 2), "\n"),
           paste("%1RM =", round(perc_1RM, 2), "\n"),
           paste("Reps =", round(linear_nRM, 2))
+        )
+      ) %>%
+      add_lines(
+        data = model_predictions, x = ~perc_1RM, y = ~generic_nRM,
+        hoverinfo = "text", line = list(color = "grey", dash = "dash"), opacity = 0.5,
+        text = ~ paste(
+          "Generic model\n",
+          paste("Weight =", round(weight, 2), "\n"),
+          paste("%1RM =", round(perc_1RM, 2), "\n"),
+          paste("Reps =", round(generic_nRM, 2))
         )
       ) %>%
       layout(
@@ -986,9 +997,11 @@ server <- function(input, output) {
         epley_perc1RM = 100 * get_max_perc_1RM_k(nRM, k = estimated_k),
         epley_mod_perc1RM = 100 * get_max_perc_1RM_kmod(nRM, kmod = estimated_kmod),
         linear_perc1RM = 100 * get_max_perc_1RM_klin(nRM, klin = estimated_klin),
+        generic_perc1RM = 100 * get_max_perc_1RM(nRM),
         epley_weight = epley_perc1RM * known_1RM_value() / 100,
         epley_mod_weight = epley_mod_perc1RM * known_1RM_value() / 100,
-        linear_weight = linear_perc1RM * known_1RM_value() / 100
+        linear_weight = linear_perc1RM * known_1RM_value() / 100,
+        generic_weight = generic_perc1RM * known_1RM_value() / 100
       )
 
     gg <- plot_ly() %>%
@@ -1029,6 +1042,16 @@ server <- function(input, output) {
           "Linear model\n",
           paste("Weight =", round(linear_weight, 2), "\n"),
           paste("%1RM =", round(linear_perc1RM, 2), "\n"),
+          paste("Reps =", round(nRM, 2))
+        )
+      ) %>%
+      add_lines(
+        data = model_predictions, y = ~generic_perc1RM, x = ~nRM,
+        hoverinfo = "text", line = list(color = "grey", dash = "dash"), opacity = 0.5,
+        text = ~ paste(
+          "Generic model\n",
+          paste("Weight =", round(generic_weight, 2), "\n"),
+          paste("%1RM =", round(generic_perc1RM, 2), "\n"),
           paste("Reps =", round(nRM, 2))
         )
       ) %>%
