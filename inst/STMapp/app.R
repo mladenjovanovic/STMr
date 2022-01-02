@@ -211,6 +211,13 @@ ui <- dashboardPage(
               )
             )
           ), # Setting box
+          box(
+            title = "Prediction equation",
+            id = "equation_progression_tables",
+            collapsible = TRUE,
+            width = 12,
+            textOutput("prediction_equation")
+          ), # Equation
           collapsible_tabBox(
             id = "schemes-tables",
             title = "Progression Table", width = 12,
@@ -283,37 +290,50 @@ ui <- dashboardPage(
                   textInput(
                     "schemes_reps",
                     "Reps",
-                    value = "5, 5, 5, 5"
+                    value = "5, 5, 5, 5",
                   ),
                   textInput(
                     "schemes_adjustment",
-                    "Adjustment",
+                    "Extra Adjustment",
                     value = "0"
                   ),
-                  h6("Use DI, RI, RIR, %MR as adjustment depending on the selected progression table"),
+                  h6("Use DI, RI, RIR, %MR as extra adjustment to be added to progression table. Value depends on the selected progression table"),
+                  br(),
+                  textInput(
+                    "schemes_adjustment_in_perc1RM",
+                    "Extra Adjustment in %1RM",
+                    value = "0"
+                  ),
+                  h6("Use extra adjustment to be added to estimated %1RM"),
                   br(),
                   selectInput(
                     "schemes_volume",
                     "Volume",
-                    choices = c("Intensive", "Normal", "Extensive"), selected = 2
+                    choices = c("Intensive", "Normal", "Extensive"), selected = "Normal"
                   ),
                   textInput(
                     "schemes_reps_change",
                     "Reps change",
                     value = ""
                   ),
+                  h6("How should reps change across progression steps?"),
+                  br(),
                   textInput(
                     "schemes_steps",
                     "Steps",
                     value = "-3, -2, -1, 0"
                   ),
-                  actionButton("schemes_generate_button", "Generate", class = "btn-success", icon = icon("hourglass-start"))
+                  h6("Enter progression steps to be utilized. If empty, number of 'reps change' items will be used"),
+                  # actionButton("schemes_generate_button", "Generate", class = "btn-success", icon = icon("hourglass-start"))
                 ),
                 column(
                   1
                 ),
                 column(
                   8,
+                  dataTableOutput("schemes_generate_scheme_table"),
+                  br(),
+                  br(),
                   plotOutput("schemes_generate_scheme", height = "600px", width = "800px") # Plot generate scheme
                 )
               )
@@ -1220,14 +1240,14 @@ server <- function(input, output) {
       ungroup() %>%
       mutate(
         Scheme = paste0(sets, " x ", reps, " (", volume, ")"),
-        step = paste0("Step ", step)
+        step = paste0("Step ", length(unique(step)) + step)
       )
 
     example_data_wide <- pivot_wider(example_data, id_cols = Scheme, names_from = step, values_from = `%1RM`) %>%
       mutate(
-        `Step (-2)-(-3) Diff` = round(`Step -2` - `Step -3`, 1),
-        `Step (-1)-(-2) Diff` = round(`Step -1` - `Step -2`, 1),
-        `Step (0)-(-1) Diff` = round(`Step 0` - `Step -1`, 1)
+        `Step 2-1 Diff` = round(`Step 2` - `Step 1` , 2),
+        `Step 3-2 Diff` = round(`Step 3` - `Step 2`, 2),
+        `Step 4-3 Diff` = round(`Step 4` - `Step 3`, 2)
       )
 
     example_data_wide
@@ -1342,7 +1362,7 @@ server <- function(input, output) {
       "Deducted Intensity 2.5%" = get_max_perc_1RM_DI_func,
       "Deducted Intensity 5%" = get_max_perc_1RM_DI_func,
       "Relative Intensity" = get_max_perc_1RM_relInt_func,
-      "Perc Drop" = get_max_perc_1RM_RIR_func,
+      "Perc Drop" = get_max_perc_1RM_DI_func,
       "RIR 1" = get_max_perc_1RM_RIR_func,
       "RIR 2" = get_max_perc_1RM_RIR_func,
       "RIR Inc" = get_max_perc_1RM_RIR_func,
@@ -1392,14 +1412,152 @@ server <- function(input, output) {
 
     list(
       reps_max_tbl = reps_max_tbl,
-      reps_max_tbl = reps_max_tbl,
+      table_type = table_type,
       progression_tbl = progression_tbl,
       example_schemes = example_schemes,
       get_max_perc_1RM_func = get_max_perc_1RM_func,
-      progression_table_func = progression_table_func
+      progression_table_func = progression_table_func,
+      parameter_value = parameter_value
     )
   })
 
+
+  # Equation
+  output$prediction_equation <- renderText({
+    parameter_value <- progression_table_data()$parameter_value
+
+    parameter_value <- switch(input$settings_model,
+      "Epley's" = round(parameter_value, 4),
+      "Modified Epley's" = round(parameter_value, 4),
+      "Linear" = round(parameter_value, 1)
+    )
+
+    # RIR
+    k_RIR_grinding <- "%%1RM = 1 / (%g * (Reps + RIR) + 1)"
+    k_RIR_ballistic <- "%%1RM = 1 / (2 * %g * (Reps + RIR) + 1)"
+
+    kmod_RIR_grinding <- "%%1RM = 1 / (%g * (Reps + RIR - 1) + 1)"
+    kmod_RIR_ballistic <- "%%1RM = 1 / (%g * (2 * Reps + 2 * RIR - 1) + 1)"
+
+    klin_RIR_grinding <- "%%1RM = (-RIR + %g - Reps + 1) / %g"
+    klin_RIR_ballistic <- "%%1RM = (-2 * RIR + %g - 2 * Reps + 1) / %g"
+
+    # DI
+    k_DI_grinding <- "%%1RM = 1 / (%g * Reps + 1) - DI"
+    k_DI_ballistic <- "%%1RM = 1 / (2 * %g * Reps + 1) - DI"
+
+    kmod_DI_grinding <- "%%1RM = 1 / (%g * (Reps - 1) + 1) - DI"
+    kmod_DI_ballistic <- "%%1RM = 1 / (%g * (2 * Reps - 1) + 1) - DI"
+
+    klin_DI_grinding <- "%%1RM = (%g - Reps + 1) / %g - DI"
+    klin_DI_ballistic <- "%%1RM = (%g - 2 * Reps + 1) / %g - DI"
+
+    # Relative Intensity
+    k_relInt_grinding <- "%%1RM = RI / (%g * Reps + 1)"
+    k_relInt_ballistic <- "%%1RM = RI / (2 * %g * Reps + 1)"
+
+    kmod_relInt_grinding <- "%%1RM = RI / (%g * (Reps - 1) + 1)"
+    kmod_relInt_ballistic <- "%%1RM = RI / (%g * (2 * Reps - 1) + 1)"
+
+    klin_relInt_grinding <- "%%1RM = RI * (%g - Reps + 1) / %g"
+    klin_relInt_ballistic <- "%%1RM = RI * (%g - 2 * Reps + 1) / %g"
+
+    # %%MR
+    k_percMR_grinding <- "%%1RM = %%MR / (%%MR + %g * Reps)"
+    k_percMR_ballistic <- "%%1RM = %%MR / (%%MR + 2 * %g * Reps)"
+
+    kmod_percMR_grinding <- "%%1RM = 1 / (%g * (Reps / %%MR - 1) + 1)"
+    kmod_percMR_ballistic <- "%%1RM = 1 / (%g * (2 * Reps / %%MR - 1) + 1)"
+
+    klin_percMR_grinding <- "%%1RM = (%g - Reps / %%MR + 1) / %g"
+    klin_percMR_ballistic <- "%%1RM = (%g - 2 * Reps / %%MR + 1) / %g"
+
+    if (progression_table_data()$table_type == "grinding") {
+      if (input$settings_model == "Epley's") {
+        print_text <- switch(input$settings_progression_table,
+          "Deducted Intensity 2.5%" = k_DI_grinding,
+          "Deducted Intensity 5%" = k_DI_grinding,
+          "Relative Intensity" = k_relInt_grinding,
+          "Perc Drop" = k_DI_grinding,
+          "RIR 1" = k_RIR_grinding,
+          "RIR 2" = k_RIR_grinding,
+          "RIR Inc" = k_RIR_grinding,
+          "%MR Step Const" = k_percMR_grinding,
+          "%MR Step Var" = k_percMR_grinding
+        )
+      } else if (input$settings_model == "Modified Epley's") {
+        print_text <- switch(input$settings_progression_table,
+          "Deducted Intensity 2.5%" = kmod_DI_grinding,
+          "Deducted Intensity 5%" = kmod_DI_grinding,
+          "Relative Intensity" = kmod_relInt_grinding,
+          "Perc Drop" = kmod_DI_grinding,
+          "RIR 1" = kmod_RIR_grinding,
+          "RIR 2" = kmod_RIR_grinding,
+          "RIR Inc" = kmod_RIR_grinding,
+          "%MR Step Const" = kmod_percMR_grinding,
+          "%MR Step Var" = kmod_percMR_grinding
+        )
+      } else if (input$settings_model == "Linear") {
+        print_text <- switch(input$settings_progression_table,
+          "Deducted Intensity 2.5%" = klin_DI_grinding,
+          "Deducted Intensity 5%" = klin_DI_grinding,
+          "Relative Intensity" = klin_relInt_grinding,
+          "Perc Drop" = klin_DI_grinding,
+          "RIR 1" = klin_RIR_grinding,
+          "RIR 2" = klin_RIR_grinding,
+          "RIR Inc" = klin_RIR_grinding,
+          "%MR Step Const" = klin_percMR_grinding,
+          "%MR Step Var" = klin_percMR_grinding
+        )
+      }
+    } else { # Ballistic
+      if (input$settings_model == "Epley's") {
+        print_text <- switch(input$settings_progression_table,
+          "Deducted Intensity 2.5%" = k_DI_ballistic,
+          "Deducted Intensity 5%" = k_DI_ballistic,
+          "Relative Intensity" = k_relInt_ballistic,
+          "Perc Drop" = k_DI_ballistic,
+          "RIR 1" = k_RIR_ballistic,
+          "RIR 2" = k_RIR_ballistic,
+          "RIR Inc" = k_RIR_ballistic,
+          "%MR Step Const" = k_percMR_ballistic,
+          "%MR Step Var" = k_percMR_ballistic
+        )
+      } else if (input$settings_model == "Modified Epley's") {
+        print_text <- switch(input$settings_progression_table,
+          "Deducted Intensity 2.5%" = kmod_DI_ballistic,
+          "Deducted Intensity 5%" = kmod_DI_ballistic,
+          "Relative Intensity" = kmod_relInt_ballistic,
+          "Perc Drop" = kmod_DI_ballistic,
+          "RIR 1" = kmod_RIR_ballistic,
+          "RIR 2" = kmod_RIR_ballistic,
+          "RIR Inc" = kmod_RIR_ballistic,
+          "%MR Step Const" = kmod_percMR_ballistic,
+          "%MR Step Var" = kmod_percMR_ballistic
+        )
+      } else if (input$settings_model == "Linear") {
+        print_text <- switch(input$settings_progression_table,
+          "Deducted Intensity 2.5%" = klin_DI_ballistic,
+          "Deducted Intensity 5%" = klin_DI_ballistic,
+          "Relative Intensity" = klin_relInt_ballistic,
+          "Perc Drop" = klin_DI_ballistic,
+          "RIR 1" = klin_RIR_ballistic,
+          "RIR 2" = klin_RIR_ballistic,
+          "RIR Inc" = klin_RIR_ballistic,
+          "%MR Step Const" = klin_percMR_ballistic,
+          "%MR Step Var" = klin_percMR_ballistic
+        )
+      }
+    }
+
+    if (input$settings_model == "Linear") {
+      sprintf(print_text, parameter_value, parameter_value)
+    } else {
+      sprintf(print_text, parameter_value)
+    }
+
+
+  })
 
   # Reps-max plot
   output$reps_max_table <- renderDT({
@@ -1561,18 +1719,101 @@ server <- function(input, output) {
   #
   # ===================================================
 
+  scheme_data <- reactive( # eventReactive(input$schemes_generate_button,
+    {
+      progression_data <- progression_table_data()
+
+      reps <- as.numeric(str_split(input$schemes_reps, ",", simplify = TRUE))
+      adjustment <- as.numeric(str_split(input$schemes_adjustment, ",", simplify = TRUE))
+      adjustment_perc1RM <- as.numeric(str_split(input$schemes_adjustment_in_perc1RM, ",", simplify = TRUE))
+
+      volume <- switch(input$schemes_volume,
+        "Intensive" = "intensive",
+        "Normal" = "normal",
+        "Extensive" = "extensive"
+      )
+
+      reps_change <- as.numeric(str_split(input$schemes_reps_change, ",", simplify = TRUE))
+      steps <- as.numeric(str_split(input$schemes_steps, ",", simplify = TRUE))
+
+      if (any(is.na(reps))) reps <- NULL
+      if (any(is.na(adjustment))) adjustment <- 0
+      if (any(is.na(adjustment_perc1RM))) adjustment_perc1RM <- 0
+      if (any(is.na(reps_change))) reps_change <- NULL
+      if (any(is.na(steps))) steps <- NULL
+
+      adjustment_multiplier <- switch(input$settings_progression_table,
+        "Deducted Intensity 2.5%" = 100,
+        "Deducted Intensity 5%" = 100,
+        "Relative Intensity" = 100,
+        "Perc Drop" = 100,
+        "RIR 1" = 1,
+        "RIR 2" = 1,
+        "RIR Inc" = 1,
+        "%MR Step Const" = 100,
+        "%MR Step Var" = 100
+      )
+
+      scheme <- scheme_generic(
+        reps = reps,
+        adjustment = adjustment / adjustment_multiplier,
+        vertical_planning = vertical_planning,
+        vertical_planning_control = list(reps_change = reps_change, step = steps),
+        progression_table = progression_data$progression_table_func,
+        progression_table_control = list(volume = volume, type = progression_data$table_type)
+      ) %>%
+        mutate(
+          perc_1RM = perc_1RM + (adjustment_perc1RM / 100)
+        )
+    } # ,
+    # ignoreNULL = FALSE
+  )
+
+  output$schemes_generate_scheme_table <- renderDT({
+    scheme <- scheme_data()
+
+    scheme <- scheme %>%
+      mutate(
+        perc_1RM = round(perc_1RM * 100, 0),
+        set_label = paste0(perc_1RM, "% x ", reps),
+        step = paste0("Step ", index)) %>%
+      group_by(index) %>%
+      mutate(Set = seq(1, n())) %>%
+      ungroup() %>%
+      pivot_wider(id_cols = Set, names_from = step, values_from = set_label)
+
+    DT::datatable(
+      scheme,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+
   output$schemes_generate_scheme <- renderPlot({
-    scheme <- scheme_wave(
-      reps = c(12, 10, 8, 12, 10, 8),
-      # Adjusting sets to use lower %1RM (RIR Inc method used, so RIR adjusted)
-      adjustment = c(4, 2, 0, 6, 4, 2),
-      vertical_planning = vertical_linear,
-      vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
-      progression_table = RIR_increment,
-      progression_table_control = list(volume = "extensive")
+    progression_data <- progression_table_data()
+
+    adjustment_multiplier <- switch(input$settings_progression_table,
+      "Deducted Intensity 2.5%" = 100,
+      "Deducted Intensity 5%" = 100,
+      "Relative Intensity" = 100,
+      "Perc Drop" = 100,
+      "RIR 1" = 1,
+      "RIR 2" = 1,
+      "RIR Inc" = 1,
+      "%MR Step Const" = 100,
+      "%MR Step Var" = 100
     )
 
-    plot_scheme(scheme)
+    scheme <- scheme_data()
+    plot_scheme(scheme, adjustment_multiplier = adjustment_multiplier, signif_digits = 3)
   })
 }
 
