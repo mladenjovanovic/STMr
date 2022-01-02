@@ -15,7 +15,7 @@ percMR_step_generic <- function(reps,
   rep_percMR <- rep_start + (reps - 1) * rep_step
   step_percMR <- step * (inc_start + (reps - 1) * inc_step)
 
-  adjustment <- 1 - (rep_percMR + step_percMR + adjustment)
+  adjustment <- 1 - (rep_percMR + step_percMR - adjustment)
   perc_1RM <- func_max_perc_1RM(
     max_reps = reps,
     adjustment = adjustment,
