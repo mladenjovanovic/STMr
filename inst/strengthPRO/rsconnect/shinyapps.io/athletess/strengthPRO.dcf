@@ -5,9 +5,9 @@ account: athletess
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5386807
-bundleId: 5426984
+bundleId: 5427049
 url: https://athletess.shinyapps.io/strengthPRO/
-when: 1641138200.2436
-lastSyncTime: 1641138200.24361
+when: 1641139992.648
+lastSyncTime: 1641139992.64801
 asMultiple: FALSE
 asStatic: FALSE
