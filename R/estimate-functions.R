@@ -127,7 +127,7 @@ estimate_k_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, weight
     m1 <- stats::nls(
       nRM ~ ((1 / k) / (weight / `0RM`)) - (1 / k),
       data =  df,
-      start = list(`0RM` = max(weight), k = 1),
+      start = list(k = 1, `0RM` = max(weight)),
       weights = df$reg_weights,
       ...
     )
@@ -135,7 +135,7 @@ estimate_k_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, weight
     m1 <- stats::nls(
       weight ~ `0RM` / (k * nRM + 1),
       data =  df,
-      start = list(`0RM` = max(weight), k = 1),
+      start = list(k = 1, `0RM` = max(weight)),
       weights = df$reg_weights,
       ...
     )
@@ -170,7 +170,7 @@ estimate_kmod_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, wei
     m1 <- stats::nls(
       nRM ~ (((weight / `1RM`) * (kmod - 1)) + 1) / (kmod * (weight / `1RM`)),
       data =  df,
-      start = list(`1RM` = max(weight), kmod = 1),
+      start = list(kmod = 1, `1RM` = max(weight)),
       weights = df$reg_weights,
       ...
     )
@@ -178,7 +178,7 @@ estimate_kmod_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, wei
     m1 <- stats::nls(
       weight ~ `1RM` / (kmod * (nRM - 1) + 1),
       data =  df,
-      start = list(`1RM` = max(weight), kmod = 1),
+      start = list(kmod = 1, `1RM` = max(weight)),
       weights = df$reg_weights,
       ...
     )
@@ -257,7 +257,7 @@ estimate_klin_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, wei
     m1 <- stats::nls(
       nRM ~ (1 - (weight / `1RM`)) * klin + 1,
       data =  df,
-      start = list(`1RM` = max(weight), klin = 1),
+      start = list(klin = 1, `1RM` = max(weight)),
       weights = df$reg_weights,
       ...
     )
@@ -265,7 +265,7 @@ estimate_klin_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, wei
     m1 <- stats::nls(
       weight ~ (`1RM` * (klin - nRM + 1)) / klin,
       data =  df,
-      start = list(`1RM` = max(weight), klin = 1),
+      start = list(klin = 1, `1RM` = max(weight)),
       weights = df$reg_weights,
       ...
     )
@@ -302,5 +302,5 @@ estimate_klin_1RM <- function(weight, reps, adjustment = 0, reverse = FALSE, wei
 #' # It also works for the "reverse" model
 #' get_predicted_1RM_from_k_model(m2)
 get_predicted_1RM_from_k_model <- function(model) {
-  stats::coef(model)[[1]] / (stats::coef(model)[[2]] + 1)
+  stats::coef(model)[[2]] / (stats::coef(model)[[1]] + 1)
 }
