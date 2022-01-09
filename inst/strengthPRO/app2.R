@@ -105,7 +105,220 @@ ui <- dashboardPage(
                      a given nRM."),
               )
             )
-          ) # Single Athlete Data Entry
+          ), # Single Athlete Data Entry
+          box(
+            title = "Settings",
+            width = 12,
+            collapsible = TRUE,
+            fluidRow(
+              column(
+                4,
+                selectInput(
+                  "single_athlete_settings_model",
+                  label = "Model",
+                  choices = c("Epley's", "Modified Epley's", "Linear"),
+                  selected = 2
+                )
+              ),
+              column(
+                4,
+                selectInput(
+                  "single_athlete_settings_parameters",
+                  label = "Parameters",
+                  choices = c("Estimated", "Generic", "User provided"),
+                  selected = 1
+                )
+              ),
+              column(
+                4,
+                numericInput(
+                  "single_athlete_settings_user_provided_value",
+                  label = "User Parameter Value",
+                  value = 0.0333, min = 0.001, max = 100, step = 0.0001
+                )
+              )
+            ),
+            fluidRow(
+              column(
+                6,
+                selectInput(
+                  "single_athlete_settings_progression_table",
+                  label = "Progression table",
+                  choices = c(
+                    "Deducted Intensity 2.5%",
+                    "Deducted Intensity 5%",
+                    "Relative Intensity",
+                    "Perc Drop",
+                    "RIR 1",
+                    "RIR 2",
+                    "RIR Inc",
+                    "%MR Step Const",
+                    "%MR Step Var"
+                  ),
+                  selected = "RIR Inc"
+                )
+              ),
+              column(
+                4,
+                selectInput(
+                  "single_athlete_settings_progression_table_type",
+                  label = "Table type",
+                  choices = c(
+                    "Grinding",
+                    "Ballistic"
+                  )
+                )
+              )
+            )
+          ), # Single Athlete Settings
+          box(
+            title = "Prediction equation",
+            collapsible = TRUE,
+            width = 12,
+            textOutput("single_athlete_prediction_equation")
+          ), # Single Athlete Prediction equation
+          collapsible_tabBox(
+            id = "single_athlete_schemes-tables",
+            title = "Progression Table", width = 12,
+            # Reps Max Table
+            tabPanel(
+              title = "Reps-Max Table",
+              fluidPage(
+                dataTableOutput("single_athlete_reps_max_table")
+              )
+            ), # Reps Max Table Panel
+            # Adjustments
+            tabPanel(
+              title = "Progressions Adjustments",
+              fluidPage(
+                column(
+                  4,
+                  h5("Intensive variant"),
+                  dataTableOutput("single_athlete_progression_table_intensive_adjustment")
+                ),
+                column(
+                  4,
+                  h5("Normal variant"),
+                  dataTableOutput("single_athlete_progression_table_normal_adjustment")
+                ),
+                column(
+                  4,
+                  h5("Extensive variant"),
+                  dataTableOutput("single_athlete_progression_table_extensive_adjustment")
+                )
+              )
+            ), # Adjustments
+            # Progression %1RMs
+            tabPanel(
+              title = "Progressions %1RM",
+              fluidPage(
+                column(
+                  4,
+                  h5("Intensive variant"),
+                  dataTableOutput("single_athlete_progression_table_intensive_perc1RM")
+                ),
+                column(
+                  4,
+                  h5("Normal variant"),
+                  dataTableOutput("single_athlete_progression_table_normal_perc1RM")
+                ),
+                column(
+                  4,
+                  h5("Extensive variant"),
+                  dataTableOutput("single_athlete_progression_table_extensive_perc1RM")
+                )
+              )
+            ) # Progression %1RMs
+          ), # Progression Tab box
+          collapsible_tabBox(
+            title = "Set and Rep Schemes", width = 12,
+            # Generic
+            tabPanel(
+              title = "Example",
+              fluidPage(
+                dataTableOutput("single_athlete_progression_table_example_scheme")
+              )
+            ), # Examples tab
+            tabPanel(
+              title = "Custom Set and Rep Scheme",
+              fluidPage(
+                column(
+                  3,
+                  h5("When entering numerics use ',' to delimitate (e.g., '5, 3, 1')"),
+                  textInput(
+                    "single_athlete_example_schemes_reps",
+                    "Reps",
+                    value = "5, 5, 5, 5",
+                  ),
+                  textInput(
+                    "single_athlete_example_schemes_adjustment",
+                    "Extra Adjustment",
+                    value = "0"
+                  ),
+                  h6("Use DI, RI, RIR, %MR as extra adjustment to be added to progression table. Value depends on the selected progression table. This will affect the calculation of the %1RM"),
+                  br(),
+                  textInput(
+                    "single_athlete_example_schemes_adjustment_in_perc1RM",
+                    "Extra Adjustment in %1RM",
+                    value = "0"
+                  ),
+                  h6("Use extra adjustment to be added to estimated %1RM (after everything is calculated)"),
+                  br(),
+                  selectInput(
+                    "single_athlete_example_schemes_volume",
+                    "Volume",
+                    choices = c("Intensive", "Normal", "Extensive"), selected = "Normal"
+                  ),
+                  br(),
+                  textInput(
+                    "single_athlete_example_schemes_reps_change",
+                    "Reps change",
+                    value = ""
+                  ),
+                  h6("How should reps change across progression steps?"),
+                  br(),
+                  textInput(
+                    "single_athlete_example_schemes_steps",
+                    "Steps",
+                    value = "-3, -2, -1, 0"
+                  ),
+                  h6("Enter progression steps to be utilized. If empty, number of 'reps change' items will be used"),
+                  br(),
+                  textInput(
+                    "single_athlete_example_schemes_reps_adjustment",
+                    "Reps adjustment",
+                    value = ""
+                  ),
+                  h6("Extra adjustment for the reps after everything is calculated"),
+                  # actionButton("schemes_generate_button", "Generate", class = "btn-success", icon = icon("hourglass-start"))
+                ),
+                column(
+                  1
+                ),
+                column(
+                  8,
+                  checkboxInput(
+                    "single_athlete_example_schemes_include_adjustment",
+                    "Include Adjustment info?",
+                    value = TRUE),
+                  dataTableOutput("single_athlete_example_schemes_generate_scheme_table"),
+                  br(),
+                  br(),
+                  plotOutput("single_athlete_example_schemes_generate_scheme", height = "600px", width = "800px") # Plot generate scheme
+                )
+              )
+            )
+          ), # Single Athlete Examples
+          box(
+            title = "Report",
+            collapsible = TRUE,
+            width = 12,
+            downloadButton(
+              "single_athlete_report_button",
+              "Generate Excel Report",
+              class = "btn-large btn-success",
+              icon = icon("hourglass-start"))
+          ),
         ), # Single Athlete
         tabItem(
           tabName = "menu-item-multiple-athletes"
