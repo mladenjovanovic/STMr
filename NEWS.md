@@ -1,5 +1,7 @@
 # STM 0.0.2.9000
 
+* Estimated `1RM` in `estimate_xxx_1RM()` functions is now in the second plance in coefficient order
+
 # STM 0.0.2
 
 * Added functionality to forward extra arguments to a custom max-reps functions (i.e., `get_max_perc_1RM()`). Also see `get_max_perc_1RM_k()` functions
