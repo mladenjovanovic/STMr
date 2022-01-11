@@ -107,9 +107,10 @@ ui <- dashboardPage(
             )
           ), # Single Athlete Data Entry
           box(
-            title = "Settings",
+            title = "Progression Table Settings",
             width = 12,
             collapsible = TRUE,
+            background = "light-blue",
             fluidRow(
               column(
                 4,
@@ -169,16 +170,20 @@ ui <- dashboardPage(
                   )
                 )
               )
-            )
+            ),
+            br(),
+            HTML("<b>Note:</b> Use the above settings to customize progression table you want to use")
           ), # Single Athlete Settings
           box(
             title = "Prediction equation",
             collapsible = TRUE,
             width = 12,
-            textOutput("single_athlete_prediction_equation")
+            htmlOutput("single_athlete_prediction_equation"),
+            br(),
+            HTML("<b>Note:</b> Use the above prediction equation to estimate %1RM needed to be used, given
+                 the target number of repetitions, model selected, and adjustment level")
           ), # Single Athlete Prediction equation
           collapsible_tabBox(
-            id = "single_athlete_schemes-tables",
             title = "Progression Table", width = 12,
             # Reps Max Table
             tabPanel(
@@ -300,7 +305,8 @@ ui <- dashboardPage(
                   checkboxInput(
                     "single_athlete_example_schemes_include_adjustment",
                     "Include Adjustment info?",
-                    value = TRUE),
+                    value = TRUE
+                  ),
                   dataTableOutput("single_athlete_example_schemes_generate_scheme_table"),
                   br(),
                   br(),
@@ -317,7 +323,8 @@ ui <- dashboardPage(
               "single_athlete_report_button",
               "Generate Excel Report",
               class = "btn-large btn-success",
-              icon = icon("hourglass-start"))
+              icon = icon("hourglass-start")
+            )
           ),
         ), # Single Athlete
         tabItem(
@@ -724,7 +731,7 @@ server <- function(input, output) {
         epley_k = epley_k,
         epley_kmod = epley_kmod,
         linear_klin = linear_klin,
-        model_predictions_df =  model_predictions_df,
+        model_predictions_df = model_predictions_df,
         plotly_plot = plotly_plot
       )
     },
@@ -752,6 +759,184 @@ server <- function(input, output) {
     single_athlete_model()$plotly_plot
   })
 
+  #############################################
+  # Progression Tables
+  ############################################
+
+  single_athlete_progression_table <- reactive({
+
+    # Options from the GUI
+    model_used <- input$single_athlete_settings_model
+    parameters <- input$single_athlete_settings_parameters
+    user_value <- input$single_athlete_settings_user_provided_value
+    progression_table <- input$single_athlete_settings_progression_table
+    progression_table_type <- input$single_athlete_settings_progression_table_type
+
+    # Estimates
+    model_estimates <- single_athlete_model()
+
+    # Get the parameter value
+    if (parameters == "Generic") {
+      parameter_value <- switch(model_used,
+        "Epley's" = 0.0333,
+        "Modified Epley's" = 0.0353,
+        "Linear" = 33
+      )
+    } else if (parameters == "User provided") {
+      parameter_value <- user_value
+    } else if ((parameters == "Estimated")) {
+      parameter_value <- switch(model_used,
+        "Epley's" = model_estimates$epley_k,
+        "Modified Epley's" = model_estimates$epley_kmod,
+        "Linear" = model_estimates$linear_klin
+      )
+    }
+
+    # Prediction equation
+    prediction_equation <- ""
+
+    eq_parameter_value <- switch(model_used,
+      "Epley's" = round(parameter_value, 4),
+      "Modified Epley's" = round(parameter_value, 4),
+      "Linear" = round(parameter_value, 1)
+    )
+
+    # RIR
+    k_RIR_grinding <- "%%1RM = 1 / (%g * (Reps + RIR) + 1)"
+    k_RIR_ballistic <- "%%1RM = 1 / (2 * %g * (Reps + RIR) + 1)"
+
+    kmod_RIR_grinding <- "%%1RM = 1 / (%g * (Reps + RIR - 1) + 1)"
+    kmod_RIR_ballistic <- "%%1RM = 1 / (%g * (2 * Reps + 2 * RIR - 1) + 1)"
+
+    klin_RIR_grinding <- "%%1RM = (-RIR + %g - Reps + 1) / %g"
+    klin_RIR_ballistic <- "%%1RM = (-2 * RIR + %g - 2 * Reps + 1) / %g"
+
+    # DI
+    k_DI_grinding <- "%%1RM = 1 / (%g * Reps + 1) - DI"
+    k_DI_ballistic <- "%%1RM = 1 / (2 * %g * Reps + 1) - DI"
+
+    kmod_DI_grinding <- "%%1RM = 1 / (%g * (Reps - 1) + 1) - DI"
+    kmod_DI_ballistic <- "%%1RM = 1 / (%g * (2 * Reps - 1) + 1) - DI"
+
+    klin_DI_grinding <- "%%1RM = (%g - Reps + 1) / %g - DI"
+    klin_DI_ballistic <- "%%1RM = (%g - 2 * Reps + 1) / %g - DI"
+
+    # Relative Intensity
+    k_relInt_grinding <- "%%1RM = RI / (%g * Reps + 1)"
+    k_relInt_ballistic <- "%%1RM = RI / (2 * %g * Reps + 1)"
+
+    kmod_relInt_grinding <- "%%1RM = RI / (%g * (Reps - 1) + 1)"
+    kmod_relInt_ballistic <- "%%1RM = RI / (%g * (2 * Reps - 1) + 1)"
+
+    klin_relInt_grinding <- "%%1RM = RI * (%g - Reps + 1) / %g"
+    klin_relInt_ballistic <- "%%1RM = RI * (%g - 2 * Reps + 1) / %g"
+
+    # %%MR
+    k_percMR_grinding <- "%%1RM = %%MR / (%%MR + %g * Reps)"
+    k_percMR_ballistic <- "%%1RM = %%MR / (%%MR + 2 * %g * Reps)"
+
+    kmod_percMR_grinding <- "%%1RM = 1 / (%g * (Reps / %%MR - 1) + 1)"
+    kmod_percMR_ballistic <- "%%1RM = 1 / (%g * (2 * Reps / %%MR - 1) + 1)"
+
+    klin_percMR_grinding <- "%%1RM = (%g - Reps / %%MR + 1) / %g"
+    klin_percMR_ballistic <- "%%1RM = (%g - 2 * Reps / %%MR + 1) / %g"
+
+    if (progression_table_type == "Grinding") {
+      if (model_used == "Epley's") {
+        print_text <- switch(progression_table,
+          "Deducted Intensity 2.5%" = k_DI_grinding,
+          "Deducted Intensity 5%" = k_DI_grinding,
+          "Relative Intensity" = k_relInt_grinding,
+          "Perc Drop" = k_DI_grinding,
+          "RIR 1" = k_RIR_grinding,
+          "RIR 2" = k_RIR_grinding,
+          "RIR Inc" = k_RIR_grinding,
+          "%MR Step Const" = k_percMR_grinding,
+          "%MR Step Var" = k_percMR_grinding
+        )
+      } else if (model_used == "Modified Epley's") {
+        print_text <- switch(progression_table,
+          "Deducted Intensity 2.5%" = kmod_DI_grinding,
+          "Deducted Intensity 5%" = kmod_DI_grinding,
+          "Relative Intensity" = kmod_relInt_grinding,
+          "Perc Drop" = kmod_DI_grinding,
+          "RIR 1" = kmod_RIR_grinding,
+          "RIR 2" = kmod_RIR_grinding,
+          "RIR Inc" = kmod_RIR_grinding,
+          "%MR Step Const" = kmod_percMR_grinding,
+          "%MR Step Var" = kmod_percMR_grinding
+        )
+      } else if (model_used == "Linear") {
+        print_text <- switch(progression_table,
+          "Deducted Intensity 2.5%" = klin_DI_grinding,
+          "Deducted Intensity 5%" = klin_DI_grinding,
+          "Relative Intensity" = klin_relInt_grinding,
+          "Perc Drop" = klin_DI_grinding,
+          "RIR 1" = klin_RIR_grinding,
+          "RIR 2" = klin_RIR_grinding,
+          "RIR Inc" = klin_RIR_grinding,
+          "%MR Step Const" = klin_percMR_grinding,
+          "%MR Step Var" = klin_percMR_grinding
+        )
+      }
+    } else { # Ballistic
+      if (model_used == "Epley's") {
+        print_text <- switch(progression_table,
+          "Deducted Intensity 2.5%" = k_DI_ballistic,
+          "Deducted Intensity 5%" = k_DI_ballistic,
+          "Relative Intensity" = k_relInt_ballistic,
+          "Perc Drop" = k_DI_ballistic,
+          "RIR 1" = k_RIR_ballistic,
+          "RIR 2" = k_RIR_ballistic,
+          "RIR Inc" = k_RIR_ballistic,
+          "%MR Step Const" = k_percMR_ballistic,
+          "%MR Step Var" = k_percMR_ballistic
+        )
+      } else if (model_used == "Modified Epley's") {
+        print_text <- switch(progression_table,
+          "Deducted Intensity 2.5%" = kmod_DI_ballistic,
+          "Deducted Intensity 5%" = kmod_DI_ballistic,
+          "Relative Intensity" = kmod_relInt_ballistic,
+          "Perc Drop" = kmod_DI_ballistic,
+          "RIR 1" = kmod_RIR_ballistic,
+          "RIR 2" = kmod_RIR_ballistic,
+          "RIR Inc" = kmod_RIR_ballistic,
+          "%MR Step Const" = kmod_percMR_ballistic,
+          "%MR Step Var" = kmod_percMR_ballistic
+        )
+      } else if (model_used == "Linear") {
+        print_text <- switch(progression_table,
+          "Deducted Intensity 2.5%" = klin_DI_ballistic,
+          "Deducted Intensity 5%" = klin_DI_ballistic,
+          "Relative Intensity" = klin_relInt_ballistic,
+          "Perc Drop" = klin_DI_ballistic,
+          "RIR 1" = klin_RIR_ballistic,
+          "RIR 2" = klin_RIR_ballistic,
+          "RIR Inc" = klin_RIR_ballistic,
+          "%MR Step Const" = klin_percMR_ballistic,
+          "%MR Step Var" = klin_percMR_ballistic
+        )
+      }
+    }
+
+    if (model_used == "Linear") {
+      prediction_equation <- sprintf(print_text, eq_parameter_value, eq_parameter_value)
+    } else {
+      prediction_equation <- sprintf(print_text, eq_parameter_value)
+    }
+
+
+    # Reutnr object
+    list(
+      parameter_value = parameter_value,
+      prediction_equation = prediction_equation
+    )
+  })
+
+  # Print prediction equation
+  output$single_athlete_prediction_equation <- renderText({
+    paste0("<b>", single_athlete_progression_table()$prediction_equation, "</b>")
+  })
 }
 
 
