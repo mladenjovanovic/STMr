@@ -1027,7 +1027,7 @@ server <- function(input, output) {
       pivot_wider(id_cols = Reps, names_from = adjustment_val, values_from = perc_1RM)
 
     # Progression table
-    progression_tbl_long <- generate_progression_table(
+    progression_table_long<- generate_progression_table(
       progression_table = progression_table_func,
       type = tolower(progression_table_type),
       reps = 1:12,
@@ -1052,28 +1052,28 @@ server <- function(input, output) {
 
     # Convert to wide
     # %1RM
-    progression_table_intensive_perc1RM <- progression_tbl_long %>%
+    progression_table_intensive_perc1RM <- progression_table_long%>%
       filter(volume == "intensive") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = perc_1RM)
 
-    progression_table_normal_perc1RM <- progression_tbl_long %>%
+    progression_table_normal_perc1RM <- progression_table_long%>%
       filter(volume == "normal") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = perc_1RM)
 
-    progression_table_extensive_perc1RM <- progression_tbl_long %>%
+    progression_table_extensive_perc1RM <- progression_table_long%>%
       filter(volume == "extensive") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = perc_1RM)
 
     # Adjustments
-    progression_table_intensive_adjustment <- progression_tbl_long %>%
+    progression_table_intensive_adjustment <- progression_table_long%>%
       filter(volume == "intensive") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = adjustment)
 
-    progression_table_normal_adjustment <- progression_tbl_long %>%
+    progression_table_normal_adjustment <- progression_table_long%>%
       filter(volume == "normal") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = adjustment)
 
-    progression_table_extensive_adjustment <- progression_tbl_long %>%
+    progression_table_extensive_adjustment <- progression_table_long%>%
       filter(volume == "extensive") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = adjustment)
 
@@ -1081,8 +1081,11 @@ server <- function(input, output) {
     list(
       parameter_value = parameter_value,
       prediction_equation = prediction_equation,
+      progression_table_func = progression_table_func,
+      get_max_perc_1RM_func = get_max_perc_1RM_func,
       reps_max_tbl = reps_max_tbl,
-      progression_tbl_long =  progression_tbl_long,
+      progression_table_long = progression_table_long,
+      progression_table_type = progression_table_type,
       progression_table_intensive_perc1RM = progression_table_intensive_perc1RM,
       progression_table_normal_perc1RM = progression_table_normal_perc1RM,
       progression_table_extensive_perc1RM = progression_table_extensive_perc1RM,
@@ -1211,6 +1214,85 @@ server <- function(input, output) {
         info = FALSE
       )
     )
+  })
+
+  ############################################
+  #  Generic Examples
+  ###########################################
+
+  single_athlete_generic_example <- reactive({
+    progression_table <- single_athlete_progression_table()
+
+    # Generic example
+    # Function to create example
+    create_example <- function(progression_table, ...) {
+      example_data <- expand_grid(
+        reps = c(3, 5, 10),
+        sets = c(1, 3, 5),
+        step = c(-3, -2, -1, 0)
+      ) %>%
+        mutate(
+          volume = ifelse(sets == 1, "intensive",
+                          ifelse(sets == 3, "normal",
+                                 ifelse(sets == 5, "extensive", NA)
+                          )
+          ),
+          volume = factor(volume, levels = c("intensive", "normal", "extensive"))
+        ) %>%
+        rowwise() %>%
+        mutate(
+          `%1RM` = round(100 * progression_table(reps = reps, step = step, volume = volume, ...)$perc_1RM, 1)
+        ) %>%
+        ungroup() %>%
+        mutate(
+          Scheme = paste0(sets, " x ", reps, " (", volume, ")"),
+          step = paste0("Step ", length(unique(step)) + step)
+        )
+
+      example_data_wide <- pivot_wider(example_data, id_cols = Scheme, names_from = step, values_from = `%1RM`) %>%
+        mutate(
+          `Step 2-1 Diff` = round(`Step 2` - `Step 1`, 2),
+          `Step 3-2 Diff` = round(`Step 3` - `Step 2`, 2),
+          `Step 4-3 Diff` = round(`Step 4` - `Step 3`, 2)
+        )
+
+      example_data_wide
+    }
+
+    generic_example <- create_example(
+      progression_table$progression_table_func,
+      type = tolower(progression_table$progression_table_type))
+
+    # Return object
+    generic_example
+
+  })
+
+
+  # Example schemes
+  output$single_athlete_progression_table_example_scheme <- renderDT({
+    example_schemes <- single_athlete_generic_example()
+
+    DT::datatable(
+      example_schemes,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+  ############################################
+  #  Custom Scheme
+  ###########################################
+
+  single_athlete_custom_scheme <- reactive({
+
   })
 
 }
