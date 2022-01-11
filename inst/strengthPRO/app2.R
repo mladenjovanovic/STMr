@@ -321,7 +321,7 @@ ui <- dashboardPage(
                   dataTableOutput("single_athlete_example_schemes_generate_scheme_table"),
                   br(),
                   br(),
-                  plotOutput("single_athlete_example_schemes_generate_scheme", height = "600px", width = "800px") # Plot generate scheme
+                  plotOutput("single_athlete_example_schemes_generate_scheme_plot") # Plot generate scheme
                 )
               )
             )
@@ -1027,7 +1027,7 @@ server <- function(input, output) {
       pivot_wider(id_cols = Reps, names_from = adjustment_val, values_from = perc_1RM)
 
     # Progression table
-    progression_table_long<- generate_progression_table(
+    progression_table_long <- generate_progression_table(
       progression_table = progression_table_func,
       type = tolower(progression_table_type),
       reps = 1:12,
@@ -1052,33 +1052,35 @@ server <- function(input, output) {
 
     # Convert to wide
     # %1RM
-    progression_table_intensive_perc1RM <- progression_table_long%>%
+    progression_table_intensive_perc1RM <- progression_table_long %>%
       filter(volume == "intensive") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = perc_1RM)
 
-    progression_table_normal_perc1RM <- progression_table_long%>%
+    progression_table_normal_perc1RM <- progression_table_long %>%
       filter(volume == "normal") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = perc_1RM)
 
-    progression_table_extensive_perc1RM <- progression_table_long%>%
+    progression_table_extensive_perc1RM <- progression_table_long %>%
       filter(volume == "extensive") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = perc_1RM)
 
     # Adjustments
-    progression_table_intensive_adjustment <- progression_table_long%>%
+    progression_table_intensive_adjustment <- progression_table_long %>%
       filter(volume == "intensive") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = adjustment)
 
-    progression_table_normal_adjustment <- progression_table_long%>%
+    progression_table_normal_adjustment <- progression_table_long %>%
       filter(volume == "normal") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = adjustment)
 
-    progression_table_extensive_adjustment <- progression_table_long%>%
+    progression_table_extensive_adjustment <- progression_table_long %>%
       filter(volume == "extensive") %>%
       pivot_wider(id_cols = Reps, names_from = Step, values_from = adjustment)
 
     # Return object
     list(
+      progression_table_name = progression_table,
+      progression_table_type = progression_table_type,
       parameter_value = parameter_value,
       prediction_equation = prediction_equation,
       progression_table_func = progression_table_func,
@@ -1120,7 +1122,6 @@ server <- function(input, output) {
 
   # Progression Table adjustments
   output$single_athlete_progression_table_intensive_adjustment <- renderDT({
-
     DT::datatable(
       single_athlete_progression_table()$progression_table_intensive_adjustment,
       rownames = FALSE,
@@ -1136,7 +1137,6 @@ server <- function(input, output) {
   })
 
   output$single_athlete_progression_table_normal_adjustment <- renderDT({
-
     DT::datatable(
       single_athlete_progression_table()$progression_table_normal_adjustment,
       rownames = FALSE,
@@ -1152,7 +1152,6 @@ server <- function(input, output) {
   })
 
   output$single_athlete_progression_table_extensive_adjustment <- renderDT({
-
     DT::datatable(
       single_athlete_progression_table()$progression_table_extensive_adjustment,
       rownames = FALSE,
@@ -1169,7 +1168,6 @@ server <- function(input, output) {
 
   # Progression Table %1RM
   output$single_athlete_progression_table_intensive_perc1RM <- renderDT({
-
     DT::datatable(
       single_athlete_progression_table()$progression_table_intensive_perc1RM,
       rownames = FALSE,
@@ -1185,7 +1183,6 @@ server <- function(input, output) {
   })
 
   output$single_athlete_progression_table_normal_perc1RM <- renderDT({
-
     DT::datatable(
       single_athlete_progression_table()$progression_table_normal_perc1RM,
       rownames = FALSE,
@@ -1201,7 +1198,6 @@ server <- function(input, output) {
   })
 
   output$single_athlete_progression_table_extensive_perc1RM <- renderDT({
-
     DT::datatable(
       single_athlete_progression_table()$progression_table_extensive_perc1RM,
       rownames = FALSE,
@@ -1233,9 +1229,9 @@ server <- function(input, output) {
       ) %>%
         mutate(
           volume = ifelse(sets == 1, "intensive",
-                          ifelse(sets == 3, "normal",
-                                 ifelse(sets == 5, "extensive", NA)
-                          )
+            ifelse(sets == 3, "normal",
+              ifelse(sets == 5, "extensive", NA)
+            )
           ),
           volume = factor(volume, levels = c("intensive", "normal", "extensive"))
         ) %>%
@@ -1261,11 +1257,11 @@ server <- function(input, output) {
 
     generic_example <- create_example(
       progression_table$progression_table_func,
-      type = tolower(progression_table$progression_table_type))
+      type = tolower(progression_table$progression_table_type)
+    )
 
     # Return object
     generic_example
-
   })
 
 
@@ -1292,7 +1288,104 @@ server <- function(input, output) {
   ###########################################
 
   single_athlete_custom_scheme <- reactive({
+    progression_table <- single_athlete_progression_table()
 
+    reps <- as.numeric(str_split(input$single_athlete_example_schemes_reps, ",", simplify = TRUE))
+    adjustment <- as.numeric(str_split(input$single_athlete_example_schemes_adjustment, ",", simplify = TRUE))
+    adjustment_perc1RM <- as.numeric(str_split(input$single_athlete_example_schemes_adjustment_in_perc1RM, ",", simplify = TRUE))
+    adjustment_reps <- as.numeric(str_split(input$single_athlete_example_schemes_reps_adjustment, ",", simplify = TRUE))
+
+    include_adjustments <- input$single_athlete_example_schemes_include_adjustment
+
+    volume <- tolower(input$single_athlete_example_schemes_volume)
+
+    reps_change <- as.numeric(str_split(input$single_athlete_example_schemes_reps_change, ",", simplify = TRUE))
+    steps <- as.numeric(str_split(input$single_athlete_example_schemes_steps, ",", simplify = TRUE))
+
+    if (any(is.na(reps))) reps <- NULL
+    if (any(is.na(adjustment))) adjustment <- 0
+    if (any(is.na(adjustment_perc1RM))) adjustment_perc1RM <- 0
+    if (any(is.na(adjustment_reps))) adjustment_reps <- 0
+    if (any(is.na(reps_change))) reps_change <- NULL
+    if (any(is.na(steps))) steps <- NULL
+
+    adjustment_multiplier <- switch(progression_table$progression_table_name,
+      "Deducted Intensity 2.5%" = 100,
+      "Deducted Intensity 5%" = 100,
+      "Relative Intensity" = 100,
+      "Perc Drop" = 100,
+      "RIR 1" = 1,
+      "RIR 2" = 1,
+      "RIR Inc" = 1,
+      "%MR Step Const" = 100,
+      "%MR Step Var" = 100
+    )
+
+    adjustment_name <- switch(progression_table$progression_table_name,
+      "Deducted Intensity 2.5%" = "%DI",
+      "Deducted Intensity 5%" = "%DI",
+      "Relative Intensity" = "%RI",
+      "Perc Drop" = "%DI",
+      "RIR 1" = "RIR",
+      "RIR 2" = "RIR",
+      "RIR Inc" = "RIR",
+      "%MR Step Const" = "%MR",
+      "%MR Step Var" = "%MR"
+    )
+
+    scheme_df <- scheme_generic(
+      reps = reps,
+      adjustment = adjustment / adjustment_multiplier,
+      vertical_planning = vertical_planning,
+      vertical_planning_control = list(reps_change = reps_change, step = steps),
+      progression_table = progression_table$progression_table_func,
+      progression_table_control = list(volume = volume, type = tolower(progression_table$progression_table_type))
+    ) %>%
+      mutate(
+        perc_1RM = perc_1RM + (adjustment_perc1RM / 100),
+        reps = reps + adjustment_reps,
+      )
+
+    scheme_table <- scheme_df %>%
+      mutate(
+        adjustment = round(adjustment * adjustment_multiplier, 1),
+        adjustment_label = if (include_adjustments) paste0(" (", adjustment, adjustment_name, ")") else "",
+        perc_1RM = round(perc_1RM * 100, 0),
+        set_label = paste0(perc_1RM, "% x ", reps, adjustment_label),
+        step = paste0("Step ", index)
+      ) %>%
+      group_by(index) %>%
+      mutate(Set = seq(1, n())) %>%
+      ungroup() %>%
+      pivot_wider(id_cols = Set, names_from = step, values_from = set_label)
+
+    scheme_plot <- plot_scheme(scheme_df, adjustment_multiplier = adjustment_multiplier, signif_digits = 3)
+
+    list(
+      scheme_df = scheme_df,
+      scheme_table = scheme_table,
+      scheme_plot = scheme_plot
+    )
+  })
+
+
+  output$single_athlete_example_schemes_generate_scheme_table <- renderDT({
+    DT::datatable(
+      single_athlete_custom_scheme()$scheme_table,
+      rownames = FALSE,
+      selection = "none",
+      editable = FALSE,
+      options = list(
+        searching = FALSE,
+        ordering = FALSE,
+        paging = FALSE,
+        info = FALSE
+      )
+    )
+  })
+
+  output$single_athlete_example_schemes_generate_scheme_plot <- renderPlot({
+    single_athlete_custom_scheme()$scheme_plot
   })
 
 }
