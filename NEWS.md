@@ -1,4 +1,8 @@
-# STM 0.0.3.
+# STM 0.0.3.9000
+
+* Fixed few typos in `citation()`
+
+# STM 0.0.3
 
 * Estimated `1RM` in `estimate_xxx_1RM()` functions is now in the second place in coefficient order
 * Added `create_example()` function for quickly creating example using selected progression table

@@ -1,6 +1,6 @@
 Package: STM
 Title: Strength Training Manual R Functions
-Version: 0.0.3
+Version: 0.0.3.9000
 Authors@R: 
     person(given = "Mladen",
            family = "Jovanović",
