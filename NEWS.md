@@ -1,6 +1,7 @@
 # STM 0.0.2.9000
 
-* Estimated `1RM` in `estimate_xxx_1RM()` functions is now in the second plance in coefficient order
+* Estimated `1RM` in `estimate_xxx_1RM()` functions is now in the second place in coefficient order
+* Added `create_example()` function for quickly creating example using selected progression table
 
 # STM 0.0.2
 
@@ -9,7 +10,6 @@
 * Added `get_max_perc_1RM_kmod()`, `get_max_reps_kmod()`, and `get_predicted_1RM_kmod()` functions that uses user defined `kmod` value/parameter for the modified Epley's equation
 Added `get_max_perc_1RM_klin()`, `get_max_reps_klin()`, and `get_predicted_1RM_klin()` functions that uses user defined `klin` value/parameter for the linear equation
 * Added `estimate_` family of functions to estimate Epley's, modified Epley's, and linear equation parameters, as well as novel estimation functions that uses absolute weight to estimate both `k`, `kmod`, `klin` and `1RM` parameters
-* Added **strengthPRO** shiny app. Run by calling `strengthPRO()`
 
 # STM 0.0.1
 
