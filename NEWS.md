@@ -1,4 +1,4 @@
-# STM 0.0.2.9000
+# STM 0.0.3.
 
 * Estimated `1RM` in `estimate_xxx_1RM()` functions is now in the second place in coefficient order
 * Added `create_example()` function for quickly creating example using selected progression table
