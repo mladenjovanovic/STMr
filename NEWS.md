@@ -1,6 +1,7 @@
 # STM 0.0.3.9000
 
 * Fixed few typos in `citation()`
+* Added sample data set `nRM_testing`, which contains reps max testing of 12 athletes using 70, 80, and 90% 1RM
 
 # STM 0.0.3
 
