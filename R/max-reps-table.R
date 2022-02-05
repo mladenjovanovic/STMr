@@ -1,5 +1,3 @@
-#' Max-Reps Tables
-#'
 #' Family of functions to represent max reps tables
 #'
 #' @param perc_1RM Percent of 1RM
