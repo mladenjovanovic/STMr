@@ -1,5 +1,5 @@
-#' @describeIn progression_table Constant \%MR Step progression table. This variant have constant \%MR
-#'     increment across reps from phases to phases and \%MR difference between extensive, normal, and
+#' @describeIn progression_table Constant %MR Step progression table. This variant have constant %MR
+#'     increment across reps from phases to phases and %MR difference between extensive, normal, and
 #'     intensive schemes. Use \code{step_increment} and  \code{volume_increment} parameters to
 #'     utilize needed increments
 #' @export
@@ -14,7 +14,8 @@
 #'   step = seq(-3, 0, 1),
 #'   type = "ballistic",
 #'   step_increment = -0.15,
-#'   volume_increment = -0.25)
+#'   volume_increment = -0.25
+#' )
 #'
 #' # Generate progression table
 #' generate_progression_table(progression_perc_MR, type = "grinding", volume = "normal")
@@ -31,7 +32,6 @@
 #' # Plot progression table
 #' plot_progression_table(progression_perc_MR)
 #' plot_progression_table(progression_perc_MR, "adjustment")
-#'
 progression_perc_MR <- function(reps,
                                 step = 0,
                                 volume = "normal",
@@ -106,10 +106,9 @@ progression_perc_MR <- function(reps,
     adjustment = df$total_adjustment,
     perc_1RM = df$perc_1RM
   ))
-
 }
 
-#' @describeIn progression_table Variable \%MR Step progression table
+#' @describeIn progression_table Variable %MR Step progression table
 #' @export
 #' @examples
 #' # ------------------------------------------
@@ -117,7 +116,6 @@ progression_perc_MR <- function(reps,
 #' progression_perc_MR_variable(10, step = seq(-3, 0, 1))
 #' progression_perc_MR_variable(10, step = seq(-3, 0, 1), volume = "extensive")
 #' progression_perc_MR_variable(5, step = seq(-3, 0, 1), type = "ballistic")
-
 #' # Generate progression table
 #' generate_progression_table(progression_perc_MR_variable, type = "grinding", volume = "normal")
 #'
@@ -133,14 +131,13 @@ progression_perc_MR <- function(reps,
 #' # Plot progression table
 #' plot_progression_table(progression_perc_MR_variable)
 #' plot_progression_table(progression_perc_MR_variable, "adjustment")
-#'
 progression_perc_MR_variable <- function(reps,
-                                      step = 0,
-                                      volume = "normal",
-                                      adjustment = 0,
-                                      type = "grinding",
-                                      mfactor = NULL,
-                                      ...) {
+                                         step = 0,
+                                         volume = "normal",
+                                         adjustment = 0,
+                                         type = "grinding",
+                                         mfactor = NULL,
+                                         ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note

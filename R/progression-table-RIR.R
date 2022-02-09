@@ -14,7 +14,8 @@
 #'   5,
 #'   step = seq(-3, 0, 1),
 #'   type = "ballistic",
-#'   step_increment = 3)
+#'   step_increment = 3
+#' )
 #'
 #' # Generate progression table
 #' generate_progression_table(progression_RIR, type = "grinding", volume = "normal")
@@ -31,16 +32,15 @@
 #' # Plot progression table
 #' plot_progression_table(progression_RIR)
 #' plot_progression_table(progression_RIR, "adjustment")
-#'
 progression_RIR <- function(reps,
-                                  step = 0,
-                                  volume = "normal",
-                                  adjustment = 0,
-                                  type = "grinding",
-                                  mfactor = NULL,
-                                  step_increment = 1,
-                                  volume_increment = step_increment,
-                                  ...) {
+                            step = 0,
+                            volume = "normal",
+                            adjustment = 0,
+                            type = "grinding",
+                            mfactor = NULL,
+                            step_increment = 1,
+                            volume_increment = step_increment,
+                            ...) {
 
 
   # +++++++++++++++++++++++++++++++++++++++++++
@@ -128,7 +128,6 @@ progression_RIR <- function(reps,
 #' # Plot progression table
 #' plot_progression_table(progression_RIR_increment)
 #' plot_progression_table(progression_RIR_increment, "adjustment")
-#'
 progression_RIR_increment <- function(reps,
                                       step = 0,
                                       volume = "normal",

@@ -7,7 +7,7 @@
 get_reps(perc_1RM, method = "RIR", model = "epley", ...)
 }
 \arguments{
-\item{perc_1RM}{Numeric vector. perc 1RM used (use 0.5 for 50 perc, 0.9 for 90 perc)}
+\item{perc_1RM}{Numeric vector. \%1RM used (use 0.5 for 50 perc, 0.9 for 90 perc)}
 
 \item{method}{Character vector. Default is "RIR". Other options are
 "DI", "RelInt", "\%MR"}
@@ -21,7 +21,7 @@ get_reps(perc_1RM, method = "RIR", model = "epley", ...)
 Function \code{get_reps} represent a wrapper function. This function is the
 reverse version of the \code{\link{get_perc_1RM}} function. Use it when
 you want to estimate number of repetitions to be used when using the
-known perc 1RM and level of adjustment
+known \%1RM and level of adjustment
 }
 \examples{
 get_perc_1RM(0.75)
@@ -29,7 +29,7 @@ get_perc_1RM(0.75)
 # # Use ballistic adjustment (this implies doing half the reps)
 get_perc_1RM(0.75, mfactor = 2)
 
-# Use perc MR adjustment method
+# Use \%MR adjustment method
 get_perc_1RM(0.75, "\%MR", adjustment = 0.8)
 
 # Use linear model with use defined klin values

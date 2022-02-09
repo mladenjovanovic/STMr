@@ -26,14 +26,13 @@
 #' # Plot progression table
 #' plot_progression_table(progression_perc_drop)
 #' plot_progression_table(progression_perc_drop, "adjustment")
-#'
 progression_perc_drop <- function(reps,
-                                      step = 0,
-                                      volume = "normal",
-                                      adjustment = 0,
-                                      type = "grinding",
-                                      mfactor = NULL,
-                                      ...) {
+                                  step = 0,
+                                  volume = "normal",
+                                  adjustment = 0,
+                                  type = "grinding",
+                                  mfactor = NULL,
+                                  ...) {
 
 
   # +++++++++++++++++++++++++++++++++++++++++++

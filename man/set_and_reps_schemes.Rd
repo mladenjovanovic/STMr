@@ -188,20 +188,18 @@ scheme_wave(
   progression_table_control = list(volume = "extensive")
 )
 
-
 # Plateau set and rep schemes
 --------------------------
-scheme_plateau()
+  scheme_plateau()
 
 scheme_plateau(
   reps = c(3, 3, 3),
   progression_table_control = list(type = "ballistic")
 )
 
-
 # Step set and rep schemes
 --------------------------
-scheme_step()
+  scheme_step()
 
 scheme_step(
   reps = c(2, 2, 2),
@@ -210,34 +208,27 @@ scheme_step(
   progression_table_control = list(type = "ballistic")
 )
 
-
 # Reverse Step set and rep schemes
 --------------------------
-scheme_step_reverse()
-
+  scheme_step_reverse()
 
 # Descending Wave set and rep schemes
 --------------------------
-scheme_wave_descending()
-
+  scheme_wave_descending()
 
 # Light-Heavy set and rep schemes
 --------------------------
-scheme_light_heavy()
-
+  scheme_light_heavy()
 
 # Pyramid set and rep schemes
 --------------------------
-scheme_pyramid()
-
+  scheme_pyramid()
 
 # Reverse Pyramid set and rep schemes
 --------------------------
-scheme_pyramid_reverse()
-
+  scheme_pyramid_reverse()
 
 # Rep Accumulation set and rep schemes
 --------------------------
-scheme_rep_acc()
-
+  scheme_rep_acc()
 }

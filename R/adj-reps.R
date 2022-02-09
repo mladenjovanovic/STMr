@@ -2,10 +2,10 @@
 #'
 #' These functions are reverse version of the \code{\link{adj_perc_1RM}}
 #'     family of functions. Use these when you want to estimate number of
-#'     repetitions to be used when using the known perc 1RM and level of
+#'     repetitions to be used when using the known %1RM and level of
 #'     adjustment
 #'
-#' @param perc_1RM Numeric vector. perc 1RM used (use 0.5 for 50 perc, 0.9 for 90 perc)
+#' @param perc_1RM Numeric vector. %1RM used (use 0.5 for 50%, 0.9 for 90%)
 #' @param max_reps_func Max reps function to be used. Default is \code{\link{max_reps_epley}}
 #' @param adjustment Numeric vector. Adjustment to be implemented
 #' @param mfactor Numeric vector. Default is 1 (i.e., no adjustment).
@@ -40,7 +40,6 @@ NULL
 #'   adjustment = 2,
 #'   kmod = 0.06
 #' )
-#'
 adj_reps_RIR <- function(perc_1RM,
                          adjustment = 0,
                          mfactor = 1,
@@ -60,7 +59,7 @@ adj_reps_RIR <- function(perc_1RM,
 #' # Use ballistic adjustment (this implies doing half the reps)
 #' adj_reps_DI(0.75, mfactor = 2)
 #'
-#' # Use 10 perc deducted intensity
+#' # Use 10% deducted intensity
 #' adj_reps_DI(0.75, adjustment = -0.1)
 #'
 #' # Use Linear model
@@ -73,7 +72,6 @@ adj_reps_RIR <- function(perc_1RM,
 #'   adjustment = -0.1,
 #'   kmod = 0.06
 #' )
-#'
 adj_reps_DI <- function(perc_1RM,
                         adjustment = 1,
                         mfactor = 1,
@@ -92,7 +90,7 @@ adj_reps_DI <- function(perc_1RM,
 #' # Use ballistic adjustment (this implies doing half the reps)
 #' adj_reps_rel_int(0.75, mfactor = 2)
 #'
-#' # Use 85 perc relative intensity
+#' # Use 85% relative intensity
 #' adj_reps_rel_int(0.75, adjustment = 0.85)
 #'
 #' # Use Linear model
@@ -105,26 +103,25 @@ adj_reps_DI <- function(perc_1RM,
 #'   adjustment = 0.85,
 #'   kmod = 0.06
 #' )
-#'
 adj_reps_rel_int <- function(perc_1RM,
-                        adjustment = 1,
-                        mfactor = 1,
-                        max_reps_func = max_reps_epley,
-                        ...) {
+                             adjustment = 1,
+                             mfactor = 1,
+                             max_reps_func = max_reps_epley,
+                             ...) {
   max_reps_func(perc_1RM / adjustment, ...) / mfactor
 }
 
-#' @describeIn adj_reps Adjust number of repetitions using the percent of max reps (perc MR) approach
+#' @describeIn adj_reps Adjust number of repetitions using the % max reps (%MR) approach
 #' @export
 #' @examples
 #' # ------------------------------------------
-#' # Adjustment using percent of max reps (perc MR)
+#' # Adjustment using % max reps (%MR)
 #' adj_reps_perc_MR(0.75)
 #'
 #' # Use ballistic adjustment (this implies doing half the reps)
 #' adj_reps_perc_MR(0.75, mfactor = 2)
 #'
-#' # Use 85perc  of max reps
+#' # Use 85% of max reps
 #' adj_reps_perc_MR(0.75, adjustment = 0.85)
 #'
 #' # Use Linear model
@@ -137,7 +134,6 @@ adj_reps_rel_int <- function(perc_1RM,
 #'   adjustment = 0.85,
 #'   kmod = 0.06
 #' )
-#'
 adj_reps_perc_MR <- function(perc_1RM,
                              adjustment = 1,
                              mfactor = 1,

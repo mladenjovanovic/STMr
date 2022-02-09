@@ -13,7 +13,8 @@
 #'   step = seq(-3, 0, 1),
 #'   type = "ballistic",
 #'   step_increment = -0.05,
-#'   volume_increment = -0.1)
+#'   volume_increment = -0.1
+#' )
 #'
 #' # Generate progression table
 #' generate_progression_table(progression_DI, type = "grinding", volume = "normal")
@@ -30,16 +31,15 @@
 #' # Plot progression table
 #' plot_progression_table(progression_DI)
 #' plot_progression_table(progression_DI, "adjustment")
-#'
 progression_DI <- function(reps,
-                                  step = 0,
-                                  volume = "normal",
-                                  adjustment = 0,
-                                  type = "grinding",
-                                  mfactor = NULL,
-                                  step_increment = -0.025,
-                                  volume_increment = step_increment,
-                                  ...) {
+                           step = 0,
+                           volume = "normal",
+                           adjustment = 0,
+                           type = "grinding",
+                           mfactor = NULL,
+                           step_increment = -0.025,
+                           volume_increment = step_increment,
+                           ...) {
 
 
   # +++++++++++++++++++++++++++++++++++++++++++

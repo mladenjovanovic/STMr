@@ -10,7 +10,8 @@
 #'   progression_RIR,
 #'   type = "grinding",
 #'   volume = "normal",
-#'   step_increment = 2)
+#'   step_increment = 2
+#' )
 #'
 #' # Create progression table using specific reps-max table and k value
 #' generate_progression_table(
@@ -37,7 +38,7 @@ generate_progression_table <- function(progression_table = progression_RIR_incre
     stringsAsFactors = FALSE
   ) %>%
     dplyr::mutate(
-     data.frame(progression_table(reps = reps, step = step, volume = volume, type = type, ...))
+      data.frame(progression_table(reps = reps, step = step, volume = volume, type = type, ...))
     )
 
   df

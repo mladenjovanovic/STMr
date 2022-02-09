@@ -24,16 +24,15 @@
 #' # Plot progression table
 #' plot_progression_table(progression_rel_int)
 #' plot_progression_table(progression_rel_int, "adjustment")
-#'
 progression_rel_int <- function(reps,
-                           step = 0,
-                           volume = "normal",
-                           adjustment = 0,
-                           type = "grinding",
-                           mfactor = NULL,
-                           step_increment = -0.05,
-                           volume_increment = -0.075,
-                           ...) {
+                                step = 0,
+                                volume = "normal",
+                                adjustment = 0,
+                                type = "grinding",
+                                mfactor = NULL,
+                                step_increment = -0.05,
+                                volume_increment = -0.075,
+                                ...) {
 
 
   # +++++++++++++++++++++++++++++++++++++++++++
@@ -99,5 +98,4 @@ progression_rel_int <- function(reps,
     adjustment = df$total_adjustment,
     perc_1RM = df$perc_1RM
   ))
-
 }

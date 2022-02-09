@@ -48,7 +48,7 @@ adj_perc_1RM_perc_MR(
 \item{mfactor}{Numeric vector. Default is 1 (i.e., no adjustment).
 Use \code{mfactor = 2} to generate ballistic adjustment and tables}
 
-\item{max_perc_1RM_func}{Max perc 1RM function to be used. Default is \code{\link{max_perc_1RM_epley}}}
+\item{max_perc_1RM_func}{Max  \%1RM function to be used. Default is \code{\link{max_perc_1RM_epley}}}
 
 \item{...}{Forwarded to \code{max_perc_1RM_func}. Usually the parameter value.
 For example \code{klin = 36} when using \code{\link{max_perc_1RM_linear}} as
@@ -62,15 +62,15 @@ Family of functions to adjust \%1RM
 }
 \section{Functions}{
 \itemize{
-\item \code{adj_perc_1RM_RIR}: Adjust max perc 1RM using the Reps In Reserve (RIR) approach
+\item \code{adj_perc_1RM_RIR}: Adjust max  \%1RM using the Reps In Reserve (RIR) approach
 
-\item \code{adj_perc_1RM_DI}: Adjust max perc 1RM using the Deducted Intensity (DI) approach.
-This approach simple deducts \code{adjustment} from estimated perc 1RM
+\item \code{adj_perc_1RM_DI}: Adjust max \%1RM using the Deducted Intensity (DI) approach.
+This approach simple deducts \code{adjustment} from estimated \%1RM
 
 \item \code{adj_perc_1RM_rel_int}: Adjust max perc 1RM using the Relative Intensity (RelInt) approach.
 This approach simple multiplies estimated perc 1RM with \code{adjustment}
 
-\item \code{adj_perc_1RM_perc_MR}: Adjust max perc 1RM using the perc Max Reps (percMR) approach.
+\item \code{adj_perc_1RM_perc_MR}: Adjust max perc 1RM using the \%Max Reps (\%MR) approach.
 This approach simple divides target reps with \code{adjustment}
 }}
 
@@ -136,7 +136,7 @@ adj_perc_1RM_rel_int(
   kmod = 0.06
 )
 # ------------------------------------------
-# Adjustment using percent of max reps (percMR)
+# Adjustment using \% max reps (\%MR)
 adj_perc_1RM_perc_MR(5)
 
 # Use ballistic adjustment (this implies doing half the reps)

@@ -5,7 +5,7 @@
 #'       \code{weight}. To reverse this, use the \code{reverse = TRUE} argument
 #'
 #' @param weight Weight used
-#' @param perc_1RM Percent of 1RM
+#' @param perc_1RM %1RM
 #' @param reps Number of repetitions done
 #' @param adjustment Subjective estimation of reps-in-reserve (eRIR)
 #' @param reverse Logical, default is \code{FALSE}. Should reps be used as predictor instead as a target?

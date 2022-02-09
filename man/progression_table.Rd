@@ -147,12 +147,12 @@ utilize needed increments
 
 \item \code{progression_RIR_increment}: RIR Increment progression table (see Strength Training Manual)
 
-\item \code{progression_perc_MR}: Constant \\%MR Step progression table. This variant have constant \\%MR
-increment across reps from phases to phases and \\%MR difference between extensive, normal, and
+\item \code{progression_perc_MR}: Constant \%MR Step progression table. This variant have constant \%MR
+increment across reps from phases to phases and \%MR difference between extensive, normal, and
 intensive schemes. Use \code{step_increment} and  \code{volume_increment} parameters to
 utilize needed increments
 
-\item \code{progression_perc_MR_variable}: Variable \\%MR Step progression table
+\item \code{progression_perc_MR_variable}: Variable \%MR Step progression table
 
 \item \code{progression_perc_drop}: Perc Drop progression table (see Strength Training Manual)
 
@@ -167,7 +167,8 @@ generate_progression_table(
   progression_RIR,
   type = "grinding",
   volume = "normal",
-  step_increment = 2)
+  step_increment = 2
+)
 
 # Create progression table using specific reps-max table and k value
 generate_progression_table(
@@ -185,7 +186,8 @@ progression_DI(
   step = seq(-3, 0, 1),
   type = "ballistic",
   step_increment = -0.05,
-  volume_increment = -0.1)
+  volume_increment = -0.1
+)
 
 # Generate progression table
 generate_progression_table(progression_DI, type = "grinding", volume = "normal")
@@ -202,7 +204,6 @@ generate_progression_table(
 # Plot progression table
 plot_progression_table(progression_DI)
 plot_progression_table(progression_DI, "adjustment")
-
 # ------------------------------------------
 # Progression RIR Constant
 progression_RIR(10, step = seq(-3, 0, 1))
@@ -212,7 +213,8 @@ progression_RIR(
   5,
   step = seq(-3, 0, 1),
   type = "ballistic",
-  step_increment = 3)
+  step_increment = 3
+)
 
 # Generate progression table
 generate_progression_table(progression_RIR, type = "grinding", volume = "normal")
@@ -229,7 +231,6 @@ generate_progression_table(
 # Plot progression table
 plot_progression_table(progression_RIR)
 plot_progression_table(progression_RIR, "adjustment")
-
 # ------------------------------------------
 # Progression RIR Increment
 progression_RIR_increment(10, step = seq(-3, 0, 1))
@@ -251,7 +252,6 @@ generate_progression_table(
 # Plot progression table
 plot_progression_table(progression_RIR_increment)
 plot_progression_table(progression_RIR_increment, "adjustment")
-
 # ------------------------------------------
 # Progression \%MR Step Const
 progression_perc_MR(10, step = seq(-3, 0, 1))
@@ -262,7 +262,8 @@ progression_perc_MR(
   step = seq(-3, 0, 1),
   type = "ballistic",
   step_increment = -0.15,
-  volume_increment = -0.25)
+  volume_increment = -0.25
+)
 
 # Generate progression table
 generate_progression_table(progression_perc_MR, type = "grinding", volume = "normal")
@@ -279,7 +280,6 @@ generate_progression_table(
 # Plot progression table
 plot_progression_table(progression_perc_MR)
 plot_progression_table(progression_perc_MR, "adjustment")
-
 # ------------------------------------------
 # Progression \%MR Step Variable
 progression_perc_MR_variable(10, step = seq(-3, 0, 1))
@@ -300,7 +300,6 @@ generate_progression_table(
 # Plot progression table
 plot_progression_table(progression_perc_MR_variable)
 plot_progression_table(progression_perc_MR_variable, "adjustment")
-
 # ------------------------------------------
 # Progression Perc Drop
 progression_perc_drop(10, step = seq(-3, 0, 1))
@@ -322,7 +321,6 @@ generate_progression_table(
 # Plot progression table
 plot_progression_table(progression_perc_drop)
 plot_progression_table(progression_perc_drop, "adjustment")
-
 # ------------------------------------------
 # Progression Relative Intensity
 progression_rel_int(10, step = seq(-3, 0, 1))
@@ -345,7 +343,6 @@ generate_progression_table(
 # Plot progression table
 plot_progression_table(progression_rel_int)
 plot_progression_table(progression_rel_int, "adjustment")
-
 }
 \references{
 \preformatted{Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.

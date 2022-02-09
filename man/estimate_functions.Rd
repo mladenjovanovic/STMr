@@ -69,7 +69,7 @@ estimate_klin_1RM(
 get_predicted_1RM_from_k_model(model)
 }
 \arguments{
-\item{perc_1RM}{Percent of 1RM}
+\item{perc_1RM}{\%1RM}
 
 \item{reps}{Number of repetitions done}
 

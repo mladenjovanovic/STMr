@@ -1,7 +1,7 @@
 #' Family of functions to adjust %1RM
 #'
 #' @param reps Numeric vector. Number of repetition to be performed
-#' @param max_perc_1RM_func Max perc 1RM function to be used. Default is \code{\link{max_perc_1RM_epley}}
+#' @param max_perc_1RM_func Max  %1RM function to be used. Default is \code{\link{max_perc_1RM_epley}}
 #' @param adjustment Numeric vector. Adjustment to be implemented
 #' @param mfactor Numeric vector. Default is 1 (i.e., no adjustment).
 #'     Use \code{mfactor = 2} to generate ballistic adjustment and tables
@@ -12,7 +12,7 @@
 #' @name adj_perc_1RM
 NULL
 
-#' @describeIn adj_perc_1RM Adjust max perc 1RM using the Reps In Reserve (RIR) approach
+#' @describeIn adj_perc_1RM Adjust max  %1RM using the Reps In Reserve (RIR) approach
 #' @export
 #' @examples
 #' # ------------------------------------------
@@ -46,8 +46,8 @@ adj_perc_1RM_RIR <- function(reps,
   max_perc_1RM_func(adj_reps, ...)
 }
 
-#' @describeIn adj_perc_1RM Adjust max perc 1RM using the Deducted Intensity (DI) approach.
-#'     This approach simple deducts \code{adjustment} from estimated perc 1RM
+#' @describeIn adj_perc_1RM Adjust max %1RM using the Deducted Intensity (DI) approach.
+#'     This approach simple deducts \code{adjustment} from estimated %1RM
 #' @export
 #' @examples
 #' # ------------------------------------------
@@ -106,22 +106,22 @@ adj_perc_1RM_DI <- function(reps,
 #'   kmod = 0.06
 #' )
 adj_perc_1RM_rel_int <- function(reps,
-                            adjustment = 1,
-                            mfactor = 1,
-                            max_perc_1RM_func = max_perc_1RM_epley,
-                            ...) {
+                                 adjustment = 1,
+                                 mfactor = 1,
+                                 max_perc_1RM_func = max_perc_1RM_epley,
+                                 ...) {
   # Adjust the reps
   adj_reps <- reps * mfactor
 
   adjustment * max_perc_1RM_func(adj_reps, ...)
 }
 
-#' @describeIn adj_perc_1RM Adjust max perc 1RM using the perc Max Reps (percMR) approach.
+#' @describeIn adj_perc_1RM Adjust max perc 1RM using the %Max Reps (%MR) approach.
 #'     This approach simple divides target reps with \code{adjustment}
 #' @export
 #' @examples
 #' # ------------------------------------------
-#' # Adjustment using percent of max reps (percMR)
+#' # Adjustment using % max reps (%MR)
 #' adj_perc_1RM_perc_MR(5)
 #'
 #' # Use ballistic adjustment (this implies doing half the reps)
