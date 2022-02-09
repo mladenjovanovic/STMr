@@ -19,7 +19,7 @@ scheme_generic(
   adjustment = c(0, 0, 0),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(),
-  progression_table = RIR_increment,
+  progression_table = progression_RIR_increment,
   progression_table_control = list()
 )
 
@@ -28,7 +28,7 @@ scheme_wave(
   adjustment = c(4, 2, 0, 6, 4, 2),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(),
-  progression_table = RIR_increment,
+  progression_table = progression_RIR_increment,
   progression_table_control = list(volume = "extensive")
 )
 
@@ -36,7 +36,7 @@ scheme_plateau(
   reps = c(5, 5, 5, 5),
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
-  progression_table = RIR_increment,
+  progression_table = progression_RIR_increment,
   progression_table_control = list(volume = "extensive")
 )
 
@@ -45,7 +45,7 @@ scheme_step(
   adjustment = c(-0.3, -0.2, -0.1, 0),
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
-  progression_table = perc_drop,
+  progression_table = progression_perc_drop,
   progression_table_control = list(volume = "normal")
 )
 
@@ -54,7 +54,7 @@ scheme_step_reverse(
   adjustment = c(0, 3, 6, 9),
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
-  progression_table = RIR_increment,
+  progression_table = progression_RIR_increment,
   progression_table_control = list(volume = "normal")
 )
 
@@ -63,7 +63,7 @@ scheme_wave_descending(
   adjustment = c(4, 2, 0, 6, 4, 2),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(),
-  progression_table = RIR_increment,
+  progression_table = progression_RIR_increment,
   progression_table_control = list(volume = "extensive")
 )
 
@@ -72,7 +72,7 @@ scheme_light_heavy(
   adjustment = c(0, -0.2, 0, -0.2, 0, -0.2),
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
-  progression_table = perc_drop,
+  progression_table = progression_perc_drop,
   progression_table_control = list(volume = "normal")
 )
 
@@ -81,7 +81,7 @@ scheme_pyramid(
   adjustment = 0,
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
-  progression_table = RIR_increment,
+  progression_table = progression_RIR_increment,
   progression_table_control = list(volume = "extensive")
 )
 
@@ -90,7 +90,7 @@ scheme_pyramid_reverse(
   adjustment = 0,
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
-  progression_table = RIR_increment,
+  progression_table = progression_RIR_increment,
   progression_table_control = list(volume = "extensive")
 )
 
@@ -98,7 +98,7 @@ scheme_rep_acc(
   reps = c(7, 7, 7),
   adjustment = 0,
   vertical_planning_control = list(step = rep(-3, 4)),
-  progression_table = RIR_increment,
+  progression_table = progression_RIR_increment,
   progression_table_control = list(volume = "extensive")
 )
 }
@@ -106,15 +106,15 @@ scheme_rep_acc(
 \item{reps}{Numeric vector indicating reps prescription}
 
 \item{adjustment}{Numeric vector indicating adjustments. Forwarded to \code{progression_table}.
-If the \code{progression_table} is \code{\link{RIR_increment}}, \code{adjustment} will be done
-using RIR. On the other hand, if \code{\link{perc_drop}} is used, \code{adjustment} will be done
+If the \code{progression_table} is \code{\link{progression_RIR_increment}}, \code{adjustment} will be done
+using RIR. On the other hand, if \code{\link{progression_perc_drop}} is used, \code{adjustment} will be done
 using 1RM percentage}
 
 \item{vertical_planning}{Vertical planning function. Default is \code{\link{vertical_linear}}}
 
 \item{vertical_planning_control}{Arguments forwarded to the \code{vertical_planning} function}
 
-\item{progression_table}{Progression table function. Default is \code{\link{RIR_increment}}}
+\item{progression_table}{Progression table function. Default is \code{\link{progression_RIR_increment}}}
 
 \item{progression_table_control}{Arguments forwarded to the \code{progression_table} function}
 }
@@ -160,7 +160,7 @@ scheme_generic()
 scheme_wave(
   reps = c(8, 6, 4, 8, 6, 4),
   vertical_planning = vertical_block,
-  progression_table = perc_drop,
+  progression_table = progression_perc_drop,
   progression_table_control = list(type = "ballistic")
 )
 
@@ -168,11 +168,11 @@ scheme_wave(
 # and using 3 steps progression
 scheme_wave(
   reps = c(8, 6, 4, 8, 6, 4),
-  # Adjusting using lower \%1RM (Perc_Drop method used)
+  # Adjusting using lower \%1RM (progression_perc_drop method used)
   adjustment = c(0, 0, 0, -0.1, -0.1, -0.1),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4)),
-  progression_table = perc_drop,
+  progression_table = progression_perc_drop,
   progression_table_control = list(volume = "extensive")
 )
 
@@ -184,22 +184,24 @@ scheme_wave(
   adjustment = c(4, 2, 0, 6, 4, 2),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4)),
-  progression_table = RIR_increment,
+  progression_table = progression_RIR_increment,
   progression_table_control = list(volume = "extensive")
 )
 
+
 # Plateau set and rep schemes
 --------------------------
-  scheme_plateau()
+scheme_plateau()
 
 scheme_plateau(
   reps = c(3, 3, 3),
   progression_table_control = list(type = "ballistic")
 )
 
+
 # Step set and rep schemes
 --------------------------
-  scheme_step()
+scheme_step()
 
 scheme_step(
   reps = c(2, 2, 2),
@@ -208,27 +210,34 @@ scheme_step(
   progression_table_control = list(type = "ballistic")
 )
 
+
 # Reverse Step set and rep schemes
 --------------------------
-  scheme_step_reverse()
+scheme_step_reverse()
+
 
 # Descending Wave set and rep schemes
 --------------------------
-  scheme_wave_descending()
+scheme_wave_descending()
+
 
 # Light-Heavy set and rep schemes
 --------------------------
-  scheme_light_heavy()
+scheme_light_heavy()
+
 
 # Pyramid set and rep schemes
 --------------------------
-  scheme_pyramid()
+scheme_pyramid()
+
 
 # Reverse Pyramid set and rep schemes
 --------------------------
-  scheme_pyramid_reverse()
+scheme_pyramid_reverse()
+
 
 # Rep Accumulation set and rep schemes
 --------------------------
-  scheme_rep_acc()
+scheme_rep_acc()
+
 }

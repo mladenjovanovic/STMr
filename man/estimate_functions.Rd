@@ -4,9 +4,9 @@
 \alias{estimate_functions}
 \alias{estimate_k}
 \alias{estimate_kmod}
+\alias{estimate_klin}
 \alias{estimate_k_1RM}
 \alias{estimate_kmod_1RM}
-\alias{estimate_klin}
 \alias{estimate_klin_1RM}
 \alias{get_predicted_1RM_from_k_model}
 \title{Estimate relationship between reps and \%1RM used using Epley's and modified
@@ -30,6 +30,15 @@ estimate_kmod(
   ...
 )
 
+estimate_klin(
+  perc_1RM,
+  reps,
+  adjustment = 0,
+  reverse = FALSE,
+  weighted = FALSE,
+  ...
+)
+
 estimate_k_1RM(
   weight,
   reps,
@@ -41,15 +50,6 @@ estimate_k_1RM(
 
 estimate_kmod_1RM(
   weight,
-  reps,
-  adjustment = 0,
-  reverse = FALSE,
-  weighted = FALSE,
-  ...
-)
-
-estimate_klin(
-  perc_1RM,
   reps,
   adjustment = 0,
   reverse = FALSE,
@@ -99,15 +99,15 @@ By default, target variable is the reps performed, while the predictors is the \
 
 \item \code{estimate_kmod}: Estimate the parameter \code{kmod} in the modified Epley's equation
 
+\item \code{estimate_klin}: Estimate the parameter \code{klin} using the Linear/Brzycki model
+
 \item \code{estimate_k_1RM}: Estimate the parameter \code{k} in the Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
 \item \code{estimate_kmod_1RM}: Estimate the parameter \code{kmod} in the modified Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
-\item \code{estimate_klin}: Estimate the parameter \code{klin} using the linear model
-
-\item \code{estimate_klin_1RM}: Estimate the parameter \code{klin} in the linear equation, as well as
+\item \code{estimate_klin_1RM}: Estimate the parameter \code{klin} in the Linear/Brzycki equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
 \item \code{get_predicted_1RM_from_k_model}: Estimate the 1RM from \code{\link{estimate_k_1RM}} function
@@ -119,48 +119,56 @@ weight at nRM = 1 for both the normal and reverse model. See Examples for code
 }}
 
 \examples{
-
+# ---------------------------------------------------------
+# Epley's model
 m1 <- estimate_k(
   perc_1RM = c(0.7, 0.8, 0.9),
   reps = c(10, 5, 3)
 )
 
 coef(m1)
-
+# ---------------------------------------------------------
+# Modified Epley's model
 m1 <- estimate_kmod(
   perc_1RM = c(0.7, 0.8, 0.9),
   reps = c(10, 5, 3)
 )
 
 coef(m1)
-
-m1 <- estimate_k_1RM(
-  weight = c(70, 110, 140),
-  reps = c(10, 5, 3)
-)
-
-coef(m1)
-
-m1 <- estimate_kmod_1RM(
-  weight = c(70, 110, 140),
-  reps = c(10, 5, 3)
-)
-
-coef(m1)
-
+# ---------------------------------------------------------
+# Linear/Brzycki model
 m1 <- estimate_klin(
   perc_1RM = c(0.7, 0.8, 0.9),
   reps = c(10, 5, 3)
 )
 
 coef(m1)
+# ---------------------------------------------------------
+# Epley's model that also estimates 1RM
+m1 <- estimate_k_1RM(
+  weight = c(70, 110, 140),
+  reps = c(10, 5, 3)
+)
 
+coef(m1)
+# ---------------------------------------------------------
+# Modified Epley's model that also estimates 1RM
+m1 <- estimate_kmod_1RM(
+  weight = c(70, 110, 140),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
+# ---------------------------------------------------------
+# Linear/Brzycki model thal also estimates 1RM
 m1 <- estimate_klin_1RM(
   weight = c(70, 110, 140),
   reps = c(10, 5, 3)
 )
 
 coef(m1)
+# ---------------------------------------------------------
+# Estimating 1RM from Epley's model
 m1 <- estimate_k_1RM(150 * c(0.9, 0.8, 0.7), c(3, 6, 12))
 m2 <- estimate_k_1RM(150 * c(0.9, 0.8, 0.7), c(3, 6, 12), reverse = TRUE)
 
