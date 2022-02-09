@@ -27,7 +27,7 @@
 \alias{get_max_reps}
 \alias{get_max_perc_1RM}
 \alias{get_predicted_1RM}
-\title{Max-Reps Tables}
+\title{Family of functions to represent max reps tables}
 \usage{
 get_max_reps_k(perc_1RM, adjustment = 0, type = "grinding", k = 0.0333)
 
