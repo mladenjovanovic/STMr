@@ -38,25 +38,25 @@ This is a quick example, more are coming….
 ### Progression tables
 
 [Strength Training Manual](https://amzn.to/3owbBr6) comes with two
-progression table implemented in `RIR_increment` and `perc_drop`
-functions, although there are other variants (and you can easily make
-your own).
+progression table implemented in `progression_RIR_increment()` and
+`progression_perc_drop()` functions, although there are other variants
+(and you can easily make your own).
 
-Here is the `RIR_increment` progression table:
+Here is the **RIR Increment** progression table:
 
 ``` r
 # Load STM package
 require(STM)
 
-plot_progression_table(RIR_increment, signif_digits = 2)
+plot_progression_table(progression_RIR_increment, signif_digits = 2)
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
-And the `perc_drop` progression table:
+And the **Perc Drop** progression table:
 
 ``` r
-plot_progression_table(perc_drop, signif_digits = 2)
+plot_progression_table(progression_perc_drop, signif_digits = 2)
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
@@ -77,7 +77,7 @@ scheme <- scheme_wave(
   adjustment = c(4, 2, 0, 6, 4, 2),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4)),
-  progression_table = RIR_increment,
+  progression_table = progression_RIR_increment,
   progression_table_control = list(volume = "extensive")
 )
 
@@ -85,21 +85,3 @@ plot_scheme(scheme)
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
-
-Example of Set Accumulation Wave Scheme
-
-``` r
-scheme <- scheme_wave(
-  reps = c(10, 8, 6),
-  # Needed to remove default scheme_wave adjustment
-  adjustment = 0,
-  vertical_planning = vertical_set_accumulation,
-  vertical_planning_control = list(accumulate_rep = c(1, 2, 3)),
-  # Custom progression table
-  progression_table = perc_drop_fixed_5,
-  progression_table_control = list(volume = "extensive"))
-
-plot_scheme(scheme, label_size = 2.5)
-```
-
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
