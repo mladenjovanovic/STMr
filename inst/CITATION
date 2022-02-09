@@ -1,9 +1,9 @@
 citHeader("To cite 'STM' in publications use:")
 
 citEntry(entry = "Manual",
-  title        = "{STM}: Strength Training Manual R Functions",
+  title        = "{STM}: Strength Training Manual R-Language Functions",
   author       = personList(as.person("Mladen Jovanović")),
-  note         = "R package version 0.0.3.9000",
+  note         = "R package version 0.1.0",
   year         = "2022",
   address      = "Belgrade, Serbia",
   url          = "https://github.com/mladenjovanovic/STM",
@@ -11,8 +11,8 @@ citEntry(entry = "Manual",
 
   textVersion  =
   paste("Mladen Jovanović (2022).",
-        "STM: Strength Training Manual R Functions.",
-        "R package version 0.0.3.9000.",
+        "STM: Strength Training Manual R-Language Functions.",
+        "R package version 0.1.0.",
         "url: https://github.com/mladenjovanovic/STM",
         "doi: 10.5281/zenodo.4155015")
 )
