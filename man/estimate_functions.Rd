@@ -9,60 +9,45 @@
 \alias{estimate_kmod_1RM}
 \alias{estimate_klin_1RM}
 \alias{get_predicted_1RM_from_k_model}
-\title{Estimate relationship between reps and \%1RM used using Epley's and modified
-Epley's equation, as well as using the linear model.}
+\title{Estimate relationship between reps and \%1RM}
 \usage{
-estimate_k(
-  perc_1RM,
-  reps,
-  adjustment = 0,
-  reverse = FALSE,
-  weighted = FALSE,
-  ...
-)
+estimate_k(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...)
 
 estimate_kmod(
   perc_1RM,
   reps,
-  adjustment = 0,
+  eRIR = 0,
   reverse = FALSE,
-  weighted = FALSE,
+  weighted = "none",
   ...
 )
 
 estimate_klin(
   perc_1RM,
   reps,
-  adjustment = 0,
+  eRIR = 0,
   reverse = FALSE,
-  weighted = FALSE,
+  weighted = "none",
   ...
 )
 
-estimate_k_1RM(
-  weight,
-  reps,
-  adjustment = 0,
-  reverse = FALSE,
-  weighted = FALSE,
-  ...
-)
+estimate_k_1RM(weight, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...)
 
 estimate_kmod_1RM(
   weight,
   reps,
-  adjustment = 0,
+  eRIR = 0,
   reverse = FALSE,
-  weighted = FALSE,
+  weighted = "none",
   ...
 )
 
 estimate_klin_1RM(
   weight,
   reps,
-  adjustment = 0,
+  eRIR = 0,
   reverse = FALSE,
-  weighted = FALSE,
+  weighted = "none",
   ...
 )
 
@@ -73,12 +58,13 @@ get_predicted_1RM_from_k_model(model)
 
 \item{reps}{Number of repetitions done}
 
-\item{adjustment}{Subjective estimation of reps-in-reserve (eRIR)}
+\item{eRIR}{Subjective estimation of reps-in-reserve (eRIR)}
 
 \item{reverse}{Logical, default is \code{FALSE}. Should reps be used as predictor instead as a target?}
 
-\item{weighted}{Should weighted non-linear regression be used? Default is \code{FALSE}. If \code{TRUE}
-then either \code{perc_1RM} or \code{weight} is used for weighting}
+\item{weighted}{What weighting should be used for the non-linear regression? Default is "none". Other options include:
+"reps" (for 1/reps weighting), "load" (for using weight or \%1RM), "eRIR" (for 1/(eRIR+1) weighting),
+"reps x load", "reps x eRIR", "load x eRIR", and "reps x load x eRIR"}
 
 \item{...}{Forwarded to \code{\link[stats]{nls}} functions}
 

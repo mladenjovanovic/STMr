@@ -35,3 +35,46 @@ get_mfactor <- function(type) {
     )
   )
 }
+
+check_weighting <- function(weighted) {
+  if (any(!(weighted %in% c("none", "reps", "load", "eRIR", "reps x load", "reps x eRIR", "load x eRIR", "reps x load x eRIR")))) {
+    stop("Please provide valid weighting type. Options are 'none', 'reps', 'load', 'eRIR', 'reps x load', 'reps x eRIR', 'load x eRIR', and 'reps x load x eRIR'", call. = FALSE)
+  }
+}
+
+get_weighting <- function(weighted, reps, load, eRIR, normalize = FALSE) {
+
+  # +++++++++++++++++++++++++++++++++++++++++++
+  # Code chunk for dealing with R CMD check note
+  weight <- NULL
+  # +++++++++++++++++++++++++++++++++++++++++++
+
+  df <- data.frame(
+    weighted = weighted,
+    # Since we are weighting smaller reps more heavily, we can use 1/reps
+    reps = 1 / reps,
+    load = load,
+    normalize = normalize,
+    # eRIR needs to be incremented by 1, since there can be 0 ratings
+    # and that can cause problems for weighting in the non-linear regression
+    # For example, when all sets are taken to failure, eRIR is equal 0
+    # Since we want to weight sets close to failure heavier, we are going
+    # to use 1/(eRIR + 1)
+    eRIR = 1 / (eRIR + 1)
+    ) %>%
+    dplyr::mutate(
+      weight = dplyr::case_when(
+        weighted == "none" ~ 1,
+        weighted == "reps" ~ reps,
+        weighted == "load" ~ load,
+        weighted == "eRIR" ~ eRIR,
+        weighted == "reps x load" ~ reps * load,
+        weighted == "reps x eRIR" ~ reps * eRIR,
+        weighted == "load x eRIR" ~ load * eRIR,
+        weighted == "reps x load x eRIR" ~ reps * load * eRIR),
+
+        weight = ifelse(normalize == TRUE, weight / min(weight), weight)
+      )
+
+    df$weight
+}

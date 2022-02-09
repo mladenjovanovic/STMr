@@ -1,3 +1,15 @@
+# STM 0.1.1
+
+* Added different weighting options for the `estimate_` family of functions. These includ
+  - "none" (for equal weight, or no weighting of the observations)
+  - "reps" (for 1/reps weighting)
+  - "load" (for using weight or %1RM)
+  - "eRIR" (for 1/(eRIR+1) weighting)
+  - "reps x load"
+  - "reps x eRIR"
+  - "load x eRIR"
+  - "reps x load x eRIR"
+
 # STM 0.1.0
 
 * REWRITTEN the whole package. This version will have compatibility issues with the previous version due to different naming of the functions. The package is now more modular, flexible, and can be parameterized more easily
