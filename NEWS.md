@@ -1,4 +1,17 @@
-# STM 0.0.3.9000
+# STM 0.1.0
+
+* REWRITTEN the whole package. This version will have compatibility issues with the previous version due to different naming of the functions. The package is now more modular, flexible, and can be parameterized more easily
+
+* The functions are organized in the following manner:
+
+  - estimation functions (start with `estimate_`)
+  - reps-max functions (start with `max_`). Epley's, Modified Epley's and Linear/Brzycki's model as implemented
+  - adjustment functions (start with `adj_`). Deducted Intensity (DI), Relative Intensity (RelInt), Reps In Reserve (RIR), and % Max Reps (%MR) methods are implemented
+  - wrapper functions `get_reps()` and `get_perc_1RM()` are implemented to combine reps-max models ad well as progression (adjustment) functions into easy to use format
+  - progression functions (start with `progression_`) are implemented and allow easy parameterization to involve specific model and their estimated parameter values
+  - *vertical planning* functions (start with `vertical_`)
+  - *scheme function* (start with `scheme_`)
+  - plotting and printing functions: `generate_progression_table()`, `plot_progression_table()`, `plot_scheme()`, and `create_example()`
 
 * Fixed few typos in `citation()`
 * Added sample data set `nRM_testing`, which contains reps max testing of 12 athletes using 70, 80, and 90% 1RM

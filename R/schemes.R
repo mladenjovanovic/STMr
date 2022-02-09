@@ -2,12 +2,12 @@
 #'
 #' @param reps Numeric vector indicating reps prescription
 #' @param adjustment Numeric vector indicating adjustments. Forwarded to \code{progression_table}.
-#'     If the \code{progression_table} is \code{\link{RIR_increment}}, \code{adjustment} will be done
-#'     using RIR. On the other hand, if \code{\link{perc_drop}} is used, \code{adjustment} will be done
+#'     If the \code{progression_table} is \code{\link{progression_RIR_increment}}, \code{adjustment} will be done
+#'     using RIR. On the other hand, if \code{\link{progression_perc_drop}} is used, \code{adjustment} will be done
 #'     using 1RM percentage
 #' @param vertical_planning Vertical planning function. Default is \code{\link{vertical_linear}}
 #' @param vertical_planning_control Arguments forwarded to the \code{vertical_planning} function
-#' @param progression_table Progression table function. Default is \code{\link{RIR_increment}}
+#' @param progression_table Progression table function. Default is \code{\link{progression_RIR_increment}}
 #' @param progression_table_control Arguments forwarded to the \code{progression_table} function
 #'
 #' @return Data frame with the following columns: \code{reps}, \code{index}, \code{step},
@@ -28,7 +28,7 @@ scheme_generic <- function(reps = c(5, 5, 5),
                            adjustment = c(0, 0, 0),
                            vertical_planning = vertical_linear,
                            vertical_planning_control = list(),
-                           progression_table = RIR_increment,
+                           progression_table = progression_RIR_increment,
                            progression_table_control = list()) {
   progression <- do.call(vertical_planning, c(list(reps = reps), vertical_planning_control))
 
@@ -64,7 +64,7 @@ scheme_generic <- function(reps = c(5, 5, 5),
 #' scheme_wave(
 #'   reps = c(8, 6, 4, 8, 6, 4),
 #'   vertical_planning = vertical_block,
-#'   progression_table = perc_drop,
+#'   progression_table = progression_perc_drop,
 #'   progression_table_control = list(type = "ballistic")
 #' )
 #'
@@ -72,11 +72,11 @@ scheme_generic <- function(reps = c(5, 5, 5),
 #' # and using 3 steps progression
 #' scheme_wave(
 #'   reps = c(8, 6, 4, 8, 6, 4),
-#'   # Adjusting using lower %1RM (Perc_Drop method used)
+#'   # Adjusting using lower %1RM (progression_perc_drop method used)
 #'   adjustment = c(0, 0, 0, -0.1, -0.1, -0.1),
 #'   vertical_planning = vertical_linear,
 #'   vertical_planning_control = list(reps_change = c(0, -2, -4)),
-#'   progression_table = perc_drop,
+#'   progression_table = progression_perc_drop,
 #'   progression_table_control = list(volume = "extensive")
 #' )
 #'
@@ -88,14 +88,14 @@ scheme_generic <- function(reps = c(5, 5, 5),
 #'   adjustment = c(4, 2, 0, 6, 4, 2),
 #'   vertical_planning = vertical_linear,
 #'   vertical_planning_control = list(reps_change = c(0, -2, -4)),
-#'   progression_table = RIR_increment,
+#'   progression_table = progression_RIR_increment,
 #'   progression_table_control = list(volume = "extensive")
 #' )
 scheme_wave <- function(reps = c(10, 8, 6, 10, 8, 6),
                         adjustment = c(4, 2, 0, 6, 4, 2),
                         vertical_planning = vertical_linear,
                         vertical_planning_control = list(),
-                        progression_table = RIR_increment,
+                        progression_table = progression_RIR_increment,
                         progression_table_control = list(volume = "extensive")) {
   scheme_generic(
     reps = reps,
@@ -122,7 +122,7 @@ scheme_wave <- function(reps = c(10, 8, 6, 10, 8, 6),
 scheme_plateau <- function(reps = c(5, 5, 5, 5),
                            vertical_planning = vertical_constant,
                            vertical_planning_control = list(),
-                           progression_table = RIR_increment,
+                           progression_table = progression_RIR_increment,
                            progression_table_control = list(volume = "extensive")) {
   scheme_generic(
     reps = reps,
@@ -154,7 +154,7 @@ scheme_step <- function(reps = c(5, 5, 5, 5),
                         adjustment = c(-0.3, -0.2, -0.1, 0),
                         vertical_planning = vertical_constant,
                         vertical_planning_control = list(),
-                        progression_table = perc_drop,
+                        progression_table = progression_perc_drop,
                         progression_table_control = list(volume = "normal")) {
   scheme_generic(
     reps = reps,
@@ -177,7 +177,7 @@ scheme_step_reverse <- function(reps = c(10, 10, 10, 10),
                                 adjustment = c(0, 3, 6, 9),
                                 vertical_planning = vertical_constant,
                                 vertical_planning_control = list(),
-                                progression_table = RIR_increment,
+                                progression_table = progression_RIR_increment,
                                 progression_table_control = list(volume = "normal")) {
   scheme_generic(
     reps = reps,
@@ -200,7 +200,7 @@ scheme_wave_descending <- function(reps = c(6, 8, 10, 6, 8, 10),
                                    adjustment = c(4, 2, 0, 6, 4, 2),
                                    vertical_planning = vertical_linear,
                                    vertical_planning_control = list(),
-                                   progression_table = RIR_increment,
+                                   progression_table = progression_RIR_increment,
                                    progression_table_control = list(volume = "extensive")) {
   scheme_generic(
     reps = reps,
@@ -223,7 +223,7 @@ scheme_light_heavy <- function(reps = c(6, 3, 6, 3, 6, 3),
                                adjustment = c(0, -0.2, 0, -0.2, 0, -0.2),
                                vertical_planning = vertical_constant,
                                vertical_planning_control = list(),
-                               progression_table = perc_drop,
+                               progression_table = progression_perc_drop,
                                progression_table_control = list(volume = "normal")) {
   scheme_generic(
     reps = reps,
@@ -247,7 +247,7 @@ scheme_pyramid <- function(reps = c(12, 10, 8, 8, 10, 12),
                            adjustment = 0,
                            vertical_planning = vertical_linear,
                            vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
-                           progression_table = RIR_increment,
+                           progression_table = progression_RIR_increment,
                            progression_table_control = list(volume = "extensive")) {
   scheme_generic(
     reps = reps,
@@ -271,7 +271,7 @@ scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 12, 10, 8),
                                    adjustment = 0,
                                    vertical_planning = vertical_linear,
                                    vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
-                                   progression_table = RIR_increment,
+                                   progression_table = progression_RIR_increment,
                                    progression_table_control = list(volume = "extensive")) {
   scheme_generic(
     reps = reps,
@@ -294,7 +294,7 @@ scheme_rep_acc <- function(reps = c(7, 7, 7),
                            adjustment = 0,
                            # vertical_planning = vertical_planning,
                            vertical_planning_control = list(step = rep(-3, 4)),
-                           progression_table = RIR_increment,
+                           progression_table = progression_RIR_increment,
                            progression_table_control = list(volume = "extensive")) {
   scheme_df <- scheme_generic(
     reps = reps,

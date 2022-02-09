@@ -1,20 +1,22 @@
 Package: STM
-Title: Strength Training Manual R Functions
-Version: 0.0.3.9000
+Title: Strength Training Manual R-Language Functions
+Version: 0.1.0
 Authors@R: 
     person(given = "Mladen",
            family = "Jovanović",
            role = c("aut", "cre"),
            email = "coach.mladen.jovanovic@gmail.com")
-Description: Set and Rep Schemes from the Strength Training Manual are created
-    in Microsoft Excel. STM package allow users to recreate those schemes, as well as to
-    allow them to create their own, with additional benefit of R language
-    (i.e., reproducibility, open-source, extendability). 
+Description: STM package allow users estimate individual reps-max relationships, implement
+    various progression table, and create numerous set and rep schemes. The STM package is
+    created as a tool to help writing Jovanovic M. (2020) Strength Training Manual
+    <ISBN:979-8604459898>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+URL: https://mladenjovanovic.github.io/STM/
+BugReports: https://github.com/mladenjovanovic/STM/issues
 Imports: 
     dplyr,
     ggplot2,
@@ -24,6 +26,6 @@ Imports:
     tidyr
 Suggests: 
     testthat (>= 3.0.0)
-Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)
+Config/testthat/edition: 3

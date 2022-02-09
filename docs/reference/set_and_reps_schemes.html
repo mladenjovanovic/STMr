@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">STM</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -28,7 +28,13 @@
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/mladenjovanovic/STM/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -38,7 +44,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Set and Rep Schemes</h1>
-    
+    <small class="dont-index">Source: <a href="https://github.com/mladenjovanovic/STM/blob/HEAD/R/schemes.R" class="external-link"><code>R/schemes.R</code></a></small>
     <div class="hidden name"><code>set_and_reps_schemes.Rd</code></div>
     </div>
 
@@ -52,7 +58,7 @@
   adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,
   vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">RIR_increment</span>,
+  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
 <span class="op">)</span>
 
@@ -61,7 +67,7 @@
   adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span>,
   vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">RIR_increment</span>,
+  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span>
 <span class="op">)</span>
 
@@ -69,7 +75,7 @@
   reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,
   vertical_planning <span class="op">=</span> <span class="va">vertical_constant</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">RIR_increment</span>,
+  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span>
 <span class="op">)</span>
 
@@ -78,7 +84,7 @@
   adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.3</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0</span><span class="op">)</span>,
   vertical_planning <span class="op">=</span> <span class="va">vertical_constant</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">perc_drop</span>,
+  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span>
 <span class="op">)</span>
 
@@ -87,7 +93,7 @@
   adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">9</span><span class="op">)</span>,
   vertical_planning <span class="op">=</span> <span class="va">vertical_constant</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">RIR_increment</span>,
+  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span>
 <span class="op">)</span>
 
@@ -96,7 +102,7 @@
   adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span>,
   vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">RIR_increment</span>,
+  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span>
 <span class="op">)</span>
 
@@ -105,7 +111,7 @@
   adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">0.2</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">0.2</span><span class="op">)</span>,
   vertical_planning <span class="op">=</span> <span class="va">vertical_constant</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">perc_drop</span>,
+  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span>
 <span class="op">)</span>
 
@@ -114,7 +120,7 @@
   adjustment <span class="op">=</span> <span class="fl">0</span>,
   vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">4</span>, <span class="op">-</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">RIR_increment</span>,
+  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span>
 <span class="op">)</span>
 
@@ -123,7 +129,7 @@
   adjustment <span class="op">=</span> <span class="fl">0</span>,
   vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">4</span>, <span class="op">-</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">RIR_increment</span>,
+  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span>
 <span class="op">)</span>
 
@@ -131,7 +137,7 @@
   reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">7</span>, <span class="fl">7</span><span class="op">)</span>,
   adjustment <span class="op">=</span> <span class="fl">0</span>,
   vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,
-  progression_table <span class="op">=</span> <span class="va">RIR_increment</span>,
+  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,
   progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
     </div>
@@ -142,15 +148,15 @@
 <dd><p>Numeric vector indicating reps prescription</p></dd>
 <dt>adjustment</dt>
 <dd><p>Numeric vector indicating adjustments. Forwarded to <code>progression_table</code>.
-If the <code>progression_table</code> is <code><a href="progression_table.html">RIR_increment</a></code>, <code>adjustment</code> will be done
-using RIR. On the other hand, if <code><a href="progression_table.html">perc_drop</a></code> is used, <code>adjustment</code> will be done
+If the <code>progression_table</code> is <code><a href="progression_table.html">progression_RIR_increment</a></code>, <code>adjustment</code> will be done
+using RIR. On the other hand, if <code><a href="progression_table.html">progression_perc_drop</a></code> is used, <code>adjustment</code> will be done
 using 1RM percentage</p></dd>
 <dt>vertical_planning</dt>
 <dd><p>Vertical planning function. Default is <code><a href="vertical_planning_functions.html">vertical_linear</a></code></p></dd>
 <dt>vertical_planning_control</dt>
 <dd><p>Arguments forwarded to the <code>vertical_planning</code> function</p></dd>
 <dt>progression_table</dt>
-<dd><p>Progression table function. Default is <code><a href="progression_table.html">RIR_increment</a></code></p></dd>
+<dd><p>Progression table function. Default is <code><a href="progression_table.html">progression_RIR_increment</a></code></p></dd>
 <dt>progression_table_control</dt>
 <dd><p>Arguments forwarded to the <code>progression_table</code> function</p></dd>
 </dl></div>
@@ -225,7 +231,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 <span class="r-in"><span class="fu">scheme_wave</span><span class="op">(</span></span>
 <span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">4</span><span class="op">)</span>,</span>
 <span class="r-in">  vertical_planning <span class="op">=</span> <span class="va">vertical_block</span>,</span>
-<span class="r-in">  progression_table <span class="op">=</span> <span class="va">perc_drop</span>,</span>
+<span class="r-in">  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
 <span class="r-in">  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"ballistic"</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step adjustment  perc_1RM</span>
@@ -258,11 +264,11 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 <span class="r-in"><span class="co"># and using 3 steps progression</span></span>
 <span class="r-in"><span class="fu">scheme_wave</span><span class="op">(</span></span>
 <span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="co"># Adjusting using lower %1RM (Perc_Drop method used)</span></span>
+<span class="r-in">  <span class="co"># Adjusting using lower %1RM (progression_perc_drop method used)</span></span>
 <span class="r-in">  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span>,</span>
 <span class="r-in">  vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span>,</span>
 <span class="r-in">  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  progression_table <span class="op">=</span> <span class="va">perc_drop</span>,</span>
+<span class="r-in">  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
 <span class="r-in">  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step  adjustment  perc_1RM</span>
@@ -293,7 +299,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 <span class="r-in">  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span class="r-in">  vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span>,</span>
 <span class="r-in">  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  progression_table <span class="op">=</span> <span class="va">RIR_increment</span>,</span>
+<span class="r-in">  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,</span>
 <span class="r-in">  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step adjustment  perc_1RM</span>
@@ -563,7 +569,7 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>
