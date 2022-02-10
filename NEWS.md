@@ -1,3 +1,7 @@
+# STM 0.1.2.9000
+
+* Fixed a bug in `progression_rel_int()` function
+
 # STM 0.1.1
 
 * Added different weighting options for the `estimate_` family of functions. These include
