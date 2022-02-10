@@ -1,4 +1,4 @@
-#' Estimate relationship between reps and %1RM
+#' Estimate relationship between reps and %1RM (or weight)
 #'
 #' By default, target variable is the reps performed, while the predictors is the \code{perc_1RM} or
 #'       \code{weight}. To reverse this, use the \code{reverse = TRUE} argument
@@ -11,7 +11,7 @@
 #' @param weighted What weighting should be used for the non-linear regression? Default is "none". Other options include:
 #'     "reps" (for 1/reps weighting), "load" (for using weight or %1RM), "eRIR" (for 1/(eRIR+1) weighting),
 #'     "reps x load", "reps x eRIR", "load x eRIR", and "reps x load x eRIR"
-#' @param ... Forwarded to \code{\link[stats]{nls}} functions
+#' @param ... Forwarded to \code{\link[stats]{nls}} function
 #' @return \code{\link[stats]{nls}} object
 #' @name estimate_functions
 NULL
