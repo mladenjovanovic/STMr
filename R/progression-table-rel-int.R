@@ -86,7 +86,7 @@ progression_rel_int <- function(reps,
       step_RI = 1 - step * (inc_start + (reps - 1) * inc_step),
       adjustment = (rep_RI + step_RI),
       total_adjustment = adjustment + post_adjustment,
-      perc_1RM = adj_perc_1RM_DI(
+      perc_1RM = adj_perc_1RM_rel_int(
         reps = reps,
         adjustment = total_adjustment,
         mfactor = mfactor,
