@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">STM</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
@@ -47,6 +47,22 @@
       <small>Source: <a href="https://github.com/mladenjovanovic/STM/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.1.1" id="stm-011">STM 0.1.1<a class="anchor" aria-label="anchor" href="#stm-011"></a></h2>
+<ul><li>
+<p>Added different weighting options for the <code>estimate_</code> family of functions. These include</p>
+<ul><li>“none” (for equal weight, or no weighting of the observations)</li>
+<li>“reps” (for <code>1/reps</code> weighting)</li>
+<li>“load” (for using weight or %1RM)</li>
+<li>“eRIR” (for <code>1/(eRIR+1)</code> weighting)</li>
+<li>“reps x load”</li>
+<li>“reps x eRIR”</li>
+<li>“load x eRIR”</li>
+<li>“reps x load x eRIR”</li>
+</ul></li>
+<li><p>Added <code>strength_training_log</code> dataset. Single individual performing two strength training sessions per week, over the course of 12 weeks (4 phases, each 3 weeks long). Individual eRIR (estimated reps-in-reserve) subjective rating is included in the dataset. This dataset is used to demonstrate techniques for <em>embedded</em> testing of the 1RM and individual profiles</p></li>
+<li><p>Added <code><a href="../reference/estimate_functions_quantile.html">estimate_k_quantile()</a></code>, <code><a href="../reference/estimate_functions_quantile.html">estimate_kmod_quantile()</a></code>, and <code><a href="../reference/estimate_functions_quantile.html">estimate_klin_quantile()</a></code> functions to implement non-linear quantile estimation of the parameters</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.0" id="stm-010">STM 0.1.0<a class="anchor" aria-label="anchor" href="#stm-010"></a></h2>
 <ul><li><p>REWRITTEN the whole package. This version will have compatibility issues with the previous version due to different naming of the functions. The package is now more modular, flexible, and can be parameterized more easily</p></li>

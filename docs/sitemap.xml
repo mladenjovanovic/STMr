@@ -31,6 +31,9 @@
     <loc>/reference/estimate_functions.html</loc>
   </url>
   <url>
+    <loc>/reference/estimate_functions_quantile.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_perc_1RM.html</loc>
   </url>
   <url>
@@ -62,6 +65,9 @@
   </url>
   <url>
     <loc>/reference/set_and_reps_schemes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/strength_training_log.html</loc>
   </url>
   <url>
     <loc>/reference/vertical_planning_functions.html</loc>

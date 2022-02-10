@@ -1,14 +1,20 @@
 # STM 0.1.1
 
-* Added different weighting options for the `estimate_` family of functions. These includ
+* Added different weighting options for the `estimate_` family of functions. These include
   - "none" (for equal weight, or no weighting of the observations)
-  - "reps" (for 1/reps weighting)
+  - "reps" (for `1/reps` weighting)
   - "load" (for using weight or %1RM)
-  - "eRIR" (for 1/(eRIR+1) weighting)
+  - "eRIR" (for `1/(eRIR+1)` weighting)
   - "reps x load"
   - "reps x eRIR"
   - "load x eRIR"
   - "reps x load x eRIR"
+
+* Added `strength_training_log` dataset. Single individual performing two strength training sessions per week,
+over the course of 12 weeks (4 phases, each 3 weeks long). Individual eRIR (estimated reps-in-reserve) subjective rating is included in the dataset. This dataset is used to demonstrate techniques for *embedded* testing of the 1RM and individual profiles
+
+* Added `estimate_k_quantile()`, `estimate_kmod_quantile()`, and `estimate_klin_quantile()` functions to implement non-linear quantile estimation of the parameters
+
 
 # STM 0.1.0
 

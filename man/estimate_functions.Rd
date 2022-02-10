@@ -9,7 +9,7 @@
 \alias{estimate_kmod_1RM}
 \alias{estimate_klin_1RM}
 \alias{get_predicted_1RM_from_k_model}
-\title{Estimate relationship between reps and \%1RM}
+\title{Estimate relationship between reps and \%1RM (or weight)}
 \usage{
 estimate_k(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...)
 
@@ -66,7 +66,7 @@ get_predicted_1RM_from_k_model(model)
 "reps" (for 1/reps weighting), "load" (for using weight or \%1RM), "eRIR" (for 1/(eRIR+1) weighting),
 "reps x load", "reps x eRIR", "load x eRIR", and "reps x load x eRIR"}
 
-\item{...}{Forwarded to \code{\link[stats]{nls}} functions}
+\item{...}{Forwarded to \code{\link[stats]{nls}} function}
 
 \item{weight}{Weight used}
 
