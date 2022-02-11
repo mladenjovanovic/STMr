@@ -75,7 +75,7 @@ progression_rel_int <- function(reps,
       rep_start = dplyr::case_when(
         volume == "intensive" ~ 0,
         volume == "normal" ~ volume_increment,
-        volume == "extensive" ~ volume_increment * 2,
+        volume == "extensive" ~ volume_increment * 2
       ),
       rep_step = 0,
       inc_start = step_increment,
