@@ -91,13 +91,13 @@ estimate_k_mixed <- function(athlete,
 #'
 #' coef(m1)
 estimate_k_1RM_mixed <- function(athlete,
-                             weight,
-                             reps,
-                             eRIR = 0,
-                             reverse = FALSE,
-                             weighted = "none",
-                             random = k + zeroRM ~ 1,
-                             ...) {
+                                 weight,
+                                 reps,
+                                 eRIR = 0,
+                                 reverse = FALSE,
+                                 weighted = "none",
+                                 random = k + zeroRM ~ 1,
+                                 ...) {
 
   # Do checks
   check_weighting(weighted)
@@ -148,12 +148,12 @@ estimate_k_1RM_mixed <- function(athlete,
 #'
 #' coef(m1)
 estimate_kmod_mixed <- function(athlete,
-                             perc_1RM,
-                             reps,
-                             eRIR = 0,
-                             reverse = FALSE,
-                             weighted = "none",
-                             ...) {
+                                perc_1RM,
+                                reps,
+                                eRIR = 0,
+                                reverse = FALSE,
+                                weighted = "none",
+                                ...) {
 
   # Do checks
   check_weighting(weighted)
@@ -205,13 +205,13 @@ estimate_kmod_mixed <- function(athlete,
 #'
 #' coef(m1)
 estimate_kmod_1RM_mixed <- function(athlete,
-                                 weight,
-                                 reps,
-                                 eRIR = 0,
-                                 reverse = FALSE,
-                                 weighted = "none",
-                                 random = kmod + oneRM ~ 1,
-                                 ...) {
+                                    weight,
+                                    reps,
+                                    eRIR = 0,
+                                    reverse = FALSE,
+                                    weighted = "none",
+                                    random = kmod + oneRM ~ 1,
+                                    ...) {
 
   # Do checks
   check_weighting(weighted)
@@ -362,4 +362,3 @@ estimate_klin_1RM_mixed <- function(athlete,
 
   m1
 }
-

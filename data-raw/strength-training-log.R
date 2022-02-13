@@ -3,7 +3,7 @@ require(STM)
 require(tidyverse)
 
 mround <- function(x, m = 2.5) {
-  round(x/m)*m
+  round(x / m) * m
 }
 
 session_A <- scheme_wave(
@@ -52,7 +52,7 @@ eRIR_df <- strength_training_log %>%
   ungroup() %>%
   select(-n) %>%
   mutate(
-    systematic_effect = 0.5 * (index-1),
+    systematic_effect = 0.5 * (index - 1),
     random_effect = runif(n(), min = -1, max = 1),
     total_effect = systematic_effect + random_effect
   ) %>%
@@ -60,8 +60,9 @@ eRIR_df <- strength_training_log %>%
 
 strength_training_log <- strength_training_log %>%
   left_join(
-  eRIR_df, by = c("phase", "session", "index")
-)
+    eRIR_df,
+    by = c("phase", "session", "index")
+  )
 
 strength_training_log <- strength_training_log %>%
   mutate(

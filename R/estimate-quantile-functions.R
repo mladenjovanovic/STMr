@@ -29,13 +29,12 @@ NULL
 #'
 #' coef(m1)
 estimate_k_quantile <- function(perc_1RM,
-                                    reps,
-                                    eRIR = 0,
-                                    tau = 0.5,
-                                    reverse = FALSE,
-                                    control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
-                                    ...) {
-
+                                reps,
+                                eRIR = 0,
+                                tau = 0.5,
+                                reverse = FALSE,
+                                control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+                                ...) {
   df <- data.frame(perc_1RM = perc_1RM, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -79,13 +78,12 @@ estimate_k_quantile <- function(perc_1RM,
 #'
 #' coef(m1)
 estimate_k_1RM_quantile <- function(weight,
-                                reps,
-                                eRIR = 0,
-                                tau = 0.5,
-                                reverse = FALSE,
-                                control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
-                                ...) {
-
+                                    reps,
+                                    eRIR = 0,
+                                    tau = 0.5,
+                                    reverse = FALSE,
+                                    control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+                                    ...) {
   df <- data.frame(weight = weight, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -126,13 +124,12 @@ estimate_k_1RM_quantile <- function(weight,
 #'
 #' coef(m1)
 estimate_kmod_quantile <- function(perc_1RM,
-                                       reps,
-                                       eRIR = 0,
-                                       tau = 0.5,
-                                       reverse = FALSE,
-                                       control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
-                                       ...) {
-
+                                   reps,
+                                   eRIR = 0,
+                                   tau = 0.5,
+                                   reverse = FALSE,
+                                   control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+                                   ...) {
   df <- data.frame(perc_1RM = perc_1RM, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -174,13 +171,12 @@ estimate_kmod_quantile <- function(perc_1RM,
 #'
 #' coef(m1)
 estimate_kmod_1RM_quantile <- function(weight,
-                                reps,
-                                eRIR = 0,
-                                tau = 0.5,
-                                reverse = FALSE,
-                                control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
-                                ...) {
-
+                                       reps,
+                                       eRIR = 0,
+                                       tau = 0.5,
+                                       reverse = FALSE,
+                                       control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+                                       ...) {
   df <- data.frame(weight = weight, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -221,13 +217,12 @@ estimate_kmod_1RM_quantile <- function(weight,
 #'
 #' coef(m1)
 estimate_klin_quantile <- function(perc_1RM,
-                                       reps,
-                                       eRIR = 0,
-                                       tau = 0.5,
-                                       reverse = FALSE,
-                                       control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
-                                       ...) {
-
+                                   reps,
+                                   eRIR = 0,
+                                   tau = 0.5,
+                                   reverse = FALSE,
+                                   control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+                                   ...) {
   df <- data.frame(perc_1RM = perc_1RM, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -269,13 +264,12 @@ estimate_klin_quantile <- function(perc_1RM,
 #'
 #' coef(m1)
 estimate_klin_1RM_quantile <- function(weight,
-                                   reps,
-                                   eRIR = 0,
-                                   tau = 0.5,
-                                   reverse = FALSE,
-                                   control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
-                                   ...) {
-
+                                       reps,
+                                       eRIR = 0,
+                                       tau = 0.5,
+                                       reverse = FALSE,
+                                       control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+                                       ...) {
   df <- data.frame(weight = weight, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -303,4 +297,3 @@ estimate_klin_1RM_quantile <- function(weight,
 
   m1
 }
-

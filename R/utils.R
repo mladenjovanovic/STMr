@@ -61,7 +61,7 @@ get_weighting <- function(weighted, reps, load, eRIR, normalize = FALSE) {
     # Since we want to weight sets close to failure heavier, we are going
     # to use 1/(eRIR + 1)
     eRIR = 1 / (eRIR + 1)
-    ) %>%
+  ) %>%
     dplyr::mutate(
       weight = dplyr::case_when(
         weighted == "none" ~ 1,
@@ -71,10 +71,10 @@ get_weighting <- function(weighted, reps, load, eRIR, normalize = FALSE) {
         weighted == "reps x load" ~ reps * load,
         weighted == "reps x eRIR" ~ reps * eRIR,
         weighted == "load x eRIR" ~ load * eRIR,
-        weighted == "reps x load x eRIR" ~ reps * load * eRIR),
+        weighted == "reps x load x eRIR" ~ reps * load * eRIR
+      ),
+      weight = ifelse(normalize == TRUE, weight / min(weight), weight)
+    )
 
-        weight = ifelse(normalize == TRUE, weight / min(weight), weight)
-      )
-
-    df$weight
+  df$weight
 }
