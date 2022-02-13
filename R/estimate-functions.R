@@ -60,93 +60,6 @@ estimate_k <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "no
   m1
 }
 
-#' @describeIn estimate_functions Estimate the parameter \code{kmod} in the modified Epley's equation
-#' @export
-#' @examples
-#' # ---------------------------------------------------------
-#' # Modified Epley's model
-#' m1 <- estimate_kmod(
-#'   perc_1RM = c(0.7, 0.8, 0.9),
-#'   reps = c(10, 5, 3)
-#' )
-#'
-#' coef(m1)
-estimate_kmod <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...) {
-
-  # Do checks
-  check_weighting(weighted)
-
-  df <- data.frame(perc_1RM = perc_1RM, reps = reps, eRIR = eRIR, weighted = weighted) %>%
-    dplyr::mutate(
-      nRM = reps + eRIR,
-      reg_weights = get_weighting(weighted, reps, perc_1RM, eRIR)
-    )
-
-  if (reverse == FALSE) {
-    m1 <- stats::nls(
-      nRM ~ ((kmod - 1) * perc_1RM + 1) / (kmod * perc_1RM),
-      data =  df,
-      start = list(kmod = 1),
-      weights = df$reg_weights,
-      ...
-    )
-  } else {
-    m1 <- stats::nls(
-      perc_1RM ~ 1 / (kmod * (nRM - 1) + 1),
-      data =  df,
-      start = list(kmod = 1),
-      weights = df$reg_weights,
-      ...
-    )
-  }
-
-  m1
-}
-
-#' @describeIn estimate_functions Estimate the parameter \code{klin} using the Linear/Brzycki model
-#' @export
-#' @examples
-#' # ---------------------------------------------------------
-#' # Linear/Brzycki model
-#' m1 <- estimate_klin(
-#'   perc_1RM = c(0.7, 0.8, 0.9),
-#'   reps = c(10, 5, 3)
-#' )
-#'
-#' coef(m1)
-estimate_klin <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...) {
-
-  # Do checks
-  check_weighting(weighted)
-
-  df <- data.frame(perc_1RM = perc_1RM, reps = reps, eRIR = eRIR, weighted = weighted) %>%
-    dplyr::mutate(
-      nRM = reps + eRIR,
-      reg_weights = get_weighting(weighted, reps, perc_1RM, eRIR)
-    )
-
-  if (reverse == FALSE) {
-    m1 <- stats::nls(
-      nRM ~ (1 - perc_1RM) * klin + 1,
-      data =  df,
-      start = list(klin = 1),
-      weights = df$reg_weights,
-      ...
-    )
-  } else {
-    m1 <- stats::nls(
-      perc_1RM ~ (klin - nRM + 1) / klin,
-      data =  df,
-      start = list(klin = 1),
-      weights = df$reg_weights,
-      ...
-    )
-  }
-
-
-  m1
-}
-
 #' @describeIn estimate_functions Estimate the parameter \code{k} in the Epley's equation, as well as
 #'     \code{1RM}. This is a novel estimation function that uses the absolute weights
 #' @export
@@ -191,6 +104,49 @@ estimate_k_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "
   m1
 }
 
+#' @describeIn estimate_functions Estimate the parameter \code{kmod} in the modified Epley's equation
+#' @export
+#' @examples
+#' # ---------------------------------------------------------
+#' # Modified Epley's model
+#' m1 <- estimate_kmod(
+#'   perc_1RM = c(0.7, 0.8, 0.9),
+#'   reps = c(10, 5, 3)
+#' )
+#'
+#' coef(m1)
+estimate_kmod <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...) {
+
+  # Do checks
+  check_weighting(weighted)
+
+  df <- data.frame(perc_1RM = perc_1RM, reps = reps, eRIR = eRIR, weighted = weighted) %>%
+    dplyr::mutate(
+      nRM = reps + eRIR,
+      reg_weights = get_weighting(weighted, reps, perc_1RM, eRIR)
+    )
+
+  if (reverse == FALSE) {
+    m1 <- stats::nls(
+      nRM ~ ((kmod - 1) * perc_1RM + 1) / (kmod * perc_1RM),
+      data =  df,
+      start = list(kmod = 1),
+      weights = df$reg_weights,
+      ...
+    )
+  } else {
+    m1 <- stats::nls(
+      perc_1RM ~ 1 / (kmod * (nRM - 1) + 1),
+      data =  df,
+      start = list(kmod = 1),
+      weights = df$reg_weights,
+      ...
+    )
+  }
+
+  m1
+}
+
 #' @describeIn estimate_functions Estimate the parameter \code{kmod} in the modified Epley's equation, as well as
 #'     \code{1RM}. This is a novel estimation function that uses the absolute weights
 #' @export
@@ -227,6 +183,50 @@ estimate_kmod_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted 
       weight ~ `1RM` / (kmod * (nRM - 1) + 1),
       data =  df,
       start = list(kmod = 1, `1RM` = max(df$weight)),
+      weights = df$reg_weights,
+      ...
+    )
+  }
+
+
+  m1
+}
+
+#' @describeIn estimate_functions Estimate the parameter \code{klin} using the Linear/Brzycki model
+#' @export
+#' @examples
+#' # ---------------------------------------------------------
+#' # Linear/Brzycki model
+#' m1 <- estimate_klin(
+#'   perc_1RM = c(0.7, 0.8, 0.9),
+#'   reps = c(10, 5, 3)
+#' )
+#'
+#' coef(m1)
+estimate_klin <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...) {
+
+  # Do checks
+  check_weighting(weighted)
+
+  df <- data.frame(perc_1RM = perc_1RM, reps = reps, eRIR = eRIR, weighted = weighted) %>%
+    dplyr::mutate(
+      nRM = reps + eRIR,
+      reg_weights = get_weighting(weighted, reps, perc_1RM, eRIR)
+    )
+
+  if (reverse == FALSE) {
+    m1 <- stats::nls(
+      nRM ~ (1 - perc_1RM) * klin + 1,
+      data =  df,
+      start = list(klin = 1),
+      weights = df$reg_weights,
+      ...
+    )
+  } else {
+    m1 <- stats::nls(
+      perc_1RM ~ (klin - nRM + 1) / klin,
+      data =  df,
+      start = list(klin = 1),
       weights = df$reg_weights,
       ...
     )
