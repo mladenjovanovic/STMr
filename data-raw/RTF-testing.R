@@ -1,10 +1,10 @@
-## code to prepare `nRM_testing` dataset goes here
+## code to prepare `RTF_testing` dataset goes here
 require(tidyverse)
 
 # Rounding function
 round_plates <- function(x, plate = 2.5, func = round) func(x / plate) * plate
 
-nRM_testing <- tribble(
+RTF_testing <- tribble(
   ~Athlete, ~k, ~`1RM`,
   "Athlete A", 0.02, 100,
   "Athlete B", 0.0333, 95,
@@ -20,13 +20,14 @@ nRM_testing <- tribble(
   "Athlete L", 0.039, 140
 ) %>%
   expand_grid(
-    `Goal %1RM` = c(0.9, 0.8, 0.7)
+    `Target %1RM` = c(0.9, 0.8, 0.7)
   ) %>%
   mutate(
-    Weight = round_plates(`Goal %1RM` * `1RM`, 2.5),
-    `Observed %1RM` = Weight / `1RM`,
-    nRM = round(get_max_reps_k(`Observed %1RM`, k = k) + runif(n(), -0.5, 0.5), 0)
+    `Target Weight` = `Target %1RM` * `1RM`,
+    `Real Weight` = round_plates(`Target Weight`, 2.5),
+    `Real %1RM` = `Real Weight` / `1RM`,
+    nRM = round(get_reps(`Real %1RM`, model = "epley", k = k) + runif(n(), -0.5, 0.5), 0)
   ) %>%
   select(-k)
 
-usethis::use_data(nRM_testing, overwrite = TRUE)
+usethis::use_data(RTF_testing, overwrite = TRUE)

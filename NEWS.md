@@ -1,6 +1,7 @@
 # STM 0.1.2.9000
 
 * Fixed a bug in `progression_rel_int()` function
+* Renamed `nRM_testing` dataset to `RTF_testing`, as well as renamed the columns to be more descriptive
 
 # STM 0.1.1
 
