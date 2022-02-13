@@ -10,9 +10,6 @@
 #' @param reps Number of repetitions done
 #' @param eRIR Subjective estimation of reps-in-reserve (eRIR)
 #' @param reverse Logical, default is \code{FALSE}. Should reps be used as predictor instead as a target?
-#' @param weighted What weighting should be used for the non-linear regression? Default is "none". Other options include:
-#'     "reps" (for 1/reps weighting), "load" (for using weight or %1RM), "eRIR" (for 1/(eRIR+1) weighting),
-#'     "reps x load", "reps x eRIR", "load x eRIR", and "reps x load x eRIR"
 #' @param random Random parameter forwarded to \code{\link[nlme]{nlme}} function. Default is \code{k + zeroRM ~ 1}
 #' @param ... Forwarded to \code{\link[nlme]{nlme}} function
 #' @return \code{\link[nlme]{nlme}} object
@@ -36,16 +33,11 @@ estimate_k_mixed <- function(athlete,
                              reps,
                              eRIR = 0,
                              reverse = FALSE,
-                             weighted = "none",
                              ...) {
 
-  # Do checks
-  check_weighting(weighted)
-
-  df <- data.frame(athlete = athlete, perc_1RM = perc_1RM, reps = reps, eRIR = eRIR, weighted = weighted) %>%
+  df <- data.frame(athlete = athlete, perc_1RM = perc_1RM, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
-      nRM = reps + eRIR,
-      reg_weights = get_weighting(weighted, reps, perc_1RM, eRIR)
+      nRM = reps + eRIR
     )
 
   if (reverse == FALSE) {
@@ -56,7 +48,6 @@ estimate_k_mixed <- function(athlete,
       groups = ~athlete,
       fixed = k ~ 1,
       random = k ~ 1,
-      weights = ~reg_weights,
       ...
     )
   } else {
@@ -67,7 +58,6 @@ estimate_k_mixed <- function(athlete,
       groups = ~athlete,
       fixed = k ~ 1,
       random = k ~ 1,
-      weights = ~reg_weights,
       ...
     )
   }
@@ -95,17 +85,12 @@ estimate_k_1RM_mixed <- function(athlete,
                                  reps,
                                  eRIR = 0,
                                  reverse = FALSE,
-                                 weighted = "none",
                                  random = k + zeroRM ~ 1,
                                  ...) {
 
-  # Do checks
-  check_weighting(weighted)
-
-  df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR, weighted = weighted) %>%
+  df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
-      nRM = reps + eRIR,
-      reg_weights = get_weighting(weighted, reps, weight, eRIR)
+      nRM = reps + eRIR
     )
 
   if (reverse == FALSE) {
@@ -116,7 +101,6 @@ estimate_k_1RM_mixed <- function(athlete,
       groups = ~athlete,
       fixed = k + zeroRM ~ 1,
       random = random,
-      weights = ~reg_weights,
       ...
     )
   } else {
@@ -127,7 +111,6 @@ estimate_k_1RM_mixed <- function(athlete,
       groups = ~athlete,
       fixed = k + zeroRM ~ 1,
       random = random,
-      weights = ~reg_weights,
       ...
     )
   }
@@ -152,16 +135,12 @@ estimate_kmod_mixed <- function(athlete,
                                 reps,
                                 eRIR = 0,
                                 reverse = FALSE,
-                                weighted = "none",
                                 ...) {
 
-  # Do checks
-  check_weighting(weighted)
 
-  df <- data.frame(athlete = athlete, perc_1RM = perc_1RM, reps = reps, eRIR = eRIR, weighted = weighted) %>%
+  df <- data.frame(athlete = athlete, perc_1RM = perc_1RM, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
-      nRM = reps + eRIR,
-      reg_weights = get_weighting(weighted, reps, perc_1RM, eRIR)
+      nRM = reps + eRIR
     )
 
   if (reverse == FALSE) {
@@ -172,7 +151,6 @@ estimate_kmod_mixed <- function(athlete,
       groups = ~athlete,
       fixed = kmod ~ 1,
       random = kmod ~ 1,
-      weights = ~reg_weights,
       ...
     )
   } else {
@@ -183,7 +161,6 @@ estimate_kmod_mixed <- function(athlete,
       groups = ~athlete,
       fixed = kmod ~ 1,
       random = kmod ~ 1,
-      weights = ~reg_weights,
       ...
     )
   }
@@ -209,17 +186,12 @@ estimate_kmod_1RM_mixed <- function(athlete,
                                     reps,
                                     eRIR = 0,
                                     reverse = FALSE,
-                                    weighted = "none",
                                     random = kmod + oneRM ~ 1,
                                     ...) {
 
-  # Do checks
-  check_weighting(weighted)
-
-  df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR, weighted = weighted) %>%
+  df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
-      nRM = reps + eRIR,
-      reg_weights = get_weighting(weighted, reps, weight, eRIR)
+      nRM = reps + eRIR
     )
 
   if (reverse == FALSE) {
@@ -230,7 +202,6 @@ estimate_kmod_1RM_mixed <- function(athlete,
       groups = ~athlete,
       fixed = kmod + oneRM ~ 1,
       random = random,
-      weights = ~reg_weights,
       ...
     )
   } else {
@@ -241,7 +212,6 @@ estimate_kmod_1RM_mixed <- function(athlete,
       groups = ~athlete,
       fixed = kmod + oneRM ~ 1,
       random = random,
-      weights = ~reg_weights,
       ...
     )
   }
@@ -266,16 +236,12 @@ estimate_klin_mixed <- function(athlete,
                                 reps,
                                 eRIR = 0,
                                 reverse = FALSE,
-                                weighted = "none",
                                 ...) {
 
-  # Do checks
-  check_weighting(weighted)
 
-  df <- data.frame(athlete = athlete, perc_1RM = perc_1RM, reps = reps, eRIR = eRIR, weighted = weighted) %>%
+  df <- data.frame(athlete = athlete, perc_1RM = perc_1RM, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
-      nRM = reps + eRIR,
-      reg_weights = get_weighting(weighted, reps, perc_1RM, eRIR)
+      nRM = reps + eRIR
     )
 
   if (reverse == FALSE) {
@@ -286,7 +252,6 @@ estimate_klin_mixed <- function(athlete,
       groups = ~athlete,
       fixed = klin ~ 1,
       random = klin ~ 1,
-      weights = ~reg_weights,
       ...
     )
   } else {
@@ -297,7 +262,6 @@ estimate_klin_mixed <- function(athlete,
       groups = ~athlete,
       fixed = klin ~ 1,
       random = klin ~ 1,
-      weights = ~reg_weights,
       ...
     )
   }
@@ -323,17 +287,13 @@ estimate_klin_1RM_mixed <- function(athlete,
                                     reps,
                                     eRIR = 0,
                                     reverse = FALSE,
-                                    weighted = "none",
                                     random = klin + oneRM ~ 1,
                                     ...) {
 
-  # Do checks
-  check_weighting(weighted)
 
-  df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR, weighted = weighted) %>%
+  df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
-      nRM = reps + eRIR,
-      reg_weights = get_weighting(weighted, reps, weight, eRIR)
+      nRM = reps + eRIR
     )
 
   if (reverse == FALSE) {
@@ -344,7 +304,6 @@ estimate_klin_1RM_mixed <- function(athlete,
       groups = ~athlete,
       fixed = klin + oneRM ~ 1,
       random = random,
-      weights = ~reg_weights,
       ...
     )
   } else {
@@ -355,7 +314,6 @@ estimate_klin_1RM_mixed <- function(athlete,
       groups = ~athlete,
       fixed = klin + oneRM ~ 1,
       random = random,
-      weights = ~reg_weights,
       ...
     )
   }

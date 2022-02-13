@@ -10,15 +10,7 @@
 \alias{estimate_klin_1RM_mixed}
 \title{Estimate relationship between reps and weight using the non-linear mixed-effects regression}
 \usage{
-estimate_k_mixed(
-  athlete,
-  perc_1RM,
-  reps,
-  eRIR = 0,
-  reverse = FALSE,
-  weighted = "none",
-  ...
-)
+estimate_k_mixed(athlete, perc_1RM, reps, eRIR = 0, reverse = FALSE, ...)
 
 estimate_k_1RM_mixed(
   athlete,
@@ -26,20 +18,11 @@ estimate_k_1RM_mixed(
   reps,
   eRIR = 0,
   reverse = FALSE,
-  weighted = "none",
   random = k + zeroRM ~ 1,
   ...
 )
 
-estimate_kmod_mixed(
-  athlete,
-  perc_1RM,
-  reps,
-  eRIR = 0,
-  reverse = FALSE,
-  weighted = "none",
-  ...
-)
+estimate_kmod_mixed(athlete, perc_1RM, reps, eRIR = 0, reverse = FALSE, ...)
 
 estimate_kmod_1RM_mixed(
   athlete,
@@ -47,20 +30,11 @@ estimate_kmod_1RM_mixed(
   reps,
   eRIR = 0,
   reverse = FALSE,
-  weighted = "none",
   random = kmod + oneRM ~ 1,
   ...
 )
 
-estimate_klin_mixed(
-  athlete,
-  perc_1RM,
-  reps,
-  eRIR = 0,
-  reverse = FALSE,
-  weighted = "none",
-  ...
-)
+estimate_klin_mixed(athlete, perc_1RM, reps, eRIR = 0, reverse = FALSE, ...)
 
 estimate_klin_1RM_mixed(
   athlete,
@@ -68,7 +42,6 @@ estimate_klin_1RM_mixed(
   reps,
   eRIR = 0,
   reverse = FALSE,
-  weighted = "none",
   random = klin + oneRM ~ 1,
   ...
 )
@@ -83,10 +56,6 @@ estimate_klin_1RM_mixed(
 \item{eRIR}{Subjective estimation of reps-in-reserve (eRIR)}
 
 \item{reverse}{Logical, default is \code{FALSE}. Should reps be used as predictor instead as a target?}
-
-\item{weighted}{What weighting should be used for the non-linear regression? Default is "none". Other options include:
-"reps" (for 1/reps weighting), "load" (for using weight or \%1RM), "eRIR" (for 1/(eRIR+1) weighting),
-"reps x load", "reps x eRIR", "load x eRIR", and "reps x load x eRIR"}
 
 \item{...}{Forwarded to \code{\link[nlme]{nlme}} function}
 
