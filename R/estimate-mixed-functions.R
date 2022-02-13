@@ -34,7 +34,6 @@ estimate_k_mixed <- function(athlete,
                              eRIR = 0,
                              reverse = FALSE,
                              ...) {
-
   df <- data.frame(athlete = athlete, perc_1RM = perc_1RM, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -87,7 +86,6 @@ estimate_k_1RM_mixed <- function(athlete,
                                  reverse = FALSE,
                                  random = k + zeroRM ~ 1,
                                  ...) {
-
   df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -136,8 +134,6 @@ estimate_kmod_mixed <- function(athlete,
                                 eRIR = 0,
                                 reverse = FALSE,
                                 ...) {
-
-
   df <- data.frame(athlete = athlete, perc_1RM = perc_1RM, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -188,7 +184,6 @@ estimate_kmod_1RM_mixed <- function(athlete,
                                     reverse = FALSE,
                                     random = kmod + oneRM ~ 1,
                                     ...) {
-
   df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -237,8 +232,6 @@ estimate_klin_mixed <- function(athlete,
                                 eRIR = 0,
                                 reverse = FALSE,
                                 ...) {
-
-
   df <- data.frame(athlete = athlete, perc_1RM = perc_1RM, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
@@ -289,8 +282,6 @@ estimate_klin_1RM_mixed <- function(athlete,
                                     reverse = FALSE,
                                     random = klin + oneRM ~ 1,
                                     ...) {
-
-
   df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
       nRM = reps + eRIR
