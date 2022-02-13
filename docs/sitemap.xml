@@ -19,6 +19,9 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/RTF_testing.html</loc>
+  </url>
+  <url>
     <loc>/reference/adj_perc_1RM.html</loc>
   </url>
   <url>
@@ -29,6 +32,9 @@
   </url>
   <url>
     <loc>/reference/estimate_functions.html</loc>
+  </url>
+  <url>
+    <loc>/reference/estimate_functions_mixed.html</loc>
   </url>
   <url>
     <loc>/reference/estimate_functions_quantile.html</loc>

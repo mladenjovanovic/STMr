@@ -58,6 +58,16 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">estimate_k_quantile</span><span class="op">(</span>
+  <span class="va">perc_1RM</span>,
+  <span class="va">reps</span>,
+  eRIR <span class="op">=</span> <span class="fl">0</span>,
+  tau <span class="op">=</span> <span class="fl">0.5</span>,
+  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
+  control <span class="op">=</span> <span class="fu">quantreg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/nlrq.control.html" class="external-link">nlrq.control</a></span><span class="op">(</span>maxiter <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">4</span>, InitialStepSize <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
+  <span class="va">...</span>
+<span class="op">)</span>
+
+<span class="fu">estimate_k_1RM_quantile</span><span class="op">(</span>
   <span class="va">weight</span>,
   <span class="va">reps</span>,
   eRIR <span class="op">=</span> <span class="fl">0</span>,
@@ -68,6 +78,16 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
 <span class="op">)</span>
 
 <span class="fu">estimate_kmod_quantile</span><span class="op">(</span>
+  <span class="va">perc_1RM</span>,
+  <span class="va">reps</span>,
+  eRIR <span class="op">=</span> <span class="fl">0</span>,
+  tau <span class="op">=</span> <span class="fl">0.5</span>,
+  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
+  control <span class="op">=</span> <span class="fu">quantreg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/nlrq.control.html" class="external-link">nlrq.control</a></span><span class="op">(</span>maxiter <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">4</span>, InitialStepSize <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
+  <span class="va">...</span>
+<span class="op">)</span>
+
+<span class="fu">estimate_kmod_1RM_quantile</span><span class="op">(</span>
   <span class="va">weight</span>,
   <span class="va">reps</span>,
   eRIR <span class="op">=</span> <span class="fl">0</span>,
@@ -78,6 +98,16 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
 <span class="op">)</span>
 
 <span class="fu">estimate_klin_quantile</span><span class="op">(</span>
+  <span class="va">perc_1RM</span>,
+  <span class="va">reps</span>,
+  eRIR <span class="op">=</span> <span class="fl">0</span>,
+  tau <span class="op">=</span> <span class="fl">0.5</span>,
+  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
+  control <span class="op">=</span> <span class="fu">quantreg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/nlrq.control.html" class="external-link">nlrq.control</a></span><span class="op">(</span>maxiter <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">4</span>, InitialStepSize <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,
+  <span class="va">...</span>
+<span class="op">)</span>
+
+<span class="fu">estimate_klin_1RM_quantile</span><span class="op">(</span>
   <span class="va">weight</span>,
   <span class="va">reps</span>,
   eRIR <span class="op">=</span> <span class="fl">0</span>,
@@ -90,8 +120,8 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>weight</dt>
-<dd><p>Weight used</p></dd>
+    <dl><dt>perc_1RM</dt>
+<dd><p>%1RM</p></dd>
 <dt>reps</dt>
 <dd><p>Number of repetitions done</p></dd>
 <dt>eRIR</dt>
@@ -105,6 +135,8 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
 <code>quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0)</code></p></dd>
 <dt>...</dt>
 <dd><p>Forwarded to <code><a href="https://rdrr.io/pkg/quantreg/man/nlrq.html" class="external-link">nlrq</a></code> function</p></dd>
+<dt>weight</dt>
+<dd><p>Weight used</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -113,19 +145,32 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>estimate_k_quantile</code>: Estimate the parameter <code>k</code> in the Epley's equation, as well as
+<ul><li><p><code>estimate_k_quantile</code>: Estimate the parameter <code>k</code> in the Epley's equation</p></li>
+<li><p><code>estimate_k_1RM_quantile</code>: Estimate the parameter <code>k</code> in the Epley's equation, as well as
 <code>1RM</code>. This is a novel estimation function that uses the absolute weights</p></li>
-<li><p><code>estimate_kmod_quantile</code>: Estimate the parameter <code>kmod</code> in the modified Epley's equation, as well as
+<li><p><code>estimate_kmod_quantile</code>: Estimate the parameter <code>kmod</code> in the modified Epley's equation</p></li>
+<li><p><code>estimate_kmod_1RM_quantile</code>: Estimate the parameter <code>kmod</code> in the modified Epley's equation, as well as
 <code>1RM</code>. This is a novel estimation function that uses the absolute weights</p></li>
-<li><p><code>estimate_klin_quantile</code>: Estimate the parameter <code>klin</code> in the Linear/Brzycki equation, as well as
+<li><p><code>estimate_klin_quantile</code>: Estimate the parameter <code>klin</code> in the Linear/Brzycki equation</p></li>
+<li><p><code>estimate_klin_1RM_quantile</code>: Estimate the parameter <code>klin</code> in the Linear/Brzycki equation, as well as
 <code>1RM</code>. This is a novel estimation function that uses the absolute weights</p></li>
 </ul></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Epley's model that also estimates 1RM</span></span>
+<span class="r-in"><span class="co"># Epley's model</span></span>
 <span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_quantile</span><span class="op">(</span></span>
+<span class="r-in">  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          k </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.04285747 </span>
+<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
+<span class="r-in"><span class="co"># Epley's model that also estimates 1RM</span></span>
+<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM_quantile</span><span class="op">(</span></span>
 <span class="r-in">  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>,</span>
 <span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
@@ -134,8 +179,18 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
 <span class="r-out co"><span class="r-pr">#&gt;</span>           k         0RM </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.2499988 245.0003205 </span>
 <span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Modified Epley's model that also estimates 1RM</span></span>
+<span class="r-in"><span class="co"># Modified Epley's model</span></span>
 <span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod_quantile</span><span class="op">(</span></span>
+<span class="r-in">  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       kmod </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 0.04762194 </span>
+<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
+<span class="r-in"><span class="co"># Modified Epley's model that also estimates 1RM</span></span>
+<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod_1RM_quantile</span><span class="op">(</span></span>
 <span class="r-in">  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>,</span>
 <span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
@@ -144,8 +199,18 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
 <span class="r-out co"><span class="r-pr">#&gt;</span>        kmod         1RM </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.1999983 196.0002286 </span>
 <span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Linear/Brzycki model thal also estimates 1RM</span></span>
+<span class="r-in"><span class="co"># Linear/Brzycki model</span></span>
 <span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_klin_quantile</span><span class="op">(</span></span>
+<span class="r-in">  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     klin </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25.51547 </span>
+<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
+<span class="r-in"><span class="co"># Linear/Brzycki model thal also estimates 1RM</span></span>
+<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_klin_1RM_quantile</span><span class="op">(</span></span>
 <span class="r-in">  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>,</span>
 <span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span class="r-in"><span class="op">)</span></span>
