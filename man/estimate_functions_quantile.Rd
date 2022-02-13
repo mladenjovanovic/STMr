@@ -3,11 +3,24 @@
 \name{estimate_functions_quantile}
 \alias{estimate_functions_quantile}
 \alias{estimate_k_quantile}
+\alias{estimate_k_1RM_quantile}
 \alias{estimate_kmod_quantile}
+\alias{estimate_kmod_1RM_quantile}
 \alias{estimate_klin_quantile}
+\alias{estimate_klin_1RM_quantile}
 \title{Estimate relationship between reps and weight using the non-linear quantile regression}
 \usage{
 estimate_k_quantile(
+  perc_1RM,
+  reps,
+  eRIR = 0,
+  tau = 0.5,
+  reverse = FALSE,
+  control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+  ...
+)
+
+estimate_k_1RM_quantile(
   weight,
   reps,
   eRIR = 0,
@@ -18,6 +31,16 @@ estimate_k_quantile(
 )
 
 estimate_kmod_quantile(
+  perc_1RM,
+  reps,
+  eRIR = 0,
+  tau = 0.5,
+  reverse = FALSE,
+  control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+  ...
+)
+
+estimate_kmod_1RM_quantile(
   weight,
   reps,
   eRIR = 0,
@@ -28,6 +51,16 @@ estimate_kmod_quantile(
 )
 
 estimate_klin_quantile(
+  perc_1RM,
+  reps,
+  eRIR = 0,
+  tau = 0.5,
+  reverse = FALSE,
+  control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+  ...
+)
+
+estimate_klin_1RM_quantile(
   weight,
   reps,
   eRIR = 0,
@@ -38,7 +71,7 @@ estimate_klin_quantile(
 )
 }
 \arguments{
-\item{weight}{Weight used}
+\item{perc_1RM}{\%1RM}
 
 \item{reps}{Number of repetitions done}
 
@@ -52,6 +85,8 @@ estimate_klin_quantile(
 \code{quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0)}}
 
 \item{...}{Forwarded to \code{\link[quantreg]{nlrq}} function}
+
+\item{weight}{Weight used}
 }
 \value{
 \code{\link[quantreg]{nlrq}} object
@@ -63,36 +98,66 @@ target variable is the reps performed, while the predictors is the \code{perc_1R
 }
 \section{Functions}{
 \itemize{
-\item \code{estimate_k_quantile}: Estimate the parameter \code{k} in the Epley's equation, as well as
+\item \code{estimate_k_quantile}: Estimate the parameter \code{k} in the Epley's equation
+
+\item \code{estimate_k_1RM_quantile}: Estimate the parameter \code{k} in the Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
-\item \code{estimate_kmod_quantile}: Estimate the parameter \code{kmod} in the modified Epley's equation, as well as
+\item \code{estimate_kmod_quantile}: Estimate the parameter \code{kmod} in the modified Epley's equation
+
+\item \code{estimate_kmod_1RM_quantile}: Estimate the parameter \code{kmod} in the modified Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
-\item \code{estimate_klin_quantile}: Estimate the parameter \code{klin} in the Linear/Brzycki equation, as well as
+\item \code{estimate_klin_quantile}: Estimate the parameter \code{klin} in the Linear/Brzycki equation
+
+\item \code{estimate_klin_1RM_quantile}: Estimate the parameter \code{klin} in the Linear/Brzycki equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 }}
 
 \examples{
 # ---------------------------------------------------------
-# Epley's model that also estimates 1RM
+# Epley's model
 m1 <- estimate_k_quantile(
+  perc_1RM = c(0.7, 0.8, 0.9),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
+# ---------------------------------------------------------
+# Epley's model that also estimates 1RM
+m1 <- estimate_k_1RM_quantile(
   weight = c(70, 110, 140),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
+# ---------------------------------------------------------
+# Modified Epley's model
+m1 <- estimate_kmod_quantile(
+  perc_1RM = c(0.7, 0.8, 0.9),
   reps = c(10, 5, 3)
 )
 
 coef(m1)
 # ---------------------------------------------------------
 # Modified Epley's model that also estimates 1RM
-m1 <- estimate_kmod_quantile(
+m1 <- estimate_kmod_1RM_quantile(
   weight = c(70, 110, 140),
   reps = c(10, 5, 3)
 )
 
 coef(m1)
 # ---------------------------------------------------------
-# Linear/Brzycki model thal also estimates 1RM
+# Linear/Brzycki model
 m1 <- estimate_klin_quantile(
+  perc_1RM = c(0.7, 0.8, 0.9),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
+# ---------------------------------------------------------
+# Linear/Brzycki model thal also estimates 1RM
+m1 <- estimate_klin_1RM_quantile(
   weight = c(70, 110, 140),
   reps = c(10, 5, 3)
 )
