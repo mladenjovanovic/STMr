@@ -52,6 +52,7 @@
 <ul><li>Fixed a bug in <code><a href="../reference/progression_table.html">progression_rel_int()</a></code> function</li>
 <li>Renamed <code>nRM_testing</code> dataset to <code>RTF_testing</code>, as well as renamed the columns to be more descriptive</li>
 <li>Added mixed-level estimation functions for both simple and 1RM estimation: <code><a href="../reference/estimate_functions_mixed.html">estimate_k_mixed()</a></code>, <code><a href="../reference/estimate_functions_mixed.html">estimate_k_1RM_mixed()</a></code>, <code><a href="../reference/estimate_functions_mixed.html">estimate_kmod_mixed()</a></code>, <code><a href="../reference/estimate_functions_mixed.html">estimate_kmod_1RM_mixed()</a></code>, <code><a href="../reference/estimate_functions_mixed.html">estimate_klin_mixed()</a></code>, and <code><a href="../reference/estimate_functions_mixed.html">estimate_klin_1RM_mixed()</a></code>. These are implemented using the {nlme} package and <code><a href="https://rdrr.io/pkg/nlme/man/nlme.html" class="external-link">nlme::nlme()</a></code> function</li>
+<li>Better model definition for the <code>estimate_k_1RM_</code> family of functions. Now <code>1RM</code> parameter is estimated rather than <code>0RM</code>, which makes <code>get_predicted_1RM_from_k_model()</code> function obsolete</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.1" id="stm-011">STM 0.1.1<a class="anchor" aria-label="anchor" href="#stm-011"></a></h2>

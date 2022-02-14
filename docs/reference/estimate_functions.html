@@ -93,9 +93,7 @@ weight. To reverse this, use the reverse = TRUE argument"><meta property="og:ima
   reverse <span class="op">=</span> <span class="cn">FALSE</span>,
   weighted <span class="op">=</span> <span class="st">"none"</span>,
   <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">get_predicted_1RM_from_k_model</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -116,8 +114,6 @@ weight. To reverse this, use the reverse = TRUE argument"><meta property="og:ima
 <dd><p>Forwarded to <code><a href="https://rdrr.io/r/stats/nls.html" class="external-link">nls</a></code> function</p></dd>
 <dt>weight</dt>
 <dd><p>Weight used</p></dd>
-<dt>model</dt>
-<dd><p>Object returned from the  <code>estimate_k_1RM</code> function</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -135,11 +131,6 @@ weight. To reverse this, use the reverse = TRUE argument"><meta property="og:ima
 <li><p><code>estimate_klin</code>: Estimate the parameter <code>klin</code> using the Linear/Brzycki model</p></li>
 <li><p><code>estimate_klin_1RM</code>: Estimate the parameter <code>klin</code> in the Linear/Brzycki equation, as well as
 <code>1RM</code>. This is a novel estimation function that uses the absolute weights</p></li>
-<li><p><code>get_predicted_1RM_from_k_model</code>: Estimate the 1RM from <code>estimate_k_1RM</code> function</p>
-<p>The problem with Epley's estimation model (implemented in <code>estimate_k_1RM</code> function)
-is that it predicts the 1RM when nRM = 0. Thus, the estimated parameter in the model produced
-by the <code>estimate_k_1RM</code> function is not 1RM, but 0RM. This function calculates the
-weight at nRM = 1 for both the normal and reverse model. See Examples for code</p></li>
 </ul></div>
 
     <div id="ref-examples">
@@ -162,8 +153,8 @@ weight at nRM = 1 for both the normal and reverse model. See Examples for code</
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           k         0RM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.2542595 248.2568808 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           k         1RM </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.2542595 197.9310344 </span>
 <span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
 <span class="r-in"><span class="co"># Modified Epley's model</span></span>
 <span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod</span><span class="op">(</span></span>
@@ -204,29 +195,6 @@ weight at nRM = 1 for both the normal and reverse model. See Examples for code</
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      klin       1RM </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  15.81081 156.00000 </span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Estimating 1RM from Epley's model</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM</span><span class="op">(</span><span class="fl">150</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.8</span>, <span class="fl">0.7</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM</span><span class="op">(</span><span class="fl">150</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.8</span>, <span class="fl">0.7</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">12</span><span class="op">)</span>, reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Estimated 0RM values from both model</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.03433858 0.03518712</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># But these are not 1RMs!!!</span></span>
-<span class="r-in"><span class="co"># Using the "reverse" model, where nRM is the predictor (in this case m2)</span></span>
-<span class="r-in"><span class="co"># makes it easier to predict 1RM</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">m2</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>nRM <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 142.9047</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># But for the normal model it involve reversing the formula</span></span>
-<span class="r-in"><span class="co"># To spare you from the math pain, use this</span></span>
-<span class="r-in"><span class="fu">get_predicted_1RM_from_k_model</span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 142.3961</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># It also works for the "reverse" model</span></span>
-<span class="r-in"><span class="fu">get_predicted_1RM_from_k_model</span><span class="op">(</span><span class="va">m2</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 142.9047</span>
 </code></pre></div>
     </div>
   </div>
