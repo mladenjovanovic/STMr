@@ -3,6 +3,7 @@
 * Fixed a bug in `progression_rel_int()` function
 * Renamed `nRM_testing` dataset to `RTF_testing`, as well as renamed the columns to be more descriptive
 * Added mixed-level estimation functions for both simple and 1RM estimation: `estimate_k_mixed()`, `estimate_k_1RM_mixed()`, `estimate_kmod_mixed()`, `estimate_kmod_1RM_mixed()`, `estimate_klin_mixed()`, and `estimate_klin_1RM_mixed()`. These are implemented using the {nlme} package and `nlme::nlme()` function
+* Better model definition for the `estimate_k_1RM_` family of functions. Now `1RM` parameter is estimated rather than `0RM`, which makes `get_predicted_1RM_from_k_model()` function obsolete
 
 # STM 0.1.1
 

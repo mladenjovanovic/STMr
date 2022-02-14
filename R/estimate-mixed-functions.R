@@ -84,7 +84,7 @@ estimate_k_1RM_mixed <- function(athlete,
                                  reps,
                                  eRIR = 0,
                                  reverse = FALSE,
-                                 random = k + zeroRM ~ 1,
+                                 random = k + oneRM ~ 1,
                                  ...) {
   df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR) %>%
     dplyr::mutate(
@@ -93,21 +93,21 @@ estimate_k_1RM_mixed <- function(athlete,
 
   if (reverse == FALSE) {
     m1 <- nlme::nlme(
-      nRM ~ ((1 / k) / (weight / zeroRM)) - (1 / k),
+      nRM ~ (k * oneRM + oneRM - weight)/(k  * weight),
       data =  df,
-      start = c(k = 1, zeroRM = max(df$weight)),
+      start = c(k = 1, oneRM = max(df$weight)),
       groups = ~athlete,
-      fixed = k + zeroRM ~ 1,
+      fixed = k + oneRM ~ 1,
       random = random,
       ...
     )
   } else {
     m1 <- nlme::nlme(
-      weight ~ zeroRM / (k * nRM + 1),
+      weight ~ ((k + 1) * oneRM)/(k * nRM + 1),
       data =  df,
-      start = c(k = 1, zeroRM = max(df$weight)),
+      start = c(k = 1, oneRM = max(df$weight)),
       groups = ~athlete,
-      fixed = k + zeroRM ~ 1,
+      fixed = k + oneRM ~ 1,
       random = random,
       ...
     )
