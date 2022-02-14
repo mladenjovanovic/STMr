@@ -93,7 +93,7 @@ estimate_k_1RM_mixed <- function(athlete,
 
   if (reverse == FALSE) {
     m1 <- nlme::nlme(
-      nRM ~ (k * oneRM + oneRM - weight)/(k  * weight),
+      nRM ~ (k * oneRM + oneRM - weight) / (k * weight),
       data =  df,
       start = c(k = 1, oneRM = max(df$weight)),
       groups = ~athlete,
@@ -103,7 +103,7 @@ estimate_k_1RM_mixed <- function(athlete,
     )
   } else {
     m1 <- nlme::nlme(
-      weight ~ ((k + 1) * oneRM)/(k * nRM + 1),
+      weight ~ ((k + 1) * oneRM) / (k * nRM + 1),
       data =  df,
       start = c(k = 1, oneRM = max(df$weight)),
       groups = ~athlete,

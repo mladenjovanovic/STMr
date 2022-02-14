@@ -85,7 +85,7 @@ estimate_k_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "
 
   if (reverse == FALSE) {
     m1 <- stats::nls(
-      nRM ~ (k * `1RM` + `1RM` - weight)/(k  * weight),
+      nRM ~ (k * `1RM` + `1RM` - weight) / (k * weight),
       data =  df,
       start = list(k = 1, `1RM` = max(df$weight)),
       weights = df$reg_weights,
@@ -93,7 +93,7 @@ estimate_k_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "
     )
   } else {
     m1 <- stats::nls(
-      weight ~ ((k + 1) * `1RM`)/(k * nRM + 1),
+      weight ~ ((k + 1) * `1RM`) / (k * nRM + 1),
       data =  df,
       start = list(k = 1, `1RM` = max(df$weight)),
       weights = df$reg_weights,
