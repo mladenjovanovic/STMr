@@ -91,18 +91,18 @@ estimate_k_1RM_quantile <- function(weight,
 
   if (reverse == FALSE) {
     m1 <- quantreg::nlrq(
-      nRM ~ (k * `1RM` + `1RM` - weight) / (k * weight),
+      nRM ~ (`0RM` - weight) / (k * weight),
       data =  df,
-      start = list(k = 1, `1RM` = max(df$weight)),
+      start = list(k = 1, `0RM` = max(df$weight)),
       tau = tau,
       control = control,
       ...
     )
   } else {
     m1 <- quantreg::nlrq(
-      weight ~ ((k + 1) * `1RM`) / (k * nRM + 1),
+      weight ~ `0RM` / (k * nRM + 1),
       data =  df,
-      start = list(k = 1, `1RM` = max(df$weight)),
+      start = list(k = 1, `0RM` = max(df$weight)),
       tau = tau,
       control = control,
       ...
@@ -184,7 +184,7 @@ estimate_kmod_1RM_quantile <- function(weight,
 
   if (reverse == FALSE) {
     m1 <- quantreg::nlrq(
-      nRM ~ (((weight / `1RM`) * (kmod - 1)) + 1) / (kmod * (weight / `1RM`)),
+      nRM ~ ((kmod - 1) * weight + `1RM`) / (kmod * weight),
       data =  df,
       start = list(kmod = 1, `1RM` = max(df$weight)),
       tau = tau,

@@ -18,7 +18,7 @@ estimate_k_1RM_mixed(
   reps,
   eRIR = 0,
   reverse = FALSE,
-  random = k + oneRM ~ 1,
+  random = k + zeroRM ~ 1,
   ...
 )
 
