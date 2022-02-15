@@ -65,7 +65,7 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
   <span class="va">reps</span>,
   eRIR <span class="op">=</span> <span class="fl">0</span>,
   reverse <span class="op">=</span> <span class="cn">FALSE</span>,
-  random <span class="op">=</span> <span class="va">k</span> <span class="op">+</span> <span class="va">oneRM</span> <span class="op">~</span> <span class="fl">1</span>,
+  random <span class="op">=</span> <span class="va">k</span> <span class="op">+</span> <span class="va">zeroRM</span> <span class="op">~</span> <span class="fl">1</span>,
   <span class="va">...</span>
 <span class="op">)</span>
 
@@ -163,22 +163,21 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 <span class="r-in">  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span>
 <span class="r-in"><span class="op">)</span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Iteration 1, LME step: nlminb() did not converge (code = 1). PORT message: false convergence (8)</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Iteration 3, LME step: nlminb() did not converge (code = 1). PORT message: false convergence (8)</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    k     oneRM</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete A 0.02009581  98.92157</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete B 0.03190781  90.67941</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete C 0.05146494 107.26821</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete D 0.02931825 103.66577</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete E 0.04599428 109.10680</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete F 0.02446026  87.88554</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete G 0.03321014  97.45520</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete H 0.03082763 127.49806</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete I 0.02224339 105.78176</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete J 0.04192211  86.29503</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete K 0.05472413  95.77180</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete L 0.03826351 133.45715</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    k    zeroRM</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete A 0.02009568 100.90930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete B 0.03190396  93.57043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete C 0.05145822 112.78560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete D 0.02931850 106.70531</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete E 0.04598449 114.11874</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete F 0.02445762  90.03293</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete G 0.03320945 100.69127</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete H 0.03081954 131.42121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete I 0.02224391 108.13537</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete J 0.04190880  89.90771</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete K 0.05472581 101.01463</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete L 0.03821828 138.52860</span>
 <span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
 <span class="r-in"><span class="co"># Modifed Epley's model</span></span>
 <span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod_mixed</span><span class="op">(</span></span>
@@ -217,10 +216,10 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete C 0.03135543 102.41451</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete D 0.03086467 105.47094</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete E 0.03133881 102.51789</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete F 0.03261366  94.57202</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete G 0.03213301  97.56804</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete F 0.03261365  94.57202</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete G 0.03213300  97.56804</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete H 0.02771236 125.11415</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete I 0.02956070 113.59505</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete I 0.02956069 113.59505</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete J 0.03421898  84.57022</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete K 0.03325611  90.57083</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete L 0.02747206 126.61250</span>
