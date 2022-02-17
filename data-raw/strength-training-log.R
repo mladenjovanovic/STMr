@@ -67,7 +67,9 @@ strength_training_log <- strength_training_log %>%
 strength_training_log <- strength_training_log %>%
   mutate(
     eRIR = adjustment + total_effect,
-    eRIR = floor(eRIR)
+    eRIR = eRIR / 2,
+    eRIR = floor(eRIR),
+    eRIR = ifelse(eRIR >= 6, NA, eRIR)
   ) %>%
   rename(week = index) %>%
   group_by(phase, session, week) %>%
