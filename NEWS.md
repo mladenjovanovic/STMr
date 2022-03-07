@@ -1,9 +1,11 @@
-# STM 0.1.2.9000
+# STM 0.1.2
 
 * Fixed a bug in `progression_rel_int()` function
 * Renamed `nRM_testing` dataset to `RTF_testing`, as well as renamed the columns to be more descriptive
 * Added mixed-level estimation functions for both simple and 1RM estimation: `estimate_k_mixed()`, `estimate_k_1RM_mixed()`, `estimate_kmod_mixed()`, `estimate_kmod_1RM_mixed()`, `estimate_klin_mixed()`, and `estimate_klin_1RM_mixed()`. These are implemented using the {nlme} package and `nlme::nlme()` function
 * Improvements on the `strength_training_log` dataset. eRIR ratings are now halved, and everything over 5 is now `NA`
+* Fixed examples in `get_reps()` function documentation
+* Rewrote README.Rmd file
 
 # STM 0.1.1
 
@@ -30,9 +32,9 @@ over the course of 12 weeks (4 phases, each 3 weeks long). Individual eRIR (esti
 * The functions are organized in the following manner:
 
   - estimation functions (start with `estimate_`)
-  - reps-max functions (start with `max_`). Epley's, Modified Epley's and Linear/Brzycki's model as implemented
+  - reps-max functions (start with `max_`). Epley's, Modified Epley's and Linear/Brzycki's model are implemented
   - adjustment functions (start with `adj_`). Deducted Intensity (DI), Relative Intensity (RelInt), Reps In Reserve (RIR), and % Max Reps (%MR) methods are implemented
-  - wrapper functions `get_reps()` and `get_perc_1RM()` are implemented to combine reps-max models ad well as progression (adjustment) functions into easy to use format
+  - wrapper functions `get_reps()` and `get_perc_1RM()` are implemented to combine reps-max models as well as progression (adjustment) functions into easy to use format
   - progression functions (start with `progression_`) are implemented and allow easy parameterization to involve specific model and their estimated parameter values
   - *vertical planning* functions (start with `vertical_`)
   - *scheme function* (start with `scheme_`)
