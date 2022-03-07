@@ -24,14 +24,14 @@ you want to estimate number of repetitions to be used when using the
 known \%1RM and level of adjustment
 }
 \examples{
-get_perc_1RM(0.75)
+get_reps(0.75)
 
 # # Use ballistic adjustment (this implies doing half the reps)
-get_perc_1RM(0.75, mfactor = 2)
+get_reps(0.75, mfactor = 2)
 
 # Use \%MR adjustment method
-get_perc_1RM(0.75, "\%MR", adjustment = 0.8)
+get_reps(0.75, "\%MR", adjustment = 0.8)
 
 # Use linear model with use defined klin values
-get_perc_1RM(0.75, "\%MR", model = "linear", adjustment = 0.8, klin = 36)
+get_reps(0.75, "\%MR", model = "linear", adjustment = 0.8, klin = 36)
 }
