@@ -1,14 +1,16 @@
 Package: STM
 Title: Strength Training Manual R-Language Functions
-Version: 0.1.2.9000
+Version: 0.1.2
 Authors@R: 
     person(given = "Mladen",
            family = "Jovanović",
            role = c("aut", "cre"),
            email = "coach.mladen.jovanovic@gmail.com")
-Description: STM package allow users estimate individual reps-max relationships, implement
-    various progression table, and create numerous set and rep schemes. The STM package is
-    created as a tool to help writing Jovanovic M. (2020) Strength Training Manual
+Description: Strength training prescription using percent-based approach requires
+    numerous computations and assumptions. STM package allow users to estimate 
+    individual reps-max relationships, implement various progression tables, and
+    create numerous set and rep schemes. The STM package is originally created as
+    a tool to help writing Jovanovic M. (2020) Strength Training Manual
     <ISBN:979-8604459898>.
 License: MIT + file LICENSE
 Encoding: UTF-8
