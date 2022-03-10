@@ -10,7 +10,9 @@
 #' @param reps Number of repetitions done
 #' @param eRIR Subjective estimation of reps-in-reserve (eRIR)
 #' @param reverse Logical, default is \code{FALSE}. Should reps be used as predictor instead as a target?
-#' @param random Random parameter forwarded to \code{\link[nlme]{nlme}} function. Default is \code{k + zeroRM ~ 1}
+#' @param random Random parameter forwarded to \code{\link[nlme]{nlme}} function. Default is \code{k + zeroRM ~ 1} for,
+#'     \code{\link{estimate_k_mixed}} function, or \code{k + oneRM ~ 1} for \code{\link{estimate_kmod_mixed}} and
+#'     \code{\link{estimate_kline_mixed}} functions
 #' @param ... Forwarded to \code{\link[nlme]{nlme}} function
 #' @return \code{\link[nlme]{nlme}} object
 #' @name estimate_functions_mixed
