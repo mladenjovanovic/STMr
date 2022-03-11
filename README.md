@@ -1227,8 +1227,8 @@ summary(mq_best)
 #> 
 #> Coefficients:
 #>      Value  Std. Error t value Pr(>|t|)
-#> klin  36.54   1.19      30.76    0.00  
-#> 1RM  107.95   1.45      74.54    0.00
+#> klin  36.54   1.36      26.96    0.00  
+#> 1RM  107.95   1.47      73.54    0.00
 coef(mq_best)
 #>  klin   1RM 
 #>  36.5 108.0
@@ -1251,8 +1251,8 @@ summary(mq_worst)
 #> 
 #> Coefficients:
 #>      Value Std. Error t value Pr(>|t|)
-#> klin 28.5   3.8        7.5     0.0    
-#> 1RM  95.0   1.6       59.4     0.0
+#> klin 28.50  4.34       6.57    0.00   
+#> 1RM  95.00  1.70      56.01    0.00
 coef(mq_worst)
 #> klin  1RM 
 #> 28.5 95.0
