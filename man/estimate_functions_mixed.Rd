@@ -63,7 +63,7 @@ estimate_klin_1RM_mixed(
 
 \item{random}{Random parameter forwarded to \code{\link[nlme]{nlme}} function. Default is \code{k + zeroRM ~ 1} for,
 \code{\link{estimate_k_mixed}} function, or \code{k + oneRM ~ 1} for \code{\link{estimate_kmod_mixed}} and
-\code{\link{estimate_kline_mixed}} functions}
+\code{\link{estimate_klin_mixed}} functions}
 }
 \value{
 \code{\link[nlme]{nlme}} object
