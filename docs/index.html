@@ -83,7 +83,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> (short of <em>Strength Training Manual R-functions</em>) package is created to help sports scientists and strength coaches estimate strength profiles, create and visualize (percent-based) progression tables and set and rep schemes. Originally <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package was created as an internal project/package to help me in writing <a href="https://amzn.to/3owbBr6" class="external-link">Strength Training Manual</a> Volume 3 book, but it soon became a project in itself. <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package is open-source package under MIT License implemented in the R language.</p>
+<p><a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> (short of <em>Strength Training Manual R-functions</em>) package is created to help sports scientists and strength coaches estimate strength profiles, create and visualize (percent-based) progression tables and set and rep schemes. Originally <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package was created as an internal project/package to help me in writing <a href="https://complementarytraining.net/strength-training-manual-paperback-edition/" class="external-link">Strength Training Manual</a> Volume 3 book, but it soon became a project in itself. <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package is open-source package under MIT License implemented in the R language.</p>
 <p><a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package can be divided in the following functional units:</p>
 <ul>
 <li>Reps-Max functions (start with <code>max_</code>)</li>
@@ -211,7 +211,7 @@
 <span class="co"># Use 70 perc max reps</span>
 <span class="fu"><a href="reference/adj_perc_1RM.html">adj_perc_1RM_perc_MR</a></span><span class="op">(</span><span class="fl">5</span>, adjustment <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.808</span></code></pre></div>
-<p>In addition to using adjustment, user can use <em>multiplication factor</em> (<code>mfactor</code> parameter). This is useful for creating <em>ballistic</em> schemes. In <a href="https://amzn.to/3owbBr6" class="external-link">Strength Training Manual</a> I have suggested using factor of 2 for ballistic exercises.</p>
+<p>In addition to using adjustment, user can use <em>multiplication factor</em> (<code>mfactor</code> parameter). This is useful for creating <em>ballistic</em> schemes. In <a href="https://complementarytraining.net/strength-training-manual-paperback-edition/" class="external-link">Strength Training Manual</a> I have suggested using factor of 2 for ballistic exercises.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Use ballistic adjustment (this implies doing half the reps of max reps possible)</span>
 <span class="co"># In other words, if I am doing 5 reps, I will use 10RM</span>
@@ -320,7 +320,7 @@
 <div class="section level2">
 <h2 id="progression">Progression<a class="anchor" aria-label="anchor" href="#progression"></a>
 </h2>
-<p>Progressions (or progression tables) represent implemented adjustments in a systematic and organized manner across <em>progression steps</em> and scheme <em>volume types</em> (intensive, normal, and extensive). Please refer to <a href="https://amzn.to/3owbBr6" class="external-link">Strength Training Manual</a> book and <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series for more information about progression tables.</p>
+<p>Progressions (or progression tables) represent implemented adjustments in a systematic and organized manner across <em>progression steps</em> and scheme <em>volume types</em> (intensive, normal, and extensive). Please refer to <a href="https://complementarytraining.net/strength-training-manual-paperback-edition/" class="external-link">Strength Training Manual</a> book and <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series for more information about progression tables.</p>
 <p><a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package has multiple progressions implemented and they all start with <code>progression_</code>. Progression functions also allow user to utilize different Reps-Max function (default is <code><a href="reference/max_perc_1RM.html">max_perc_1RM_epley()</a></code>) and provide custom model parameter value. This modular and flexible feature allows for easier generation of individualized progression tables, as well as set and rep schemes.</p>
 <p>Here is an example using <em>Constant RIR Increment Progression</em> using 5 repetitions and -3, -2, -1, and 0 progression steps using “normal” volume. Please note that progression steps move backwards from the Reps-Max relationship, indicated as step 0.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -494,7 +494,7 @@
 <div class="section level2">
 <h2 id="vertical-planning">Vertical Planning<a class="anchor" aria-label="anchor" href="#vertical-planning"></a>
 </h2>
-<p>Vertical Planning represents another layer in building set and rep schemes and it revolves around changes or progressions across time. This involves changes to repetitions, progression steps, number of sets and so forth. Please refer to <a href="https://amzn.to/3owbBr6" class="external-link">Strength Training Manual</a> book for thorough information about the Vertical Planning. Vertical Planning functions in <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package begin with <code>vertical_</code>.</p>
+<p>Vertical Planning represents another layer in building set and rep schemes and it revolves around changes or progressions across time. This involves changes to repetitions, progression steps, number of sets and so forth. Please refer to <a href="https://complementarytraining.net/strength-training-manual-paperback-edition/" class="external-link">Strength Training Manual</a> book for thorough information about the Vertical Planning. Vertical Planning functions in <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package begin with <code>vertical_</code>.</p>
 <p>Here is an example involving <em>constant</em> variant of Vertical Planning:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/vertical_planning_functions.html">vertical_constant</a></span><span class="op">(</span>reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
@@ -531,7 +531,7 @@
 <h2 id="set-and-rep-schemes">Set and Rep Schemes<a class="anchor" aria-label="anchor" href="#set-and-rep-schemes"></a>
 </h2>
 <p>Set and rep schemes are the highest layer in <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package, since they utilize Reps-Max model, adjustment method, progression table, and vertical planning. <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package is built to follow this <em>modular</em> approach, which makes is extensible and flexible.</p>
-<p>Set and rep schemes are implemented using the functions that begin with <code>scheme_</code>. Here is an example for the Wave Set and Rep Scheme (for more information about various set and rep schemes please refer to <a href="https://amzn.to/3owbBr6" class="external-link">Strength Training Manual</a> book):</p>
+<p>Set and rep schemes are implemented using the functions that begin with <code>scheme_</code>. Here is an example for the Wave Set and Rep Scheme (for more information about various set and rep schemes please refer to <a href="https://complementarytraining.net/strength-training-manual-paperback-edition/" class="external-link">Strength Training Manual</a> book):</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Wave set and rep scheme</span>
 <span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span>
@@ -751,7 +751,7 @@
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m3</span><span class="op">)</span>
 <span class="co">#&gt; klin  1RM </span>
 <span class="co">#&gt; 45.6 88.8</span></code></pre></div>
-<p>This novel technique allows for <em>embedded testing</em> (please refer to <a href="https://amzn.to/3owbBr6" class="external-link">Strength Training Manual</a> and <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series for more information) using the strength training log data. In the case where sets are not taken to failure, one can also utilize subjective rating of perceived/estimated RIR (<code>eRIR</code> argument). This technique will be applied to log analysis in the <a href="#quantile-estimation">Quantile estimation</a> section.</p>
+<p>This novel technique allows for <em>embedded testing</em> (please refer to <a href="https://complementarytraining.net/strength-training-manual-paperback-edition/" class="external-link">Strength Training Manual</a> and <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series for more information) using the strength training log data. In the case where sets are not taken to failure, one can also utilize subjective rating of perceived/estimated RIR (<code>eRIR</code> argument). This technique will be applied to log analysis in the <a href="#quantile-estimation">Quantile estimation</a> section.</p>
 </div>
 <div class="section level3">
 <h3 id="mixed-effect-estimation">Mixed-effect estimation<a class="anchor" aria-label="anchor" href="#mixed-effect-estimation"></a>
@@ -1036,8 +1036,8 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;      Value  Std. Error t value Pr(&gt;|t|)</span>
-<span class="co">#&gt; klin  36.54   1.36      26.96    0.00  </span>
-<span class="co">#&gt; 1RM  107.95   1.47      73.54    0.00</span>
+<span class="co">#&gt; klin  36.54   1.27      28.66    0.00  </span>
+<span class="co">#&gt; 1RM  107.95   1.48      72.84    0.00</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mq_best</span><span class="op">)</span>
 <span class="co">#&gt;  klin   1RM </span>
 <span class="co">#&gt;  36.5 108.0</span>
@@ -1060,8 +1060,8 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;      Value Std. Error t value Pr(&gt;|t|)</span>
-<span class="co">#&gt; klin 28.50  4.34       6.57    0.00   </span>
-<span class="co">#&gt; 1RM  95.00  1.70      56.01    0.00</span>
+<span class="co">#&gt; klin 28.50  3.96       7.20    0.00   </span>
+<span class="co">#&gt; 1RM  95.00  1.56      60.92    0.00</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mq_worst</span><span class="op">)</span>
 <span class="co">#&gt; klin  1RM </span>
 <span class="co">#&gt; 28.5 95.0</span></code></pre></div>
