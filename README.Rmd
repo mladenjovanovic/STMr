@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
   dpi = 200
 )
 
+set.seed(1667)
+
 # Set rounding
 op <- options()
 options(digits = 3)
@@ -714,7 +716,7 @@ gg
 
 We are interested in finding both the "best" and "worst" profiles (as well as estimated 1RMs). To achieve this, we will utilize *quantile non-linear regression*. This quantile non-linear estimation is implemented in `{STMr}` package using the `nlrq()` function from the `{quantreg}` package. Quantile estimation functions ends with `_quantile`. You can also use the `...` feature of the quantile estimation functions to forward extra arguments to `nlrq()` function.
 
-For the "best" performance profile we can use 0.95 quantile, and for "worst" we can use "0.05" quantile. I will utilize Linear/Brzycki's model. For more information please refer to [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/) article series. 
+For the "best" performance profile we can use 0.95 quantile, and for "worst" we can use 0.05 quantile. I will utilize Linear/Brzycki's model. For more information please refer to [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/) article series. 
 
 ```{r}
 mq_best <- estimate_klin_1RM_quantile(

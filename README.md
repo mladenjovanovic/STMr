@@ -1207,9 +1207,9 @@ implemented in `{STMr}` package using the `nlrq()` function from the
 estimation functions to forward extra arguments to `nlrq()` function.
 
 For the “best” performance profile we can use 0.95 quantile, and for
-“worst” we can use “0.05” quantile. I will utilize Linear/Brzycki’s
-model. For more information please refer to [Load-Exertion Tables And
-Their Use For
+“worst” we can use 0.05 quantile. I will utilize Linear/Brzycki’s model.
+For more information please refer to [Load-Exertion Tables And Their Use
+For
 Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series.
 
@@ -1232,8 +1232,8 @@ summary(mq_best)
 #> 
 #> Coefficients:
 #>      Value  Std. Error t value Pr(>|t|)
-#> klin  36.54   1.27      28.66    0.00  
-#> 1RM  107.95   1.48      72.84    0.00
+#> klin  36.54   1.41      25.98    0.00  
+#> 1RM  107.95   1.64      65.82    0.00
 coef(mq_best)
 #>  klin   1RM 
 #>  36.5 108.0
@@ -1256,8 +1256,8 @@ summary(mq_worst)
 #> 
 #> Coefficients:
 #>      Value Std. Error t value Pr(>|t|)
-#> klin 28.50  3.96       7.20    0.00   
-#> 1RM  95.00  1.56      60.92    0.00
+#> klin 28.50  4.21       6.78    0.00   
+#> 1RM  95.00  1.56      60.75    0.00
 coef(mq_worst)
 #> klin  1RM 
 #> 28.5 95.0
