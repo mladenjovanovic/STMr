@@ -1016,7 +1016,7 @@
 <span class="va">gg</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-40-1.png" width="100%"></p>
 <p>We are interested in finding both the “best” and “worst” profiles (as well as estimated 1RMs). To achieve this, we will utilize <em>quantile non-linear regression</em>. This quantile non-linear estimation is implemented in <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package using the <code>nlrq()</code> function from the <a href="https://www.r-project.org" class="external-link">quantreg</a> package. Quantile estimation functions ends with <code>_quantile</code>. You can also use the <code>...</code> feature of the quantile estimation functions to forward extra arguments to <code>nlrq()</code> function.</p>
-<p>For the “best” performance profile we can use 0.95 quantile, and for “worst” we can use “0.05” quantile. I will utilize Linear/Brzycki’s model. For more information please refer to <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series.</p>
+<p>For the “best” performance profile we can use 0.95 quantile, and for “worst” we can use 0.05 quantile. I will utilize Linear/Brzycki’s model. For more information please refer to <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mq_best</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions_quantile.html">estimate_klin_1RM_quantile</a></span><span class="op">(</span>
   weight <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">weight</span>,
@@ -1036,8 +1036,8 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;      Value  Std. Error t value Pr(&gt;|t|)</span>
-<span class="co">#&gt; klin  36.54   1.27      28.66    0.00  </span>
-<span class="co">#&gt; 1RM  107.95   1.48      72.84    0.00</span>
+<span class="co">#&gt; klin  36.54   1.41      25.98    0.00  </span>
+<span class="co">#&gt; 1RM  107.95   1.64      65.82    0.00</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mq_best</span><span class="op">)</span>
 <span class="co">#&gt;  klin   1RM </span>
 <span class="co">#&gt;  36.5 108.0</span>
@@ -1060,8 +1060,8 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;      Value Std. Error t value Pr(&gt;|t|)</span>
-<span class="co">#&gt; klin 28.50  3.96       7.20    0.00   </span>
-<span class="co">#&gt; 1RM  95.00  1.56      60.92    0.00</span>
+<span class="co">#&gt; klin 28.50  4.21       6.78    0.00   </span>
+<span class="co">#&gt; 1RM  95.00  1.56      60.75    0.00</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mq_worst</span><span class="op">)</span>
 <span class="co">#&gt; klin  1RM </span>
 <span class="co">#&gt; 28.5 95.0</span></code></pre></div>
