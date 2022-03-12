@@ -15,9 +15,9 @@ created to help sports scientists and strength coaches estimate strength
 profiles, create and visualize (percent-based) progression tables and
 set and rep schemes. Originally `{STMr}` package was created as an
 internal project/package to help me in writing [Strength Training
-Manual](https://amzn.to/3owbBr6) Volume 3 book, but it soon became a
-project in itself. `{STMr}` package is open-source package under MIT
-License implemented in the R language.
+Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+Volume 3 book, but it soon became a project in itself. `{STMr}` package
+is open-source package under MIT License implemented in the R language.
 
 `{STMr}` package can be divided in the following functional units:
 
@@ -213,8 +213,9 @@ adj_perc_1RM_perc_MR(5, adjustment = 0.7)
 
 In addition to using adjustment, user can use *multiplication factor*
 (`mfactor` parameter). This is useful for creating *ballistic* schemes.
-In [Strength Training Manual](https://amzn.to/3owbBr6) I have suggested
-using factor of 2 for ballistic exercises.
+In [Strength Training
+Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+I have suggested using factor of 2 for ballistic exercises.
 
 ``` r
 # Use ballistic adjustment (this implies doing half the reps of max reps possible)
@@ -297,8 +298,9 @@ get_reps(0.85, method = "RIR", model = "modified epley", adjustment = 2, kmod = 
 Progressions (or progression tables) represent implemented adjustments
 in a systematic and organized manner across *progression steps* and
 scheme *volume types* (intensive, normal, and extensive). Please refer
-to [Strength Training Manual](https://amzn.to/3owbBr6) book and
-[Load-Exertion Tables And Their Use For
+to [Strength Training
+Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+book and [Load-Exertion Tables And Their Use For
 Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series for more information about progression tables.
 
@@ -445,9 +447,9 @@ Vertical Planning represents another layer in building set and rep
 schemes and it revolves around changes or progressions across time. This
 involves changes to repetitions, progression steps, number of sets and
 so forth. Please refer to [Strength Training
-Manual](https://amzn.to/3owbBr6) book for thorough information about the
-Vertical Planning. Vertical Planning functions in `{STMr}` package begin
-with `vertical_`.
+Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+book for thorough information about the Vertical Planning. Vertical
+Planning functions in `{STMr}` package begin with `vertical_`.
 
 Here is an example involving *constant* variant of Vertical Planning:
 
@@ -512,7 +514,9 @@ approach, which makes is extensible and flexible.
 Set and rep schemes are implemented using the functions that begin with
 `scheme_`. Here is an example for the Wave Set and Rep Scheme (for more
 information about various set and rep schemes please refer to [Strength
-Training Manual](https://amzn.to/3owbBr6) book):
+Training
+Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+book):
 
 ``` r
 # Wave set and rep scheme
@@ -845,8 +849,9 @@ coef(m3)
 ```
 
 This novel technique allows for *embedded testing* (please refer to
-[Strength Training Manual](https://amzn.to/3owbBr6) and [Load-Exertion
-Tables And Their Use For
+[Strength Training
+Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+and [Load-Exertion Tables And Their Use For
 Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series for more information) using the strength training log
 data. In the case where sets are not taken to failure, one can also
@@ -1227,8 +1232,8 @@ summary(mq_best)
 #> 
 #> Coefficients:
 #>      Value  Std. Error t value Pr(>|t|)
-#> klin  36.54   1.36      26.96    0.00  
-#> 1RM  107.95   1.47      73.54    0.00
+#> klin  36.54   1.27      28.66    0.00  
+#> 1RM  107.95   1.48      72.84    0.00
 coef(mq_best)
 #>  klin   1RM 
 #>  36.5 108.0
@@ -1251,8 +1256,8 @@ summary(mq_worst)
 #> 
 #> Coefficients:
 #>      Value Std. Error t value Pr(>|t|)
-#> klin 28.50  4.34       6.57    0.00   
-#> 1RM  95.00  1.70      56.01    0.00
+#> klin 28.50  3.96       7.20    0.00   
+#> 1RM  95.00  1.56      60.92    0.00
 coef(mq_worst)
 #> klin  1RM 
 #> 28.5 95.0
