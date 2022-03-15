@@ -1,3 +1,8 @@
+# STMr 0.1.3
+
+* Changed the STMr to 'STMr' in the DESCRIPTION as per CRAN member recommendation
+* Added documentation about the functions output/return values as per CRAN member recommendation. Documentation for the following functions has been updated: `create_example()`, `get_perc_1RM()`, `get_reps()`
+
 # STMr 0.1.2
 
 * Renamed the package to {STMr} since there is already a CRAN package STM
