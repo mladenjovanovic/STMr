@@ -6,6 +6,19 @@
 #' @param volume Character vector. Default is \code{c("intensive", "normal", "extensive")}
 #' @param type Character vector. Type of max rep table. Options are grinding (Default) and ballistic
 #' @param ... Extra arguments forwarded to \code{progression_table}
+#' @return Data frame with the following structure
+#'   \describe{
+#'     \item{type}{Type of the set and rep scheme}
+#'     \item{reps}{Number of reps performed}
+#'     \item{volume}{Volume type of the set and rep scheme}
+#'     \item{Step 1}{First progression step %1RM}
+#'     \item{Step 2}{Second progression step %1RM}
+#'     \item{Step 3}{Third progression step %1RM}
+#'     \item{Step 4}{Fourth progression step %1RM}
+#'     \item{Step 2-1 Diff}{Difference in %1RM between second and first progression step}
+#'     \item{Step 3-2 Diff}{Difference in %1RM between third and second progression step}
+#'     \item{Step 4-3 Diff}{Difference in %1RM between fourth and third progression step}
+#'   }
 #'
 #' @export
 #' @examples

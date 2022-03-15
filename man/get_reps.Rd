@@ -17,6 +17,9 @@ get_reps(perc_1RM, method = "RIR", model = "epley", ...)
 
 \item{...}{Forwarded to selected \code{adj_reps} function}
 }
+\value{
+Numeric vector Predicted repetitions
+}
 \description{
 Function \code{get_reps} represent a wrapper function. This function is the
 reverse version of the \code{\link{get_perc_1RM}} function. Use it when

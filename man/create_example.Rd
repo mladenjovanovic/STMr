@@ -23,6 +23,21 @@ create_example(
 
 \item{...}{Extra arguments forwarded to \code{progression_table}}
 }
+\value{
+Data frame with the following structure
+\describe{
+\item{type}{Type of the set and rep scheme}
+\item{reps}{Number of reps performed}
+\item{volume}{Volume type of the set and rep scheme}
+\item{Step 1}{First progression step \%1RM}
+\item{Step 2}{Second progression step \%1RM}
+\item{Step 3}{Third progression step \%1RM}
+\item{Step 4}{Fourth progression step \%1RM}
+\item{Step 2-1 Diff}{Difference in \%1RM between second and first progression step}
+\item{Step 3-2 Diff}{Difference in \%1RM between third and second progression step}
+\item{Step 4-3 Diff}{Difference in \%1RM between fourth and third progression step}
+}
+}
 \description{
 This function create simple example using \code{progression_table}
 }

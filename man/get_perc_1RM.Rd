@@ -17,6 +17,9 @@ get_perc_1RM(reps, method = "RIR", model = "epley", ...)
 
 \item{...}{Forwarded to selected \code{adj_perc_1RM} function}
 }
+\value{
+Numeric vector. Predicted \%1RM
+}
 \description{
 Function \code{get_perc_1RM} represent a wrapper function
 }

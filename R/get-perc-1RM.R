@@ -8,6 +8,7 @@
 #' @param model Character vector. Default is "epley". Other options are
 #'     "modified epley", "linear"
 #' @param ... Forwarded to selected \code{adj_perc_1RM} function
+#' @return Numeric vector. Predicted %1RM
 #' @export
 #' @examples
 #' get_perc_1RM(5)

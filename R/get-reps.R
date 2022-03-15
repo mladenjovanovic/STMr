@@ -11,6 +11,7 @@
 #' @param model Character vector. Default is "epley". Other options are
 #'     "modified epley", "linear"
 #' @param ... Forwarded to selected \code{adj_reps} function
+#' @return Numeric vector Predicted repetitions
 #' @export
 #' @examples
 #' get_reps(0.75)
