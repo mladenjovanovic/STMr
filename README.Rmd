@@ -22,7 +22,7 @@ set.seed(1667)
 # Set rounding
 op <- options()
 options(digits = 3)
-```
+``` 
 
 # `{STMr}` Package <img src="man/figures/logo.png" align="right" width="200" />
 

@@ -1341,7 +1341,7 @@ citation("STMr")
 #> To cite 'STMr' in publications use:
 #> 
 #>   Mladen Jovanović (2022). STMr: Strength Training Manual R-Language
-#>   Functions. R package version 0.1.2. url:
+#>   Functions. R package version 0.1.3. url:
 #>   https://github.com/mladenjovanovic/STMr doi: 10.5281/zenodo.4155015
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -1349,7 +1349,7 @@ citation("STMr")
 #>   @Manual{,
 #>     title = {{STMr}: Strength Training Manual R-Language Functions},
 #>     author = {Mladen Jovanović},
-#>     note = {R package version 0.1.2},
+#>     note = {R package version 0.1.3},
 #>     year = {2022},
 #>     address = {Belgrade, Serbia},
 #>     url = {https://github.com/mladenjovanovic/STMr},
