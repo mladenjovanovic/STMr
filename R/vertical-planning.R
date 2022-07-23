@@ -38,6 +38,8 @@
 #' )
 #'
 #' # Rep accumulation
+#' # If used with `scheme_generic()` it will provide wrong set and rep scheme.
+#' # Use `scheme_rep_acc()` instead
 #' vertical_planning(
 #'   reps = c(10, 8, 6),
 #'   reps_change = c(-3, -2, -1, 0),
@@ -141,7 +143,9 @@ vertical_block_variant <- function(reps,
 #' @examples
 #'
 #' # Rep Accumulation
-#' vertical_rep_accumulation(c(19, 8, 6))
+#' # If used with `scheme_generic()` it will provide wrong set and rep scheme.
+#' # Use `scheme_rep_acc()` instead
+#' vertical_rep_accumulation(c(10, 8, 6))
 vertical_rep_accumulation <- function(reps,
                                       reps_change = c(-3, -2, -1, 0),
                                       step = c(0, 0, 0, 0)) {

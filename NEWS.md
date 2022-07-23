@@ -1,3 +1,9 @@
+# STMr 0.1.3.9000
+
+* Fixed a bug in `scheme_rep_acc()` - now the END rep and step is used, and the reps are counted backwards as intended
+* Addded comment in the `vertical_generic()` and `vertical_rep_accumulation()` to avoid generating rep accumulation schme using those two functions, but rather using `scheme_rep_acc()`
+
+
 # STMr 0.1.3
 
 * Changed the STMr to 'STMr' in the DESCRIPTION as per CRAN member recommendation

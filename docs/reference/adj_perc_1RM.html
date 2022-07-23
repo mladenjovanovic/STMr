@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">STMr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.9000</span>
       </span>
     </div>
 
@@ -53,58 +53,69 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  adjustment <span class="op">=</span> <span class="fl">0</span>,
-  mfactor <span class="op">=</span> <span class="fl">1</span>,
-  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_epley</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">adj_perc_1RM_DI</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  adjustment <span class="op">=</span> <span class="fl">0</span>,
-  mfactor <span class="op">=</span> <span class="fl">1</span>,
-  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_epley</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  adjustment <span class="op">=</span> <span class="fl">1</span>,
-  mfactor <span class="op">=</span> <span class="fl">1</span>,
-  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_epley</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  adjustment <span class="op">=</span> <span class="fl">1</span>,
-  mfactor <span class="op">=</span> <span class="fl">1</span>,
-  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_epley</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_epley</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_epley</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_epley</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_epley</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>reps</dt>
 <dd><p>Numeric vector. Number of repetition to be performed</p></dd>
+
+
 <dt>adjustment</dt>
 <dd><p>Numeric vector. Adjustment to be implemented</p></dd>
+
+
 <dt>mfactor</dt>
 <dd><p>Numeric vector. Default is 1 (i.e., no adjustment).
 Use <code>mfactor = 2</code> to generate ballistic adjustment and tables</p></dd>
+
+
 <dt>max_perc_1RM_func</dt>
 <dd><p>Max  %1RM function to be used. Default is <code><a href="max_perc_1RM.html">max_perc_1RM_epley</a></code></p></dd>
+
+
 <dt>...</dt>
 <dd><p>Forwarded to <code>max_perc_1RM_func</code>. Usually the parameter value.
 For example <code>klin = 36</code> when using <code><a href="max_perc_1RM.html">max_perc_1RM_linear</a></code> as
 <code>max_perc_1RM_func</code> function</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Numeric vector. Predicted perc 1RM</p>
+    
+
+<p>Numeric vector. Predicted perc 1RM</p>
     </div>
     <div id="functions">
     <h2>Functions</h2>
@@ -120,105 +131,105 @@ This approach simple divides target reps with <code>adjustment</code></p></li>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Adjustment using Reps In Reserve (RIR)</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Adjustment using Reps In Reserve (RIR)</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8572653</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use ballistic adjustment (this implies doing half the reps)</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span><span class="fl">5</span>, mfactor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use ballistic adjustment (this implies doing half the reps)</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span><span class="fl">5</span>, mfactor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7501875</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use 2 reps in reserve</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span><span class="fl">5</span>, adjustment <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use 2 reps in reserve</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span><span class="fl">5</span>, adjustment <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8109642</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use Linear model</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span><span class="fl">5</span>, max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>, adjustment <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use Linear model</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span><span class="fl">5</span>, max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>, adjustment <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8181818</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use Modifed Epley's equation with a custom parameter values</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span></span>
-<span class="r-in">  <span class="fl">5</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span>
-<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">2</span>,</span>
-<span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.06</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use Modifed Epley's equation with a custom parameter values</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_RIR</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span></span>
+<span class="r-in"><span>  adjustment <span class="op">=</span> <span class="fl">2</span>,</span></span>
+<span class="r-in"><span>  kmod <span class="op">=</span> <span class="fl">0.06</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7352941</span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Adjustment using Deducted Intensity (DI)</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Adjustment using Deducted Intensity (DI)</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8572653</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use ballistic adjustment (this implies doing half the reps)</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span><span class="fl">5</span>, mfactor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use ballistic adjustment (this implies doing half the reps)</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span><span class="fl">5</span>, mfactor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7501875</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use 10 perc deducted intensity</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span><span class="fl">5</span>, adjustment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use 10 perc deducted intensity</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span><span class="fl">5</span>, adjustment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7572653</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use Linear model</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span><span class="fl">5</span>, max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>, adjustment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use Linear model</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span><span class="fl">5</span>, max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>, adjustment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7787879</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use Modifed Epley's equation with a custom parameter values</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span></span>
-<span class="r-in">  <span class="fl">5</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span>
-<span class="r-in">  adjustment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span>,</span>
-<span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.06</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use Modifed Epley's equation with a custom parameter values</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_DI</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span></span>
+<span class="r-in"><span>  adjustment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span>,</span></span>
+<span class="r-in"><span>  kmod <span class="op">=</span> <span class="fl">0.06</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7064516</span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Adjustment using Relative Intensity (RelInt)</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Adjustment using Relative Intensity (RelInt)</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8572653</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use ballistic adjustment (this implies doing half the reps)</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span><span class="fl">5</span>, mfactor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use ballistic adjustment (this implies doing half the reps)</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span><span class="fl">5</span>, mfactor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7501875</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use 90 perc  relative intensity</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span><span class="fl">5</span>, adjustment <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use 90 perc  relative intensity</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span><span class="fl">5</span>, adjustment <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7715388</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use Linear model</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span><span class="fl">5</span>, max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>, adjustment <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use Linear model</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span><span class="fl">5</span>, max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>, adjustment <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7909091</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use Modifed Epley's equation with a custom parameter values</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span></span>
-<span class="r-in">  <span class="fl">5</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span>
-<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.9</span>,</span>
-<span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.06</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use Modifed Epley's equation with a custom parameter values</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_rel_int</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span></span>
+<span class="r-in"><span>  adjustment <span class="op">=</span> <span class="fl">0.9</span>,</span></span>
+<span class="r-in"><span>  kmod <span class="op">=</span> <span class="fl">0.06</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7258065</span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Adjustment using % max reps (%MR)</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Adjustment using % max reps (%MR)</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8572653</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use ballistic adjustment (this implies doing half the reps)</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span><span class="fl">5</span>, mfactor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use ballistic adjustment (this implies doing half the reps)</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span><span class="fl">5</span>, mfactor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7501875</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use 70 perc max reps</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span><span class="fl">5</span>, adjustment <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use 70 perc max reps</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span><span class="fl">5</span>, adjustment <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8078477</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use Linear model</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span><span class="fl">5</span>, max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>, adjustment <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use Linear model</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span><span class="fl">5</span>, max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>, adjustment <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8138528</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use Modifed Epley's equation with a custom parameter values</span></span>
-<span class="r-in"><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span></span>
-<span class="r-in">  <span class="fl">5</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span>
-<span class="r-in">  adjustment <span class="op">=</span> <span class="fl">0.7</span>,</span>
-<span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.06</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use Modifed Epley's equation with a custom parameter values</span></span></span>
+<span class="r-in"><span><span class="fu">adj_perc_1RM_perc_MR</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span></span>
+<span class="r-in"><span>  adjustment <span class="op">=</span> <span class="fl">0.7</span>,</span></span>
+<span class="r-in"><span>  kmod <span class="op">=</span> <span class="fl">0.06</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7306889</span>
 </code></pre></div>
     </div>
@@ -234,7 +245,7 @@ This approach simple divides target reps with <code>adjustment</code></p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

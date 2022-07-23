@@ -129,6 +129,8 @@ vertical_planning(
 )
 
 # Rep accumulation
+# If used with `scheme_generic()` it will provide wrong set and rep scheme.
+# Use `scheme_rep_acc()` instead
 vertical_planning(
   reps = c(10, 8, 6),
   reps_change = c(-3, -2, -1, 0),
@@ -155,7 +157,9 @@ vertical_block(c(6, 4, 2))
 vertical_block_variant(c(6, 4, 2))
 
 # Rep Accumulation
-vertical_rep_accumulation(c(19, 8, 6))
+# If used with `scheme_generic()` it will provide wrong set and rep scheme.
+# Use `scheme_rep_acc()` instead
+vertical_rep_accumulation(c(10, 8, 6))
 
 # Set Accumulation
 vertical_set_accumulation(c(5, 5, 5))

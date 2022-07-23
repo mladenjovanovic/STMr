@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">STMr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.9000</span>
       </span>
     </div>
 
@@ -53,31 +53,42 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">create_example</span><span class="op">(</span>
-  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,
-  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,
-  volume <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"intensive"</span>, <span class="st">"normal"</span>, <span class="st">"extensive"</span><span class="op">)</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"grinding"</span>, <span class="st">"ballistic"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_example</span><span class="op">(</span></span>
+<span>  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,</span>
+<span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  volume <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"intensive"</span>, <span class="st">"normal"</span>, <span class="st">"extensive"</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"grinding"</span>, <span class="st">"ballistic"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>progression_table</dt>
 <dd><p>Progression table function. Default is <code><a href="progression_table.html">progression_RIR_increment</a></code></p></dd>
+
+
 <dt>reps</dt>
 <dd><p>Numeric vector. Default is <code>c(3, 5, 10)</code></p></dd>
+
+
 <dt>volume</dt>
 <dd><p>Character vector. Default is <code>c("intensive", "normal", "extensive")</code></p></dd>
+
+
 <dt>type</dt>
 <dd><p>Character vector. Type of max rep table. Options are grinding (Default) and ballistic</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Extra arguments forwarded to <code>progression_table</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Data frame with the following structure</p><dl><dt>type</dt>
+    
+
+<p>Data frame with the following structure</p><dl><dt>type</dt>
 <dd><p>Type of the set and rep scheme</p></dd>
 
 <dt>reps</dt>
@@ -112,58 +123,60 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">create_example</span><span class="op">(</span><span class="va">progression_RIR</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">create_example</span><span class="op">(</span><span class="va">progression_RIR</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    type       reps volume    `Step 1` `Step 2` `Step 3` `Step 4` `Step 2-1 Diff`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> grinding      3 intensive     83.3     85.7     88.2     90.9            2.38</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> grinding      3 normal        81.1     83.3     85.7     88.2            2.25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> grinding      3 extensive     79.0     81.1     83.3     85.7            2.13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> grinding      5 intensive     79.0     81.1     83.3     85.7            2.13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> grinding      5 normal        76.9     79.0     81.1     83.3            2.02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> grinding      5 extensive     75.0     76.9     79.0     81.1            1.92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> grinding     10 intensive     69.8     71.4     73.2     75.0            1.66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> grinding     10 normal        68.2     69.8     71.4     73.2            1.59</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> grinding     10 extensive     66.7     68.2     69.8     71.4            1.51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ballistic     3 intensive     71.4     75.0     79.0     83.3            3.57</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> ballistic     3 normal        68.2     71.4     75.0     79.0            3.25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ballistic     3 extensive     65.2     68.2     71.4     75.0            2.96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> ballistic     5 intensive     65.2     68.2     71.4     75.0            2.96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> ballistic     5 normal        62.5     65.2     68.2     71.4            2.72</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> ballistic     5 extensive     60.0     62.5     65.2     68.2            2.50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> ballistic    10 intensive     53.6     55.6     57.7     60.0            1.98</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> ballistic    10 normal        51.7     53.6     55.6     57.7            1.85</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> ballistic    10 extensive     50.0     51.7     53.6     55.6            1.72</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 2 more variables: `Step 3-2 Diff` &lt;dbl&gt;, `Step 4-3 Diff` &lt;dbl&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Create example using specific reps-max table and k value</span></span>
-<span class="r-in"><span class="fu">create_example</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">progression_RIR</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span>
-<span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.0388</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    type      reps volume Step …¹ Step …² Step …³ Step …⁴ Step …⁵ Step …⁶ Step …⁷</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> grinding     3 inten…    83.3    85.7    88.2    90.9    2.38    2.52    2.67</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> grinding     3 normal    81.1    83.3    85.7    88.2    2.25    2.38    2.52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> grinding     3 exten…    79.0    81.1    83.3    85.7    2.13    2.25    2.38</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> grinding     5 inten…    79.0    81.1    83.3    85.7    2.13    2.25    2.38</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> grinding     5 normal    76.9    79.0    81.1    83.3    2.02    2.13    2.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> grinding     5 exten…    75.0    76.9    79.0    81.1    1.92    2.02    2.13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> grinding    10 inten…    69.8    71.4    73.2    75.0    1.66    1.74    1.83</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> grinding    10 normal    68.2    69.8    71.4    73.2    1.59    1.66    1.74</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> grinding    10 exten…    66.7    68.2    69.8    71.4    1.51    1.59    1.66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ballist…     3 inten…    71.4    75.0    79.0    83.3    3.57    3.95    4.38</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> ballist…     3 normal    68.2    71.4    75.0    79.0    3.25    3.57    3.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ballist…     3 exten…    65.2    68.2    71.4    75.0    2.96    3.25    3.57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> ballist…     5 inten…    65.2    68.2    71.4    75.0    2.96    3.25    3.57</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> ballist…     5 normal    62.5    65.2    68.2    71.4    2.72    2.96    3.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> ballist…     5 exten…    60.0    62.5    65.2    68.2    2.50    2.72    2.96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> ballist…    10 inten…    53.6    55.6    57.7    60.0    1.98    2.14    2.31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> ballist…    10 normal    51.7    53.6    55.6    57.7    1.85    1.98    2.14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> ballist…    10 exten…    50.0    51.7    53.6    55.6    1.72    1.85    1.98</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​`Step 1`, ²​`Step 2`, ³​`Step 3`, ⁴​`Step 4`,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​`Step 2-1 Diff`, ⁶​`Step 3-2 Diff`, ⁷​`Step 4-3 Diff`</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create example using specific reps-max table and k value</span></span></span>
+<span class="r-in"><span><span class="fu">create_example</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">progression_RIR</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span></span>
+<span class="r-in"><span>  kmod <span class="op">=</span> <span class="fl">0.0388</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    type       reps volume    `Step 1` `Step 2` `Step 3` `Step 4` `Step 2-1 Diff`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> grinding      3 intensive     83.8     86.6     89.6     92.8            2.81</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> grinding      3 normal        81.1     83.8     86.6     89.6            2.64</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> grinding      3 extensive     78.6     81.1     83.8     86.6            2.48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> grinding      5 intensive     78.6     81.1     83.8     86.6            2.48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> grinding      5 normal        76.3     78.6     81.1     83.8            2.33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> grinding      5 extensive     74.1     76.3     78.6     81.1            2.19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> grinding     10 intensive     68.2     70.1     72.0     74.1            1.86</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> grinding     10 normal        66.5     68.2     70.1     72.0            1.76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> grinding     10 extensive     64.8     66.5     68.2     70.1            1.67</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ballistic     3 intensive     70.1     74.1     78.6     83.8            4.03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> ballistic     3 normal        66.5     70.1     74.1     78.6            3.62</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ballistic     3 extensive     63.2     66.5     70.1     74.1            3.26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> ballistic     5 intensive     63.2     66.5     70.1     74.1            3.26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> ballistic     5 normal        60.3     63.2     66.5     70.1            2.96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> ballistic     5 extensive     57.6     60.3     63.2     66.5            2.69</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> ballistic    10 intensive     50.8     52.8     55.1     57.6            2.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> ballistic    10 normal        48.8     50.8     52.8     55.1            1.92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> ballistic    10 extensive     47.1     48.8     50.8     52.8            1.78</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 2 more variables: `Step 3-2 Diff` &lt;dbl&gt;, `Step 4-3 Diff` &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    type      reps volume Step …¹ Step …² Step …³ Step …⁴ Step …⁵ Step …⁶ Step …⁷</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> grinding     3 inten…    83.8    86.6    89.6    92.8    2.81    3.01    3.23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> grinding     3 normal    81.1    83.8    86.6    89.6    2.64    2.81    3.01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> grinding     3 exten…    78.6    81.1    83.8    86.6    2.48    2.64    2.81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> grinding     5 inten…    78.6    81.1    83.8    86.6    2.48    2.64    2.81</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> grinding     5 normal    76.3    78.6    81.1    83.8    2.33    2.48    2.64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> grinding     5 exten…    74.1    76.3    78.6    81.1    2.19    2.33    2.48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> grinding    10 inten…    68.2    70.1    72.0    74.1    1.86    1.96    2.07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> grinding    10 normal    66.5    68.2    70.1    72.0    1.76    1.86    1.96</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> grinding    10 exten…    64.8    66.5    68.2    70.1    1.67    1.76    1.86</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> ballist…     3 inten…    70.1    74.1    78.6    83.8    4.03    4.52    5.11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> ballist…     3 normal    66.5    70.1    74.1    78.6    3.62    4.03    4.52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> ballist…     3 exten…    63.2    66.5    70.1    74.1    3.26    3.62    4.03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> ballist…     5 inten…    63.2    66.5    70.1    74.1    3.26    3.62    4.03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> ballist…     5 normal    60.3    63.2    66.5    70.1    2.96    3.26    3.62</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> ballist…     5 exten…    57.6    60.3    63.2    66.5    2.69    2.96    3.26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> ballist…    10 inten…    50.8    52.8    55.1    57.6    2.08    2.26    2.46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> ballist…    10 normal    48.8    50.8    52.8    55.1    1.92    2.08    2.26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> ballist…    10 exten…    47.1    48.8    50.8    52.8    1.78    1.92    2.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​`Step 1`, ²​`Step 2`, ³​`Step 3`, ⁴​`Step 4`,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​`Step 2-1 Diff`, ⁶​`Step 3-2 Diff`, ⁷​`Step 4-3 Diff`</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -178,7 +191,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

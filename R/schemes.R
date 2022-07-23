@@ -290,10 +290,10 @@ scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 12, 10, 8),
 #' # Rep Accumulation set and rep schemes
 #' --------------------------
 #'   scheme_rep_acc()
-scheme_rep_acc <- function(reps = c(7, 7, 7),
+scheme_rep_acc <- function(reps = c(10, 10, 10),
                            adjustment = 0,
                            # vertical_planning = vertical_planning,
-                           vertical_planning_control = list(step = rep(-3, 4)),
+                           vertical_planning_control = list(step = rep(0, 4)),
                            progression_table = progression_RIR_increment,
                            progression_table_control = list(volume = "extensive")) {
   scheme_df <- scheme_generic(
@@ -305,7 +305,7 @@ scheme_rep_acc <- function(reps = c(7, 7, 7),
     progression_table_control = progression_table_control
   )
 
-  scheme_df$reps <- scheme_df$reps + scheme_df$index - 1
+  scheme_df$reps <- scheme_df$reps - (max(scheme_df$index) - scheme_df$index)
 
   scheme_df
 }

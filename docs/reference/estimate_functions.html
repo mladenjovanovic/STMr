@@ -18,7 +18,7 @@ weight. To reverse this, use the reverse = TRUE argument"><meta property="og:ima
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">STMr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.9000</span>
       </span>
     </div>
 
@@ -55,73 +55,90 @@ weight. To reverse this, use the reverse = TRUE argument"><meta property="og:ima
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">estimate_k</span><span class="op">(</span><span class="va">perc_1RM</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, weighted <span class="op">=</span> <span class="st">"none"</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">estimate_k_1RM</span><span class="op">(</span><span class="va">weight</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, weighted <span class="op">=</span> <span class="st">"none"</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">estimate_kmod</span><span class="op">(</span>
-  <span class="va">perc_1RM</span>,
-  <span class="va">reps</span>,
-  eRIR <span class="op">=</span> <span class="fl">0</span>,
-  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
-  weighted <span class="op">=</span> <span class="st">"none"</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">estimate_kmod_1RM</span><span class="op">(</span>
-  <span class="va">weight</span>,
-  <span class="va">reps</span>,
-  eRIR <span class="op">=</span> <span class="fl">0</span>,
-  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
-  weighted <span class="op">=</span> <span class="st">"none"</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">estimate_klin</span><span class="op">(</span>
-  <span class="va">perc_1RM</span>,
-  <span class="va">reps</span>,
-  eRIR <span class="op">=</span> <span class="fl">0</span>,
-  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
-  weighted <span class="op">=</span> <span class="st">"none"</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">estimate_klin_1RM</span><span class="op">(</span>
-  <span class="va">weight</span>,
-  <span class="va">reps</span>,
-  eRIR <span class="op">=</span> <span class="fl">0</span>,
-  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
-  weighted <span class="op">=</span> <span class="st">"none"</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">get_predicted_1RM_from_k_model</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">estimate_k</span><span class="op">(</span><span class="va">perc_1RM</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, weighted <span class="op">=</span> <span class="st">"none"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">estimate_k_1RM</span><span class="op">(</span><span class="va">weight</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, weighted <span class="op">=</span> <span class="st">"none"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">estimate_kmod</span><span class="op">(</span></span>
+<span>  <span class="va">perc_1RM</span>,</span>
+<span>  <span class="va">reps</span>,</span>
+<span>  eRIR <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  weighted <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">estimate_kmod_1RM</span><span class="op">(</span></span>
+<span>  <span class="va">weight</span>,</span>
+<span>  <span class="va">reps</span>,</span>
+<span>  eRIR <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  weighted <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">estimate_klin</span><span class="op">(</span></span>
+<span>  <span class="va">perc_1RM</span>,</span>
+<span>  <span class="va">reps</span>,</span>
+<span>  eRIR <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  weighted <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">estimate_klin_1RM</span><span class="op">(</span></span>
+<span>  <span class="va">weight</span>,</span>
+<span>  <span class="va">reps</span>,</span>
+<span>  eRIR <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  weighted <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">get_predicted_1RM_from_k_model</span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>perc_1RM</dt>
 <dd><p>%1RM</p></dd>
+
+
 <dt>reps</dt>
 <dd><p>Number of repetitions done</p></dd>
+
+
 <dt>eRIR</dt>
 <dd><p>Subjective estimation of reps-in-reserve (eRIR)</p></dd>
+
+
 <dt>reverse</dt>
 <dd><p>Logical, default is <code>FALSE</code>. Should reps be used as predictor instead as a target?</p></dd>
+
+
 <dt>weighted</dt>
 <dd><p>What weighting should be used for the non-linear regression? Default is "none". Other options include:
 "reps" (for 1/reps weighting), "load" (for using weight or %1RM), "eRIR" (for 1/(eRIR+1) weighting),
 "reps x load", "reps x eRIR", "load x eRIR", and "reps x load x eRIR"</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Forwarded to <code><a href="https://rdrr.io/r/stats/nls.html" class="external-link">nls</a></code> function</p></dd>
+
+
 <dt>weight</dt>
 <dd><p>Weight used</p></dd>
+
+
 <dt>model</dt>
 <dd><p>Object returned from the  <code>estimate_k_1RM</code> function</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code><a href="https://rdrr.io/r/stats/nls.html" class="external-link">nls</a></code> object</p>
+    
+
+<p><code><a href="https://rdrr.io/r/stats/nls.html" class="external-link">nls</a></code> object</p>
     </div>
     <div id="functions">
     <h2>Functions</h2>
@@ -144,88 +161,88 @@ weight at nRM = 1 for both the normal and reverse model. See Examples for code</
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Epley's model</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k</span><span class="op">(</span></span>
-<span class="r-in">  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Epley's model</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          k </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.04404789 </span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Epley's model that also estimates 1RM</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM</span><span class="op">(</span></span>
-<span class="r-in">  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Epley's model that also estimates 1RM</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           k         0RM </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.2542595 248.2568808 </span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Modified Epley's model</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod</span><span class="op">(</span></span>
-<span class="r-in">  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Modified Epley's model</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       kmod </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.05089595 </span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Modified Epley's model that also estimates 1RM</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod_1RM</span><span class="op">(</span></span>
-<span class="r-in">  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Modified Epley's model that also estimates 1RM</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod_1RM</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        kmod         1RM </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.2027168 197.9310353 </span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Linear/Brzycki model</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_klin</span><span class="op">(</span></span>
-<span class="r-in">  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Linear/Brzycki model</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_klin</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     klin </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 26.42857 </span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Linear/Brzycki model thal also estimates 1RM</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_klin_1RM</span><span class="op">(</span></span>
-<span class="r-in">  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Linear/Brzycki model thal also estimates 1RM</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_klin_1RM</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      klin       1RM </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  15.81081 156.00000 </span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Estimating 1RM from Epley's model</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM</span><span class="op">(</span><span class="fl">150</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.8</span>, <span class="fl">0.7</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM</span><span class="op">(</span><span class="fl">150</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.8</span>, <span class="fl">0.7</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">12</span><span class="op">)</span>, reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Estimated 0RM values from both model</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Estimating 1RM from Epley's model</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM</span><span class="op">(</span><span class="fl">150</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.8</span>, <span class="fl">0.7</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM</span><span class="op">(</span><span class="fl">150</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">0.8</span>, <span class="fl">0.7</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">12</span><span class="op">)</span>, reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Estimated 0RM values from both model</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.03433858 0.03518712</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># But these are not 1RMs!!!</span></span>
-<span class="r-in"><span class="co"># Using the "reverse" model, where nRM is the predictor (in this case m2)</span></span>
-<span class="r-in"><span class="co"># makes it easier to predict 1RM</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">m2</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>nRM <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># But these are not 1RMs!!!</span></span></span>
+<span class="r-in"><span><span class="co"># Using the "reverse" model, where nRM is the predictor (in this case m2)</span></span></span>
+<span class="r-in"><span><span class="co"># makes it easier to predict 1RM</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">m2</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>nRM <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 142.9047</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># But for the normal model it involve reversing the formula</span></span>
-<span class="r-in"><span class="co"># To spare you from the math pain, use this</span></span>
-<span class="r-in"><span class="fu">get_predicted_1RM_from_k_model</span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># But for the normal model it involve reversing the formula</span></span></span>
+<span class="r-in"><span><span class="co"># To spare you from the math pain, use this</span></span></span>
+<span class="r-in"><span><span class="fu">get_predicted_1RM_from_k_model</span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 142.3961</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># It also works for the "reverse" model</span></span>
-<span class="r-in"><span class="fu">get_predicted_1RM_from_k_model</span><span class="op">(</span><span class="va">m2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># It also works for the "reverse" model</span></span></span>
+<span class="r-in"><span><span class="fu">get_predicted_1RM_from_k_model</span><span class="op">(</span><span class="va">m2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 142.9047</span>
 </code></pre></div>
     </div>
@@ -241,7 +258,7 @@ weight at nRM = 1 for both the normal and reverse model. See Examples for code</
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

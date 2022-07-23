@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">STMr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.9000</span>
       </span>
     </div>
 
@@ -53,44 +53,53 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">plot_scheme</span><span class="op">(</span>
-  <span class="va">scheme</span>,
-  label_size <span class="op">=</span> <span class="fl">3</span>,
-  signif_digits <span class="op">=</span> <span class="fl">3</span>,
-  adjustment_multiplier <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_scheme</span><span class="op">(</span></span>
+<span>  <span class="va">scheme</span>,</span>
+<span>  label_size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  signif_digits <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  adjustment_multiplier <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>scheme</dt>
 <dd><p>Data Frame create by one of the package functions. See examples</p></dd>
+
+
 <dt>label_size</dt>
 <dd><p>Numeric. Default is 3</p></dd>
+
+
 <dt>signif_digits</dt>
 <dd><p>Rounding numbers for plotting. Default is 3</p></dd>
+
+
 <dt>adjustment_multiplier</dt>
 <dd><p>Factor to multiply the adjustment. Useful when converting to percentage.
 Default is 1</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>ggplot2</code> object</p>
+    
+
+<p><code>ggplot2</code> object</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span></span>
-<span class="r-in">  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span>
-<span class="r-in">  <span class="co"># Adjusting sets to use lower %1RM (RIR Inc method used, so RIR adjusted)</span></span>
-<span class="r-in">  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in">  vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span>,</span>
-<span class="r-in">  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
-<span class="r-in">  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,</span>
-<span class="r-in">  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">plot_scheme</span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="co"># Adjusting sets to use lower %1RM (RIR Inc method used, so RIR adjusted)</span></span></span>
+<span class="r-in"><span>  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span>,</span></span>
+<span class="r-in"><span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,</span></span>
+<span class="r-in"><span>  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">plot_scheme</span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_scheme-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -106,7 +115,7 @@ Default is 1</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

@@ -1,6 +1,6 @@
 Package: STMr
 Title: Strength Training Manual R-Language Functions
-Version: 0.1.3
+Version: 0.1.3.9000
 Authors@R: 
     person(given = "Mladen",
            family = "Jovanović",
@@ -16,7 +16,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 URL: https://mladenjovanovic.github.io/STMr/
 BugReports: https://github.com/mladenjovanovic/STMr/issues
 Imports: 

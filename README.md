@@ -1176,7 +1176,7 @@ reps on the bench press and I rate it with 2pRIR, I can assume that is
 7RM load (i.e., 5 reps + 2pRIR).
 
 `strength_training_log` dataset contains both reps performed as well as
-eRIR values, including weight used. High eRIR values (>5eRIR) are
+eRIR values, including weight used. High eRIR values (\>5eRIR) are
 treated as missing-data (i.e., unreliable). Here is the pooled plot from
 12 weeks of training log data for a single exercise:
 
@@ -1341,7 +1341,7 @@ citation("STMr")
 #> To cite 'STMr' in publications use:
 #> 
 #>   Mladen Jovanović (2022). STMr: Strength Training Manual R-Language
-#>   Functions. R package version 0.1.3. url:
+#>   Functions. R package version 0.1.4. url:
 #>   https://github.com/mladenjovanovic/STMr doi: 10.5281/zenodo.4155015
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -1349,7 +1349,7 @@ citation("STMr")
 #>   @Manual{,
 #>     title = {{STMr}: Strength Training Manual R-Language Functions},
 #>     author = {Mladen Jovanović},
-#>     note = {R package version 0.1.3},
+#>     note = {R package version 0.1.4},
 #>     year = {2022},
 #>     address = {Belgrade, Serbia},
 #>     url = {https://github.com/mladenjovanovic/STMr},

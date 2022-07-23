@@ -20,7 +20,7 @@ known %1RM and level of adjustment"><meta property="og:image" content="/logo.png
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">STMr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.9000</span>
       </span>
     </div>
 
@@ -59,42 +59,51 @@ known %1RM and level of adjustment</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_reps</span><span class="op">(</span><span class="va">perc_1RM</span>, method <span class="op">=</span> <span class="st">"RIR"</span>, model <span class="op">=</span> <span class="st">"epley"</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_reps</span><span class="op">(</span><span class="va">perc_1RM</span>, method <span class="op">=</span> <span class="st">"RIR"</span>, model <span class="op">=</span> <span class="st">"epley"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>perc_1RM</dt>
 <dd><p>Numeric vector. %1RM used (use 0.5 for 50 perc, 0.9 for 90 perc)</p></dd>
+
+
 <dt>method</dt>
 <dd><p>Character vector. Default is "RIR". Other options are
 "DI", "RelInt", "%MR"</p></dd>
+
+
 <dt>model</dt>
 <dd><p>Character vector. Default is "epley". Other options are
 "modified epley", "linear"</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Forwarded to selected <code>adj_reps</code> function</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Numeric vector Predicted repetitions</p>
+    
+
+<p>Numeric vector Predicted repetitions</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">get_reps</span><span class="op">(</span><span class="fl">0.75</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_reps</span><span class="op">(</span><span class="fl">0.75</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10.01001</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># # Use ballistic adjustment (this implies doing half the reps)</span></span>
-<span class="r-in"><span class="fu">get_reps</span><span class="op">(</span><span class="fl">0.75</span>, mfactor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># # Use ballistic adjustment (this implies doing half the reps)</span></span></span>
+<span class="r-in"><span><span class="fu">get_reps</span><span class="op">(</span><span class="fl">0.75</span>, mfactor <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5.005005</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use %MR adjustment method</span></span>
-<span class="r-in"><span class="fu">get_reps</span><span class="op">(</span><span class="fl">0.75</span>, <span class="st">"%MR"</span>, adjustment <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use %MR adjustment method</span></span></span>
+<span class="r-in"><span><span class="fu">get_reps</span><span class="op">(</span><span class="fl">0.75</span>, <span class="st">"%MR"</span>, adjustment <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8.008008</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use linear model with use defined klin values</span></span>
-<span class="r-in"><span class="fu">get_reps</span><span class="op">(</span><span class="fl">0.75</span>, <span class="st">"%MR"</span>, model <span class="op">=</span> <span class="st">"linear"</span>, adjustment <span class="op">=</span> <span class="fl">0.8</span>, klin <span class="op">=</span> <span class="fl">36</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use linear model with use defined klin values</span></span></span>
+<span class="r-in"><span><span class="fu">get_reps</span><span class="op">(</span><span class="fl">0.75</span>, <span class="st">"%MR"</span>, model <span class="op">=</span> <span class="st">"linear"</span>, adjustment <span class="op">=</span> <span class="fl">0.8</span>, klin <span class="op">=</span> <span class="fl">36</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8</span>
 </code></pre></div>
     </div>
@@ -110,7 +119,7 @@ known %1RM and level of adjustment</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

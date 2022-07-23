@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">STMr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.9000</span>
       </span>
     </div>
 
@@ -53,92 +53,92 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">generate_progression_table</span><span class="op">(</span>
-  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"grinding"</span>, <span class="st">"ballistic"</span><span class="op">)</span>,
-  volume <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"intensive"</span>, <span class="st">"normal"</span>, <span class="st">"extensive"</span><span class="op">)</span>,
-  reps <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,
-  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">progression_DI</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  step <span class="op">=</span> <span class="fl">0</span>,
-  volume <span class="op">=</span> <span class="st">"normal"</span>,
-  adjustment <span class="op">=</span> <span class="fl">0</span>,
-  type <span class="op">=</span> <span class="st">"grinding"</span>,
-  mfactor <span class="op">=</span> <span class="cn">NULL</span>,
-  step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.025</span>,
-  volume_increment <span class="op">=</span> <span class="va">step_increment</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">progression_RIR</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  step <span class="op">=</span> <span class="fl">0</span>,
-  volume <span class="op">=</span> <span class="st">"normal"</span>,
-  adjustment <span class="op">=</span> <span class="fl">0</span>,
-  type <span class="op">=</span> <span class="st">"grinding"</span>,
-  mfactor <span class="op">=</span> <span class="cn">NULL</span>,
-  step_increment <span class="op">=</span> <span class="fl">1</span>,
-  volume_increment <span class="op">=</span> <span class="va">step_increment</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">progression_RIR_increment</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  step <span class="op">=</span> <span class="fl">0</span>,
-  volume <span class="op">=</span> <span class="st">"normal"</span>,
-  adjustment <span class="op">=</span> <span class="fl">0</span>,
-  type <span class="op">=</span> <span class="st">"grinding"</span>,
-  mfactor <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">progression_perc_MR</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  step <span class="op">=</span> <span class="fl">0</span>,
-  volume <span class="op">=</span> <span class="st">"normal"</span>,
-  adjustment <span class="op">=</span> <span class="fl">0</span>,
-  type <span class="op">=</span> <span class="st">"grinding"</span>,
-  mfactor <span class="op">=</span> <span class="cn">NULL</span>,
-  step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span>,
-  volume_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.2</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">progression_perc_MR_variable</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  step <span class="op">=</span> <span class="fl">0</span>,
-  volume <span class="op">=</span> <span class="st">"normal"</span>,
-  adjustment <span class="op">=</span> <span class="fl">0</span>,
-  type <span class="op">=</span> <span class="st">"grinding"</span>,
-  mfactor <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">progression_perc_drop</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  step <span class="op">=</span> <span class="fl">0</span>,
-  volume <span class="op">=</span> <span class="st">"normal"</span>,
-  adjustment <span class="op">=</span> <span class="fl">0</span>,
-  type <span class="op">=</span> <span class="st">"grinding"</span>,
-  mfactor <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">progression_rel_int</span><span class="op">(</span>
-  <span class="va">reps</span>,
-  step <span class="op">=</span> <span class="fl">0</span>,
-  volume <span class="op">=</span> <span class="st">"normal"</span>,
-  adjustment <span class="op">=</span> <span class="fl">0</span>,
-  type <span class="op">=</span> <span class="st">"grinding"</span>,
-  mfactor <span class="op">=</span> <span class="cn">NULL</span>,
-  step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.05</span>,
-  volume_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.075</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">generate_progression_table</span><span class="op">(</span></span>
+<span>  progression_table <span class="op">=</span> <span class="va">progression_RIR_increment</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"grinding"</span>, <span class="st">"ballistic"</span><span class="op">)</span>,</span>
+<span>  volume <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"intensive"</span>, <span class="st">"normal"</span>, <span class="st">"extensive"</span><span class="op">)</span>,</span>
+<span>  reps <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,</span>
+<span>  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">progression_DI</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  step <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.025</span>,</span>
+<span>  volume_increment <span class="op">=</span> <span class="va">step_increment</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">progression_RIR</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  step <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  step_increment <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  volume_increment <span class="op">=</span> <span class="va">step_increment</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">progression_RIR_increment</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  step <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">progression_perc_MR</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  step <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span>,</span>
+<span>  volume_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.2</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">progression_perc_MR_variable</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  step <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">progression_perc_drop</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  step <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">progression_rel_int</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  step <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
+<span>  mfactor <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.05</span>,</span>
+<span>  volume_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.075</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -146,30 +146,51 @@
     <dl><dt>progression_table</dt>
 <dd><p>Progression table function to use. Default is
 <code>progression_RIR_increment</code></p></dd>
+
+
 <dt>type</dt>
 <dd><p>Character vector. Type of max rep table. Options are grinding (Default) and ballistic.</p></dd>
+
+
 <dt>volume</dt>
 <dd><p>Character vector: 'intensive', 'normal' (Default), or 'extensive'</p></dd>
+
+
 <dt>reps</dt>
 <dd><p>Numeric vector. Number of repetition to be performed</p></dd>
+
+
 <dt>step</dt>
 <dd><p>Numeric vector. Progression step. Default is 0. Use negative numbers (i.e., -1, -2)</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Extra arguments forwarded to <code><a href="adj_perc_1RM.html">adj_perc_1RM</a></code> family of functions
 Use this to supply different parameter value (i.e., <code>k = 0.035</code>), or model
 function (i.e., <code>max_perc_1RM_func = max_perc_1RM_linear)</code></p></dd>
+
+
 <dt>adjustment</dt>
 <dd><p>Numeric vector. Additional post adjustment applied to sets. Default is none
 (value depends on the method).</p></dd>
+
+
 <dt>mfactor</dt>
 <dd><p>Numeric vector. Factor to adjust max rep table. Used instead of <code>type</code> parameter,
 unless <code>NULL</code></p></dd>
+
+
 <dt>step_increment, volume_increment</dt>
 <dd><p>Numeric vector. Used to adjust specific progression methods</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>List with two elements: <code>adjustment</code> and <code>perc_1RM</code></p>
+    
+
+<p>List with two elements: <code>adjustment</code> and <code>perc_1RM</code></p>
+
+
     </div>
     <div id="functions">
     <h2>Functions</h2>
@@ -194,20 +215,15 @@ and  <code>volume_increment</code> parameters to utilize needed increments</p></
 </ul></div>
     <div id="references">
     <h2>References</h2>
-    
-<div class="sourceCode"><pre><code>Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.
-Independently published.
-</code></pre></div>
-
-<div class="sourceCode"><pre><code>Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.
-Independently published.
-</code></pre></div>
-
+    <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Jovanović M. <span class="fl">2020.</span> Strength Training Manual<span class="sc">:</span> The Agile Periodization Approach.</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Independently published.</span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Jovanović M. <span class="fl">2020.</span> Strength Training Manual<span class="sc">:</span> The Agile Periodization Approach.</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Independently published.</span></code></pre><p></p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_RIR</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_RIR</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          type    volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    grinding intensive    1   -3          3 0.8824568</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   ballistic intensive    1   -3          3 0.7896399</span>
@@ -497,13 +513,13 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 286 ballistic    normal   12    0          1 0.5359631</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 287  grinding extensive   12    0          2 0.6820352</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 288 ballistic extensive   12    0          2 0.5174912</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">progression_RIR</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
-<span class="r-in">  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
-<span class="r-in">  step_increment <span class="op">=</span> <span class="fl">2</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">progression_RIR</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span></span>
+<span class="r-in"><span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span></span>
+<span class="r-in"><span>  step_increment <span class="op">=</span> <span class="fl">2</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3          8 0.7694083</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3          8 0.7501875</span>
@@ -553,13 +569,13 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0          2 0.7144899</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0          2 0.6978854</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0          2 0.6820352</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Create progression table using specific reps-max table and k value</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">progression_RIR</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span>
-<span class="r-in">  kmod <span class="op">=</span> <span class="fl">0.0388</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create progression table using specific reps-max table and k value</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">progression_RIR</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_modified_epley</span>,</span></span>
+<span class="r-in"><span>  kmod <span class="op">=</span> <span class="fl">0.0388</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          type    volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    grinding intensive    1   -3          3 0.8957363</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   ballistic intensive    1   -3          3 0.7864108</span>
@@ -849,45 +865,45 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 286 ballistic    normal   12    0          1 0.5076142</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 287  grinding extensive   12    0          2 0.6647168</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 288 ballistic extensive   12    0          2 0.4883766</span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Progression Deducted Intensity</span></span>
-<span class="r-in"><span class="fu">progression_DI</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Progression Deducted Intensity</span></span></span>
+<span class="r-in"><span><span class="fu">progression_DI</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.100 -0.075 -0.050 -0.025</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6501875 0.6751875 0.7001875 0.7251875</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_DI</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_DI</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.125 -0.100 -0.075 -0.050</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6251875 0.6501875 0.6751875 0.7001875</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_DI</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span>, step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.05</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_DI</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span>, step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.05</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.20 -0.15 -0.10 -0.05</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5501875 0.6001875 0.6501875 0.7001875</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_DI</span><span class="op">(</span></span>
-<span class="r-in">  <span class="fl">5</span>,</span>
-<span class="r-in">  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
-<span class="r-in">  step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.05</span>,</span>
-<span class="r-in">  volume_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_DI</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span></span>
+<span class="r-in"><span>  step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.05</span>,</span></span>
+<span class="r-in"><span>  volume_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.25 -0.20 -0.15 -0.10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5001875 0.5501875 0.6001875 0.6501875</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Generate progression table</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_DI</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Generate progression table</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_DI</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3     -0.100 0.8677732</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3     -0.100 0.8375586</span>
@@ -937,15 +953,15 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0     -0.025 0.7251875</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0     -0.025 0.7069037</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0     -0.025 0.6894899</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use different reps-max model</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">progression_DI</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
-<span class="r-in">  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
-<span class="r-in">  klin <span class="op">=</span> <span class="fl">36</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use different reps-max model</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">progression_DI</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span></span>
+<span class="r-in"><span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span></span>
+<span class="r-in"><span>  klin <span class="op">=</span> <span class="fl">36</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3     -0.100 0.9000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3     -0.100 0.8722222</span>
@@ -995,50 +1011,50 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0     -0.025 0.7250000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0     -0.025 0.6972222</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0     -0.025 0.6694444</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot progression table</span></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_DI</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot progression table</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_DI</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_DI</span>, <span class="st">"adjustment"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_DI</span>, <span class="st">"adjustment"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Progression RIR Constant</span></span>
-<span class="r-in"><span class="fu">progression_RIR</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Progression RIR Constant</span></span></span>
+<span class="r-in"><span><span class="fu">progression_RIR</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 3 2 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6820352 0.6978854 0.7144899 0.7319037</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_RIR</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_RIR</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 4 3 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6668890 0.6820352 0.6978854 0.7144899</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_RIR</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span>, step_increment <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_RIR</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span>, step_increment <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8 6 4 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5359631 0.5771673 0.6252345 0.6820352</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_RIR</span><span class="op">(</span></span>
-<span class="r-in">  <span class="fl">5</span>,</span>
-<span class="r-in">  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
-<span class="r-in">  step_increment <span class="op">=</span> <span class="fl">3</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_RIR</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span></span>
+<span class="r-in"><span>  step_increment <span class="op">=</span> <span class="fl">3</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 12  9  6  3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4689992 0.5174912 0.5771673 0.6524008</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Generate progression table</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_RIR</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Generate progression table</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_RIR</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3          4 0.8572653</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3          4 0.8334722</span>
@@ -1088,15 +1104,15 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0          1 0.7319037</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0          1 0.7144899</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0          1 0.6978854</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use different reps-max model</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">progression_RIR</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
-<span class="r-in">  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
-<span class="r-in">  klin <span class="op">=</span> <span class="fl">36</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use different reps-max model</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">progression_RIR</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span></span>
+<span class="r-in"><span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span></span>
+<span class="r-in"><span>  klin <span class="op">=</span> <span class="fl">36</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3          4 0.8888889</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3          4 0.8611111</span>
@@ -1146,38 +1162,38 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0          1 0.7222222</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0          1 0.6944444</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0          1 0.6666667</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot progression table</span></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot progression table</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR</span>, <span class="st">"adjustment"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR</span>, <span class="st">"adjustment"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-4.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Progression RIR Increment</span></span>
-<span class="r-in"><span class="fu">progression_RIR_increment</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Progression RIR Increment</span></span></span>
+<span class="r-in"><span><span class="fu">progression_RIR_increment</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8.090909 6.272727 4.454545 2.636364</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6240533 0.6485581 0.6750661 0.7038333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_RIR_increment</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_RIR_increment</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10.727273  8.909091  7.090909  5.272727</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5916396 0.6136201 0.6372969 0.6628742</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_RIR_increment</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_RIR_increment</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7.2 5.4 3.6 1.8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5517181 0.5907931 0.6358249 0.6882881</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Generate progression table</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_RIR_increment</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Generate progression table</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_RIR_increment</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3   4.000000 0.8572653</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3   4.454545 0.8230884</span>
@@ -1227,15 +1243,15 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0   2.636364 0.7038333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0   2.818182 0.6848633</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0   3.000000 0.6668890</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use different reps-max model</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">progression_RIR_increment</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
-<span class="r-in">  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
-<span class="r-in">  klin <span class="op">=</span> <span class="fl">36</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use different reps-max model</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">progression_RIR_increment</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span></span>
+<span class="r-in"><span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span></span>
+<span class="r-in"><span>  klin <span class="op">=</span> <span class="fl">36</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3   4.000000 0.8888889</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3   4.454545 0.8484848</span>
@@ -1285,51 +1301,51 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0   2.636364 0.6767677</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0   2.818182 0.6439394</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0   3.000000 0.6111111</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot progression table</span></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR_increment</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot progression table</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR_increment</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-5.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR_increment</span>, <span class="st">"adjustment"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR_increment</span>, <span class="st">"adjustment"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-6.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Progression %MR Step Const</span></span>
-<span class="r-in"><span class="fu">progression_perc_MR</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Progression %MR Step Const</span></span></span>
+<span class="r-in"><span><span class="fu">progression_perc_MR</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5 0.6 0.7 0.8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.6002401 0.6430868 0.6776379 0.7060900</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_perc_MR</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_perc_MR</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3 0.4 0.5 0.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4739336 0.5457026 0.6002401 0.6430868</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_perc_MR</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span>, step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.2</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_perc_MR</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span>, step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2 0.4 0.6 0.8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3752345 0.5457026 0.6430868 0.7060900</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_perc_MR</span><span class="op">(</span></span>
-<span class="r-in">  <span class="fl">5</span>,</span>
-<span class="r-in">  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
-<span class="r-in">  step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.15</span>,</span>
-<span class="r-in">  volume_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.25</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_perc_MR</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fl">5</span>,</span></span>
+<span class="r-in"><span>  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ballistic"</span>,</span></span>
+<span class="r-in"><span>  step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.15</span>,</span></span>
+<span class="r-in"><span>  volume_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.25</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.30 0.45 0.60 0.75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4739336 0.5747126 0.6430868 0.6925208</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Generate progression table</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_perc_MR</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Generate progression table</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_perc_MR</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3        0.5 0.9375586</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3        0.5 0.8824568</span>
@@ -1379,15 +1395,15 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0        0.8 0.7060900</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0        0.8 0.6859299</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0        0.8 0.6668890</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use different reps-max model</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">progression_perc_MR</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
-<span class="r-in">  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
-<span class="r-in">  klin <span class="op">=</span> <span class="fl">36</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use different reps-max model</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">progression_perc_MR</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span></span>
+<span class="r-in"><span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span></span>
+<span class="r-in"><span>  klin <span class="op">=</span> <span class="fl">36</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3        0.5 0.9722222</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3        0.5 0.9166667</span>
@@ -1437,37 +1453,37 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0        0.8 0.6805556</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0        0.8 0.6458333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0        0.8 0.6111111</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot progression table</span></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_MR</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot progression table</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_MR</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-7.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_MR</span>, <span class="st">"adjustment"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_MR</span>, <span class="st">"adjustment"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-8.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Progression %MR Step Variable</span></span>
-<span class="r-in"><span class="fu">progression_perc_MR_variable</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Progression %MR Step Variable</span></span></span>
+<span class="r-in"><span><span class="fu">progression_perc_MR_variable</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4818182 0.5818182 0.6818182 0.7818182</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5913199 0.6359932 0.6718624 0.7012966</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_perc_MR_variable</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_perc_MR_variable</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2818182 0.3818182 0.4818182 0.5818182</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4583765 0.5341473 0.5913199 0.6359932</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_perc_MR_variable</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_perc_MR_variable</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4363636 0.5363636 0.6363636 0.7363636</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5671748 0.6169612 0.6564757 0.6885998</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="co"># Generate progression table</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_perc_MR_variable</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># Generate progression table</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_perc_MR_variable</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3  0.4000000 0.9231479</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3  0.4090909 0.8599931</span>
@@ -1517,15 +1533,15 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0  0.7818182 0.7012966</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0  0.7909091 0.6834626</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0  0.8000000 0.6668890</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use different reps-max model</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">progression_perc_MR_variable</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
-<span class="r-in">  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
-<span class="r-in">  klin <span class="op">=</span> <span class="fl">36</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use different reps-max model</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">progression_perc_MR_variable</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span></span>
+<span class="r-in"><span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span></span>
+<span class="r-in"><span>  klin <span class="op">=</span> <span class="fl">36</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3  0.4000000 0.9583333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3  0.4090909 0.8919753</span>
@@ -1575,38 +1591,38 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0  0.7818182 0.6724806</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0  0.7909091 0.6414432</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0  0.8000000 0.6111111</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot progression table</span></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_MR_variable</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot progression table</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_MR_variable</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-9.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_MR_variable</span>, <span class="st">"adjustment"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_MR_variable</span>, <span class="st">"adjustment"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-10.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Progression Perc Drop</span></span>
-<span class="r-in"><span class="fu">progression_perc_drop</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Progression Perc Drop</span></span></span>
+<span class="r-in"><span><span class="fu">progression_perc_drop</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.18181818 -0.13636364 -0.09090909 -0.04545455</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5683694 0.6138239 0.6592785 0.7047330</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_perc_drop</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_perc_drop</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.22727273 -0.18181818 -0.13636364 -0.09090909</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5229148 0.5683694 0.6138239 0.6592785</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_perc_drop</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_perc_drop</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.170 -0.125 -0.080 -0.035</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5801875 0.6251875 0.6701875 0.7151875</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Generate progression table</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_perc_drop</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Generate progression table</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_perc_drop</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step  adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3 -0.10000000 0.8677732</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3 -0.10909091 0.8284677</span>
@@ -1656,15 +1672,15 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0 -0.04545455 0.7047330</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0 -0.04772727 0.6841764</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0 -0.05000000 0.6644899</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use different reps-max model</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">progression_perc_drop</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
-<span class="r-in">  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
-<span class="r-in">  klin <span class="op">=</span> <span class="fl">36</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use different reps-max model</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">progression_perc_drop</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span></span>
+<span class="r-in"><span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span></span>
+<span class="r-in"><span>  klin <span class="op">=</span> <span class="fl">36</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step  adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3 -0.10000000 0.9000000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3 -0.10909091 0.8631313</span>
@@ -1714,38 +1730,38 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0 -0.04545455 0.7045455</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0 -0.04772727 0.6744949</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0 -0.05000000 0.6444444</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot progression table</span></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_drop</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot progression table</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_drop</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-11.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_drop</span>, <span class="st">"adjustment"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_perc_drop</span>, <span class="st">"adjustment"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-12.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Progression Relative Intensity</span></span>
-<span class="r-in"><span class="fu">progression_rel_int</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Progression Relative Intensity</span></span></span>
+<span class="r-in"><span><span class="fu">progression_rel_int</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.775 0.825 0.875 0.925</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5813953 0.6189047 0.6564141 0.6939235</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_rel_int</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_rel_int</span><span class="op">(</span><span class="fl">10</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.70 0.75 0.80 0.85</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5251313 0.5626407 0.6001500 0.6376594</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">progression_rel_int</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">progression_rel_int</span><span class="op">(</span><span class="fl">5</span>, step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"ballistic"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $adjustment</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.775 0.825 0.875 0.925</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5813953 0.6189047 0.6564141 0.6939235</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Generate progression table</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_rel_int</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Generate progression table</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_rel_int</span>, type <span class="op">=</span> <span class="st">"grinding"</span>, volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3      0.775 0.7500242</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3      0.775 0.7266079</span>
@@ -1795,7 +1811,7 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0      0.925 0.6939235</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0      0.925 0.6770109</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0      0.925 0.6609031</span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_rel_int</span>, step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span>, volume_increment <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span><span class="va">progression_rel_int</span>, step_increment <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span>, volume_increment <span class="op">=</span> <span class="fl">0.15</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          type    volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    grinding intensive    1   -3       0.70 0.6774412</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   ballistic intensive    1   -3       0.70 0.6562910</span>
@@ -2085,15 +2101,15 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 286 ballistic    normal   12    0       1.15 0.6391730</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 287  grinding extensive   12    0       1.30 0.9288368</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 288 ballistic extensive   12    0       1.30 0.7225434</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use different reps-max model</span></span>
-<span class="r-in"><span class="fu">generate_progression_table</span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">progression_rel_int</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
-<span class="r-in">  volume <span class="op">=</span> <span class="st">"normal"</span>,</span>
-<span class="r-in">  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
-<span class="r-in">  klin <span class="op">=</span> <span class="fl">36</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use different reps-max model</span></span></span>
+<span class="r-in"><span><span class="fu">generate_progression_table</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">progression_rel_int</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span></span>
+<span class="r-in"><span>  volume <span class="op">=</span> <span class="st">"normal"</span>,</span></span>
+<span class="r-in"><span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span></span>
+<span class="r-in"><span>  klin <span class="op">=</span> <span class="fl">36</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        type volume reps step adjustment  perc_1RM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  grinding normal    1   -3      0.775 0.7750000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  grinding normal    2   -3      0.775 0.7534722</span>
@@ -2143,11 +2159,11 @@ Independently published.
 <span class="r-out co"><span class="r-pr">#&gt;</span> 46 grinding normal   10    0      0.925 0.6937500</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47 grinding normal   11    0      0.925 0.6680556</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 48 grinding normal   12    0      0.925 0.6423611</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot progression table</span></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_rel_int</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot progression table</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_rel_int</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-13.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_rel_int</span>, <span class="st">"adjustment"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_rel_int</span>, <span class="st">"adjustment"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="progression_table-14.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -2163,7 +2179,7 @@ Independently published.
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

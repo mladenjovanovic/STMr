@@ -345,11 +345,11 @@ plot_progression_table(progression_rel_int)
 plot_progression_table(progression_rel_int, "adjustment")
 }
 \references{
-\preformatted{Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.
 Independently published.
-}
+}\if{html}{\out{</div>}}
 
-\preformatted{Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.
 Independently published.
-}
+}\if{html}{\out{</div>}}
 }

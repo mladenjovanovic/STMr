@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">STMr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.9000</span>
       </span>
     </div>
 
@@ -53,27 +53,36 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">max_reps_epley</span><span class="op">(</span><span class="va">perc_1RM</span>, k <span class="op">=</span> <span class="fl">0.0333</span><span class="op">)</span>
-
-<span class="fu">max_reps_modified_epley</span><span class="op">(</span><span class="va">perc_1RM</span>, kmod <span class="op">=</span> <span class="fl">0.0353</span><span class="op">)</span>
-
-<span class="fu">max_reps_linear</span><span class="op">(</span><span class="va">perc_1RM</span>, klin <span class="op">=</span> <span class="fl">33</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">max_reps_epley</span><span class="op">(</span><span class="va">perc_1RM</span>, k <span class="op">=</span> <span class="fl">0.0333</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">max_reps_modified_epley</span><span class="op">(</span><span class="va">perc_1RM</span>, kmod <span class="op">=</span> <span class="fl">0.0353</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">max_reps_linear</span><span class="op">(</span><span class="va">perc_1RM</span>, klin <span class="op">=</span> <span class="fl">33</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>perc_1RM</dt>
 <dd><p>Numeric vector. % 1RM used (use 0.5 for 50 %, 0.9 for 90 %)</p></dd>
+
+
 <dt>k</dt>
 <dd><p>User defined <code>k</code> parameter in the Epley's equation. Default is 0.0333</p></dd>
+
+
 <dt>kmod</dt>
 <dd><p>User defined <code>kmod</code> parameter in the Modified Epley's equation. Default is 0.0353</p></dd>
+
+
 <dt>klin</dt>
 <dd><p>User defined <code>klin</code> parameter in the Linear equation. Default is 33</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Numeric vector. Predicted maximal number of repetitions (nRM)</p>
+    
+
+<p>Numeric vector. Predicted maximal number of repetitions (nRM)</p>
     </div>
     <div id="functions">
     <h2>Functions</h2>
@@ -85,23 +94,23 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Epley equation</span></span>
-<span class="r-in"><span class="fu">max_reps_epley</span><span class="op">(</span><span class="fl">0.85</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Epley equation</span></span></span>
+<span class="r-in"><span><span class="fu">max_reps_epley</span><span class="op">(</span><span class="fl">0.85</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5.299417</span>
-<span class="r-in"><span class="fu">max_reps_epley</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.75</span>, <span class="fl">0.85</span><span class="op">)</span>, k <span class="op">=</span> <span class="fl">0.04</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">max_reps_epley</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.75</span>, <span class="fl">0.85</span><span class="op">)</span>, k <span class="op">=</span> <span class="fl">0.04</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 8.333333 4.411765</span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Modified Epley equation</span></span>
-<span class="r-in"><span class="fu">max_reps_modified_epley</span><span class="op">(</span><span class="fl">0.85</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Modified Epley equation</span></span></span>
+<span class="r-in"><span><span class="fu">max_reps_modified_epley</span><span class="op">(</span><span class="fl">0.85</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5.999167</span>
-<span class="r-in"><span class="fu">max_reps_modified_epley</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.75</span>, <span class="fl">0.85</span><span class="op">)</span>, kmod <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">max_reps_modified_epley</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.75</span>, <span class="fl">0.85</span><span class="op">)</span>, kmod <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 7.666667 4.529412</span>
-<span class="r-in"><span class="co"># ------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Linear/Brzycki's equation</span></span>
-<span class="r-in"><span class="fu">max_reps_linear</span><span class="op">(</span><span class="fl">0.85</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Linear/Brzycki's equation</span></span></span>
+<span class="r-in"><span><span class="fu">max_reps_linear</span><span class="op">(</span><span class="fl">0.85</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5.95</span>
-<span class="r-in"><span class="fu">max_reps_linear</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.75</span>, <span class="fl">0.85</span><span class="op">)</span>, klin <span class="op">=</span> <span class="fl">36</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">max_reps_linear</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.75</span>, <span class="fl">0.85</span><span class="op">)</span>, klin <span class="op">=</span> <span class="fl">36</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10.0  6.4</span>
 </code></pre></div>
     </div>
@@ -117,7 +126,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

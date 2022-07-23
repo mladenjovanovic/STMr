@@ -19,7 +19,7 @@ weight. To reverse this, use the reverse = TRUE argument"><meta property="og:ima
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">STMr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.9000</span>
       </span>
     </div>
 
@@ -57,67 +57,84 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">estimate_k_mixed</span><span class="op">(</span><span class="va">athlete</span>, <span class="va">perc_1RM</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">estimate_k_1RM_mixed</span><span class="op">(</span>
-  <span class="va">athlete</span>,
-  <span class="va">weight</span>,
-  <span class="va">reps</span>,
-  eRIR <span class="op">=</span> <span class="fl">0</span>,
-  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
-  random <span class="op">=</span> <span class="va">k</span> <span class="op">+</span> <span class="va">zeroRM</span> <span class="op">~</span> <span class="fl">1</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">estimate_kmod_mixed</span><span class="op">(</span><span class="va">athlete</span>, <span class="va">perc_1RM</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">estimate_kmod_1RM_mixed</span><span class="op">(</span>
-  <span class="va">athlete</span>,
-  <span class="va">weight</span>,
-  <span class="va">reps</span>,
-  eRIR <span class="op">=</span> <span class="fl">0</span>,
-  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
-  random <span class="op">=</span> <span class="va">kmod</span> <span class="op">+</span> <span class="va">oneRM</span> <span class="op">~</span> <span class="fl">1</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">estimate_klin_mixed</span><span class="op">(</span><span class="va">athlete</span>, <span class="va">perc_1RM</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span>
-
-<span class="fu">estimate_klin_1RM_mixed</span><span class="op">(</span>
-  <span class="va">athlete</span>,
-  <span class="va">weight</span>,
-  <span class="va">reps</span>,
-  eRIR <span class="op">=</span> <span class="fl">0</span>,
-  reverse <span class="op">=</span> <span class="cn">FALSE</span>,
-  random <span class="op">=</span> <span class="va">klin</span> <span class="op">+</span> <span class="va">oneRM</span> <span class="op">~</span> <span class="fl">1</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">estimate_k_mixed</span><span class="op">(</span><span class="va">athlete</span>, <span class="va">perc_1RM</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">estimate_k_1RM_mixed</span><span class="op">(</span></span>
+<span>  <span class="va">athlete</span>,</span>
+<span>  <span class="va">weight</span>,</span>
+<span>  <span class="va">reps</span>,</span>
+<span>  eRIR <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  random <span class="op">=</span> <span class="va">k</span> <span class="op">+</span> <span class="va">zeroRM</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">estimate_kmod_mixed</span><span class="op">(</span><span class="va">athlete</span>, <span class="va">perc_1RM</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">estimate_kmod_1RM_mixed</span><span class="op">(</span></span>
+<span>  <span class="va">athlete</span>,</span>
+<span>  <span class="va">weight</span>,</span>
+<span>  <span class="va">reps</span>,</span>
+<span>  eRIR <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  random <span class="op">=</span> <span class="va">kmod</span> <span class="op">+</span> <span class="va">oneRM</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">estimate_klin_mixed</span><span class="op">(</span><span class="va">athlete</span>, <span class="va">perc_1RM</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">estimate_klin_1RM_mixed</span><span class="op">(</span></span>
+<span>  <span class="va">athlete</span>,</span>
+<span>  <span class="va">weight</span>,</span>
+<span>  <span class="va">reps</span>,</span>
+<span>  eRIR <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  random <span class="op">=</span> <span class="va">klin</span> <span class="op">+</span> <span class="va">oneRM</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>athlete</dt>
 <dd><p>Athlete identifier</p></dd>
+
+
 <dt>perc_1RM</dt>
 <dd><p>%1RM</p></dd>
+
+
 <dt>reps</dt>
 <dd><p>Number of repetitions done</p></dd>
+
+
 <dt>eRIR</dt>
 <dd><p>Subjective estimation of reps-in-reserve (eRIR)</p></dd>
+
+
 <dt>reverse</dt>
 <dd><p>Logical, default is <code>FALSE</code>. Should reps be used as predictor instead as a target?</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Forwarded to <code><a href="https://rdrr.io/pkg/nlme/man/nlme.html" class="external-link">nlme</a></code> function</p></dd>
+
+
 <dt>weight</dt>
 <dd><p>Weight used</p></dd>
+
+
 <dt>random</dt>
 <dd><p>Random parameter forwarded to <code><a href="https://rdrr.io/pkg/nlme/man/nlme.html" class="external-link">nlme</a></code> function. Default is <code>k + zeroRM ~ 1</code> for,
 <code>estimate_k_mixed</code> function, or <code>k + oneRM ~ 1</code> for <code>estimate_kmod_mixed</code> and
 <code>estimate_klin_mixed</code> functions</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code><a href="https://rdrr.io/pkg/nlme/man/nlme.html" class="external-link">nlme</a></code> object</p>
+    
+
+<p><code><a href="https://rdrr.io/pkg/nlme/man/nlme.html" class="external-link">nlme</a></code> object</p>
     </div>
     <div id="functions">
     <h2>Functions</h2>
@@ -135,15 +152,15 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Epley's model</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_mixed</span><span class="op">(</span></span>
-<span class="r-in">  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span>
-<span class="r-in">  perc_1RM <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real %1RM`</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Epley's model</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_mixed</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span></span>
+<span class="r-in"><span>  perc_1RM <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real %1RM`</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    k</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete A 0.01937865</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete B 0.03403605</span>
@@ -157,16 +174,16 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete J 0.04741195</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete K 0.05844494</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete L 0.03987504</span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Epley's model that also estimates 1RM</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM_mixed</span><span class="op">(</span></span>
-<span class="r-in">  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span>
-<span class="r-in">  weight <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real Weight`</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Epley's model that also estimates 1RM</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM_mixed</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real Weight`</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Iteration 1, LME step: nlminb() did not converge (code = 1). PORT message: false convergence (8)</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    k    zeroRM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete A 0.02009568 100.90930</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete B 0.03190396  93.57043</span>
@@ -180,15 +197,15 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete J 0.04190880  89.90771</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete K 0.05472581 101.01463</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete L 0.03821828 138.52860</span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Modifed Epley's model</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod_mixed</span><span class="op">(</span></span>
-<span class="r-in">  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span>
-<span class="r-in">  perc_1RM <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real %1RM`</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Modifed Epley's model</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod_mixed</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span></span>
+<span class="r-in"><span>  perc_1RM <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real %1RM`</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 kmod</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete A 0.02061064</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete B 0.03816219</span>
@@ -202,16 +219,16 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete J 0.05521785</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete K 0.06915300</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete L 0.04531026</span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Modified Epley's model that also estimates 1RM</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod_1RM_mixed</span><span class="op">(</span></span>
-<span class="r-in">  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span>
-<span class="r-in">  weight <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real Weight`</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Modified Epley's model that also estimates 1RM</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_kmod_1RM_mixed</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real Weight`</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Iteration 1, LME step: nlminb() did not converge (code = 1). PORT message: false convergence (8)</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 kmod     oneRM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete A 0.03015273 109.90560</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete B 0.03302734  91.99512</span>
@@ -225,15 +242,15 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete J 0.03421898  84.57022</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete K 0.03325611  90.57083</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete L 0.02747206 126.61250</span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Linear/Brzycki model</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_klin_mixed</span><span class="op">(</span></span>
-<span class="r-in">  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span>
-<span class="r-in">  perc_1RM <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real %1RM`</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Linear/Brzycki model</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_klin_mixed</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span></span>
+<span class="r-in"><span>  perc_1RM <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real %1RM`</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               klin</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete A 64.11011</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete B 35.11002</span>
@@ -247,16 +264,16 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete J 24.65495</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete K 19.43184</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete L 30.18074</span>
-<span class="r-in"><span class="co"># ---------------------------------------------------------</span></span>
-<span class="r-in"><span class="co"># Linear/Brzycki model that also estimates 1RM</span></span>
-<span class="r-in"><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_klin_1RM_mixed</span><span class="op">(</span></span>
-<span class="r-in">  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span>
-<span class="r-in">  weight <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real Weight`</span>,</span>
-<span class="r-in">  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Linear/Brzycki model that also estimates 1RM</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_klin_1RM_mixed</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real Weight`</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Iteration 1, LME step: nlminb() did not converge (code = 1). PORT message: false convergence (8)</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               klin     oneRM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete A 75.15769  96.19463</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete B 45.44975  88.91455</span>
@@ -284,7 +301,7 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
