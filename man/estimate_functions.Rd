@@ -81,29 +81,29 @@ By default, target variable is the reps performed, while the predictors is the \
 }
 \section{Functions}{
 \itemize{
-\item \code{estimate_k}: Estimate the parameter \code{k} in the Epley's equation
+\item \code{estimate_k()}: Estimate the parameter \code{k} in the Epley's equation
 
-\item \code{estimate_k_1RM}: Estimate the parameter \code{k} in the Epley's equation, as well as
+\item \code{estimate_k_1RM()}: Estimate the parameter \code{k} in the Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights.
 
-\item \code{estimate_kmod}: Estimate the parameter \code{kmod} in the modified Epley's equation
+\item \code{estimate_kmod()}: Estimate the parameter \code{kmod} in the modified Epley's equation
 
-\item \code{estimate_kmod_1RM}: Estimate the parameter \code{kmod} in the modified Epley's equation, as well as
+\item \code{estimate_kmod_1RM()}: Estimate the parameter \code{kmod} in the modified Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
-\item \code{estimate_klin}: Estimate the parameter \code{klin} using the Linear/Brzycki model
+\item \code{estimate_klin()}: Estimate the parameter \code{klin} using the Linear/Brzycki model
 
-\item \code{estimate_klin_1RM}: Estimate the parameter \code{klin} in the Linear/Brzycki equation, as well as
+\item \code{estimate_klin_1RM()}: Estimate the parameter \code{klin} in the Linear/Brzycki equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
-\item \code{get_predicted_1RM_from_k_model}: Estimate the 1RM from \code{\link{estimate_k_1RM}} function
+\item \code{get_predicted_1RM_from_k_model()}: Estimate the 1RM from \code{\link{estimate_k_1RM}} function
 
 The problem with Epley's estimation model (implemented in \code{\link{estimate_k_1RM}} function)
 is that it predicts the 1RM when nRM = 0. Thus, the estimated parameter in the model produced
 by the \code{\link{estimate_k_1RM}} function is not 1RM, but 0RM. This function calculates the
 weight at nRM = 1 for both the normal and reverse model. See Examples for code
-}}
 
+}}
 \examples{
 # ---------------------------------------------------------
 # Epley's model

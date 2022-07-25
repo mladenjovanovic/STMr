@@ -62,18 +62,18 @@ Family of functions to adjust \%1RM
 }
 \section{Functions}{
 \itemize{
-\item \code{adj_perc_1RM_RIR}: Adjust max  \%1RM using the Reps In Reserve (RIR) approach
+\item \code{adj_perc_1RM_RIR()}: Adjust max  \%1RM using the Reps In Reserve (RIR) approach
 
-\item \code{adj_perc_1RM_DI}: Adjust max \%1RM using the Deducted Intensity (DI) approach.
+\item \code{adj_perc_1RM_DI()}: Adjust max \%1RM using the Deducted Intensity (DI) approach.
 This approach simple deducts \code{adjustment} from estimated \%1RM
 
-\item \code{adj_perc_1RM_rel_int}: Adjust max perc 1RM using the Relative Intensity (RelInt) approach.
+\item \code{adj_perc_1RM_rel_int()}: Adjust max perc 1RM using the Relative Intensity (RelInt) approach.
 This approach simple multiplies estimated perc 1RM with \code{adjustment}
 
-\item \code{adj_perc_1RM_perc_MR}: Adjust max perc 1RM using the \%Max Reps (\%MR) approach.
+\item \code{adj_perc_1RM_perc_MR()}: Adjust max perc 1RM using the \%Max Reps (\%MR) approach.
 This approach simple divides target reps with \code{adjustment}
-}}
 
+}}
 \examples{
 # ------------------------------------------
 # Adjustment using Reps In Reserve (RIR)

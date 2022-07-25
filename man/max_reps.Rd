@@ -30,13 +30,13 @@ Family of functions to estimate max number of repetition (nRM)
 }
 \section{Functions}{
 \itemize{
-\item \code{max_reps_epley}: Estimate max number of repetition (nRM) using the Epley's equation
+\item \code{max_reps_epley()}: Estimate max number of repetition (nRM) using the Epley's equation
 
-\item \code{max_reps_modified_epley}: Estimate max number of repetition (nRM) using the Modified Epley's equation
+\item \code{max_reps_modified_epley()}: Estimate max number of repetition (nRM) using the Modified Epley's equation
 
-\item \code{max_reps_linear}: Estimate max number of repetition (nRM) using the Linear/Brzycki's equation
+\item \code{max_reps_linear()}: Estimate max number of repetition (nRM) using the Linear/Brzycki's equation
+
 }}
-
 \examples{
 # ------------------------------------------
 # Epley equation

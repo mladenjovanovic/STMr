@@ -65,15 +65,15 @@ adjustment
 }
 \section{Functions}{
 \itemize{
-\item \code{adj_reps_RIR}: Adjust number of repetitions using the Reps In Reserve (RIR) approach
+\item \code{adj_reps_RIR()}: Adjust number of repetitions using the Reps In Reserve (RIR) approach
 
-\item \code{adj_reps_DI}: Adjust number of repetitions using the Deducted Intensity (DI) approach
+\item \code{adj_reps_DI()}: Adjust number of repetitions using the Deducted Intensity (DI) approach
 
-\item \code{adj_reps_rel_int}: Adjust number of repetitions using the Relative Intensity (RelInt) approach
+\item \code{adj_reps_rel_int()}: Adjust number of repetitions using the Relative Intensity (RelInt) approach
 
-\item \code{adj_reps_perc_MR}: Adjust number of repetitions using the \% max reps (\%MR) approach
+\item \code{adj_reps_perc_MR()}: Adjust number of repetitions using the \% max reps (\%MR) approach
+
 }}
-
 \examples{
 # ------------------------------------------
 # Adjustment using Reps In Reserve (RIR)

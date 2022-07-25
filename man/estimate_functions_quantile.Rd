@@ -98,22 +98,22 @@ target variable is the reps performed, while the predictors is the \code{perc_1R
 }
 \section{Functions}{
 \itemize{
-\item \code{estimate_k_quantile}: Estimate the parameter \code{k} in the Epley's equation
+\item \code{estimate_k_quantile()}: Estimate the parameter \code{k} in the Epley's equation
 
-\item \code{estimate_k_1RM_quantile}: Estimate the parameter \code{k} in the Epley's equation, as well as
+\item \code{estimate_k_1RM_quantile()}: Estimate the parameter \code{k} in the Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
-\item \code{estimate_kmod_quantile}: Estimate the parameter \code{kmod} in the modified Epley's equation
+\item \code{estimate_kmod_quantile()}: Estimate the parameter \code{kmod} in the modified Epley's equation
 
-\item \code{estimate_kmod_1RM_quantile}: Estimate the parameter \code{kmod} in the modified Epley's equation, as well as
+\item \code{estimate_kmod_1RM_quantile()}: Estimate the parameter \code{kmod} in the modified Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
-\item \code{estimate_klin_quantile}: Estimate the parameter \code{klin} in the Linear/Brzycki equation
+\item \code{estimate_klin_quantile()}: Estimate the parameter \code{klin} in the Linear/Brzycki equation
 
-\item \code{estimate_klin_1RM_quantile}: Estimate the parameter \code{klin} in the Linear/Brzycki equation, as well as
+\item \code{estimate_klin_1RM_quantile()}: Estimate the parameter \code{klin} in the Linear/Brzycki equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
+
 }}
-
 \examples{
 # ---------------------------------------------------------
 # Epley's model

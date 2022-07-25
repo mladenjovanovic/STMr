@@ -134,32 +134,32 @@ Family of functions to create progression tables
 }
 \section{Functions}{
 \itemize{
-\item \code{generate_progression_table}: Generates progression tables
+\item \code{generate_progression_table()}: Generates progression tables
 
-\item \code{progression_DI}: Deducted Intensity progression table. This simplest progression
+\item \code{progression_DI()}: Deducted Intensity progression table. This simplest progression
 table simply deducts intensity to progress. Adjust this deducted by using the
 \code{deduction} parameter (default is equal to -0.025)
 
-\item \code{progression_RIR}: Constant RIR Increment progression table. This variant have constant RIR
+\item \code{progression_RIR()}: Constant RIR Increment progression table. This variant have constant RIR
 increment across reps from phases to phases and RIR difference between extensive, normal, and
 intensive schemes. Use \code{step_increment} and  \code{volume_increment} parameters to
 utilize needed increments
 
-\item \code{progression_RIR_increment}: RIR Increment progression table (see Strength Training Manual)
+\item \code{progression_RIR_increment()}: RIR Increment progression table (see Strength Training Manual)
 
-\item \code{progression_perc_MR}: Constant \%MR Step progression table. This variant have constant \%MR
+\item \code{progression_perc_MR()}: Constant \%MR Step progression table. This variant have constant \%MR
 increment across reps from phases to phases and \%MR difference between extensive, normal, and
 intensive schemes. Use \code{step_increment} and  \code{volume_increment} parameters to
 utilize needed increments
 
-\item \code{progression_perc_MR_variable}: Variable \%MR Step progression table
+\item \code{progression_perc_MR_variable()}: Variable \%MR Step progression table
 
-\item \code{progression_perc_drop}: Perc Drop progression table (see Strength Training Manual)
+\item \code{progression_perc_drop()}: Perc Drop progression table (see Strength Training Manual)
 
-\item \code{progression_rel_int}: Relative Intensity progression table. Use \code{step_increment}
+\item \code{progression_rel_int()}: Relative Intensity progression table. Use \code{step_increment}
 and  \code{volume_increment} parameters to utilize needed increments
-}}
 
+}}
 \examples{
 generate_progression_table(progression_RIR)
 

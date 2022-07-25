@@ -75,22 +75,22 @@ target variable is the reps performed, while the predictor is the \code{perc_1RM
 }
 \section{Functions}{
 \itemize{
-\item \code{estimate_k_mixed}: Estimate the parameter \code{k} in the Epley's equation
+\item \code{estimate_k_mixed()}: Estimate the parameter \code{k} in the Epley's equation
 
-\item \code{estimate_k_1RM_mixed}: Estimate the parameter \code{k} in the Epley's equation, as well as
+\item \code{estimate_k_1RM_mixed()}: Estimate the parameter \code{k} in the Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
-\item \code{estimate_kmod_mixed}: Estimate the parameter \code{kmod} in the Modified Epley's equation
+\item \code{estimate_kmod_mixed()}: Estimate the parameter \code{kmod} in the Modified Epley's equation
 
-\item \code{estimate_kmod_1RM_mixed}: Estimate the parameter \code{kmod} in the Modified Epley's equation, as well as
+\item \code{estimate_kmod_1RM_mixed()}: Estimate the parameter \code{kmod} in the Modified Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
 
-\item \code{estimate_klin_mixed}: Estimate the parameter \code{klin} in the Linear/Brzycki's equation
+\item \code{estimate_klin_mixed()}: Estimate the parameter \code{klin} in the Linear/Brzycki's equation
 
-\item \code{estimate_klin_1RM_mixed}: Estimate the parameter \code{klin} in the Linear/Brzycki equation, as well as
+\item \code{estimate_klin_1RM_mixed()}: Estimate the parameter \code{klin} in the Linear/Brzycki equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
+
 }}
-
 \examples{
 # ---------------------------------------------------------
 # Epley's model

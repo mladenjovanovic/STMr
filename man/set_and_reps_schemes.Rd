@@ -127,35 +127,35 @@ Set and Rep Schemes
 }
 \section{Functions}{
 \itemize{
-\item \code{scheme_generic}: Generic set and rep scheme.
+\item \code{scheme_generic()}: Generic set and rep scheme.
 \code{scheme_generic} is called in all other set and rep schemes - only the default parameters
 differ to make easier and quicker schemes writing and groupings
 
-\item \code{scheme_wave}: Wave set and rep scheme
+\item \code{scheme_wave()}: Wave set and rep scheme
 
-\item \code{scheme_plateau}: Plateau set and rep scheme
+\item \code{scheme_plateau()}: Plateau set and rep scheme
 
-\item \code{scheme_step}: Step set and rep scheme
+\item \code{scheme_step()}: Step set and rep scheme
 
-\item \code{scheme_step_reverse}: Reverse Step set and rep scheme
+\item \code{scheme_step_reverse()}: Reverse Step set and rep scheme
 
-\item \code{scheme_wave_descending}: Descending Wave set and rep scheme
+\item \code{scheme_wave_descending()}: Descending Wave set and rep scheme
 
-\item \code{scheme_light_heavy}: Light-Heavy set and rep scheme
+\item \code{scheme_light_heavy()}: Light-Heavy set and rep scheme
 
-\item \code{scheme_pyramid}: Pyramid set and rep scheme
+\item \code{scheme_pyramid()}: Pyramid set and rep scheme
 
-\item \code{scheme_pyramid_reverse}: Reverse Pyramid set and rep scheme
+\item \code{scheme_pyramid_reverse()}: Reverse Pyramid set and rep scheme
 
-\item \code{scheme_rep_acc}: Rep Accumulation set and rep scheme
+\item \code{scheme_rep_acc()}: Rep Accumulation set and rep scheme
+
 }}
-
 \examples{
 scheme_generic()
 
 # Wave set and rep schemes
---------------------------
-  scheme_wave()
+# --------------------------
+scheme_wave()
 
 scheme_wave(
   reps = c(8, 6, 4, 8, 6, 4),
@@ -189,8 +189,8 @@ scheme_wave(
 )
 
 # Plateau set and rep schemes
---------------------------
-  scheme_plateau()
+# --------------------------
+scheme_plateau()
 
 scheme_plateau(
   reps = c(3, 3, 3),
@@ -198,8 +198,8 @@ scheme_plateau(
 )
 
 # Step set and rep schemes
---------------------------
-  scheme_step()
+# --------------------------
+scheme_step()
 
 scheme_step(
   reps = c(2, 2, 2),
@@ -209,26 +209,26 @@ scheme_step(
 )
 
 # Reverse Step set and rep schemes
---------------------------
-  scheme_step_reverse()
+#- -------------------------
+scheme_step_reverse()
 
 # Descending Wave set and rep schemes
---------------------------
-  scheme_wave_descending()
+# --------------------------
+scheme_wave_descending()
 
 # Light-Heavy set and rep schemes
---------------------------
-  scheme_light_heavy()
+# --------------------------
+scheme_light_heavy()
 
 # Pyramid set and rep schemes
---------------------------
-  scheme_pyramid()
+# --------------------------
+scheme_pyramid()
 
 # Reverse Pyramid set and rep schemes
---------------------------
-  scheme_pyramid_reverse()
+# --------------------------
+scheme_pyramid_reverse()
 
 # Rep Accumulation set and rep schemes
---------------------------
-  scheme_rep_acc()
+# --------------------------
+scheme_rep_acc()
 }

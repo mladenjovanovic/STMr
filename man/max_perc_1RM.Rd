@@ -30,13 +30,13 @@ Family of functions to estimate max \%1RM
 }
 \section{Functions}{
 \itemize{
-\item \code{max_perc_1RM_epley}: Estimate max \%1RM using the Epley's equation
+\item \code{max_perc_1RM_epley()}: Estimate max \%1RM using the Epley's equation
 
-\item \code{max_perc_1RM_modified_epley}: Estimate max \%1RM using the Modified Epley's equation
+\item \code{max_perc_1RM_modified_epley()}: Estimate max \%1RM using the Modified Epley's equation
 
-\item \code{max_perc_1RM_linear}: Estimate max \%1RM using the Linear (or Brzycki's) equation
+\item \code{max_perc_1RM_linear()}: Estimate max \%1RM using the Linear (or Brzycki's) equation
+
 }}
-
 \examples{
 # ------------------------------------------
 # Epley equation

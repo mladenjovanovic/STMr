@@ -75,31 +75,31 @@ Functions for creating vertical planning (progressions)
 }
 \section{Functions}{
 \itemize{
-\item \code{vertical_planning}: Generic Vertical Planning
+\item \code{vertical_planning()}: Generic Vertical Planning
 
-\item \code{vertical_constant}: Constants Vertical Planning
+\item \code{vertical_constant()}: Constants Vertical Planning
 
-\item \code{vertical_linear}: Linear Vertical Planning
+\item \code{vertical_linear()}: Linear Vertical Planning
 
-\item \code{vertical_linear_reverse}: Reverse Linear Vertical Planning
+\item \code{vertical_linear_reverse()}: Reverse Linear Vertical Planning
 
-\item \code{vertical_block}: Block Vertical Planning
+\item \code{vertical_block()}: Block Vertical Planning
 
-\item \code{vertical_block_variant}: Block Variant Vertical Planning
+\item \code{vertical_block_variant()}: Block Variant Vertical Planning
 
-\item \code{vertical_rep_accumulation}: Rep Accumulation Vertical Planning
+\item \code{vertical_rep_accumulation()}: Rep Accumulation Vertical Planning
 
-\item \code{vertical_set_accumulation}: Set Accumulation Vertical Planning
+\item \code{vertical_set_accumulation()}: Set Accumulation Vertical Planning
 
-\item \code{vertical_set_accumulation_reverse}: Set Accumulation Reverse Vertical Planning
+\item \code{vertical_set_accumulation_reverse()}: Set Accumulation Reverse Vertical Planning
 
-\item \code{vertical_undulating}: Undulating Vertical Planning
+\item \code{vertical_undulating()}: Undulating Vertical Planning
 
-\item \code{vertical_undulating_reverse}: Undulating Vertical Planning
+\item \code{vertical_undulating_reverse()}: Undulating Vertical Planning
 
-\item \code{vertical_volume_intensity}: Volume-Intensity Vertical Planning
+\item \code{vertical_volume_intensity()}: Volume-Intensity Vertical Planning
+
 }}
-
 \examples{
 # Generic vertical planning function
 # ----------------------------------
