@@ -143,16 +143,16 @@ weight. To reverse this, use the reverse = TRUE argument"><meta property="og:ima
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>estimate_k</code>: Estimate the parameter <code>k</code> in the Epley's equation</p></li>
-<li><p><code>estimate_k_1RM</code>: Estimate the parameter <code>k</code> in the Epley's equation, as well as
+<ul><li><p><code>estimate_k()</code>: Estimate the parameter <code>k</code> in the Epley's equation</p></li>
+<li><p><code>estimate_k_1RM()</code>: Estimate the parameter <code>k</code> in the Epley's equation, as well as
 <code>1RM</code>. This is a novel estimation function that uses the absolute weights.</p></li>
-<li><p><code>estimate_kmod</code>: Estimate the parameter <code>kmod</code> in the modified Epley's equation</p></li>
-<li><p><code>estimate_kmod_1RM</code>: Estimate the parameter <code>kmod</code> in the modified Epley's equation, as well as
+<li><p><code>estimate_kmod()</code>: Estimate the parameter <code>kmod</code> in the modified Epley's equation</p></li>
+<li><p><code>estimate_kmod_1RM()</code>: Estimate the parameter <code>kmod</code> in the modified Epley's equation, as well as
 <code>1RM</code>. This is a novel estimation function that uses the absolute weights</p></li>
-<li><p><code>estimate_klin</code>: Estimate the parameter <code>klin</code> using the Linear/Brzycki model</p></li>
-<li><p><code>estimate_klin_1RM</code>: Estimate the parameter <code>klin</code> in the Linear/Brzycki equation, as well as
+<li><p><code>estimate_klin()</code>: Estimate the parameter <code>klin</code> using the Linear/Brzycki model</p></li>
+<li><p><code>estimate_klin_1RM()</code>: Estimate the parameter <code>klin</code> in the Linear/Brzycki equation, as well as
 <code>1RM</code>. This is a novel estimation function that uses the absolute weights</p></li>
-<li><p><code>get_predicted_1RM_from_k_model</code>: Estimate the 1RM from <code>estimate_k_1RM</code> function</p>
+<li><p><code>get_predicted_1RM_from_k_model()</code>: Estimate the 1RM from <code>estimate_k_1RM</code> function</p>
 <p>The problem with Epley's estimation model (implemented in <code>estimate_k_1RM</code> function)
 is that it predicts the 1RM when nRM = 0. Thus, the estimated parameter in the model produced
 by the <code>estimate_k_1RM</code> function is not 1RM, but 0RM. This function calculates the
@@ -258,7 +258,7 @@ weight at nRM = 1 for both the normal and reverse model. See Examples for code</
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -195,22 +195,22 @@ unless <code>NULL</code></p></dd>
     <div id="functions">
     <h2>Functions</h2>
     
-<ul><li><p><code>generate_progression_table</code>: Generates progression tables</p></li>
-<li><p><code>progression_DI</code>: Deducted Intensity progression table. This simplest progression
+<ul><li><p><code>generate_progression_table()</code>: Generates progression tables</p></li>
+<li><p><code>progression_DI()</code>: Deducted Intensity progression table. This simplest progression
 table simply deducts intensity to progress. Adjust this deducted by using the
 <code>deduction</code> parameter (default is equal to -0.025)</p></li>
-<li><p><code>progression_RIR</code>: Constant RIR Increment progression table. This variant have constant RIR
+<li><p><code>progression_RIR()</code>: Constant RIR Increment progression table. This variant have constant RIR
 increment across reps from phases to phases and RIR difference between extensive, normal, and
 intensive schemes. Use <code>step_increment</code> and  <code>volume_increment</code> parameters to
 utilize needed increments</p></li>
-<li><p><code>progression_RIR_increment</code>: RIR Increment progression table (see Strength Training Manual)</p></li>
-<li><p><code>progression_perc_MR</code>: Constant %MR Step progression table. This variant have constant %MR
+<li><p><code>progression_RIR_increment()</code>: RIR Increment progression table (see Strength Training Manual)</p></li>
+<li><p><code>progression_perc_MR()</code>: Constant %MR Step progression table. This variant have constant %MR
 increment across reps from phases to phases and %MR difference between extensive, normal, and
 intensive schemes. Use <code>step_increment</code> and  <code>volume_increment</code> parameters to
 utilize needed increments</p></li>
-<li><p><code>progression_perc_MR_variable</code>: Variable %MR Step progression table</p></li>
-<li><p><code>progression_perc_drop</code>: Perc Drop progression table (see Strength Training Manual)</p></li>
-<li><p><code>progression_rel_int</code>: Relative Intensity progression table. Use <code>step_increment</code>
+<li><p><code>progression_perc_MR_variable()</code>: Variable %MR Step progression table</p></li>
+<li><p><code>progression_perc_drop()</code>: Perc Drop progression table (see Strength Training Manual)</p></li>
+<li><p><code>progression_rel_int()</code>: Relative Intensity progression table. Use <code>step_increment</code>
 and  <code>volume_increment</code> parameters to utilize needed increments</p></li>
 </ul></div>
     <div id="references">
@@ -2179,7 +2179,7 @@ and  <code>volume_increment</code> parameters to utilize needed increments</p></
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
