@@ -58,8 +58,8 @@ scheme_generic <- function(reps = c(5, 5, 5),
 #' @examples
 #'
 #' # Wave set and rep schemes
-#' --------------------------
-#'   scheme_wave()
+#' # --------------------------
+#' scheme_wave()
 #'
 #' scheme_wave(
 #'   reps = c(8, 6, 4, 8, 6, 4),
@@ -112,8 +112,8 @@ scheme_wave <- function(reps = c(10, 8, 6, 10, 8, 6),
 #' @examples
 #'
 #' # Plateau set and rep schemes
-#' --------------------------
-#'   scheme_plateau()
+#' # --------------------------
+#' scheme_plateau()
 #'
 #' scheme_plateau(
 #'   reps = c(3, 3, 3),
@@ -141,8 +141,8 @@ scheme_plateau <- function(reps = c(5, 5, 5, 5),
 #' @examples
 #'
 #' # Step set and rep schemes
-#' --------------------------
-#'   scheme_step()
+#' # --------------------------
+#' scheme_step()
 #'
 #' scheme_step(
 #'   reps = c(2, 2, 2),
@@ -171,8 +171,8 @@ scheme_step <- function(reps = c(5, 5, 5, 5),
 #' @examples
 #'
 #' # Reverse Step set and rep schemes
-#' --------------------------
-#'   scheme_step_reverse()
+#' #- -------------------------
+#' scheme_step_reverse()
 scheme_step_reverse <- function(reps = c(10, 10, 10, 10),
                                 adjustment = c(0, 3, 6, 9),
                                 vertical_planning = vertical_constant,
@@ -194,8 +194,8 @@ scheme_step_reverse <- function(reps = c(10, 10, 10, 10),
 #' @examples
 #'
 #' # Descending Wave set and rep schemes
-#' --------------------------
-#'   scheme_wave_descending()
+#' # --------------------------
+#' scheme_wave_descending()
 scheme_wave_descending <- function(reps = c(6, 8, 10, 6, 8, 10),
                                    adjustment = c(4, 2, 0, 6, 4, 2),
                                    vertical_planning = vertical_linear,
@@ -217,8 +217,8 @@ scheme_wave_descending <- function(reps = c(6, 8, 10, 6, 8, 10),
 #' @examples
 #'
 #' # Light-Heavy set and rep schemes
-#' --------------------------
-#'   scheme_light_heavy()
+#' # --------------------------
+#' scheme_light_heavy()
 scheme_light_heavy <- function(reps = c(6, 3, 6, 3, 6, 3),
                                adjustment = c(0, -0.2, 0, -0.2, 0, -0.2),
                                vertical_planning = vertical_constant,
@@ -241,8 +241,8 @@ scheme_light_heavy <- function(reps = c(6, 3, 6, 3, 6, 3),
 #' @examples
 #'
 #' # Pyramid set and rep schemes
-#' --------------------------
-#'   scheme_pyramid()
+#' # --------------------------
+#' scheme_pyramid()
 scheme_pyramid <- function(reps = c(12, 10, 8, 8, 10, 12),
                            adjustment = 0,
                            vertical_planning = vertical_linear,
@@ -265,8 +265,8 @@ scheme_pyramid <- function(reps = c(12, 10, 8, 8, 10, 12),
 #' @examples
 #'
 #' # Reverse Pyramid set and rep schemes
-#' --------------------------
-#'   scheme_pyramid_reverse()
+#' # --------------------------
+#' scheme_pyramid_reverse()
 scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 12, 10, 8),
                                    adjustment = 0,
                                    vertical_planning = vertical_linear,
@@ -288,8 +288,8 @@ scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 12, 10, 8),
 #' @examples
 #'
 #' # Rep Accumulation set and rep schemes
-#' --------------------------
-#'   scheme_rep_acc()
+#' # --------------------------
+#' scheme_rep_acc()
 scheme_rep_acc <- function(reps = c(10, 10, 10),
                            adjustment = 0,
                            # vertical_planning = vertical_planning,
