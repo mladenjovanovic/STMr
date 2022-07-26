@@ -3,6 +3,7 @@
 * Fixed a bug in `scheme_rep_acc()` - now the END rep and step is used, and the reps are counted backwards as intended
 * Addded comment in the `vertical_generic()` and `vertical_rep_accumulation()` to avoid generating rep accumulation schme using those two functions, but rather using `scheme_rep_acc()`
 * Formatting error in `scheme_()` functions
+* Changed default progression table to `progression_perc_drop` in all `scheme_()` functions
 
 
 # STMr 0.1.3

@@ -19,57 +19,57 @@ scheme_generic(
   adjustment = c(0, 0, 0),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(),
-  progression_table = progression_RIR_increment,
+  progression_table = progression_perc_drop,
   progression_table_control = list()
 )
 
 scheme_wave(
-  reps = c(10, 8, 6, 10, 8, 6),
-  adjustment = c(4, 2, 0, 6, 4, 2),
+  reps = c(10, 8, 6),
+  adjustment = c(-0.2, -0.1, 0),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(),
-  progression_table = progression_RIR_increment,
-  progression_table_control = list(volume = "extensive")
+  progression_table = progression_perc_drop,
+  progression_table_control = list(volume = "normal")
 )
 
 scheme_plateau(
-  reps = c(5, 5, 5, 5),
-  vertical_planning = vertical_constant,
-  vertical_planning_control = list(),
-  progression_table = progression_RIR_increment,
-  progression_table_control = list(volume = "extensive")
-)
-
-scheme_step(
-  reps = c(5, 5, 5, 5),
-  adjustment = c(-0.3, -0.2, -0.1, 0),
+  reps = c(5, 5, 5),
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
   progression_table_control = list(volume = "normal")
 )
 
-scheme_step_reverse(
-  reps = c(10, 10, 10, 10),
-  adjustment = c(0, 3, 6, 9),
+scheme_step(
+  reps = c(5, 5, 5),
+  adjustment = c(-0.2, -0.1, 0),
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
-  progression_table = progression_RIR_increment,
-  progression_table_control = list(volume = "normal")
+  progression_table = progression_perc_drop,
+  progression_table_control = list(volume = "intensive")
+)
+
+scheme_step_reverse(
+  reps = c(5, 5, 5),
+  adjustment = c(0, -0.1, -0.2),
+  vertical_planning = vertical_constant,
+  vertical_planning_control = list(),
+  progression_table = progression_perc_drop,
+  progression_table_control = list(volume = "intensive")
 )
 
 scheme_wave_descending(
-  reps = c(6, 8, 10, 6, 8, 10),
-  adjustment = c(4, 2, 0, 6, 4, 2),
+  reps = c(6, 8, 10),
+  adjustment = c(-0.2, -0.1, 0),
   vertical_planning = vertical_linear,
   vertical_planning_control = list(),
-  progression_table = progression_RIR_increment,
-  progression_table_control = list(volume = "extensive")
+  progression_table = progression_perc_drop,
+  progression_table_control = list(volume = "normal")
 )
 
 scheme_light_heavy(
-  reps = c(6, 3, 6, 3, 6, 3),
-  adjustment = c(0, -0.2, 0, -0.2, 0, -0.2),
+  reps = c(6, 3, 6, 3),
+  adjustment = c(0, -0.2, 0, -0.2),
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
@@ -81,7 +81,7 @@ scheme_pyramid(
   adjustment = 0,
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
-  progression_table = progression_RIR_increment,
+  progression_table = progression_perc_drop,
   progression_table_control = list(volume = "extensive")
 )
 
@@ -90,7 +90,7 @@ scheme_pyramid_reverse(
   adjustment = 0,
   vertical_planning = vertical_linear,
   vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
-  progression_table = progression_RIR_increment,
+  progression_table = progression_perc_drop,
   progression_table_control = list(volume = "extensive")
 )
 
@@ -98,7 +98,7 @@ scheme_rep_acc(
   reps = c(10, 10, 10),
   adjustment = 0,
   vertical_planning_control = list(step = rep(0, 4)),
-  progression_table = progression_RIR_increment,
+  progression_table = progression_perc_drop,
   progression_table_control = list(volume = "extensive")
 )
 }
@@ -159,6 +159,8 @@ scheme_wave()
 
 scheme_wave(
   reps = c(8, 6, 4, 8, 6, 4),
+  # Second wave with higher intensity
+  adjustment = c(-0.25, -0.15, 0.05, -0.2, -0.1, 0),
   vertical_planning = vertical_block,
   progression_table = progression_perc_drop,
   progression_table_control = list(type = "ballistic")
