@@ -26,7 +26,7 @@ NULL
 #' scheme_generic()
 scheme_generic <- function(reps = c(5, 5, 5),
                            adjustment = c(0, 0, 0),
-                           vertical_planning = vertical_linear,
+                           vertical_planning = vertical_constant,
                            vertical_planning_control = list(),
                            progression_table = progression_perc_drop,
                            progression_table_control = list()) {
@@ -95,7 +95,7 @@ scheme_generic <- function(reps = c(5, 5, 5),
 #' )
 scheme_wave <- function(reps = c(10, 8, 6),
                         adjustment = c(-0.2, -0.1, 0),
-                        vertical_planning = vertical_linear,
+                        vertical_planning = vertical_constant,
                         vertical_planning_control = list(),
                         progression_table = progression_perc_drop,
                         progression_table_control = list(volume = "normal")) {
@@ -200,7 +200,7 @@ scheme_step_reverse <- function(reps = c(5, 5, 5),
 #' scheme_wave_descending()
 scheme_wave_descending <- function(reps = c(6, 8, 10),
                                    adjustment = c(-0.2, -0.1, 0),
-                                   vertical_planning = vertical_linear,
+                                   vertical_planning = vertical_constant,
                                    vertical_planning_control = list(),
                                    progression_table = progression_perc_drop,
                                    progression_table_control = list(volume = "normal")) {
@@ -247,8 +247,8 @@ scheme_light_heavy <- function(reps = c(6, 3, 6, 3),
 #' scheme_pyramid()
 scheme_pyramid <- function(reps = c(12, 10, 8, 8, 10, 12),
                            adjustment = 0,
-                           vertical_planning = vertical_linear,
-                           vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
+                           vertical_planning = vertical_constant,
+                           vertical_planning_control = list(),
                            progression_table = progression_perc_drop,
                            progression_table_control = list(volume = "extensive")) {
   scheme_generic(
@@ -271,8 +271,8 @@ scheme_pyramid <- function(reps = c(12, 10, 8, 8, 10, 12),
 #' scheme_pyramid_reverse()
 scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 12, 10, 8),
                                    adjustment = 0,
-                                   vertical_planning = vertical_linear,
-                                   vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
+                                   vertical_planning = vertical_constant,
+                                   vertical_planning_control = list(),
                                    progression_table = progression_perc_drop,
                                    progression_table_control = list(volume = "extensive")) {
   scheme_generic(
@@ -294,7 +294,6 @@ scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 12, 10, 8),
 #' scheme_rep_acc()
 scheme_rep_acc <- function(reps = c(10, 10, 10),
                            adjustment = 0,
-                           # vertical_planning = vertical_planning,
                            vertical_planning_control = list(step = rep(0, 4)),
                            progression_table = progression_perc_drop,
                            progression_table_control = list(volume = "extensive")) {
