@@ -227,14 +227,19 @@ scheme_light_heavy <- function(reps = c(6, 3, 6, 3),
                                vertical_planning_control = list(),
                                progression_table = progression_perc_drop,
                                progression_table_control = list(volume = "normal")) {
-  scheme_generic(
-    reps = reps,
+
+  df <- scheme_generic(
+    reps = rep(max(reps), length(reps)),
     adjustment = adjustment,
     vertical_planning = vertical_planning,
     vertical_planning_control = vertical_planning_control,
     progression_table = progression_table,
     progression_table_control = progression_table_control
   )
+
+  df$reps <- reps
+
+  df
 }
 
 
