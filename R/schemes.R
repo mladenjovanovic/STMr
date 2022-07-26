@@ -221,8 +221,8 @@ scheme_wave_descending <- function(reps = c(6, 8, 10),
 #' # Light-Heavy set and rep schemes
 #' # --------------------------
 #' scheme_light_heavy()
-scheme_light_heavy <- function(reps = c(6, 3, 6, 3),
-                               adjustment = c(0, -0.2, 0, -0.2),
+scheme_light_heavy <- function(reps = c(10, 5, 10, 5),
+                               adjustment = c(0, -0.1, 0, -0.1),
                                vertical_planning = vertical_constant,
                                vertical_planning_control = list(),
                                progression_table = progression_perc_drop,
@@ -314,4 +314,32 @@ scheme_rep_acc <- function(reps = c(10, 10, 10),
   scheme_df$reps <- scheme_df$reps - (max(scheme_df$index) - scheme_df$index)
 
   scheme_df
+}
+
+#' @describeIn set_and_reps_schemes Ladder set and rep scheme
+#' @export
+#' @examples
+#'
+#' # Ladder set and rep schemes
+#' # --------------------------
+#' scheme_ladder()
+scheme_ladder <- function(reps = c(3, 5, 10),
+                               adjustment = c(0, 0, 0),
+                               vertical_planning = vertical_constant,
+                               vertical_planning_control = list(),
+                               progression_table = progression_perc_drop,
+                               progression_table_control = list(volume = "normal")) {
+
+  df <- scheme_generic(
+    reps = rep(max(reps), length(reps)),
+    adjustment = adjustment,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
+
+  df$reps <- reps
+
+  df
 }

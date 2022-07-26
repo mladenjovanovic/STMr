@@ -6,6 +6,7 @@
 * Changed default progression table to `progression_perc_drop` in all `scheme_()` functions
 * Changed default vertical planning to `vertical_const` in all `scheme_()` functions
 * Fixed a bug in `scheme_light_heavy()` - now it takes the highest rep and use that to estimate %1RMs
+* Added `scheme_ladder()` set and rep scheme
 
 # STMr 0.1.3
 
