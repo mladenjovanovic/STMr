@@ -327,12 +327,12 @@ vertical_volume_intensity <- function(reps,
                                             rep_decrement = c(-3, -2, -1, 0),
                                             remove_reps = TRUE) {
 
-  steps <- unique(scheme$step)
+  max_step <- max(scheme$step)
   indexes <- unique(scheme$index)
 
-  index_step <- data.frame(index = indexes, step = steps, rep_decrement = rep_decrement)
+  index_step <- data.frame(index = indexes, step = max_step, rep_decrement = rep_decrement)
 
-  selected_step_df <- scheme[scheme$step == max(scheme$step), ]
+  selected_step_df <- scheme[scheme$step == max_step, ]
 
   df <- tidyr::expand_grid(
     index_step,
