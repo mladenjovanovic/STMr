@@ -250,7 +250,7 @@ scheme_light_heavy <- function(reps = c(10, 5, 10, 5),
 #' # Pyramid set and rep schemes
 #' # --------------------------
 #' scheme_pyramid()
-scheme_pyramid <- function(reps = c(12, 10, 8, 8, 10, 12),
+scheme_pyramid <- function(reps = c(12, 10, 8, 10, 12),
                            adjustment = 0,
                            vertical_planning = vertical_constant,
                            vertical_planning_control = list(),
@@ -274,7 +274,7 @@ scheme_pyramid <- function(reps = c(12, 10, 8, 8, 10, 12),
 #' # Reverse Pyramid set and rep schemes
 #' # --------------------------
 #' scheme_pyramid_reverse()
-scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 12, 10, 8),
+scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 10, 8),
                                    adjustment = 0,
                                    vertical_planning = vertical_constant,
                                    vertical_planning_control = list(),
