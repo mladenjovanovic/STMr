@@ -271,6 +271,20 @@ vertical_undulating_reverse <- function(reps,
   vertical_planning(reps = reps, reps_change = reps_change)
 }
 
+#' @describeIn vertical_planning_functions Block Undulating Vertical Planning
+#' @export
+#' @examples
+#'
+#' # Block Undulating
+#' # This is a combination of Block Variant (undulation in the steps) and
+#' # Undulating (undulation in reps)
+#' vertical_block_undulating(c(8, 6, 4))
+vertical_block_undulating <- function(reps,
+                                      reps_change = c(0, -2, -1, -3),
+                                      step = c(-2, -1, -3, 0)) {
+  vertical_planning(reps = reps, reps_change = reps_change, step = step)
+}
+
 #' @describeIn vertical_planning_functions Volume-Intensity Vertical Planning
 #' @export
 #' @examples

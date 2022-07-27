@@ -8,6 +8,7 @@
 * Fixed a bug in `scheme_light_heavy()` - now it takes the highest rep and use that to estimate %1RMs
 * Added `scheme_ladder()` set and rep scheme
 * Added `.vertical_rep_accumulation.post()` function. This functions is to be applied AFTER scheme is generated. Other options is to use `scheme_rep_acc()` function, that is flexible enough to generate most schemes, except for the `scheme_ladder()` and `scheme_light_heavy()`
+* Added `vertical_block_undulating()` vertical planning function. This is a combination of Block Variant (undulation in the steps) and Undulating (undulation in reps)
 
 # STMr 0.1.3
 

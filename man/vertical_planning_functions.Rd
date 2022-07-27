@@ -13,6 +13,7 @@
 \alias{vertical_set_accumulation_reverse}
 \alias{vertical_undulating}
 \alias{vertical_undulating_reverse}
+\alias{vertical_block_undulating}
 \alias{vertical_volume_intensity}
 \alias{.vertical_rep_accumulation.post}
 \title{Vertical Planning Functions}
@@ -52,6 +53,12 @@ vertical_set_accumulation_reverse(
 vertical_undulating(reps, reps_change = c(0, -2, -1, -3))
 
 vertical_undulating_reverse(reps, reps_change = c(0, 2, 1, 3))
+
+vertical_block_undulating(
+  reps,
+  reps_change = c(0, -2, -1, -3),
+  step = c(-2, -1, -3, 0)
+)
 
 vertical_volume_intensity(reps, reps_change = c(0, 0, -3, -3))
 
@@ -109,6 +116,8 @@ Functions for creating vertical planning (progressions)
 \item \code{vertical_undulating()}: Undulating Vertical Planning
 
 \item \code{vertical_undulating_reverse()}: Undulating Vertical Planning
+
+\item \code{vertical_block_undulating()}: Block Undulating Vertical Planning
 
 \item \code{vertical_volume_intensity()}: Volume-Intensity Vertical Planning
 
@@ -216,6 +225,11 @@ vertical_undulating(c(8, 6, 4))
 
 # Undulating
 vertical_undulating_reverse(c(8, 6, 4))
+
+# Block Undulating
+# This is a combination of Block Variant (undulation in the steps) and
+# Undulating (undulation in reps)
+vertical_block_undulating(c(8, 6, 4))
 
 # Volume-Intensity
 vertical_volume_intensity(c(6, 6, 6))
