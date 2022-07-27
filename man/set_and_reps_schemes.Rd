@@ -12,12 +12,13 @@
 \alias{scheme_pyramid}
 \alias{scheme_pyramid_reverse}
 \alias{scheme_rep_acc}
+\alias{scheme_ladder}
 \title{Set and Rep Schemes}
 \usage{
 scheme_generic(
   reps = c(5, 5, 5),
   adjustment = c(0, 0, 0),
-  vertical_planning = vertical_linear,
+  vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
   progression_table_control = list()
@@ -26,7 +27,7 @@ scheme_generic(
 scheme_wave(
   reps = c(10, 8, 6),
   adjustment = c(-0.2, -0.1, 0),
-  vertical_planning = vertical_linear,
+  vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
   progression_table_control = list(volume = "normal")
@@ -61,15 +62,15 @@ scheme_step_reverse(
 scheme_wave_descending(
   reps = c(6, 8, 10),
   adjustment = c(-0.2, -0.1, 0),
-  vertical_planning = vertical_linear,
+  vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
   progression_table_control = list(volume = "normal")
 )
 
 scheme_light_heavy(
-  reps = c(6, 3, 6, 3),
-  adjustment = c(0, -0.2, 0, -0.2),
+  reps = c(10, 5, 10, 5),
+  adjustment = c(0, -0.1, 0, -0.1),
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
@@ -79,8 +80,8 @@ scheme_light_heavy(
 scheme_pyramid(
   reps = c(12, 10, 8, 8, 10, 12),
   adjustment = 0,
-  vertical_planning = vertical_linear,
-  vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
+  vertical_planning = vertical_constant,
+  vertical_planning_control = list(),
   progression_table = progression_perc_drop,
   progression_table_control = list(volume = "extensive")
 )
@@ -88,8 +89,8 @@ scheme_pyramid(
 scheme_pyramid_reverse(
   reps = c(8, 10, 12, 12, 10, 8),
   adjustment = 0,
-  vertical_planning = vertical_linear,
-  vertical_planning_control = list(reps_change = c(0, -2, -4, -6)),
+  vertical_planning = vertical_constant,
+  vertical_planning_control = list(),
   progression_table = progression_perc_drop,
   progression_table_control = list(volume = "extensive")
 )
@@ -100,6 +101,15 @@ scheme_rep_acc(
   vertical_planning_control = list(step = rep(0, 4)),
   progression_table = progression_perc_drop,
   progression_table_control = list(volume = "extensive")
+)
+
+scheme_ladder(
+  reps = c(3, 5, 10),
+  adjustment = c(0, 0, 0),
+  vertical_planning = vertical_constant,
+  vertical_planning_control = list(),
+  progression_table = progression_perc_drop,
+  progression_table_control = list(volume = "normal")
 )
 }
 \arguments{
@@ -148,6 +158,8 @@ differ to make easier and quicker schemes writing and groupings
 \item \code{scheme_pyramid_reverse()}: Reverse Pyramid set and rep scheme
 
 \item \code{scheme_rep_acc()}: Rep Accumulation set and rep scheme
+
+\item \code{scheme_ladder()}: Ladder set and rep scheme
 
 }}
 \examples{
@@ -233,4 +245,36 @@ scheme_pyramid_reverse()
 # Rep Accumulation set and rep schemes
 # --------------------------
 scheme_rep_acc()
+
+# Generate Wave scheme with rep accumulation vertical progression
+# This functions doesn't allow you to use different vertical planning
+# options
+scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+
+# Other options is to use `.vertical_rep_accumulation.post()` and
+# apply it after
+# The default vertical progression is `vertical_const()`
+schm <- scheme_wave(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+
+.vertical_rep_accumulation.post(schm)
+
+# We can also create "undulating" rep decrements
+.vertical_rep_accumulation.post(
+  schm,
+  rep_decrement = c(-3, -1, -2, 0)
+  )
+
+# `scheme_rep_acc` will not allow you to generate `scheme_ladder()`
+# and `scheme_scheme_light_heavy()`
+# You must use `.vertical_rep_accumulation.post()` to do so
+schm <- scheme_ladder()
+.vertical_rep_accumulation.post(schm)
+
+# Please note that reps < 1 are removed. If you do not want this,
+# use `remove_reps = FALSE` parameter
+.vertical_rep_accumulation.post(schm, remove_reps = FALSE)
+
+# Ladder set and rep schemes
+# --------------------------
+scheme_ladder()
 }

@@ -7,6 +7,7 @@
 * Changed default vertical planning to `vertical_const` in all `scheme_()` functions
 * Fixed a bug in `scheme_light_heavy()` - now it takes the highest rep and use that to estimate %1RMs
 * Added `scheme_ladder()` set and rep scheme
+* Added `.vertical_rep_accumulation.post()` function. This functions is to be applied AFTER scheme is generated. Other options is to use `scheme_rep_acc()` function, that is flexible enough to generate most schemes, except for the `scheme_ladder()` and `scheme_light_heavy()`
 
 # STMr 0.1.3
 
