@@ -138,7 +138,7 @@
 <span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
-<span>  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"extensive"</span><span class="op">)</span></span>
+<span>  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">scheme_ladder</span><span class="op">(</span></span>
@@ -523,37 +523,37 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 <span class="r-in"><span><span class="co"># Rep Accumulation set and rep schemes</span></span></span>
 <span class="r-in"><span><span class="co"># --------------------------</span></span></span>
 <span class="r-in"><span><span class="fu">scheme_rep_acc</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step  adjustment  perc_1RM</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     7     1    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     7     1    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     7     1    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     8     2    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     8     2    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     8     2    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7     9     3    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     9     3    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     9     3    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10   10     4    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11   10     4    0 -0.09090909 0.6592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12   10     4    0 -0.09090909 0.6592785</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step  adjustment perc_1RM</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     7     1    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     7     1    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     7     1    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     8     2    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     8     2    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     8     2    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     9     3    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     9     3    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     9     3    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   10     4    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   10     4    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   10     4    0 -0.04545455 0.704733</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Generate Wave scheme with rep accumulation vertical progression</span></span></span>
 <span class="r-in"><span><span class="co"># This functions doesn't allow you to use different vertical planning</span></span></span>
 <span class="r-in"><span><span class="co"># options</span></span></span>
 <span class="r-in"><span><span class="fu">scheme_rep_acc</span><span class="op">(</span>reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>, adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step  adjustment  perc_1RM</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     7     1    0 -0.19090909 0.5592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     5     1    0 -0.13181818 0.6578217</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     3     1    0 -0.07272727 0.7607450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     8     2    0 -0.19090909 0.5592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     6     2    0 -0.13181818 0.6578217</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     4     2    0 -0.07272727 0.7607450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7     9     3    0 -0.19090909 0.5592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     7     3    0 -0.13181818 0.6578217</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     5     3    0 -0.07272727 0.7607450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10   10     4    0 -0.19090909 0.5592785</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11    8     4    0 -0.13181818 0.6578217</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12    6     4    0 -0.07272727 0.7607450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     7     1    0 -0.14545455 0.6047330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     5     1    0 -0.09090909 0.6987308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     3     1    0 -0.03636364 0.7971086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     8     2    0 -0.14545455 0.6047330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     6     2    0 -0.09090909 0.6987308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     4     2    0 -0.03636364 0.7971086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     9     3    0 -0.14545455 0.6047330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     7     3    0 -0.09090909 0.6987308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     5     3    0 -0.03636364 0.7971086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   10     4    0 -0.14545455 0.6047330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11    8     4    0 -0.09090909 0.6987308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12    6     4    0 -0.03636364 0.7971086</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Other options is to use `.vertical_rep_accumulation.post()` and</span></span></span>
 <span class="r-in"><span><span class="co"># apply it after</span></span></span>
@@ -562,15 +562,15 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="vertical_planning_functions.html">.vertical_rep_accumulation.post</a></span><span class="op">(</span><span class="va">schm</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step  adjustment  perc_1RM</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     7     1   -3 -0.14545455 0.6047330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     5     1   -3 -0.09090909 0.6987308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     3     1   -3 -0.03636364 0.7971086</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     8     2   -2 -0.14545455 0.6047330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     6     2   -2 -0.09090909 0.6987308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     4     2   -2 -0.03636364 0.7971086</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7     9     3   -1 -0.14545455 0.6047330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     7     3   -1 -0.09090909 0.6987308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     5     3   -1 -0.03636364 0.7971086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     7     1    0 -0.14545455 0.6047330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     5     1    0 -0.09090909 0.6987308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     3     1    0 -0.03636364 0.7971086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     8     2    0 -0.14545455 0.6047330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     6     2    0 -0.09090909 0.6987308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     4     2    0 -0.03636364 0.7971086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     9     3    0 -0.14545455 0.6047330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     7     3    0 -0.09090909 0.6987308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     5     3    0 -0.03636364 0.7971086</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10   10     4    0 -0.14545455 0.6047330</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11    8     4    0 -0.09090909 0.6987308</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12    6     4    0 -0.03636364 0.7971086</span>
@@ -581,15 +581,15 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 <span class="r-in"><span>  rep_decrement <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step  adjustment  perc_1RM</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     7     1   -3 -0.14545455 0.6047330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     5     1   -3 -0.09090909 0.6987308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     3     1   -3 -0.03636364 0.7971086</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     9     2   -2 -0.14545455 0.6047330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     7     2   -2 -0.09090909 0.6987308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     5     2   -2 -0.03636364 0.7971086</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7     8     3   -1 -0.14545455 0.6047330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     6     3   -1 -0.09090909 0.6987308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     4     3   -1 -0.03636364 0.7971086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     7     1    0 -0.14545455 0.6047330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     5     1    0 -0.09090909 0.6987308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     3     1    0 -0.03636364 0.7971086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     9     2    0 -0.14545455 0.6047330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     7     2    0 -0.09090909 0.6987308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     5     2    0 -0.03636364 0.7971086</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     8     3    0 -0.14545455 0.6047330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     6     3    0 -0.09090909 0.6987308</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     4     3    0 -0.03636364 0.7971086</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10   10     4    0 -0.14545455 0.6047330</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11    8     4    0 -0.09090909 0.6987308</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12    6     4    0 -0.03636364 0.7971086</span>
@@ -600,14 +600,14 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 <span class="r-in"><span><span class="va">schm</span> <span class="op">&lt;-</span> <span class="fu">scheme_ladder</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="vertical_planning_functions.html">.vertical_rep_accumulation.post</a></span><span class="op">(</span><span class="va">schm</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step  adjustment perc_1RM</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     2     1   -3 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     7     1   -3 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     1     2   -2 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     3     2   -2 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     8     2   -2 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7     2     3   -1 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     4     3   -1 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     9     3   -1 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     2     1    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     7     1    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     1     2    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     3     2    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     8     2    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     2     3    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     4     3    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     9     3    0 -0.04545455 0.704733</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10    3     4    0 -0.04545455 0.704733</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11    5     4    0 -0.04545455 0.704733</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12   10     4    0 -0.04545455 0.704733</span>
@@ -616,15 +616,15 @@ differ to make easier and quicker schemes writing and groupings</p></li>
 <span class="r-in"><span><span class="co"># use `remove_reps = FALSE` parameter</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="vertical_planning_functions.html">.vertical_rep_accumulation.post</a></span><span class="op">(</span><span class="va">schm</span>, remove_reps <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step  adjustment perc_1RM</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     0     1   -3 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     2     1   -3 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     7     1   -3 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     1     2   -2 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     3     2   -2 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     8     2   -2 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7     2     3   -1 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     4     3   -1 -0.04545455 0.704733</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     9     3   -1 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     0     1    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     2     1    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     7     1    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     1     2    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     3     2    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     8     2    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     2     3    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     4     3    0 -0.04545455 0.704733</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     9     3    0 -0.04545455 0.704733</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10    3     4    0 -0.04545455 0.704733</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11    5     4    0 -0.04545455 0.704733</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12   10     4    0 -0.04545455 0.704733</span>
