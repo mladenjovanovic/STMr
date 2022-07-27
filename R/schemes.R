@@ -228,7 +228,7 @@ scheme_light_heavy <- function(reps = c(10, 5, 10, 5),
                                progression_table = progression_perc_drop,
                                progression_table_control = list(volume = "normal")) {
 
-  df <- scheme_generic(
+  df_max <- scheme_generic(
     reps = rep(max(reps), length(reps)),
     adjustment = adjustment,
     vertical_planning = vertical_planning,
@@ -237,9 +237,18 @@ scheme_light_heavy <- function(reps = c(10, 5, 10, 5),
     progression_table_control = progression_table_control
   )
 
-  df$reps <- reps
+  df_reps <- scheme_generic(
+    reps = reps,
+    adjustment = adjustment,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
 
-  df
+  df_max$reps <- df_reps$reps
+
+  df_max
 }
 
 
@@ -358,7 +367,7 @@ scheme_ladder <- function(reps = c(3, 5, 10),
                                progression_table = progression_perc_drop,
                                progression_table_control = list(volume = "normal")) {
 
-  df <- scheme_generic(
+  df_max <- scheme_generic(
     reps = rep(max(reps), length(reps)),
     adjustment = adjustment,
     vertical_planning = vertical_planning,
@@ -367,7 +376,16 @@ scheme_ladder <- function(reps = c(3, 5, 10),
     progression_table_control = progression_table_control
   )
 
-  df$reps <- reps
+  df_reps <- scheme_generic(
+    reps = reps,
+    adjustment = adjustment,
+    vertical_planning = vertical_planning,
+    vertical_planning_control = vertical_planning_control,
+    progression_table = progression_table,
+    progression_table_control = progression_table_control
+  )
 
-  df
+  df_max$reps <- df_reps$reps
+
+  df_max
 }
