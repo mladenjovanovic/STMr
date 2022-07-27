@@ -94,7 +94,7 @@ scheme_generic <- function(reps = c(5, 5, 5),
 #'   progression_table_control = list(volume = "extensive")
 #' )
 scheme_wave <- function(reps = c(10, 8, 6),
-                        adjustment = c(-0.2, -0.1, 0),
+                        adjustment = c(-0.1, -0.05, 0),
                         vertical_planning = vertical_constant,
                         vertical_planning_control = list(),
                         progression_table = progression_perc_drop,
@@ -199,7 +199,7 @@ scheme_step_reverse <- function(reps = c(5, 5, 5),
 #' # --------------------------
 #' scheme_wave_descending()
 scheme_wave_descending <- function(reps = c(6, 8, 10),
-                                   adjustment = c(-0.2, -0.1, 0),
+                                   adjustment = c(-0.1, -0.05, 0),
                                    vertical_planning = vertical_constant,
                                    vertical_planning_control = list(),
                                    progression_table = progression_perc_drop,
