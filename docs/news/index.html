@@ -53,6 +53,12 @@
 <li>Addded comment in the <code>vertical_generic()</code> and <code><a href="../reference/vertical_planning_functions.html">vertical_rep_accumulation()</a></code> to avoid generating rep accumulation schme using those two functions, but rather using <code><a href="../reference/set_and_reps_schemes.html">scheme_rep_acc()</a></code>
 </li>
 <li>Formatting error in <code>scheme_()</code> functions</li>
+<li>Changed default progression table to <code>progression_perc_drop</code> in all <code>scheme_()</code> functions</li>
+<li>Changed default vertical planning to <code>vertical_const</code> in all <code>scheme_()</code> functions</li>
+<li>Fixed a bug in <code><a href="../reference/set_and_reps_schemes.html">scheme_light_heavy()</a></code> - now it takes the highest rep and use that to estimate %1RMs</li>
+<li>Added <code><a href="../reference/set_and_reps_schemes.html">scheme_ladder()</a></code> set and rep scheme</li>
+<li>Added <code><a href="../reference/vertical_planning_functions.html">.vertical_rep_accumulation.post()</a></code> function. This functions is to be applied AFTER scheme is generated. Other options is to use <code><a href="../reference/set_and_reps_schemes.html">scheme_rep_acc()</a></code> function, that is flexible enough to generate most schemes, except for the <code><a href="../reference/set_and_reps_schemes.html">scheme_ladder()</a></code> and <code><a href="../reference/set_and_reps_schemes.html">scheme_light_heavy()</a></code>
+</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.3" id="stmr-013">STMr 0.1.3<small>2022-03-16</small><a class="anchor" aria-label="anchor" href="#stmr-013"></a></h2>
