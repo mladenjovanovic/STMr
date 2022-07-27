@@ -328,7 +328,8 @@ vertical_volume_intensity <- function(reps,
                                             remove_reps = TRUE) {
 
   max_step <- max(scheme$step)
-  indexes <- unique(scheme$index)
+  max_index <- max(scheme$index)
+  indexes <- seq(max_index - length(rep_decrement) + 1, max_index)
 
   index_step <- data.frame(index = indexes, step = max_step, rep_decrement = rep_decrement)
 
