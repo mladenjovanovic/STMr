@@ -89,6 +89,12 @@
 <span></span>
 <span><span class="fu">vertical_undulating_reverse</span><span class="op">(</span><span class="va">reps</span>, reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">vertical_block_undulating</span><span class="op">(</span></span>
+<span>  <span class="va">reps</span>,</span>
+<span>  reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">vertical_volume_intensity</span><span class="op">(</span><span class="va">reps</span>, reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">.vertical_rep_accumulation.post</span><span class="op">(</span></span>
@@ -156,6 +162,7 @@
 <li><p><code>vertical_set_accumulation_reverse()</code>: Set Accumulation Reverse Vertical Planning</p></li>
 <li><p><code>vertical_undulating()</code>: Undulating Vertical Planning</p></li>
 <li><p><code>vertical_undulating_reverse()</code>: Undulating Vertical Planning</p></li>
+<li><p><code>vertical_block_undulating()</code>: Block Undulating Vertical Planning</p></li>
 <li><p><code>vertical_volume_intensity()</code>: Volume-Intensity Vertical Planning</p></li>
 <li><p><code>.vertical_rep_accumulation.post()</code>: Rep Accumulation Vertical Planning POST treatment
 This functions is to be applied AFTER scheme is generated. Other options is to use
@@ -641,6 +648,24 @@ except for the <code><a href="set_and_reps_schemes.html">scheme_ladder</a></code
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10   11     4    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11    9     4    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12    7     4    0</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Block Undulating</span></span></span>
+<span class="r-in"><span><span class="co"># This is a combination of Block Variant (undulation in the steps) and</span></span></span>
+<span class="r-in"><span><span class="co"># Undulating (undulation in reps)</span></span></span>
+<span class="r-in"><span><span class="fu">vertical_block_undulating</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    reps index step</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     8     1   -2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     6     1   -2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     4     1   -2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     6     2   -1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     4     2   -1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     2     2   -1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     7     3   -3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     5     3   -3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     3     3   -3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10    5     4    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11    3     4    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12    1     4    0</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Volume-Intensity</span></span></span>
 <span class="r-in"><span><span class="fu">vertical_volume_intensity</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></span>
