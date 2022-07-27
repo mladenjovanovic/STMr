@@ -100,7 +100,7 @@ scheme_rep_acc(
   adjustment = 0,
   vertical_planning_control = list(step = rep(0, 4)),
   progression_table = progression_perc_drop,
-  progression_table_control = list(volume = "extensive")
+  progression_table_control = list(volume = "normal")
 )
 
 scheme_ladder(

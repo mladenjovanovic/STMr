@@ -329,7 +329,7 @@ scheme_rep_acc <- function(reps = c(10, 10, 10),
                            adjustment = 0,
                            vertical_planning_control = list(step = rep(0, 4)),
                            progression_table = progression_perc_drop,
-                           progression_table_control = list(volume = "extensive")) {
+                           progression_table_control = list(volume = "normal")) {
   scheme_df <- scheme_generic(
     reps = reps,
     adjustment = adjustment,
