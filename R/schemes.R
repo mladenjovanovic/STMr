@@ -6,10 +6,9 @@
 #'     using RIR. On the other hand, if \code{\link{progression_perc_drop}} is used, \code{adjustment} will be done
 #'     using 1RM percentage
 #' @param vertical_planning Vertical planning function. Default is \code{\link{vertical_linear}}
-#' @param vertical_planning_control Arguments forwarded to the \code{vertical_planning} function
+#' @param vertical_planning_control Arguments forwarded to the \code{\link{vertical_planning}} function
 #' @param progression_table Progression table function. Default is \code{\link{progression_RIR_increment}}
-#' @param progression_table_control Arguments forwarded to the \code{progression_table} function
-#'
+#' @param progression_table_control Arguments forwarded to the \code{\link{progression_table}} function
 #' @return Data frame with the following columns: \code{reps}, \code{index}, \code{step},
 #'     \code{adjustment}, and \code{perc_1RM}.
 #'
