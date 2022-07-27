@@ -26,7 +26,7 @@ scheme_generic(
 
 scheme_wave(
   reps = c(10, 8, 6),
-  adjustment = c(-0.2, -0.1, 0),
+  adjustment = c(-0.1, -0.05, 0),
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
@@ -61,7 +61,7 @@ scheme_step_reverse(
 
 scheme_wave_descending(
   reps = c(6, 8, 10),
-  adjustment = c(-0.2, -0.1, 0),
+  adjustment = c(-0.1, -0.05, 0),
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
@@ -78,7 +78,7 @@ scheme_light_heavy(
 )
 
 scheme_pyramid(
-  reps = c(12, 10, 8, 8, 10, 12),
+  reps = c(12, 10, 8, 10, 12),
   adjustment = 0,
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
@@ -87,7 +87,7 @@ scheme_pyramid(
 )
 
 scheme_pyramid_reverse(
-  reps = c(8, 10, 12, 12, 10, 8),
+  reps = c(8, 10, 12, 10, 8),
   adjustment = 0,
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
@@ -122,11 +122,11 @@ using 1RM percentage}
 
 \item{vertical_planning}{Vertical planning function. Default is \code{\link{vertical_linear}}}
 
-\item{vertical_planning_control}{Arguments forwarded to the \code{vertical_planning} function}
+\item{vertical_planning_control}{Arguments forwarded to the \code{\link{vertical_planning}} function}
 
 \item{progression_table}{Progression table function. Default is \code{\link{progression_RIR_increment}}}
 
-\item{progression_table_control}{Arguments forwarded to the \code{progression_table} function}
+\item{progression_table_control}{Arguments forwarded to the \code{\link{progression_table}} function}
 }
 \value{
 Data frame with the following columns: \code{reps}, \code{index}, \code{step},
