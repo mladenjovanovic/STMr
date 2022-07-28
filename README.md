@@ -499,10 +499,15 @@ Schemes](#set-and-rep-schemes) section).
 `{STMr}` currently features the following Vertical Planning functions:
 `vertical_planning()`, `vertical_constant()`, `vertical_linear()`,
 `vertical_linear_reverse()`, `vertical_block()`,
-`vertical_block_variant()`, `vertical_rep_accumulation()`,
-`vertical_set_accumulation()`, `vertical_set_accumulation_reverse()`,
-`vertical_undulating()`, `vertical_undulating_reverse()`,
-`vertical_volume_intensity()`.
+`vertical_block_variant()`, `vertical_block_undulating()`,
+`vertical_rep_accumulation()`, `vertical_set_accumulation()`,
+`vertical_set_accumulation_reverse()`, `vertical_undulating()`,
+`vertical_undulating_reverse()`, `vertical_volume_intensity()`.
+
+Please note that `vertical_rep_accumulation()` when used with [Set and
+Rep Schemes](#set-and-rep-schemes) will yield *wrong* results. I will
+address how to deal with this issue in [Rep
+Accumulation](#rep-accumulation) section.
 
 ## Set and Rep Schemes
 
@@ -650,6 +655,116 @@ and rep schemes. The following set and rep schemes are implemented in
 `scheme_wave_descending()`, `scheme_light_heavy()`, `scheme_pyramid()`,
 `scheme_pyramid_reverse()`, `scheme_rep_acc()`.
 
+### Rep Accumulation
+
+If you intend to use `vertical_rep_accumulation()` withing `scheme_`
+functions, it will yield wrong result. Here is an example:
+
+``` r
+scheme_plateau(reps = c(5, 5, 5), vertical_planning = vertical_rep_accumulation)
+#>    reps index step adjustment perc_1RM
+#> 1     2     1    0    -0.0273    0.910
+#> 2     2     1    0    -0.0273    0.910
+#> 3     2     1    0    -0.0273    0.910
+#> 4     3     2    0    -0.0295    0.880
+#> 5     3     2    0    -0.0295    0.880
+#> 6     3     2    0    -0.0295    0.880
+#> 7     4     3    0    -0.0318    0.851
+#> 8     4     3    0    -0.0318    0.851
+#> 9     4     3    0    -0.0318    0.851
+#> 10    5     4    0    -0.0341    0.823
+#> 11    5     4    0    -0.0341    0.823
+#> 12    5     4    0    -0.0341    0.823
+```
+
+You need to check the `perc_1RM` column - it needs to be the same across
+progression steps, but it is not.
+
+This is due to the modular design of the `{shorts}` package. One way to
+sort this out, is to use the `scheme_rep_acc()` function:
+
+``` r
+scheme_rep_acc(reps = c(5, 5, 5))
+#>    reps index step adjustment perc_1RM
+#> 1     2     1    0    -0.0341    0.823
+#> 2     2     1    0    -0.0341    0.823
+#> 3     2     1    0    -0.0341    0.823
+#> 4     3     2    0    -0.0341    0.823
+#> 5     3     2    0    -0.0341    0.823
+#> 6     3     2    0    -0.0341    0.823
+#> 7     4     3    0    -0.0341    0.823
+#> 8     4     3    0    -0.0341    0.823
+#> 9     4     3    0    -0.0341    0.823
+#> 10    5     4    0    -0.0341    0.823
+#> 11    5     4    0    -0.0341    0.823
+#> 12    5     4    0    -0.0341    0.823
+```
+
+With some extra arguments, we can generate waves, pyramid and other
+schemes:
+
+``` r
+scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+#>    reps index step adjustment perc_1RM
+#> 1     7     1    0    -0.1455    0.605
+#> 2     5     1    0    -0.0909    0.699
+#> 3     3     1    0    -0.0364    0.797
+#> 4     8     2    0    -0.1455    0.605
+#> 5     6     2    0    -0.0909    0.699
+#> 6     4     2    0    -0.0364    0.797
+#> 7     9     3    0    -0.1455    0.605
+#> 8     7     3    0    -0.0909    0.699
+#> 9     5     3    0    -0.0364    0.797
+#> 10   10     4    0    -0.1455    0.605
+#> 11    8     4    0    -0.0909    0.699
+#> 12    6     4    0    -0.0364    0.797
+```
+
+Unfortunately, this will not work for the ladders and volume-intensity
+scheme. The more *universal* approach would be to apply rep accumulation
+*AFTER* the scheme is generated. For this reason these is
+`.vertical_rep_accumulation.post()` function, which works across all
+schemes. Just make sure to use `vertical_constant` when generating the
+scheme (this is default option):
+
+``` r
+scheme_ladder() %>%
+  .vertical_rep_accumulation.post()
+#>    reps index step adjustment perc_1RM
+#> 2     2     1    0    -0.0455    0.705
+#> 3     7     1    0    -0.0455    0.705
+#> 4     1     2    0    -0.0455    0.705
+#> 5     3     2    0    -0.0455    0.705
+#> 6     8     2    0    -0.0455    0.705
+#> 7     2     3    0    -0.0455    0.705
+#> 8     4     3    0    -0.0455    0.705
+#> 9     9     3    0    -0.0455    0.705
+#> 10    3     4    0    -0.0455    0.705
+#> 11    5     4    0    -0.0455    0.705
+#> 12   10     4    0    -0.0455    0.705
+```
+
+``` r
+scheme_wave() %>%
+  .vertical_rep_accumulation.post()
+#>    reps index step adjustment perc_1RM
+#> 1     7     1    0    -0.1455    0.605
+#> 2     5     1    0    -0.0909    0.699
+#> 3     3     1    0    -0.0364    0.797
+#> 4     8     2    0    -0.1455    0.605
+#> 5     6     2    0    -0.0909    0.699
+#> 6     4     2    0    -0.0364    0.797
+#> 7     9     3    0    -0.1455    0.605
+#> 8     7     3    0    -0.0909    0.699
+#> 9     5     3    0    -0.0364    0.797
+#> 10   10     4    0    -0.1455    0.605
+#> 11    8     4    0    -0.0909    0.699
+#> 12    6     4    0    -0.0364    0.797
+```
+
+By default, `.vertical_rep_accumulation.post()` function will use the
+highest progression step in the scheme.
+
 ## Estimation
 
 `{STMr}` package offers very flexible and customizable approach to
@@ -752,7 +867,7 @@ gg_relative <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM, color = A
 gg_absolute + gg_relative + plot_layout(widths = c(1, 1.1))
 ```
 
-<img src="man/figures/README-unnamed-chunk-30-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-35-1.png" width="100%" />
 
 Let’s use *Athlete B* from RTF testing dataset to estimate individual
 model parameter values for Epley’s, Modified Epley’s, and
@@ -894,7 +1009,7 @@ ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
   geom_line(data = pred_df, aes(x = perc_1RM * 100, y = nRM), size = 1.5, alpha = 0.8)
 ```
 
-<img src="man/figures/README-unnamed-chunk-33-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-38-1.png" width="100%" />
 
 When analyzing multiple individuals, particularly when absolute weights
 are used instead of %1RM, one needs to utilize mixed-effect approach.
@@ -985,7 +1100,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-35-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
 
 `{STMr}` package also implements mixed-effect models that utilize
 absolute weight values. As alluded previously, this is novel technique
@@ -1070,7 +1185,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-37-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-42-1.png" width="100%" />
 
 Mixed-effects functions implemented in `{STMr}` package allows you to
 set-up random parameters using `random=` function argument. In the
@@ -1151,7 +1266,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-39-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-44-1.png" width="100%" />
 
 In my opinion this doesn’t make much sense. If you are interested in
 estimating group or *generic* `klin` (or `k` or `kmod`) model parameter
@@ -1196,7 +1311,7 @@ gg <- ggplot(strength_training_log) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-45-1.png" width="100%" />
 
 We are interested in finding both the “best” and “worst” profiles (as
 well as estimated 1RMs). To achieve this, we will utilize *quantile
@@ -1279,7 +1394,7 @@ gg +
   geom_line(data = pred_df_worst, aes(x = weight, y = nRM), linetype = "dashed")
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-47-1.png" width="100%" />
 
 In this example we have used all 12 weeks of strength training log data
 (i.e., pooled). We can perform some type of “rolling” analysis to get
@@ -1324,7 +1439,7 @@ ggplot(rolling_weeks, aes(x = week_end)) +
   ylab("Estimated 1RM (kg)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-43-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-48-1.png" width="100%" />
 
 This analysis represents novel technique and the time will tell how
 valid is it and how to interpret it correctly. But at least we have very
@@ -1341,7 +1456,7 @@ citation("STMr")
 #> To cite 'STMr' in publications use:
 #> 
 #>   Mladen Jovanović (2022). STMr: Strength Training Manual R-Language
-#>   Functions. R package version 0.1.4. url:
+#>   Functions. R package version 0.1.3.9000. url:
 #>   https://github.com/mladenjovanovic/STMr doi: 10.5281/zenodo.4155015
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -1349,7 +1464,7 @@ citation("STMr")
 #>   @Manual{,
 #>     title = {{STMr}: Strength Training Manual R-Language Functions},
 #>     author = {Mladen Jovanović},
-#>     note = {R package version 0.1.4},
+#>     note = {R package version 0.1.3.9000},
 #>     year = {2022},
 #>     address = {Belgrade, Serbia},
 #>     url = {https://github.com/mladenjovanovic/STMr},

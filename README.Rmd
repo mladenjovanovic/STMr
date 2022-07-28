@@ -324,7 +324,9 @@ vertical_linear(reps = c(10, 10, 10), reps_change = c(0, -2, -4))
 
 Most of these Vertical Planning functionalities can be achieved with the *generic* Vertical Planning function `vertical_planning()`. As can be seen from the output, result of the Vertical Planning functions is a simple `data.frame` with three columns: (1) `reps`, (2) `index`, and (3) `step`. Usability of Vertical Planning functions is mostly visible at the next layer of prescription: *schemes* (see [Set and Rep Schemes] section).
 
-`{STMr}` currently features the following Vertical Planning functions: `vertical_planning()`, `vertical_constant()`, `vertical_linear()`, `vertical_linear_reverse()`, `vertical_block()`, `vertical_block_variant()`, `vertical_rep_accumulation()`, `vertical_set_accumulation()`, `vertical_set_accumulation_reverse()`, `vertical_undulating()`, `vertical_undulating_reverse()`, `vertical_volume_intensity()`.
+`{STMr}` currently features the following Vertical Planning functions: `vertical_planning()`, `vertical_constant()`, `vertical_linear()`, `vertical_linear_reverse()`, `vertical_block()`, `vertical_block_variant()`, `vertical_block_undulating()`, `vertical_rep_accumulation()`, `vertical_set_accumulation()`, `vertical_set_accumulation_reverse()`, `vertical_undulating()`, `vertical_undulating_reverse()`, `vertical_volume_intensity()`.
+
+Please note that `vertical_rep_accumulation()` when used with [Set and Rep Schemes] will yield *wrong* results. I will address how to deal with this issue in [Rep Accumulation] section.
 
 ## Set and Rep Schemes
 
@@ -423,6 +425,42 @@ plot_scheme(scheme, adjustment_multiplier = 100)
 ```
 
 The `scheme_` functions afford you great flexibility in designing set and rep schemes. The following set and rep schemes are implemented in `{STMr}` package: `scheme_generic()`, `scheme_wave()`, `scheme_plateau()`, `scheme_step()`, `scheme_step_reverse()`, `scheme_wave_descending()`, `scheme_light_heavy()`, `scheme_pyramid()`, `scheme_pyramid_reverse()`, `scheme_rep_acc()`. 
+
+### Rep Accumulation
+
+If you intend to use `vertical_rep_accumulation()` withing `scheme_` functions, it will yield wrong result. Here is an example:
+
+```{r}
+scheme_plateau(reps = c(5, 5, 5), vertical_planning = vertical_rep_accumulation)
+```
+
+You need to check the `perc_1RM` column - it needs to be the same across progression steps, but it is not. 
+
+This is due to the modular design of the `{shorts}` package. One way to sort this out, is to use the `scheme_rep_acc()` function:
+
+```{r}
+scheme_rep_acc(reps = c(5, 5, 5))
+```
+
+With some extra arguments, we can generate waves, pyramid and other schemes:
+
+```{r}
+scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+```
+
+Unfortunately, this will not work for the ladders and volume-intensity scheme. The more *universal* approach would be to apply rep accumulation *AFTER* the scheme is generated. For this reason these is `.vertical_rep_accumulation.post()` function, which works across all schemes. Just make sure to use `vertical_constant` when generating the scheme (this is default option):
+
+```{r}
+scheme_ladder() %>%
+  .vertical_rep_accumulation.post()
+```
+
+```{r}
+scheme_wave() %>%
+  .vertical_rep_accumulation.post()
+```
+
+By default, `.vertical_rep_accumulation.post()` function will use the highest progression step in the scheme. 
 
 ## Estimation
 
