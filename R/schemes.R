@@ -29,7 +29,14 @@ scheme_generic <- function(reps = c(5, 5, 5),
                            vertical_planning_control = list(),
                            progression_table = progression_perc_drop,
                            progression_table_control = list()) {
-  progression <- do.call(vertical_planning, c(list(reps = reps), vertical_planning_control))
+
+  # Just to make sure the lengths are the same
+  .tmp <- data.frame(reps = reps, adjustment = adjustment)
+
+  progression <- do.call(vertical_planning, c(list(reps = .tmp$reps), vertical_planning_control))
+
+  # This needs to be done for the adjustments to work for set accumulation vertical planning
+  adj <- do.call(vertical_planning, c(list(reps = .tmp$adjustment), vertical_planning_control))
 
   loads <- do.call(
     progression_table,
@@ -37,7 +44,7 @@ scheme_generic <- function(reps = c(5, 5, 5),
       list(
         reps = progression$reps,
         step = progression$step,
-        adjustment = adjustment
+        adjustment = adj$reps
       ),
       progression_table_control
     )

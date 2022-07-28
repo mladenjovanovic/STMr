@@ -9,6 +9,7 @@
 * Added `scheme_ladder()` set and rep scheme
 * Added `.vertical_rep_accumulation.post()` function. This functions is to be applied AFTER scheme is generated. Other options is to use `scheme_rep_acc()` function, that is flexible enough to generate most schemes, except for the `scheme_ladder()` and `scheme_light_heavy()`
 * Added `vertical_block_undulating()` vertical planning function. This is a combination of Block Variant (undulation in the steps) and Undulating (undulation in reps)
+* Fixed a "corner case" bug in `scheme_generic()`, where `vertical_set_accumulation` didn't repeat the adjustments, which cause problems if only single set is accumulated. This is because the adjustments were not accumulated, but rather "recycled". 
 
 # STMr 0.1.3
 
