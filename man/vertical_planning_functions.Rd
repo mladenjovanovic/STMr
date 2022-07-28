@@ -39,14 +39,14 @@ vertical_rep_accumulation(
 vertical_set_accumulation(
   reps,
   step = c(-2, -2, -2, -2),
-  accumulate_rep = length(reps),
+  accumulate_set = length(reps),
   set_increment = 1
 )
 
 vertical_set_accumulation_reverse(
   reps,
   step = c(-3, -2, -1, 0),
-  accumulate_rep = length(reps),
+  accumulate_set = length(reps),
   set_increment = 1
 )
 
@@ -77,7 +77,7 @@ vertical_volume_intensity(reps, reps_change = c(0, 0, -3, -3))
 
 \item{n_steps}{Number of progression steps. Default is 4}
 
-\item{accumulate_rep}{Which rep (position in \code{reps}) to accumulate}
+\item{accumulate_set}{Which set (position in \code{reps}) to accumulate}
 
 \item{set_increment}{How many sets to increase each step? Default is 1}
 
@@ -196,12 +196,12 @@ vertical_set_accumulation(c(3, 2, 1), step = c(-1, -1, -1))
 vertical_set_accumulation(
   c(3, 2, 1),
   step = c(-1, -1, -1),
-  accumulate_rep = 1
+  accumulate_set = 1
 )
 vertical_set_accumulation(
   c(3, 2, 1),
   step = c(-1, -1, -1),
-  accumulate_rep = 2,
+  accumulate_set = 2,
   set_increment = 2
 )
 
@@ -211,12 +211,12 @@ vertical_set_accumulation_reverse(c(3, 2, 1), step = c(-1, -1, -1))
 vertical_set_accumulation_reverse(
   c(3, 2, 1),
   step = c(-1, -1, -1),
-  accumulate_rep = 1
+  accumulate_set = 1
 )
 vertical_set_accumulation_reverse(
   c(3, 2, 1),
   step = c(-4, -2, 0),
-  accumulate_rep = 2,
+  accumulate_set = 2,
   set_increment = 2
 )
 

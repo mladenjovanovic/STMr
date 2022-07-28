@@ -156,7 +156,7 @@ vertical_rep_accumulation <- function(reps,
 
 
 #' @describeIn vertical_planning_functions Set Accumulation Vertical Planning
-#' @param accumulate_rep Which rep (position in \code{reps}) to accumulate
+#' @param accumulate_set Which set (position in \code{reps}) to accumulate
 #' @param set_increment How many sets to increase each step? Default is 1
 #' @export
 #' @examples
@@ -167,29 +167,29 @@ vertical_rep_accumulation <- function(reps,
 #' vertical_set_accumulation(
 #'   c(3, 2, 1),
 #'   step = c(-1, -1, -1),
-#'   accumulate_rep = 1
+#'   accumulate_set = 1
 #' )
 #' vertical_set_accumulation(
 #'   c(3, 2, 1),
 #'   step = c(-1, -1, -1),
-#'   accumulate_rep = 2,
+#'   accumulate_set = 2,
 #'   set_increment = 2
 #' )
 vertical_set_accumulation <- function(reps,
                                       step = c(-2, -2, -2, -2),
-                                      accumulate_rep = length(reps),
+                                      accumulate_set = length(reps),
                                       set_increment = 1) {
   progression_steps <- list()
 
-  before_reps <- reps[seq(1, min(accumulate_rep))]
+  before_reps <- reps[seq(1, min(accumulate_set))]
   before_reps <- before_reps[-length(before_reps)]
-  after_reps <- reps[seq(max(accumulate_rep), length(reps))]
+  after_reps <- reps[seq(max(accumulate_set), length(reps))]
   after_reps <- after_reps[-1]
 
   for (i in seq_along(step)) {
     new_reps <- c(
       before_reps,
-      rep(reps[accumulate_rep], (set_increment * (i - 1)) + 1),
+      rep(reps[accumulate_set], (set_increment * (i - 1)) + 1),
       after_reps
     )
 
@@ -203,7 +203,7 @@ vertical_set_accumulation <- function(reps,
 }
 
 #' @describeIn vertical_planning_functions Set Accumulation Reverse Vertical Planning
-#' @param accumulate_rep Which rep (position in \code{reps}) to accumulate
+#' @param accumulate_set Which set (position in \code{reps}) to accumulate
 #' @param set_increment How many sets to increase each step? Default is 1
 #' @export
 #' @examples
@@ -214,29 +214,29 @@ vertical_set_accumulation <- function(reps,
 #' vertical_set_accumulation_reverse(
 #'   c(3, 2, 1),
 #'   step = c(-1, -1, -1),
-#'   accumulate_rep = 1
+#'   accumulate_set = 1
 #' )
 #' vertical_set_accumulation_reverse(
 #'   c(3, 2, 1),
 #'   step = c(-4, -2, 0),
-#'   accumulate_rep = 2,
+#'   accumulate_set = 2,
 #'   set_increment = 2
 #' )
 vertical_set_accumulation_reverse <- function(reps,
                                               step = c(-3, -2, -1, 0),
-                                              accumulate_rep = length(reps),
+                                              accumulate_set = length(reps),
                                               set_increment = 1) {
   progression_steps <- list()
 
-  before_reps <- reps[seq(1, min(accumulate_rep))]
+  before_reps <- reps[seq(1, min(accumulate_set))]
   before_reps <- before_reps[-length(before_reps)]
-  after_reps <- reps[seq(max(accumulate_rep), length(reps))]
+  after_reps <- reps[seq(max(accumulate_set), length(reps))]
   after_reps <- after_reps[-1]
 
   for (i in rev(seq_along(step))) {
     new_reps <- c(
       before_reps,
-      rep(reps[accumulate_rep], (set_increment * (i - 1)) + 1),
+      rep(reps[accumulate_set], (set_increment * (i - 1)) + 1),
       after_reps
     )
 
