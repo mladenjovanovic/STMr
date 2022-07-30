@@ -187,7 +187,8 @@ vertical_rep_accumulation <- function(reps,
 #' vertical_set_accumulation(
 #'   c(10, 8, 6, 4, 2, 1),
 #'   accumulate_set = c(1:2, 5:6),
-#'   sequence = FALSE)
+#'   sequence = FALSE
+#' )
 vertical_set_accumulation <- function(reps,
                                       step = c(-2, -2, -2, -2),
                                       accumulate_set = length(reps),
@@ -242,7 +243,7 @@ vertical_set_accumulation <- function(reps,
         .repeat = ifelse(.accumulate, (set_increment * (index - 1)) + 1, 1)
       ) %>%
       tidyr::uncount(.repeat) %>%
-      dplyr::mutate(set_index =  seq_along(reps)) %>%
+      dplyr::mutate(set_index = seq_along(reps)) %>%
       dplyr::ungroup() %>%
       dplyr::arrange(index, set_index)
   }
@@ -277,7 +278,8 @@ vertical_set_accumulation <- function(reps,
 #' vertical_set_accumulation_reverse(
 #'   c(10, 8, 6, 4, 2, 1),
 #'   accumulate_set = c(1:2, 5:6),
-#'   sequence = FALSE)
+#'   sequence = FALSE
+#' )
 vertical_set_accumulation_reverse <- function(reps,
                                               step = c(-3, -2, -1, 0),
                                               accumulate_set = length(reps),
@@ -333,7 +335,7 @@ vertical_set_accumulation_reverse <- function(reps,
         .repeat = ifelse(.accumulate, max_step_index - (set_increment * (index - 1)), 1)
       ) %>%
       tidyr::uncount(.repeat) %>%
-      dplyr::mutate(set_index =  seq_along(reps)) %>%
+      dplyr::mutate(set_index = seq_along(reps)) %>%
       dplyr::ungroup() %>%
       dplyr::arrange(index, set_index)
   }
@@ -424,7 +426,7 @@ vertical_volume_intensity <- function(reps,
 #' .vertical_rep_accumulation.post(
 #'   schm,
 #'   rep_decrement = c(-3, -1, -2, 0)
-#'   )
+#' )
 #'
 #' # `scheme_rep_acc` will not allow you to generate `scheme_ladder()`
 #' # and `scheme_scheme_light_heavy()`
@@ -438,7 +440,6 @@ vertical_volume_intensity <- function(reps,
 .vertical_rep_accumulation.post <- function(scheme,
                                             rep_decrement = c(-3, -2, -1, 0),
                                             remove_reps = TRUE) {
-
   max_step <- max(scheme$step)
   max_index <- max(scheme$index)
   indexes <- seq(max_index - length(rep_decrement) + 1, max_index)
@@ -452,7 +453,8 @@ vertical_volume_intensity <- function(reps,
     data.frame(
       reps = selected_step_df$reps,
       adjustment = selected_step_df$adjustment,
-      perc_1RM = selected_step_df$perc_1RM)
+      perc_1RM = selected_step_df$perc_1RM
+    )
   )
 
   df <- data.frame(

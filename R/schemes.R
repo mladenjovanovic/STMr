@@ -42,7 +42,8 @@ scheme_generic <- function(reps,
   .tmp <- data.frame(
     reps = reps,
     adjustment = adjustment,
-    null_adjustment = 0)
+    null_adjustment = 0
+  )
 
   progression <- do.call(vertical_planning, c(list(reps = .tmp$reps), vertical_planning_control))
 
@@ -121,7 +122,7 @@ scheme_generic <- function(reps,
 #'   progression_table_control = list(volume = "extensive")
 #' )
 scheme_wave <- function(reps = c(10, 8, 6),
-                        adjustment = -rev((seq_along(reps) -1 ) * 5) / 100,
+                        adjustment = -rev((seq_along(reps) - 1) * 5) / 100,
                         vertical_planning = vertical_constant,
                         vertical_planning_control = list(),
                         progression_table = progression_perc_drop,
@@ -180,7 +181,7 @@ scheme_plateau <- function(reps = c(5, 5, 5),
 #'   progression_table_control = list(type = "ballistic")
 #' )
 scheme_step <- function(reps = c(5, 5, 5),
-                        adjustment = -rev((seq_along(reps) -1 ) * 10) / 100,
+                        adjustment = -rev((seq_along(reps) - 1) * 10) / 100,
                         vertical_planning = vertical_constant,
                         vertical_planning_control = list(),
                         progression_table = progression_perc_drop,
@@ -203,7 +204,7 @@ scheme_step <- function(reps = c(5, 5, 5),
 #' #- -------------------------
 #' scheme_step_reverse()
 scheme_step_reverse <- function(reps = c(5, 5, 5),
-                                adjustment = -((seq_along(reps) -1 ) * 10) / 100,
+                                adjustment = -((seq_along(reps) - 1) * 10) / 100,
                                 vertical_planning = vertical_constant,
                                 vertical_planning_control = list(),
                                 progression_table = progression_perc_drop,
@@ -226,7 +227,7 @@ scheme_step_reverse <- function(reps = c(5, 5, 5),
 #' # --------------------------
 #' scheme_wave_descending()
 scheme_wave_descending <- function(reps = c(6, 8, 10),
-                                   adjustment = -rev((seq_along(reps) -1 ) * 5) / 100,
+                                   adjustment = -rev((seq_along(reps) - 1) * 5) / 100,
                                    vertical_planning = vertical_constant,
                                    vertical_planning_control = list(),
                                    progression_table = progression_perc_drop,
@@ -254,7 +255,6 @@ scheme_light_heavy <- function(reps = c(10, 5, 10, 5),
                                vertical_planning_control = list(),
                                progression_table = progression_perc_drop,
                                progression_table_control = list(volume = "normal")) {
-
   df_max <- scheme_generic(
     reps = rep(max(reps), length(reps)),
     adjustment = adjustment,
@@ -350,7 +350,7 @@ scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 10, 8),
 #' .vertical_rep_accumulation.post(
 #'   schm,
 #'   rep_decrement = c(-3, -1, -2, 0)
-#'   )
+#' )
 #'
 #' # `scheme_rep_acc` will not allow you to generate `scheme_ladder()`
 #' # and `scheme_scheme_light_heavy()`
@@ -388,12 +388,11 @@ scheme_rep_acc <- function(reps = c(10, 10, 10),
 #' # --------------------------
 #' scheme_ladder()
 scheme_ladder <- function(reps = c(3, 5, 10),
-                               adjustment = 0,
-                               vertical_planning = vertical_constant,
-                               vertical_planning_control = list(),
-                               progression_table = progression_perc_drop,
-                               progression_table_control = list(volume = "normal")) {
-
+                          adjustment = 0,
+                          vertical_planning = vertical_constant,
+                          vertical_planning_control = list(),
+                          progression_table = progression_perc_drop,
+                          progression_table_control = list(volume = "normal")) {
   df_max <- scheme_generic(
     reps = rep(max(reps), length(reps)),
     adjustment = adjustment,

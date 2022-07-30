@@ -102,16 +102,17 @@ range01 <- function(x, .min = min(x), .max = max(x)) {
 
 # Function to mark and group sequences of TRUE values
 mark_sequences <- function(x) {
-
   group <- x
   group_index <- 1
 
   group[1] <- 1
 
-  if (length(x) < 2) return(group)
+  if (length(x) < 2) {
+    return(group)
+  }
 
-  for(i in seq(2, length(x))) {
-    if ((x[i] & x[i-1]) == FALSE) {
+  for (i in seq(2, length(x))) {
+    if ((x[i] & x[i - 1]) == FALSE) {
       group_index <- group_index + 1
     }
     group[i] <- group_index
