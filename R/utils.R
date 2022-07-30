@@ -1,3 +1,15 @@
+# Color set
+color_black <- "#000000"
+color_blue <- "#5DA5DA"
+color_red <- "#F15854"
+color_grey <- "#4D4D4D"
+color_green <- "#60BD68"
+color_orange <- "#FAA43A"
+color_pink <- "#F17CB0"
+color_purple <- "#B276B2"
+color_yellow <- "#DECF3F"
+
+
 check_method <- function(method) {
   if (any(!(method %in% c("RIR", "DI", "RelInt", "%MR")))) {
     stop("Please provide valid method. Options are 'RIR', 'DI', 'RelInt', and '%MR'", call. = FALSE)
@@ -77,4 +89,33 @@ get_weighting <- function(weighted, reps, load, eRIR, normalize = FALSE) {
     )
 
   df$weight
+}
+
+# Function to normalize/standardize
+range01 <- function(x, .min = min(x), .max = max(x)) {
+  res <- (x - .min) / (.max - .min)
+
+  res <- ifelse(is.na(res), 1, res)
+
+  res
+}
+
+# Function to mark and group sequences of TRUE values
+mark_sequences <- function(x) {
+
+  group <- x
+  group_index <- 1
+
+  group[1] <- 1
+
+  if (length(x) < 2) return(group)
+
+  for(i in seq(2, length(x))) {
+    if ((x[i] & x[i-1]) == FALSE) {
+      group_index <- group_index + 1
+    }
+    group[i] <- group_index
+  }
+
+  group
 }
