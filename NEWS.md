@@ -12,6 +12,7 @@
 * Fixed a "corner case" bug in `scheme_generic()`, where `vertical_set_accumulation` didn't repeat the adjustments, which cause problems if only single set is accumulated. This is because the adjustments were not accumulated, but rather "recycled". 
 * Changed the parameter name from `accumulate_rep` to `accumulate_set` in `vertical_set_accumulation()` and `vertical_set_accumulation_reverse()` functions
 * Expanded the README.Rmd to include the discussion on Rep Accumulation scheme
+* Added extra features to vertical_set_accumulation() and vertical_set_accumulation_reverse() (see sequence argument)
 
 # STMr 0.1.3
 
