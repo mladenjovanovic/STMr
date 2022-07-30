@@ -4,9 +4,6 @@
 #'
 #' @param scheme Data Frame create by one of the package functions. See examples
 #' @param label_size Numeric. Default is 3
-#' @param signif_digits Rounding numbers for plotting. Default is 3
-#' @param adjustment_multiplier Factor to multiply the adjustment. Useful when converting to percentage.
-#'     Default is 1
 #' @return \code{ggplot2} object
 #' @export
 #' @examples
@@ -22,59 +19,76 @@
 #'
 #' plot_scheme(scheme)
 plot_scheme <- function(scheme,
-                        label_size = 3,
-                        signif_digits = 3,
-                        adjustment_multiplier = 1) {
+                        label_size = 3) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
-  perc_1RM <- NULL
-  adjustment <- NULL
-  step <- NULL
-  reps <- NULL
-  hjust <- NULL
-  param <- NULL
   index <- NULL
-  set <- NULL
-  value <- NULL
+  reps <- NULL
+  perc_1RM <- NULL
+  reps_norm <- NULL
+  perc_1RM_norm <- NULL
+  perc_1RM_str <- NULL
+  set_index <- NULL
+  step_index <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
-  # Reorganize the data
-  scheme <- scheme %>%
-    dplyr::group_by(index) %>%
-    dplyr::mutate(
-      set = dplyr::row_number(),
-      adjustment = signif(adjustment * adjustment_multiplier, signif_digits),
-      perc_1RM = signif(perc_1RM * 100, signif_digits),
-      index = paste0("Step ", index)
-    ) %>%
-    dplyr::rename(
-      Reps = reps,
-      Adjustment = adjustment,
-      `%1RM` = perc_1RM
-    ) %>%
-    tidyr::pivot_longer(cols = c("Reps", "Adjustment", "%1RM"), names_to = "param") %>%
-    dplyr::mutate(
-      param = factor(param, levels = c("Reps", "Adjustment", "%1RM")),
-      hjust = ifelse(value < 0, -0.5, 1.5)
-    )
 
-  # Plot
-  ggplot2::ggplot(scheme, ggplot2::aes(x = value, y = set, fill = param)) +
-    ggplot2::theme_linedraw() +
-    ggstance::geom_barh(stat = "identity") +
-    ggplot2::geom_text(ggplot2::aes(label = value, hjust = hjust), size = label_size) +
-    ggplot2::facet_grid(index ~ param, scales = "free_x") +
-    ggplot2::scale_y_reverse() +
+  # Prepare the scheme df
+  scheme %>%
+    dplyr::group_by(index) %>%
+    dplyr::mutate(set_index = seq_along(reps)) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
+    dplyr::mutate(
+      step_index = paste0("Step #", index),
+      reps_norm = 0.2 + range01(reps),
+      perc_1RM_norm = 1.35 + range01(perc_1RM),
+      perc_1RM_str = paste0(perc_1RM, "%")
+    ) %>%
+    dplyr::mutate(
+      reps = ifelse(reps >= 1, reps, NA),
+      reps_norm = ifelse(reps >= 1, reps_norm, NA),
+      perc_1RM_norm = ifelse(reps >= 1, perc_1RM_norm, NA),
+      perc_1RM = ifelse(reps >= 1, perc_1RM, NA),
+      perc_1RM_str = ifelse(reps >= 1, perc_1RM_str, "")
+    ) %>%
+    # Plot
+    ggplot2::ggplot() +
+    ggplot2::theme_grey() +
+
+    # %1RM
+    ggplot2::geom_bar(
+      ggplot2::aes(x = step_index, y = perc_1RM_norm, group = set_index),
+      fill = color_orange,
+      stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.7
+    ) +
+    ggplot2::geom_text(
+      ggplot2::aes(x = index, y = perc_1RM_norm, group = set_index, label = perc_1RM_str),
+      position = ggplot2::position_dodge(0.9), vjust = 1.5, size = label_size * 0.75
+    ) +
+
+    # Reps
+    ggplot2::geom_bar(
+      ggplot2::aes(x = step_index, y = reps_norm, group = set_index),
+      fill = color_blue,
+      stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
+    ) +
+    ggplot2::geom_text(
+      ggplot2::aes(x = step_index, y = reps_norm, group = set_index, label = reps),
+      position = ggplot2::position_dodge(0.9), vjust = 1.5, size = label_size
+    ) +
+    ggplot2::ylab(NULL) +
+    ggplot2::xlab(NULL) +
     ggplot2::theme(
       legend.position = "none",
-      axis.title = ggplot2::element_blank(),
-      axis.text = ggplot2::element_blank(),
-      axis.ticks = ggplot2::element_blank(),
+      strip.background = ggplot2::element_rect(fill = "black"),
+      strip.text = ggplot2::element_text(color = "white"),
+      axis.ticks.y = ggplot2::element_blank(),
+      axis.text.y = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank(),
+      panel.background = ggplot2::element_rect(fill = "white"),
       panel.grid.major = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank()
-    ) +
-    ggplot2::scale_fill_brewer(palette = "Accent") +
-    ggplot2::xlab(NULL) +
-    ggplot2::ylab(NULL)
+    )
 }

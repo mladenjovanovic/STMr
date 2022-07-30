@@ -22,7 +22,6 @@ BugReports: https://github.com/mladenjovanovic/STMr/issues
 Imports: 
     dplyr,
     ggplot2,
-    ggstance,
     magrittr,
     nlme,
     quantreg,

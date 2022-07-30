@@ -1,7 +1,7 @@
 # STMr 0.1.3.9000
 
 * Fixed a bug in `scheme_rep_acc()` - now the END rep and step is used, and the reps are counted backwards as intended
-* Addded comment in the `vertical_generic()` and `vertical_rep_accumulation()` to avoid generating rep accumulation schme using those two functions, but rather using `scheme_rep_acc()`
+* Added comment in the `vertical_generic()` and `vertical_rep_accumulation()` to avoid generating rep accumulation schme using those two functions, but rather using `scheme_rep_acc()`
 * Formatting error in `scheme_()` functions
 * Changed default progression table to `progression_perc_drop` in all `scheme_()` functions
 * Changed default vertical planning to `vertical_const` in all `scheme_()` functions
@@ -14,6 +14,7 @@
 * Expanded the README.Rmd to include the discussion on Rep Accumulation scheme
 * Added extra features to `vertical_set_accumulation()` and `vertical_set_accumulation_reverse()` (see sequence argument)
 * Fixed the default arguments for `adjustment` in the `scheme_` functions. Now they are flexible, depending on the `reps` argument, but follow the general logic of a given scheme.  
+* Improved and simplified scheme plotting in `plot_scheme()` function. Removed {ggstance} from package dependencies
 
 # STMr 0.1.3
 

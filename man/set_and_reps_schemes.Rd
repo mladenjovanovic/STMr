@@ -270,7 +270,7 @@ schm <- scheme_wave(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
 .vertical_rep_accumulation.post(
   schm,
   rep_decrement = c(-3, -1, -2, 0)
-  )
+)
 
 # `scheme_rep_acc` will not allow you to generate `scheme_ladder()`
 # and `scheme_scheme_light_heavy()`

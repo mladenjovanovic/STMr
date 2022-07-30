@@ -4,22 +4,12 @@
 \alias{plot_scheme}
 \title{Plotting of the Set and Reps Scheme}
 \usage{
-plot_scheme(
-  scheme,
-  label_size = 3,
-  signif_digits = 3,
-  adjustment_multiplier = 1
-)
+plot_scheme(scheme, label_size = 3)
 }
 \arguments{
 \item{scheme}{Data Frame create by one of the package functions. See examples}
 
 \item{label_size}{Numeric. Default is 3}
-
-\item{signif_digits}{Rounding numbers for plotting. Default is 3}
-
-\item{adjustment_multiplier}{Factor to multiply the adjustment. Useful when converting to percentage.
-Default is 1}
 }
 \value{
 \code{ggplot2} object
