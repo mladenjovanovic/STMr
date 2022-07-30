@@ -64,7 +64,7 @@
 <span></span>
 <span><span class="fu">scheme_wave</span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span>
-<span>  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fl">5</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_constant</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
@@ -81,7 +81,7 @@
 <span></span>
 <span><span class="fu">scheme_step</span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.2</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_constant</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
@@ -90,7 +90,7 @@
 <span></span>
 <span><span class="fu">scheme_step_reverse</span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.2</span><span class="op">)</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="op">-</span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_constant</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
@@ -99,7 +99,7 @@
 <span></span>
 <span><span class="fu">scheme_wave_descending</span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">8</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/rev.html" class="external-link">rev</a></span><span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fl">5</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_constant</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
@@ -108,7 +108,7 @@
 <span></span>
 <span><span class="fu">scheme_light_heavy</span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">reps</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html" class="external-link">%%</a></span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_constant</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
@@ -143,7 +143,7 @@
 <span></span>
 <span><span class="fu">scheme_ladder</span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_constant</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
