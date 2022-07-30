@@ -9,6 +9,7 @@ plot_progression_table(
   plot = "\%1RM",
   signif_digits = 3,
   adjustment_multiplier = 1,
+  label_size = 3,
   ...
 )
 }
@@ -21,6 +22,8 @@ plot_progression_table(
 
 \item{adjustment_multiplier}{Factor to multiply the adjustment. Useful when converting to percentage.
 Default is 1}
+
+\item{label_size}{Numeric. Default is 3}
 
 \item{...}{Forwarder to the \code{\link{generate_progression_table}} function}
 }
