@@ -11,10 +11,14 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%",
+  out.width = "80%",
+  fig.align = "center",
+  fig.width = 6,
+  fig.height = 6 * 0.618, # 1 / phi
   message = FALSE,
   warning = FALSE,
-  dpi = 150
+  dpi = 200,
+  size = "small"
 )
 
 set.seed(1667)
@@ -47,7 +51,7 @@ options(digits = 3)
 
 Figure below depicts the relationship between `{STMr}` package functional units:
 
-```{r echo=FALSE, out.width='100%'}
+```{r echo=FALSE, out.width='80%'}
 knitr::include_graphics("man/figures/STMr-package.png")
 ```
 
@@ -376,7 +380,7 @@ scheme <- scheme_wave(
   )
 )
 
-plot_scheme(scheme, adjustment_multiplier = 100)
+plot_scheme(scheme)
 ```
 
 This scheme would be pretty impossible to do, since I am using the *intensive* variant of the Deducted Intensity progression, but in this case I have 3 heavy sets. Here is the Deducted Intensity progression table (with -2.5% decrement across volume types and progression steps):
@@ -421,7 +425,7 @@ scheme <- scheme_wave(
   )
 )
 
-plot_scheme(scheme, adjustment_multiplier = 100)
+plot_scheme(scheme)
 ```
 
 The `scheme_` functions afford you great flexibility in designing set and rep schemes. The following set and rep schemes are implemented in `{STMr}` package: `scheme_generic()`, `scheme_wave()`, `scheme_plateau()`, `scheme_step()`, `scheme_step_reverse()`, `scheme_wave_descending()`, `scheme_light_heavy()`, `scheme_pyramid()`, `scheme_pyramid_reverse()`, `scheme_rep_acc()`. 

@@ -37,7 +37,7 @@ is open-source package under MIT License implemented in the R language.
 Figure below depicts the relationship between `{STMr}` package
 functional units:
 
-<img src="man/figures/STMr-package.png" width="100%" />
+<img src="man/figures/STMr-package.png" width="80%" style="display: block; margin: auto;" />
 
 I will walk you through each of these functional units to demonstrate
 the simplicity, flexibility, usability, and power of the `{STMr}`
@@ -166,7 +166,7 @@ ggplot(max_reps_relationship, aes(x = Reps, y = `%1RM`, color = Model)) +
   scale_x_continuous(breaks = 1:12)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Adjustment Functions
 
@@ -355,7 +355,7 @@ Even better approach would be to plot progression table:
 plot_progression_table(progression_RIR, signif_digits = 2)
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
 
 If you are interested in plotting the adjustments used, use:
 
@@ -363,7 +363,7 @@ If you are interested in plotting the adjustments used, use:
 plot_progression_table(progression_RIR, plot = "adjustment")
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
 
 `progression_RIR()` allows you to use custom progression increments as
 well as volume increments:
@@ -377,7 +377,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" />
 
 Here is another example using *Perc Drop* progression table and
 Linear/Brzycki’s model:
@@ -393,7 +393,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" />
 
 Here are the adjustments used in the *Perc Drop* progression table
 (deducted %1RM):
@@ -410,7 +410,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" />
 
 Another useful feature implemented in `{STMr}` package is a
 `create_example()` function to quickly generate strength training
@@ -564,7 +564,7 @@ comprehend it:
 plot_scheme(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-23-1.png" width="80%" style="display: block; margin: auto;" />
 
 In the next example I will utilize different progression table and
 progression steps, as well as Linear/Brzycki’s Reps-Max model with a
@@ -587,10 +587,10 @@ scheme <- scheme_wave(
   )
 )
 
-plot_scheme(scheme, adjustment_multiplier = 100)
+plot_scheme(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-24-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" />
 
 This scheme would be pretty impossible to do, since I am using the
 *intensive* variant of the Deducted Intensity progression, but in this
@@ -608,7 +608,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-25-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 plot_progression_table(
@@ -622,7 +622,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" />
 
 To make the Waves Loading scheme in the above example doable, I can
 apply additional adjustments to make sets easier. Since I am using
@@ -643,10 +643,10 @@ scheme <- scheme_wave(
   )
 )
 
-plot_scheme(scheme, adjustment_multiplier = 100)
+plot_scheme(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-27-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
 
 The `scheme_` functions afford you great flexibility in designing set
 and rep schemes. The following set and rep schemes are implemented in
@@ -867,7 +867,7 @@ gg_relative <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM, color = A
 gg_absolute + gg_relative + plot_layout(widths = c(1, 1.1))
 ```
 
-<img src="man/figures/README-unnamed-chunk-35-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" />
 
 Let’s use *Athlete B* from RTF testing dataset to estimate individual
 model parameter values for Epley’s, Modified Epley’s, and
@@ -1009,7 +1009,7 @@ ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
   geom_line(data = pred_df, aes(x = perc_1RM * 100, y = nRM), size = 1.5, alpha = 0.8)
 ```
 
-<img src="man/figures/README-unnamed-chunk-38-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
 
 When analyzing multiple individuals, particularly when absolute weights
 are used instead of %1RM, one needs to utilize mixed-effect approach.
@@ -1100,7 +1100,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-40-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" />
 
 `{STMr}` package also implements mixed-effect models that utilize
 absolute weight values. As alluded previously, this is novel technique
@@ -1185,7 +1185,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" />
 
 Mixed-effects functions implemented in `{STMr}` package allows you to
 set-up random parameters using `random=` function argument. In the
@@ -1266,7 +1266,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-44-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" />
 
 In my opinion this doesn’t make much sense. If you are interested in
 estimating group or *generic* `klin` (or `k` or `kmod`) model parameter
@@ -1311,7 +1311,7 @@ gg <- ggplot(strength_training_log) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-45-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
 
 We are interested in finding both the “best” and “worst” profiles (as
 well as estimated 1RMs). To achieve this, we will utilize *quantile
@@ -1394,7 +1394,7 @@ gg +
   geom_line(data = pred_df_worst, aes(x = weight, y = nRM), linetype = "dashed")
 ```
 
-<img src="man/figures/README-unnamed-chunk-47-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-47-1.png" width="80%" style="display: block; margin: auto;" />
 
 In this example we have used all 12 weeks of strength training log data
 (i.e., pooled). We can perform some type of “rolling” analysis to get
@@ -1439,7 +1439,7 @@ ggplot(rolling_weeks, aes(x = week_end)) +
   ylab("Estimated 1RM (kg)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-48-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-48-1.png" width="80%" style="display: block; margin: auto;" />
 
 This analysis represents novel technique and the time will tell how
 valid is it and how to interpret it correctly. But at least we have very
