@@ -4,12 +4,14 @@
 \alias{plot_scheme}
 \title{Plotting of the Set and Reps Scheme}
 \usage{
-plot_scheme(scheme, label_size = 3)
+plot_scheme(scheme, font_size = 8, label_size = 2.5)
 }
 \arguments{
 \item{scheme}{Data Frame create by one of the package functions. See examples}
 
-\item{label_size}{Numeric. Default is 3}
+\item{font_size}{Numeric. Default is 8}
+
+\item{label_size}{Numeric. Default is 2.5}
 }
 \value{
 \code{ggplot2} object

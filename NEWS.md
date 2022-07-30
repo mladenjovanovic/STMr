@@ -15,6 +15,7 @@
 * Added extra features to `vertical_set_accumulation()` and `vertical_set_accumulation_reverse()` (see sequence argument)
 * Fixed the default arguments for `adjustment` in the `scheme_` functions. Now they are flexible, depending on the `reps` argument, but follow the general logic of a given scheme.  
 * Improved and simplified scheme plotting in `plot_scheme()` function. Removed {ggstance} from package dependencies
+* Added `label_size` and `font_size` arguments to `plot_scheme()` and `plot_progression_table()` functions
 
 # STMr 0.1.3
 

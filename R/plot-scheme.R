@@ -3,7 +3,8 @@
 #' Functions for creating \code{ggplot2} plot of the Set and Reps Scheme
 #'
 #' @param scheme Data Frame create by one of the package functions. See examples
-#' @param label_size Numeric. Default is 3
+#' @param font_size Numeric. Default is 8
+#' @param label_size Numeric. Default is 2.5
 #' @return \code{ggplot2} object
 #' @export
 #' @examples
@@ -19,7 +20,8 @@
 #'
 #' plot_scheme(scheme)
 plot_scheme <- function(scheme,
-                        label_size = 3) {
+                        font_size = 8,
+                        label_size = 2.5) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
@@ -55,7 +57,7 @@ plot_scheme <- function(scheme,
     ) %>%
     # Plot
     ggplot2::ggplot() +
-    ggplot2::theme_grey() +
+    ggplot2::theme_grey(font_size) +
 
     # %1RM
     ggplot2::geom_bar(
