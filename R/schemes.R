@@ -22,12 +22,20 @@ NULL
 #'
 #' @export
 #' @examples
-#' scheme_generic()
-scheme_generic <- function(reps = c(5, 5, 5),
-                           adjustment = c(0, 0, 0),
-                           vertical_planning = vertical_constant,
+#' scheme_generic(
+#'   reps = c(8, 6, 4, 8, 6, 4),
+#'   # Adjusting using lower %1RM (RIR Increment method used)
+#'   adjustment = c(4, 2, 0, 6, 4, 2),
+#'   vertical_planning = vertical_linear,
+#'   vertical_planning_control = list(reps_change = c(0, -2, -4)),
+#'   progression_table = progression_RIR_increment,
+#'   progression_table_control = list(volume = "extensive")
+#' )
+scheme_generic <- function(reps,
+                           adjustment,
+                           vertical_planning,
                            vertical_planning_control = list(),
-                           progression_table = progression_perc_drop,
+                           progression_table,
                            progression_table_control = list()) {
 
   # Just to make sure the lengths are the same
