@@ -121,7 +121,7 @@ scheme_generic <- function(reps,
 #'   progression_table_control = list(volume = "extensive")
 #' )
 scheme_wave <- function(reps = c(10, 8, 6),
-                        adjustment = c(-0.1, -0.05, 0),
+                        adjustment = -rev((seq_along(reps) -1 ) * 5) / 100,
                         vertical_planning = vertical_constant,
                         vertical_planning_control = list(),
                         progression_table = progression_perc_drop,
@@ -180,7 +180,7 @@ scheme_plateau <- function(reps = c(5, 5, 5),
 #'   progression_table_control = list(type = "ballistic")
 #' )
 scheme_step <- function(reps = c(5, 5, 5),
-                        adjustment = c(-0.2, -0.1, 0),
+                        adjustment = -rev((seq_along(reps) -1 ) * 10) / 100,
                         vertical_planning = vertical_constant,
                         vertical_planning_control = list(),
                         progression_table = progression_perc_drop,
@@ -203,7 +203,7 @@ scheme_step <- function(reps = c(5, 5, 5),
 #' #- -------------------------
 #' scheme_step_reverse()
 scheme_step_reverse <- function(reps = c(5, 5, 5),
-                                adjustment = c(0, -0.1, -0.2),
+                                adjustment = -((seq_along(reps) -1 ) * 10) / 100,
                                 vertical_planning = vertical_constant,
                                 vertical_planning_control = list(),
                                 progression_table = progression_perc_drop,
@@ -226,7 +226,7 @@ scheme_step_reverse <- function(reps = c(5, 5, 5),
 #' # --------------------------
 #' scheme_wave_descending()
 scheme_wave_descending <- function(reps = c(6, 8, 10),
-                                   adjustment = c(-0.1, -0.05, 0),
+                                   adjustment = -rev((seq_along(reps) -1 ) * 5) / 100,
                                    vertical_planning = vertical_constant,
                                    vertical_planning_control = list(),
                                    progression_table = progression_perc_drop,
@@ -249,7 +249,7 @@ scheme_wave_descending <- function(reps = c(6, 8, 10),
 #' # --------------------------
 #' scheme_light_heavy()
 scheme_light_heavy <- function(reps = c(10, 5, 10, 5),
-                               adjustment = c(0, -0.1, 0, -0.1),
+                               adjustment = c(-0.1, 0)[(seq_along(reps) %% 2) + 1],
                                vertical_planning = vertical_constant,
                                vertical_planning_control = list(),
                                progression_table = progression_perc_drop,
@@ -388,7 +388,7 @@ scheme_rep_acc <- function(reps = c(10, 10, 10),
 #' # --------------------------
 #' scheme_ladder()
 scheme_ladder <- function(reps = c(3, 5, 10),
-                               adjustment = c(0, 0, 0),
+                               adjustment = 0,
                                vertical_planning = vertical_constant,
                                vertical_planning_control = list(),
                                progression_table = progression_perc_drop,

@@ -13,6 +13,7 @@
 * Changed the parameter name from `accumulate_rep` to `accumulate_set` in `vertical_set_accumulation()` and `vertical_set_accumulation_reverse()` functions
 * Expanded the README.Rmd to include the discussion on Rep Accumulation scheme
 * Added extra features to `vertical_set_accumulation()` and `vertical_set_accumulation_reverse()` (see sequence argument)
+* Fixed the default arguments for `adjustment` in the `scheme_` functions. Now they are flexible, depending on the `reps` argument, but follow the general logic of a given scheme.  
 
 # STMr 0.1.3
 

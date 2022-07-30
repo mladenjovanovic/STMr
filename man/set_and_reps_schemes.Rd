@@ -26,7 +26,7 @@ scheme_generic(
 
 scheme_wave(
   reps = c(10, 8, 6),
-  adjustment = c(-0.1, -0.05, 0),
+  adjustment = -rev((seq_along(reps) - 1) * 5)/100,
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
@@ -43,7 +43,7 @@ scheme_plateau(
 
 scheme_step(
   reps = c(5, 5, 5),
-  adjustment = c(-0.2, -0.1, 0),
+  adjustment = -rev((seq_along(reps) - 1) * 10)/100,
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
@@ -52,7 +52,7 @@ scheme_step(
 
 scheme_step_reverse(
   reps = c(5, 5, 5),
-  adjustment = c(0, -0.1, -0.2),
+  adjustment = -((seq_along(reps) - 1) * 10)/100,
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
@@ -61,7 +61,7 @@ scheme_step_reverse(
 
 scheme_wave_descending(
   reps = c(6, 8, 10),
-  adjustment = c(-0.1, -0.05, 0),
+  adjustment = -rev((seq_along(reps) - 1) * 5)/100,
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
@@ -70,7 +70,7 @@ scheme_wave_descending(
 
 scheme_light_heavy(
   reps = c(10, 5, 10, 5),
-  adjustment = c(0, -0.1, 0, -0.1),
+  adjustment = c(-0.1, 0)[(seq_along(reps)\%\%2) + 1],
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
@@ -105,7 +105,7 @@ scheme_rep_acc(
 
 scheme_ladder(
   reps = c(3, 5, 10),
-  adjustment = c(0, 0, 0),
+  adjustment = 0,
   vertical_planning = vertical_constant,
   vertical_planning_control = list(),
   progression_table = progression_perc_drop,
