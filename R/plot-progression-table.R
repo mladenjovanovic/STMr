@@ -2,7 +2,7 @@
 #'
 #' Functions for creating \code{ggplot2} plot of the Progression Table
 #'
-#' @param progression_table Function for creating progression table. Default is \code{\link{progression_RIR_increment}}
+#' @param progression_table Function for creating progression table
 #' @param signif_digits Rounding numbers for plotting. Default is 3
 #' @param adjustment_multiplier Factor to multiply the adjustment. Useful when converting to percentage.
 #'     Default is 1
@@ -22,7 +22,7 @@
 #'   max_perc_1RM_func = max_perc_1RM_linear,
 #'   klin = 36
 #' )
-plot_progression_table <- function(progression_table = progression_RIR_increment,
+plot_progression_table <- function(progression_table,
                                    plot = "%1RM",
                                    signif_digits = 3,
                                    adjustment_multiplier = 1,

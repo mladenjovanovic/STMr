@@ -5,7 +5,7 @@
 \title{Plotting of the Progression Table}
 \usage{
 plot_progression_table(
-  progression_table = progression_RIR_increment,
+  progression_table,
   plot = "\%1RM",
   signif_digits = 3,
   adjustment_multiplier = 1,
@@ -15,7 +15,7 @@ plot_progression_table(
 )
 }
 \arguments{
-\item{progression_table}{Function for creating progression table. Default is \code{\link{progression_RIR_increment}}}
+\item{progression_table}{Function for creating progression table}
 
 \item{plot}{Character string. Options include "\%1RM" (default) and "adjustment"}
 

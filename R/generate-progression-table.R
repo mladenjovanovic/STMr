@@ -1,6 +1,5 @@
 #' @describeIn progression_table Generates progression tables
-#' @param progression_table Progression table function to use. Default is
-#'     \code{\link{progression_RIR_increment}}
+#' @param progression_table Progression table function to use
 #' @param ... Forwarded to \code{progression_table} for using different rep max function
 #' @export
 #' @examples
@@ -19,7 +18,7 @@
 #'   max_perc_1RM_func = max_perc_1RM_modified_epley,
 #'   kmod = 0.0388
 #' )
-generate_progression_table <- function(progression_table = progression_RIR_increment,
+generate_progression_table <- function(progression_table,
                                        type = c("grinding", "ballistic"),
                                        volume = c("intensive", "normal", "extensive"),
                                        reps = 1:12,

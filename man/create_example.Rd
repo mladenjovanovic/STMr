@@ -5,7 +5,7 @@
 \title{Create Example}
 \usage{
 create_example(
-  progression_table = progression_RIR_increment,
+  progression_table,
   reps = c(3, 5, 10),
   volume = c("intensive", "normal", "extensive"),
   type = c("grinding", "ballistic"),
@@ -13,7 +13,7 @@ create_example(
 )
 }
 \arguments{
-\item{progression_table}{Progression table function. Default is \code{\link{progression_RIR_increment}}}
+\item{progression_table}{Progression table function}
 
 \item{reps}{Numeric vector. Default is \code{c(3, 5, 10)}}
 

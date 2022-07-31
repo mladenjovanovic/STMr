@@ -1,7 +1,7 @@
 #' Create Example
 #'
 #' This function create simple example using \code{progression_table}
-#' @param progression_table Progression table function. Default is \code{\link{progression_RIR_increment}}
+#' @param progression_table Progression table function
 #' @param reps Numeric vector. Default is \code{c(3, 5, 10)}
 #' @param volume Character vector. Default is \code{c("intensive", "normal", "extensive")}
 #' @param type Character vector. Type of max rep table. Options are grinding (Default) and ballistic
@@ -30,7 +30,7 @@
 #'   max_perc_1RM_func = max_perc_1RM_modified_epley,
 #'   kmod = 0.0388
 #' )
-create_example <- function(progression_table = progression_RIR_increment,
+create_example <- function(progression_table,
                            reps = c(3, 5, 10),
                            volume = c("intensive", "normal", "extensive"),
                            type = c("grinding", "ballistic"),
