@@ -170,29 +170,41 @@ vertical_planning(
   reps_change = c(-3, -2, -1, 0),
   step = c(0, 0, 0, 0)
 )
-# ----------------------------------
+
+
 
 # Constant
+# ----------------------------------
 vertical_constant(c(5, 5, 5), 4)
 vertical_constant(c(3, 2, 1), 2)
+
+plot_vertical(vertical_constant)
 
 # Linear
 # ----------------------------------
 vertical_linear(c(10, 8, 6), c(0, -2, -4))
 vertical_linear(c(5, 5, 5), c(0, -1, -2, -3))
 
+plot_vertical(vertical_linear)
+
 # Reverse Linear
 # ----------------------------------
 vertical_linear_reverse(c(6, 4, 2), c(0, 1, 2))
 vertical_linear_reverse(c(5, 5, 5))
 
+plot_vertical(vertical_linear_reverse)
+
 # Block
 # ----------------------------------
 vertical_block(c(6, 4, 2))
 
+plot_vertical(vertical_block)
+
 # Block Variant
 # ----------------------------------
 vertical_block_variant(c(6, 4, 2))
+
+plot_vertical(vertical_block_variant)
 
 # Rep Accumulation
 # ----------------------------------
@@ -200,6 +212,8 @@ vertical_block_variant(c(6, 4, 2))
 # Use `scheme_rep_acc()` instead, or apply `.vertical_rep_accumulation.post()`
 # function AFTER generating the scheme
 vertical_rep_accumulation(c(10, 8, 6))
+
+plot_vertical(vertical_rep_accumulation)
 
 # Set Accumulation
 # ----------------------------------
@@ -221,6 +235,7 @@ vertical_set_accumulation(
   accumulate_set = c(1:2, 5:6),
   sequence = FALSE
 )
+plot_vertical(vertical_set_accumulation)
 
 # Reverse Set Accumulation
 # ----------------------------------
@@ -242,6 +257,8 @@ vertical_set_accumulation_reverse(
   accumulate_set = c(1:2, 5:6),
   sequence = FALSE
 )
+
+plot_vertical(vertical_set_accumulation_reverse)
 
 # Undulating
 # ----------------------------------

@@ -47,7 +47,8 @@
 #'   reps_change = c(-3, -2, -1, 0),
 #'   step = c(0, 0, 0, 0)
 #' )
-#' # ----------------------------------
+#'
+#'
 NULL
 
 #' @describeIn vertical_planning_functions Generic Vertical Planning
@@ -86,8 +87,11 @@ vertical_planning <- function(reps, reps_change = NULL, step = NULL) {
 #' @examples
 #'
 #' # Constant
+#' # ----------------------------------
 #' vertical_constant(c(5, 5, 5), 4)
 #' vertical_constant(c(3, 2, 1), 2)
+#'
+#' plot_vertical(vertical_constant)
 vertical_constant <- function(reps, n_steps = 4) {
   vertical_planning(reps = reps, reps_change = rep(0, n_steps))
 }
@@ -100,6 +104,8 @@ vertical_constant <- function(reps, n_steps = 4) {
 #' # ----------------------------------
 #' vertical_linear(c(10, 8, 6), c(0, -2, -4))
 #' vertical_linear(c(5, 5, 5), c(0, -1, -2, -3))
+#'
+#' plot_vertical(vertical_linear)
 vertical_linear <- function(reps,
                             reps_change = c(0, -1, -2, -3)) {
   vertical_planning(reps = reps, reps_change = reps_change)
@@ -113,6 +119,8 @@ vertical_linear <- function(reps,
 #' # ----------------------------------
 #' vertical_linear_reverse(c(6, 4, 2), c(0, 1, 2))
 #' vertical_linear_reverse(c(5, 5, 5))
+#'
+#' plot_vertical(vertical_linear_reverse)
 vertical_linear_reverse <- function(reps,
                                     reps_change = c(0, 1, 2, 3)) {
   vertical_planning(reps = reps, reps_change = reps_change)
@@ -126,6 +134,8 @@ vertical_linear_reverse <- function(reps,
 #' # Block
 #' # ----------------------------------
 #' vertical_block(c(6, 4, 2))
+#'
+#' plot_vertical(vertical_block)
 vertical_block <- function(reps,
                            step = c(-2, -1, 0, -3)) {
   vertical_planning(reps = reps, step = step)
@@ -138,6 +148,8 @@ vertical_block <- function(reps,
 #' # Block Variant
 #' # ----------------------------------
 #' vertical_block_variant(c(6, 4, 2))
+#'
+#' plot_vertical(vertical_block_variant)
 vertical_block_variant <- function(reps,
                                    step = c(-2, -1, -3, 0)) {
   vertical_planning(reps = reps, step = step)
@@ -154,6 +166,8 @@ vertical_block_variant <- function(reps,
 #' # Use `scheme_rep_acc()` instead, or apply `.vertical_rep_accumulation.post()`
 #' # function AFTER generating the scheme
 #' vertical_rep_accumulation(c(10, 8, 6))
+#'
+#' plot_vertical(vertical_rep_accumulation)
 vertical_rep_accumulation <- function(reps,
                                       reps_change = c(-3, -2, -1, 0),
                                       step = c(0, 0, 0, 0)) {
@@ -189,6 +203,7 @@ vertical_rep_accumulation <- function(reps,
 #'   accumulate_set = c(1:2, 5:6),
 #'   sequence = FALSE
 #' )
+#' plot_vertical(vertical_set_accumulation)
 vertical_set_accumulation <- function(reps,
                                       step = c(-2, -2, -2, -2),
                                       accumulate_set = length(reps),
@@ -280,6 +295,8 @@ vertical_set_accumulation <- function(reps,
 #'   accumulate_set = c(1:2, 5:6),
 #'   sequence = FALSE
 #' )
+#'
+#' plot_vertical(vertical_set_accumulation_reverse)
 vertical_set_accumulation_reverse <- function(reps,
                                               step = c(-3, -2, -1, 0),
                                               accumulate_set = length(reps),
