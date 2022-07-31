@@ -200,7 +200,7 @@ scheme_wave(
 
 # Adjusted using RIR inc
 # This time we adjust first wave as well, first two sets easier
-scheme_wave(
+scheme <- scheme_wave(
   reps = c(8, 6, 4, 8, 6, 4),
   # Adjusting using lower \%1RM (RIR Increment method used)
   adjustment = c(4, 2, 0, 6, 4, 2),
@@ -209,46 +209,54 @@ scheme_wave(
   progression_table = progression_RIR_increment,
   progression_table_control = list(volume = "extensive")
 )
+plot(scheme)
 
 # Plateau set and rep schemes
 # --------------------------
 scheme_plateau()
 
-scheme_plateau(
+scheme <- scheme_plateau(
   reps = c(3, 3, 3),
   progression_table_control = list(type = "ballistic")
 )
+plot(scheme)
 
 # Step set and rep schemes
 # --------------------------
 scheme_step()
 
-scheme_step(
+scheme <- scheme_step(
   reps = c(2, 2, 2),
   adjustment = c(-0.1, -0.05, 0),
   vertical_planning = vertical_linear_reverse,
   progression_table_control = list(type = "ballistic")
 )
+plot(scheme)
 
 # Reverse Step set and rep schemes
 #- -------------------------
-scheme_step_reverse()
+scheme <- scheme_step_reverse()
+plot(scheme)
 
 # Descending Wave set and rep schemes
 # --------------------------
-scheme_wave_descending()
+scheme <- scheme_wave_descending()
+plot(scheme)
 
 # Light-Heavy set and rep schemes
 # --------------------------
-scheme_light_heavy()
+scheme <- scheme_light_heavy()
+plot(scheme)
 
 # Pyramid set and rep schemes
 # --------------------------
-scheme_pyramid()
+scheme <- scheme_pyramid()
+plot(scheme)
 
 # Reverse Pyramid set and rep schemes
 # --------------------------
-scheme_pyramid_reverse()
+scheme <- scheme_pyramid_reverse()
+plot(scheme)
 
 # Rep Accumulation set and rep schemes
 # --------------------------
@@ -257,32 +265,35 @@ scheme_rep_acc()
 # Generate Wave scheme with rep accumulation vertical progression
 # This functions doesn't allow you to use different vertical planning
 # options
-scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+scheme <- scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+plot(scheme)
 
 # Other options is to use `.vertical_rep_accumulation.post()` and
 # apply it after
 # The default vertical progression is `vertical_const()`
-schm <- scheme_wave(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+scheme <- scheme_wave(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
 
-.vertical_rep_accumulation.post(schm)
+.vertical_rep_accumulation.post(scheme)
 
 # We can also create "undulating" rep decrements
 .vertical_rep_accumulation.post(
-  schm,
+  scheme,
   rep_decrement = c(-3, -1, -2, 0)
 )
 
 # `scheme_rep_acc` will not allow you to generate `scheme_ladder()`
 # and `scheme_scheme_light_heavy()`
 # You must use `.vertical_rep_accumulation.post()` to do so
-schm <- scheme_ladder()
-.vertical_rep_accumulation.post(schm)
+scheme <- scheme_ladder()
+scheme <- .vertical_rep_accumulation.post(scheme)
+plot(scheme)
 
 # Please note that reps < 1 are removed. If you do not want this,
 # use `remove_reps = FALSE` parameter
-.vertical_rep_accumulation.post(schm, remove_reps = FALSE)
+.vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
 
 # Ladder set and rep schemes
 # --------------------------
-scheme_ladder()
+scheme <- scheme_ladder()
+plot(scheme)
 }

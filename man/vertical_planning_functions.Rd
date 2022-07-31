@@ -279,32 +279,36 @@ vertical_block_undulating(c(8, 6, 4))
 vertical_volume_intensity(c(6, 6, 6))
 
 # Rep Accumulation
-# ----------------------------------
+# --------------------------
+scheme_rep_acc()
+
 # Generate Wave scheme with rep accumulation vertical progression
 # This functions doesn't allow you to use different vertical planning
 # options
-scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+scheme <- scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+plot(scheme)
 
 # Other options is to use `.vertical_rep_accumulation.post()` and
 # apply it after
 # The default vertical progression is `vertical_const()`
-schm <- scheme_wave(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+scheme <- scheme_wave(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
 
-.vertical_rep_accumulation.post(schm)
+.vertical_rep_accumulation.post(scheme)
 
 # We can also create "undulating" rep decrements
 .vertical_rep_accumulation.post(
-  schm,
+  scheme,
   rep_decrement = c(-3, -1, -2, 0)
 )
 
 # `scheme_rep_acc` will not allow you to generate `scheme_ladder()`
 # and `scheme_scheme_light_heavy()`
 # You must use `.vertical_rep_accumulation.post()` to do so
-schm <- scheme_ladder()
-.vertical_rep_accumulation.post(schm)
+scheme <- scheme_ladder()
+scheme <- .vertical_rep_accumulation.post(scheme)
+plot(scheme)
 
 # Please note that reps < 1 are removed. If you do not want this,
 # use `remove_reps = FALSE` parameter
-.vertical_rep_accumulation.post(schm, remove_reps = FALSE)
+.vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
 }

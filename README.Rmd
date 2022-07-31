@@ -326,6 +326,12 @@ As can be seen from the code output, this Vertical Planning involves keeping the
 vertical_linear(reps = c(10, 10, 10), reps_change = c(0, -2, -4))
 ```
 
+You can also plot the vertical plan function, using `plot_vertical()`. Migh be easier to comprehend the variations in different vertical plans. 
+
+```{r}
+plot_vertical(vertical_linear, reps = c(10, 10, 10))
+```
+
 Most of these Vertical Planning functionalities can be achieved with the *generic* Vertical Planning function `vertical_planning()`. As can be seen from the output, result of the Vertical Planning functions is a simple `data.frame` with three columns: (1) `reps`, (2) `index`, and (3) `step`. Usability of Vertical Planning functions is mostly visible at the next layer of prescription: *schemes* (see [Set and Rep Schemes] section).
 
 `{STMr}` currently features the following Vertical Planning functions: `vertical_planning()`, `vertical_constant()`, `vertical_linear()`, `vertical_linear_reverse()`, `vertical_block()`, `vertical_block_variant()`, `vertical_block_undulating()`, `vertical_rep_accumulation()`, `vertical_set_accumulation()`, `vertical_set_accumulation_reverse()`, `vertical_undulating()`, `vertical_undulating_reverse()`, `vertical_volume_intensity()`.

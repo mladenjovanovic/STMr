@@ -1,4 +1,4 @@
-# STMr 0.1.3.9000
+# STMr 0.1.4
 
 * Fixed a bug in `scheme_rep_acc()` - now the END rep and step is used, and the reps are counted backwards as intended
 * Added comment in the `vertical_generic()` and `vertical_rep_accumulation()` to avoid generating rep accumulation schme using those two functions, but rather using `scheme_rep_acc()`
@@ -18,6 +18,7 @@
 * Added `label_size` and `font_size` arguments to `plot_scheme()` and `plot_progression_table()` functions
 * Removed default progression table from `generate_progression_table()`, `create_example()`, `plot_progression_table()` functions
 * Added `plot_vertical()` function for plotting vertical plan
+* Create `STMr_scheme` class, and now scheme can be plotted by using simple S3 `plot` method. `plot_scheme()` function is now deprecated
 
 # STMr 0.1.3
 

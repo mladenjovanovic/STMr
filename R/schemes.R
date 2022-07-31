@@ -72,7 +72,8 @@ scheme_generic <- function(reps,
     )
   )
 
-  data.frame(
+  # Constructor
+  new_STMr_scheme(
     reps = progression$reps,
     index = progression$index,
     step = progression$step,
@@ -112,7 +113,7 @@ scheme_generic <- function(reps,
 #'
 #' # Adjusted using RIR inc
 #' # This time we adjust first wave as well, first two sets easier
-#' scheme_wave(
+#' scheme <- scheme_wave(
 #'   reps = c(8, 6, 4, 8, 6, 4),
 #'   # Adjusting using lower %1RM (RIR Increment method used)
 #'   adjustment = c(4, 2, 0, 6, 4, 2),
@@ -121,6 +122,7 @@ scheme_generic <- function(reps,
 #'   progression_table = progression_RIR_increment,
 #'   progression_table_control = list(volume = "extensive")
 #' )
+#' plot(scheme)
 scheme_wave <- function(reps = c(10, 8, 6),
                         adjustment = -rev((seq_along(reps) - 1) * 5) / 100,
                         vertical_planning = vertical_constant,
@@ -145,10 +147,11 @@ scheme_wave <- function(reps = c(10, 8, 6),
 #' # --------------------------
 #' scheme_plateau()
 #'
-#' scheme_plateau(
+#' scheme <- scheme_plateau(
 #'   reps = c(3, 3, 3),
 #'   progression_table_control = list(type = "ballistic")
 #' )
+#' plot(scheme)
 scheme_plateau <- function(reps = c(5, 5, 5),
                            vertical_planning = vertical_constant,
                            vertical_planning_control = list(),
@@ -174,12 +177,13 @@ scheme_plateau <- function(reps = c(5, 5, 5),
 #' # --------------------------
 #' scheme_step()
 #'
-#' scheme_step(
+#' scheme <- scheme_step(
 #'   reps = c(2, 2, 2),
 #'   adjustment = c(-0.1, -0.05, 0),
 #'   vertical_planning = vertical_linear_reverse,
 #'   progression_table_control = list(type = "ballistic")
 #' )
+#' plot(scheme)
 scheme_step <- function(reps = c(5, 5, 5),
                         adjustment = -rev((seq_along(reps) - 1) * 10) / 100,
                         vertical_planning = vertical_constant,
@@ -202,7 +206,8 @@ scheme_step <- function(reps = c(5, 5, 5),
 #'
 #' # Reverse Step set and rep schemes
 #' #- -------------------------
-#' scheme_step_reverse()
+#' scheme <- scheme_step_reverse()
+#' plot(scheme)
 scheme_step_reverse <- function(reps = c(5, 5, 5),
                                 adjustment = -((seq_along(reps) - 1) * 10) / 100,
                                 vertical_planning = vertical_constant,
@@ -225,7 +230,8 @@ scheme_step_reverse <- function(reps = c(5, 5, 5),
 #'
 #' # Descending Wave set and rep schemes
 #' # --------------------------
-#' scheme_wave_descending()
+#' scheme <- scheme_wave_descending()
+#' plot(scheme)
 scheme_wave_descending <- function(reps = c(6, 8, 10),
                                    adjustment = -rev((seq_along(reps) - 1) * 5) / 100,
                                    vertical_planning = vertical_constant,
@@ -248,7 +254,8 @@ scheme_wave_descending <- function(reps = c(6, 8, 10),
 #'
 #' # Light-Heavy set and rep schemes
 #' # --------------------------
-#' scheme_light_heavy()
+#' scheme <- scheme_light_heavy()
+#' plot(scheme)
 scheme_light_heavy <- function(reps = c(10, 5, 10, 5),
                                adjustment = c(-0.1, 0)[(seq_along(reps) %% 2) + 1],
                                vertical_planning = vertical_constant,
@@ -285,7 +292,8 @@ scheme_light_heavy <- function(reps = c(10, 5, 10, 5),
 #'
 #' # Pyramid set and rep schemes
 #' # --------------------------
-#' scheme_pyramid()
+#' scheme <- scheme_pyramid()
+#' plot(scheme)
 scheme_pyramid <- function(reps = c(12, 10, 8, 10, 12),
                            adjustment = 0,
                            vertical_planning = vertical_constant,
@@ -309,7 +317,8 @@ scheme_pyramid <- function(reps = c(12, 10, 8, 10, 12),
 #'
 #' # Reverse Pyramid set and rep schemes
 #' # --------------------------
-#' scheme_pyramid_reverse()
+#' scheme <- scheme_pyramid_reverse()
+#' plot(scheme)
 scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 10, 8),
                                    adjustment = 0,
                                    vertical_planning = vertical_constant,
@@ -337,30 +346,32 @@ scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 10, 8),
 #' # Generate Wave scheme with rep accumulation vertical progression
 #' # This functions doesn't allow you to use different vertical planning
 #' # options
-#' scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+#' scheme <- scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+#' plot(scheme)
 #'
 #' # Other options is to use `.vertical_rep_accumulation.post()` and
 #' # apply it after
 #' # The default vertical progression is `vertical_const()`
-#' schm <- scheme_wave(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
+#' scheme <- scheme_wave(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
 #'
-#' .vertical_rep_accumulation.post(schm)
+#' .vertical_rep_accumulation.post(scheme)
 #'
 #' # We can also create "undulating" rep decrements
 #' .vertical_rep_accumulation.post(
-#'   schm,
+#'   scheme,
 #'   rep_decrement = c(-3, -1, -2, 0)
 #' )
 #'
 #' # `scheme_rep_acc` will not allow you to generate `scheme_ladder()`
 #' # and `scheme_scheme_light_heavy()`
 #' # You must use `.vertical_rep_accumulation.post()` to do so
-#' schm <- scheme_ladder()
-#' .vertical_rep_accumulation.post(schm)
+#' scheme <- scheme_ladder()
+#' scheme <- .vertical_rep_accumulation.post(scheme)
+#' plot(scheme)
 #'
 #' # Please note that reps < 1 are removed. If you do not want this,
 #' # use `remove_reps = FALSE` parameter
-#' .vertical_rep_accumulation.post(schm, remove_reps = FALSE)
+#' .vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
 scheme_rep_acc <- function(reps = c(10, 10, 10),
                            adjustment = 0,
                            vertical_planning_control = list(step = rep(0, 4)),
@@ -386,7 +397,8 @@ scheme_rep_acc <- function(reps = c(10, 10, 10),
 #'
 #' # Ladder set and rep schemes
 #' # --------------------------
-#' scheme_ladder()
+#' scheme <- scheme_ladder()
+#' plot(scheme)
 scheme_ladder <- function(reps = c(3, 5, 10),
                           adjustment = 0,
                           vertical_planning = vertical_constant,
