@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
   fig.height = 6 * 0.618, # 1 / phi
   message = FALSE,
   warning = FALSE,
-  dpi = 200,
+  dpi = 150,
   size = "small"
 )
 
@@ -45,7 +45,7 @@ options(digits = 3)
 -   progression functions (start with `progression_`)
 -   *vertical planning* functions (start with `vertical_`)
 -   *scheme function* (start with `scheme_`)
--   plotting and printing functions: `generate_progression_table()`, `plot_progression_table()`, `plot_scheme()`, and `create_example()`
+-   plotting and printing functions: `generate_progression_table()`, `plot_progression_table()`, `plot_scheme()` (deprecated as of `{STMr}` version 0.1.4. Please use S3 `plot()` method instead), and `create_example()`
 -   built-in datasets (`strength_training_log` and `RTF_testing`)
 -   estimation functions (start with `estimate_`)
 
@@ -143,7 +143,7 @@ max_reps_relationship <- tibble(Reps = seq(1, 12)) %>%
 
 ggplot(max_reps_relationship, aes(x = Reps, y = `%1RM`, color = Model)) +
   theme_bw() +
-  geom_line() + 
+  geom_line() +
   scale_x_continuous(breaks = 1:12)
 ```
 
@@ -364,7 +364,7 @@ Set and rep scheme functions offers you the ability to utilize different vertica
 The output of the `scheme_` functions is a simple `data.frame` with following columns: (1) `reps`, (2) `index`, (3) `step`, (4) `adjustment`, and (5) `perc_1RM`. Plotting the scheme is a better way to comprehend it:
 
 ```{r}
-plot_scheme(scheme)
+plot(scheme)
 ```
 
 In the next example I will utilize different progression table and progression steps, as well as Linear/Brzycki's Reps-Max model with a custom model parameter value:
@@ -386,7 +386,7 @@ scheme <- scheme_wave(
   )
 )
 
-plot_scheme(scheme)
+plot(scheme)
 ```
 
 This scheme would be pretty impossible to do, since I am using the *intensive* variant of the Deducted Intensity progression, but in this case I have 3 heavy sets. Here is the Deducted Intensity progression table (with -2.5% decrement across volume types and progression steps):
@@ -405,7 +405,7 @@ plot_progression_table(
 ```{r}
 plot_progression_table(
   progression_DI,
-  plot = "adjustment", adjustment_multiplier =  100,
+  plot = "adjustment", adjustment_multiplier = 100,
   max_perc_1RM_func = max_perc_1RM_linear,
   klin = 36,
   type = "grinding",
@@ -431,7 +431,7 @@ scheme <- scheme_wave(
   )
 )
 
-plot_scheme(scheme)
+plot(scheme)
 ```
 
 The `scheme_` functions afford you great flexibility in designing set and rep schemes. The following set and rep schemes are implemented in `{STMr}` package: `scheme_generic()`, `scheme_wave()`, `scheme_plateau()`, `scheme_step()`, `scheme_step_reverse()`, `scheme_wave_descending()`, `scheme_light_heavy()`, `scheme_pyramid()`, `scheme_pyramid_reverse()`, `scheme_rep_acc()`. 
@@ -466,8 +466,10 @@ scheme_ladder() %>%
 ```
 
 ```{r}
-scheme_wave() %>%
+scheme <- scheme_wave() %>%
   .vertical_rep_accumulation.post()
+
+plot(scheme)
 ```
 
 By default, `.vertical_rep_accumulation.post()` function will use the highest progression step in the scheme. 

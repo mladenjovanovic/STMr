@@ -30,7 +30,9 @@ is open-source package under MIT License implemented in the R language.
 -   *vertical planning* functions (start with `vertical_`)
 -   *scheme function* (start with `scheme_`)
 -   plotting and printing functions: `generate_progression_table()`,
-    `plot_progression_table()`, `plot_scheme()`, and `create_example()`
+    `plot_progression_table()`, `plot_scheme()` (deprecated as of
+    `{STMr}` version 0.1.4. Please use S3 `plot()` method instead), and
+    `create_example()`
 -   built-in datasets (`strength_training_log` and `RTF_testing`)
 -   estimation functions (start with `estimate_`)
 
@@ -162,7 +164,7 @@ max_reps_relationship <- tibble(Reps = seq(1, 12)) %>%
 
 ggplot(max_reps_relationship, aes(x = Reps, y = `%1RM`, color = Model)) +
   theme_bw() +
-  geom_line() + 
+  geom_line() +
   scale_x_continuous(breaks = 1:12)
 ```
 
@@ -488,6 +490,15 @@ vertical_linear(reps = c(10, 10, 10), reps_change = c(0, -2, -4))
 #> 9    6     3    0
 ```
 
+You can also plot the vertical plan function, using `plot_vertical()`.
+Migh be easier to comprehend the variations in different vertical plans.
+
+``` r
+plot_vertical(vertical_linear, reps = c(10, 10, 10))
+```
+
+<img src="man/figures/README-unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" />
+
 Most of these Vertical Planning functionalities can be achieved with the
 *generic* Vertical Planning function `vertical_planning()`. As can be
 seen from the output, result of the Vertical Planning functions is a
@@ -561,10 +572,10 @@ following columns: (1) `reps`, (2) `index`, (3) `step`, (4)
 comprehend it:
 
 ``` r
-plot_scheme(scheme)
+plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-23-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" />
 
 In the next example I will utilize different progression table and
 progression steps, as well as Linear/Brzycki’s Reps-Max model with a
@@ -587,10 +598,10 @@ scheme <- scheme_wave(
   )
 )
 
-plot_scheme(scheme)
+plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" />
 
 This scheme would be pretty impossible to do, since I am using the
 *intensive* variant of the Deducted Intensity progression, but in this
@@ -608,12 +619,12 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 plot_progression_table(
   progression_DI,
-  plot = "adjustment", adjustment_multiplier =  100,
+  plot = "adjustment", adjustment_multiplier = 100,
   max_perc_1RM_func = max_perc_1RM_linear,
   klin = 36,
   type = "grinding",
@@ -622,7 +633,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
 
 To make the Waves Loading scheme in the above example doable, I can
 apply additional adjustments to make sets easier. Since I am using
@@ -643,10 +654,10 @@ scheme <- scheme_wave(
   )
 )
 
-plot_scheme(scheme)
+plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;" />
 
 The `scheme_` functions afford you great flexibility in designing set
 and rep schemes. The following set and rep schemes are implemented in
@@ -731,36 +742,27 @@ scheme (this is default option):
 scheme_ladder() %>%
   .vertical_rep_accumulation.post()
 #>    reps index step adjustment perc_1RM
-#> 2     2     1    0    -0.0455    0.705
-#> 3     7     1    0    -0.0455    0.705
-#> 4     1     2    0    -0.0455    0.705
-#> 5     3     2    0    -0.0455    0.705
-#> 6     8     2    0    -0.0455    0.705
-#> 7     2     3    0    -0.0455    0.705
-#> 8     4     3    0    -0.0455    0.705
-#> 9     9     3    0    -0.0455    0.705
-#> 10    3     4    0    -0.0455    0.705
-#> 11    5     4    0    -0.0455    0.705
-#> 12   10     4    0    -0.0455    0.705
+#> 1     2     1    0    -0.0455    0.705
+#> 2     7     1    0    -0.0455    0.705
+#> 3     1     2    0    -0.0455    0.705
+#> 4     3     2    0    -0.0455    0.705
+#> 5     8     2    0    -0.0455    0.705
+#> 6     2     3    0    -0.0455    0.705
+#> 7     4     3    0    -0.0455    0.705
+#> 8     9     3    0    -0.0455    0.705
+#> 9     3     4    0    -0.0455    0.705
+#> 10    5     4    0    -0.0455    0.705
+#> 11   10     4    0    -0.0455    0.705
 ```
 
 ``` r
-scheme_wave() %>%
+scheme <- scheme_wave() %>%
   .vertical_rep_accumulation.post()
-#>    reps index step adjustment perc_1RM
-#> 1     7     1    0    -0.1455    0.605
-#> 2     5     1    0    -0.0909    0.699
-#> 3     3     1    0    -0.0364    0.797
-#> 4     8     2    0    -0.1455    0.605
-#> 5     6     2    0    -0.0909    0.699
-#> 6     4     2    0    -0.0364    0.797
-#> 7     9     3    0    -0.1455    0.605
-#> 8     7     3    0    -0.0909    0.699
-#> 9     5     3    0    -0.0364    0.797
-#> 10   10     4    0    -0.1455    0.605
-#> 11    8     4    0    -0.0909    0.699
-#> 12    6     4    0    -0.0364    0.797
+
+plot(scheme)
 ```
+
+<img src="man/figures/README-unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;" />
 
 By default, `.vertical_rep_accumulation.post()` function will use the
 highest progression step in the scheme.
@@ -867,7 +869,7 @@ gg_relative <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM, color = A
 gg_absolute + gg_relative + plot_layout(widths = c(1, 1.1))
 ```
 
-<img src="man/figures/README-unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" />
 
 Let’s use *Athlete B* from RTF testing dataset to estimate individual
 model parameter values for Epley’s, Modified Epley’s, and
@@ -1009,7 +1011,7 @@ ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
   geom_line(data = pred_df, aes(x = perc_1RM * 100, y = nRM), size = 1.5, alpha = 0.8)
 ```
 
-<img src="man/figures/README-unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
 
 When analyzing multiple individuals, particularly when absolute weights
 are used instead of %1RM, one needs to utilize mixed-effect approach.
@@ -1100,7 +1102,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" />
 
 `{STMr}` package also implements mixed-effect models that utilize
 absolute weight values. As alluded previously, this is novel technique
@@ -1185,7 +1187,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" />
 
 Mixed-effects functions implemented in `{STMr}` package allows you to
 set-up random parameters using `random=` function argument. In the
@@ -1266,7 +1268,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
 
 In my opinion this doesn’t make much sense. If you are interested in
 estimating group or *generic* `klin` (or `k` or `kmod`) model parameter
@@ -1311,7 +1313,7 @@ gg <- ggplot(strength_training_log) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;" />
 
 We are interested in finding both the “best” and “worst” profiles (as
 well as estimated 1RMs). To achieve this, we will utilize *quantile
@@ -1394,7 +1396,7 @@ gg +
   geom_line(data = pred_df_worst, aes(x = weight, y = nRM), linetype = "dashed")
 ```
 
-<img src="man/figures/README-unnamed-chunk-47-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-48-1.png" width="80%" style="display: block; margin: auto;" />
 
 In this example we have used all 12 weeks of strength training log data
 (i.e., pooled). We can perform some type of “rolling” analysis to get
@@ -1439,7 +1441,7 @@ ggplot(rolling_weeks, aes(x = week_end)) +
   ylab("Estimated 1RM (kg)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-48-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" />
 
 This analysis represents novel technique and the time will tell how
 valid is it and how to interpret it correctly. But at least we have very
