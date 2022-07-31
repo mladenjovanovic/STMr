@@ -67,7 +67,7 @@ plot_scheme <- function(scheme,
       stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.7
     ) +
     ggplot2::geom_text(
-      ggplot2::aes(x = index, y = perc_1RM_norm, group = set_index, label = perc_1RM_str),
+      ggplot2::aes(x = step_index, y = perc_1RM_norm, group = set_index, label = perc_1RM_str),
       position = ggplot2::position_dodge(0.9), vjust = 1.5, size = label_size * 0.75
     ) +
 
