@@ -45,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">STMr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.4</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@
 <em>vertical planning</em> functions (start with <code>vertical_</code>)</li>
 <li>
 <em>scheme function</em> (start with <code>scheme_</code>)</li>
-<li>plotting and printing functions: <code><a href="reference/progression_table.html">generate_progression_table()</a></code>, <code><a href="reference/plot_progression_table.html">plot_progression_table()</a></code>, <code><a href="reference/plot_scheme.html">plot_scheme()</a></code>, and <code><a href="reference/create_example.html">create_example()</a></code>
+<li>plotting and printing functions: <code><a href="reference/progression_table.html">generate_progression_table()</a></code>, <code><a href="reference/plot_progression_table.html">plot_progression_table()</a></code>, <code><a href="reference/plot_scheme.html">plot_scheme()</a></code> (deprecated as of <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> version 0.1.4. Please use S3 <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method instead), and <code><a href="reference/create_example.html">create_example()</a></code>
 </li>
 <li>built-in datasets (<code>strength_training_log</code> and <code>RTF_testing</code>)</li>
 <li>estimation functions (start with <code>estimate_</code>)</li>
@@ -185,7 +185,7 @@
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">max_reps_relationship</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Reps</span>, y <span class="op">=</span> <span class="va">`%1RM`</span>, color <span class="op">=</span> <span class="va">Model</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
@@ -524,6 +524,10 @@
 <span><span class="co">#&gt; 7    6     3    0</span></span>
 <span><span class="co">#&gt; 8    6     3    0</span></span>
 <span><span class="co">#&gt; 9    6     3    0</span></span></code></pre></div>
+<p>You can also plot the vertical plan function, using <code><a href="reference/plot_vertical.html">plot_vertical()</a></code>. Migh be easier to comprehend the variations in different vertical plans.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_vertical.html">plot_vertical</a></span><span class="op">(</span><span class="va">vertical_linear</span>, reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>Most of these Vertical Planning functionalities can be achieved with the <em>generic</em> Vertical Planning function <code><a href="reference/vertical_planning_functions.html">vertical_planning()</a></code>. As can be seen from the output, result of the Vertical Planning functions is a simple <code>data.frame</code> with three columns: (1) <code>reps</code>, (2) <code>index</code>, and (3) <code>step</code>. Usability of Vertical Planning functions is mostly visible at the next layer of prescription: <em>schemes</em> (see <a href="#set-and-rep-schemes">Set and Rep Schemes</a> section).</p>
 <p><a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> currently features the following Vertical Planning functions: <code><a href="reference/vertical_planning_functions.html">vertical_planning()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_constant()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_linear()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_linear_reverse()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_block()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_block_variant()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_block_undulating()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_rep_accumulation()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_set_accumulation()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_set_accumulation_reverse()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_undulating()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_undulating_reverse()</a></code>, <code><a href="reference/vertical_planning_functions.html">vertical_volume_intensity()</a></code>.</p>
 <p>Please note that <code><a href="reference/vertical_planning_functions.html">vertical_rep_accumulation()</a></code> when used with <a href="#set-and-rep-schemes">Set and Rep Schemes</a> will yield <em>wrong</em> results. I will address how to deal with this issue in <a href="#rep-accumulation">Rep Accumulation</a> section.</p>
@@ -533,7 +537,7 @@
 </h2>
 <p>Set and rep schemes are the highest layer in <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package, since they utilize Reps-Max model, adjustment method, progression table, and vertical planning. <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package is built to follow this <em>modular</em> approach, which makes is extensible and flexible.</p>
 <p>Set and rep schemes are implemented using the functions that begin with <code>scheme_</code>. Here is an example for the Wave Set and Rep Scheme (for more information about various set and rep schemes please refer to <a href="https://complementarytraining.net/strength-training-manual-paperback-edition/" class="external-link">Strength Training Manual</a> book):</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Wave set and rep scheme</span></span>
 <span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span>
@@ -555,11 +559,11 @@
 <span><span class="co">#&gt; 6    6     1   -2       8.73    0.671</span></span></code></pre></div>
 <p>Set and rep scheme functions offers you the ability to utilize different vertical planning (using the <code>vertical_planning</code> argument, as well as <code>vertical_planning_control</code> to forward extra parameters to the vertical planning function), progression table (using the <code>progression_table</code> argument, as well as <code>progression_table_control</code> to forward extra parameters, including Reps-Max function), and extra adjustments to the reps utilized. Please note that the adjustment utilized depends on the progression table selected (i.e., if using RIR Increment, adjustment will be RIR).</p>
 <p>The output of the <code>scheme_</code> functions is a simple <code>data.frame</code> with following columns: (1) <code>reps</code>, (2) <code>index</code>, (3) <code>step</code>, (4) <code>adjustment</code>, and (5) <code>perc_1RM</code>. Plotting the scheme is a better way to comprehend it:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_scheme.html">plot_scheme</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-23-1.png" width="80%" style="display: block; margin: auto;"></p>
-<p>In the next example I will utilize different progression table and progression steps, as well as Linear/Brzycki’s Reps-Max model with a custom model parameter value:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p>In the next example I will utilize different progression table and progression steps, as well as Linear/Brzycki’s Reps-Max model with a custom model parameter value:</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Wave set and rep scheme</span></span>
 <span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span>
@@ -576,23 +580,12 @@
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/plot_scheme.html">plot_scheme</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;"></p>
-<p>This scheme would be pretty impossible to do, since I am using the <em>intensive</em> variant of the Deducted Intensity progression, but in this case I have 3 heavy sets. Here is the Deducted Intensity progression table (with -2.5% decrement across volume types and progression steps):</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span></span>
-<span>  <span class="va">progression_DI</span>,</span>
-<span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
-<span>  klin <span class="op">=</span> <span class="fl">36</span>,</span>
-<span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
-<span>  reps <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,</span>
-<span>  signif_digits <span class="op">=</span> <span class="fl">2</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p>This scheme would be pretty impossible to do, since I am using the <em>intensive</em> variant of the Deducted Intensity progression, but in this case I have 3 heavy sets. Here is the Deducted Intensity progression table (with -2.5% decrement across volume types and progression steps):</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span></span>
 <span>  <span class="va">progression_DI</span>,</span>
-<span>  plot <span class="op">=</span> <span class="st">"adjustment"</span>, adjustment_multiplier <span class="op">=</span>  <span class="fl">100</span>,</span>
 <span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
 <span>  klin <span class="op">=</span> <span class="fl">36</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
@@ -600,8 +593,19 @@
 <span>  signif_digits <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;"></p>
-<p>To make the Waves Loading scheme in the above example doable, I can apply additional adjustments to make sets easier. Since I am using Deducted Intensity, adjustments will be in %1RM:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span></span>
+<span>  <span class="va">progression_DI</span>,</span>
+<span>  plot <span class="op">=</span> <span class="st">"adjustment"</span>, adjustment_multiplier <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
+<span>  klin <span class="op">=</span> <span class="fl">36</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"grinding"</span>,</span>
+<span>  reps <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20</span>,</span>
+<span>  signif_digits <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p>To make the Waves Loading scheme in the above example doable, I can apply additional adjustments to make sets easier. Since I am using Deducted Intensity, adjustments will be in %1RM:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Wave set and rep scheme</span></span>
 <span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span>, <span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span>
@@ -616,14 +620,14 @@
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/plot_scheme.html">plot_scheme</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;"></p>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>The <code>scheme_</code> functions afford you great flexibility in designing set and rep schemes. The following set and rep schemes are implemented in <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package: <code><a href="reference/set_and_reps_schemes.html">scheme_generic()</a></code>, <code><a href="reference/set_and_reps_schemes.html">scheme_wave()</a></code>, <code><a href="reference/set_and_reps_schemes.html">scheme_plateau()</a></code>, <code><a href="reference/set_and_reps_schemes.html">scheme_step()</a></code>, <code><a href="reference/set_and_reps_schemes.html">scheme_step_reverse()</a></code>, <code><a href="reference/set_and_reps_schemes.html">scheme_wave_descending()</a></code>, <code><a href="reference/set_and_reps_schemes.html">scheme_light_heavy()</a></code>, <code><a href="reference/set_and_reps_schemes.html">scheme_pyramid()</a></code>, <code><a href="reference/set_and_reps_schemes.html">scheme_pyramid_reverse()</a></code>, <code><a href="reference/set_and_reps_schemes.html">scheme_rep_acc()</a></code>.</p>
 <div class="section level3">
 <h3 id="rep-accumulation">Rep Accumulation<a class="anchor" aria-label="anchor" href="#rep-accumulation"></a>
 </h3>
 <p>If you intend to use <code><a href="reference/vertical_planning_functions.html">vertical_rep_accumulation()</a></code> withing <code>scheme_</code> functions, it will yield wrong result. Here is an example:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_plateau</a></span><span class="op">(</span>reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>, vertical_planning <span class="op">=</span> <span class="va">vertical_rep_accumulation</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    reps index step adjustment perc_1RM</span></span>
 <span><span class="co">#&gt; 1     2     1    0    -0.0273    0.910</span></span>
@@ -640,7 +644,7 @@
 <span><span class="co">#&gt; 12    5     4    0    -0.0341    0.823</span></span></code></pre></div>
 <p>You need to check the <code>perc_1RM</code> column - it needs to be the same across progression steps, but it is not.</p>
 <p>This is due to the modular design of the <a href="https://mladenjovanovic.github.io/shorts/" class="external-link">shorts</a> package. One way to sort this out, is to use the <code><a href="reference/set_and_reps_schemes.html">scheme_rep_acc()</a></code> function:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_rep_acc</a></span><span class="op">(</span>reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    reps index step adjustment perc_1RM</span></span>
 <span><span class="co">#&gt; 1     2     1    0    -0.0341    0.823</span></span>
@@ -656,7 +660,7 @@
 <span><span class="co">#&gt; 11    5     4    0    -0.0341    0.823</span></span>
 <span><span class="co">#&gt; 12    5     4    0    -0.0341    0.823</span></span></code></pre></div>
 <p>With some extra arguments, we can generate waves, pyramid and other schemes:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_rep_acc</a></span><span class="op">(</span>reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>, adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    reps index step adjustment perc_1RM</span></span>
 <span><span class="co">#&gt; 1     7     1    0    -0.1455    0.605</span></span>
@@ -672,37 +676,27 @@
 <span><span class="co">#&gt; 11    8     4    0    -0.0909    0.699</span></span>
 <span><span class="co">#&gt; 12    6     4    0    -0.0364    0.797</span></span></code></pre></div>
 <p>Unfortunately, this will not work for the ladders and volume-intensity scheme. The more <em>universal</em> approach would be to apply rep accumulation <em>AFTER</em> the scheme is generated. For this reason these is <code><a href="reference/vertical_planning_functions.html">.vertical_rep_accumulation.post()</a></code> function, which works across all schemes. Just make sure to use <code>vertical_constant</code> when generating the scheme (this is default option):</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_ladder</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/vertical_planning_functions.html">.vertical_rep_accumulation.post</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    reps index step adjustment perc_1RM</span></span>
-<span><span class="co">#&gt; 2     2     1    0    -0.0455    0.705</span></span>
-<span><span class="co">#&gt; 3     7     1    0    -0.0455    0.705</span></span>
-<span><span class="co">#&gt; 4     1     2    0    -0.0455    0.705</span></span>
-<span><span class="co">#&gt; 5     3     2    0    -0.0455    0.705</span></span>
-<span><span class="co">#&gt; 6     8     2    0    -0.0455    0.705</span></span>
-<span><span class="co">#&gt; 7     2     3    0    -0.0455    0.705</span></span>
-<span><span class="co">#&gt; 8     4     3    0    -0.0455    0.705</span></span>
-<span><span class="co">#&gt; 9     9     3    0    -0.0455    0.705</span></span>
-<span><span class="co">#&gt; 10    3     4    0    -0.0455    0.705</span></span>
-<span><span class="co">#&gt; 11    5     4    0    -0.0455    0.705</span></span>
-<span><span class="co">#&gt; 12   10     4    0    -0.0455    0.705</span></span></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="co">#&gt; 1     2     1    0    -0.0455    0.705</span></span>
+<span><span class="co">#&gt; 2     7     1    0    -0.0455    0.705</span></span>
+<span><span class="co">#&gt; 3     1     2    0    -0.0455    0.705</span></span>
+<span><span class="co">#&gt; 4     3     2    0    -0.0455    0.705</span></span>
+<span><span class="co">#&gt; 5     8     2    0    -0.0455    0.705</span></span>
+<span><span class="co">#&gt; 6     2     3    0    -0.0455    0.705</span></span>
+<span><span class="co">#&gt; 7     4     3    0    -0.0455    0.705</span></span>
+<span><span class="co">#&gt; 8     9     3    0    -0.0455    0.705</span></span>
+<span><span class="co">#&gt; 9     3     4    0    -0.0455    0.705</span></span>
+<span><span class="co">#&gt; 10    5     4    0    -0.0455    0.705</span></span>
+<span><span class="co">#&gt; 11   10     4    0    -0.0455    0.705</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/vertical_planning_functions.html">.vertical_rep_accumulation.post</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    reps index step adjustment perc_1RM</span></span>
-<span><span class="co">#&gt; 1     7     1    0    -0.1455    0.605</span></span>
-<span><span class="co">#&gt; 2     5     1    0    -0.0909    0.699</span></span>
-<span><span class="co">#&gt; 3     3     1    0    -0.0364    0.797</span></span>
-<span><span class="co">#&gt; 4     8     2    0    -0.1455    0.605</span></span>
-<span><span class="co">#&gt; 5     6     2    0    -0.0909    0.699</span></span>
-<span><span class="co">#&gt; 6     4     2    0    -0.0364    0.797</span></span>
-<span><span class="co">#&gt; 7     9     3    0    -0.1455    0.605</span></span>
-<span><span class="co">#&gt; 8     7     3    0    -0.0909    0.699</span></span>
-<span><span class="co">#&gt; 9     5     3    0    -0.0364    0.797</span></span>
-<span><span class="co">#&gt; 10   10     4    0    -0.1455    0.605</span></span>
-<span><span class="co">#&gt; 11    8     4    0    -0.0909    0.699</span></span>
-<span><span class="co">#&gt; 12    6     4    0    -0.0364    0.797</span></span></code></pre></div>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>By default, <code><a href="reference/vertical_planning_functions.html">.vertical_rep_accumulation.post()</a></code> function will use the highest progression step in the scheme.</p>
 </div>
 </div>
@@ -711,7 +705,7 @@
 </h2>
 <p><a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package offers very flexible and customizable approach to percent-based strength prescription. As explained in the previous examples, one can use three models of Reps-Max relationship (or write additional implementation) and apply custom model parameter values (i.e., <code>k</code>, <code>kmod</code>, and <code>klin</code> for Epley’s, Modified Epley’s, and Linear/Brzycki’s models respectively). In addition to providing custom model parameter values, <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package offers function to estimate these parameter values.</p>
 <p>Before introducing the <code>estimate_</code> family of functions, let’s introduce built-in datasets that we are going to use. The first dataset is the RTF testing:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">RTF_testing</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">RTF_testing</span><span class="op">)</span></span>
@@ -726,7 +720,7 @@
 <span><span class="co">#&gt; 6 Athlete B    95           0.7            66.5          67.5       0.711    12</span></span></code></pre></div>
 <p>This dataset contains reps-to-failure tests for 12 athletes, their 1RMs and RTF sets using 90, 80, and 70% 1RM.</p>
 <p>The next dataset is strength training log:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">strength_training_log</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">strength_training_log</span><span class="op">)</span></span>
@@ -745,7 +739,7 @@
 <h3 id="simple-estimation">Simple estimation<a class="anchor" aria-label="anchor" href="#simple-estimation"></a>
 </h3>
 <p>To demonstrate simple profile estimation I will use <code>RTF_testing</code> dataset. The figure below depicts maximum number of repetitions performed against both absolute (or raw) and relative weights (using %1RM).</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("patchwork", dependencies = TRUE)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
 <span></span>
@@ -764,9 +758,9 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">gg_absolute</span> <span class="op">+</span> <span class="va">gg_relative</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html" class="external-link">plot_layout</a></span><span class="op">(</span>widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1.1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>Let’s use <em>Athlete B</em> from RTF testing dataset to estimate individual model parameter values for Epley’s, Modified Epley’s, and Linear/Brzycki’s models.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">athlete_rtf</span> <span class="op">&lt;-</span> <span class="va">RTF_testing</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Athlete</span> <span class="op">==</span> <span class="st">"Athlete B"</span><span class="op">)</span></span>
 <span></span>
@@ -803,7 +797,7 @@
 <p>Estimate functions also allow you to use <em>reverse</em> statistical model (using <code>reverse = TRUE</code> argument), where predictor is number of reps (i.e., nRM), and target variable is %1RM.</p>
 <p>Estimate functions offer various observation weighting options. Options are ‘none’, ‘reps’, ‘load’, ‘eRIR’, ‘reps x load’, ‘reps x eRIR’, ‘load x eRIR’, and ‘reps x load x eRIR’ and are set using the <code>weighted =</code> argument.</p>
 <p>Novel technique implemented into <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> is estimation of both 1RM and model parameter value from absolute weights, rather than from %1RM for which you need known 1RM:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Estimate Epley's model</span></span>
 <span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions.html">estimate_k_1RM</a></span><span class="op">(</span></span>
 <span>  weight <span class="op">=</span> <span class="va">athlete_rtf</span><span class="op">$</span><span class="va">`Real Weight`</span>,</span>
@@ -845,7 +839,7 @@
 </h3>
 <p>The simple estimation function allow for the estimation for a single individual. Simple estimation can also be used for <em>pooled</em> analysis (i.e., all athletes and/or exercises pooled together) with %1RM to get the <em>generic</em> or <em>average</em> model parameter value. Unfortunately, this will not work with the absolute weights as predictors, hence the need to <em>normalize</em> the predictors using relative weight or %1RM.</p>
 <p>Here is an example of pooled profile estimation using the <code>RTF_testing</code> dataset and Modified Epley’s model:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_pooled</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions.html">estimate_kmod</a></span><span class="op">(</span></span>
 <span>  perc_1RM <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real %1RM`</span>,</span>
 <span>  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span>,</span>
@@ -866,10 +860,10 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">Athlete</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"%1RM"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pred_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">perc_1RM</span> <span class="op">*</span> <span class="fl">100</span>, y <span class="op">=</span> <span class="va">nRM</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1.5</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>When analyzing multiple individuals, particularly when absolute weights are used instead of %1RM, one needs to utilize mixed-effect approach. <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package implements non-linear mixed-effect model using the <code>nlme()</code> function from the <a href="https://svn.r-project.org/R-packages/trunk/nlme/" class="external-link">nlme</a> package. Mixed-effects estimation functions in <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package end with <code>_mixed</code>. You can also use the <code>...</code> feature of the mixed-effects estimation functions to forward extra arguments to <code>nlme()</code> function.</p>
 <p>Here is how to perform mixed-effects model using Modified Epley’s model and %1RM as predictor:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions_mixed.html">estimate_kmod_mixed</a></span><span class="op">(</span></span>
 <span>  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span>
 <span>  perc_1RM <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real %1RM`</span>,</span>
@@ -915,7 +909,7 @@
 <span><span class="co">#&gt; Athlete L 0.0453</span></span></code></pre></div>
 <p>Please note the difference between <em>fixed</em> parameter value of <code>kmod</code> estimated using the mixed-effects model (equal to 0.042) and our previous pooled model (equal to 0.045).</p>
 <p>In addition to estimating fixed parameter value, mixed-effects model also estimates <em>random</em> parameter values (i.e., individual athlete model parameter values). Mixed-effects model can be thought as a combination of pooled model (i.e., fixed effects) and multiple individual models (i.e., random effects). Figure below depicts random effects (i.e., individual predictions), fixed effects (i.e., group predictions; thick line), as well as pooled simple model predictions (dashed thick line):</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_rnd_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html" class="external-link">expand_grid</a></span><span class="op">(</span></span>
 <span>  athlete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span><span class="op">)</span>,</span>
 <span>  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.65</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
@@ -933,9 +927,9 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pred_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">perc_1RM</span> <span class="op">*</span> <span class="fl">100</span>, y <span class="op">=</span> <span class="va">nRM</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1.5</span>, alpha <span class="op">=</span> <span class="fl">0.8</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"%1RM"</span><span class="op">)</span></span>
 <span><span class="va">gg</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p><a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package also implements mixed-effect models that utilize absolute weight values. As alluded previously, this is novel technique that besides estimating Reps-Max profile, also estimates 1RM. Here is how to perform mixed-effects Linear/Brzycki’s model using absolute weights:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions_mixed.html">estimate_klin_1RM_mixed</a></span><span class="op">(</span></span>
 <span>  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span>
 <span>  weight <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real Weight`</span>,</span>
@@ -988,7 +982,7 @@
 <span><span class="co">#&gt; Athlete K 24.8  95.5</span></span>
 <span><span class="co">#&gt; Athlete L 39.4 130.1</span></span></code></pre></div>
 <p>Here is how this looks graphically:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_rnd_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html" class="external-link">expand_grid</a></span><span class="op">(</span></span>
 <span>  athlete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span><span class="op">)</span>,</span>
 <span>  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span></span>
@@ -1007,9 +1001,9 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pred_rnd_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">weight</span>, y <span class="op">=</span> <span class="va">nRM</span>, color <span class="op">=</span> <span class="va">athlete</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Weight (kg)"</span><span class="op">)</span></span>
 <span><span class="va">gg</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>Mixed-effects functions implemented in <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package allows you to set-up random parameters using <code>random=</code> function argument. In the previous example both 1RM and <code>klin</code> parameters are treated as random, but you can make <code>klin</code> fixed:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mm3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions_mixed.html">estimate_klin_1RM_mixed</a></span><span class="op">(</span></span>
 <span>  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span>
 <span>  weight <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real Weight`</span>,</span>
@@ -1059,7 +1053,7 @@
 <span><span class="co">#&gt; Athlete K 47.6  89.6</span></span>
 <span><span class="co">#&gt; Athlete L 47.6 125.4</span></span></code></pre></div>
 <p>It is easier to grasp this graphically:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_rnd_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html" class="external-link">expand_grid</a></span><span class="op">(</span></span>
 <span>  athlete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span><span class="op">)</span>,</span>
 <span>  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span></span>
@@ -1078,7 +1072,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pred_rnd_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">weight</span>, y <span class="op">=</span> <span class="va">nRM</span>, color <span class="op">=</span> <span class="va">athlete</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Weight (kg)"</span><span class="op">)</span></span>
 <span><span class="va">gg</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>In my opinion this doesn’t make much sense. If you are interested in estimating group or <em>generic</em> <code>klin</code> (or <code>k</code> or <code>kmod</code>) model parameter values, use fixed estimates, but allow it to vary (i.e. to be random effect). Estimated fixed <code>klin</code> value from random 1RM and random <code>klin</code> model is equal to 46.24, where with the above fixed <code>klin</code> and random 1RM it is equal to 47.62. Regardless of your statistical modeling preference, <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package allows you implementation of each.</p>
 </div>
 <div class="section level3">
@@ -1087,7 +1081,7 @@
 <p>So far we have estimated Reps-Max profiles using sets to failure. This approach demands designated <em>testing</em> session(s). But what if we could estimate Reps-Max profiles as well as 1RMs from training log data? This would allow “embedded” testing, since we would not need designated testing sessions or sets, but we could use normal training log data.</p>
 <p>When sets are not taken to failure, one way to estimate max reps that can be performed is to utilize subjective rating of <em>perceived reps-in-reserve</em> (pRIR or eRIR). For example, if I perform 100kg for 5 reps on the bench press and I rate it with 2pRIR, I can assume that is 7RM load (i.e., 5 reps + 2pRIR).</p>
 <p><code>strength_training_log</code> dataset contains both reps performed as well as eRIR values, including weight used. High eRIR values (&gt;5eRIR) are treated as missing-data (i.e., unreliable). Here is the pooled plot from 12 weeks of training log data for a single exercise:</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">strength_training_log</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html" class="external-link">geom_jitter</a></span><span class="op">(</span></span>
@@ -1101,10 +1095,10 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Weight (kg)"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">gg</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>We are interested in finding both the “best” and “worst” profiles (as well as estimated 1RMs). To achieve this, we will utilize <em>quantile non-linear regression</em>. This quantile non-linear estimation is implemented in <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package using the <code>nlrq()</code> function from the <a href="https://www.r-project.org" class="external-link">quantreg</a> package. Quantile estimation functions ends with <code>_quantile</code>. You can also use the <code>...</code> feature of the quantile estimation functions to forward extra arguments to <code>nlrq()</code> function.</p>
 <p>For the “best” performance profile we can use 0.95 quantile, and for “worst” we can use 0.05 quantile. I will utilize Linear/Brzycki’s model. For more information please refer to <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series.</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mq_best</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions_quantile.html">estimate_klin_1RM_quantile</a></span><span class="op">(</span></span>
 <span>  weight <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">weight</span>,</span>
 <span>  reps <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">reps</span>,</span>
@@ -1153,7 +1147,7 @@
 <span><span class="co">#&gt; klin  1RM </span></span>
 <span><span class="co">#&gt; 28.5 95.0</span></span></code></pre></div>
 <p>Graphically, these profiles look like this:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_df_best</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">120</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nRM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">mq_best</span>, newdata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="va">weight</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">nRM</span> <span class="op">&gt;=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -1165,9 +1159,9 @@
 <span><span class="va">gg</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pred_df_best</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">weight</span>, y <span class="op">=</span> <span class="va">nRM</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pred_df_worst</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">weight</span>, y <span class="op">=</span> <span class="va">nRM</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-47-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-48-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>In this example we have used all 12 weeks of strength training log data (i.e., pooled). We can perform some type of “rolling” analysis to get ideas of trends, particularly the estimated 1RM trend across time. In the following example, I am using rolling 3 weeks estimation of the “best” and “worst” 1RM:</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">estimate_1RM</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df_log</span>, <span class="va">week_start</span>, <span class="va">week_end</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df_log</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>index <span class="op">=</span> <span class="op">(</span><span class="va">phase</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fl">3</span> <span class="op">+</span> <span class="va">week</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -1202,7 +1196,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Week"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Estimated 1RM (kg)"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-48-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>This analysis represents novel technique and the time will tell how valid is it and how to interpret it correctly. But at least we have very powerful, transparent, and flexible open-source tool: <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package.</p>
 </div>
 </div>
@@ -1211,7 +1205,7 @@
 <a class="anchor" aria-label="anchor" href="#how-to-cite-stmr"></a>
 </h2>
 <p>If you are using <a href="https://mladenjovanovic.github.io/STMr/" class="external-link">STMr</a> package in your publications, please use the following citation:</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"STMr"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; To cite 'STMr' in publications use:</span></span>

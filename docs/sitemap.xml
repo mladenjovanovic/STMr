@@ -55,16 +55,19 @@
     <loc>/reference/max_reps.html</loc>
   </url>
   <url>
-    <loc>/reference/nRM_testing.html</loc>
+    <loc>/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>/reference/pipe.html</loc>
+    <loc>/reference/plot.STMr_scheme.html</loc>
   </url>
   <url>
     <loc>/reference/plot_progression_table.html</loc>
   </url>
   <url>
     <loc>/reference/plot_scheme.html</loc>
+  </url>
+  <url>
+    <loc>/reference/plot_vertical.html</loc>
   </url>
   <url>
     <loc>/reference/progression_table.html</loc>
