@@ -1,6 +1,6 @@
 #' Plotting of the Progression Table
 #'
-#' Functions for creating \code{ggplot2} plot of the Progression Table
+#' Function for creating \code{ggplot2} plot of the Progression Table
 #'
 #' @param progression_table Function for creating progression table
 #' @param signif_digits Rounding numbers for plotting. Default is 3

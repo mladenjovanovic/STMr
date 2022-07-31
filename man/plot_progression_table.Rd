@@ -34,7 +34,7 @@ Default is 1}
 \code{ggplot2} object
 }
 \description{
-Functions for creating \code{ggplot2} plot of the Progression Table
+Function for creating \code{ggplot2} plot of the Progression Table
 }
 \examples{
 plot_progression_table(progression_RIR_increment, "\%1RM")
