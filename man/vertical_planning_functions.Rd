@@ -172,7 +172,6 @@ vertical_planning(
 )
 
 
-
 # Constant
 # ----------------------------------
 vertical_constant(c(5, 5, 5), 4)

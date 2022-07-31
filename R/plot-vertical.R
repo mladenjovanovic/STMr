@@ -36,7 +36,7 @@ plot_vertical <- function(vertical_plan,
       step_index = paste0("Step #", index),
       reps_norm = 0.2 + range01(reps),
       step_norm = 1.35 + range01(step),
-      step_str =  step
+      step_str = step
     ) %>%
     # Plot
     ggplot2::ggplot() +
@@ -76,9 +76,4 @@ plot_vertical <- function(vertical_plan,
       panel.grid.major = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank()
     )
-
-
-
-
-
 }

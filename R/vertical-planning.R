@@ -48,7 +48,6 @@
 #'   step = c(0, 0, 0, 0)
 #' )
 #'
-#'
 NULL
 
 #' @describeIn vertical_planning_functions Generic Vertical Planning

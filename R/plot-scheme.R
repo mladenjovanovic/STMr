@@ -1,6 +1,6 @@
 plot_scheme_ <- function(scheme,
-                        font_size = 8,
-                        label_size = 2.5) {
+                         font_size = 8,
+                         label_size = 2.5) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
@@ -28,13 +28,13 @@ plot_scheme_ <- function(scheme,
       perc_1RM_str = paste0(perc_1RM, "%")
     ) %>%
     # Remove reps
-    #dplyr::mutate(
+    # dplyr::mutate(
     #  reps = ifelse(reps >= 1, reps, NA),
     #  reps_norm = ifelse(reps >= 1, reps_norm, NA),
     #  perc_1RM_norm = ifelse(reps >= 1, perc_1RM_norm, NA),
     #  perc_1RM = ifelse(reps >= 1, perc_1RM, NA),
     #  perc_1RM_str = ifelse(reps >= 1, perc_1RM_str, "")
-    #) %>%
+    # ) %>%
     # Plot
     ggplot2::ggplot() +
     ggplot2::theme_grey(font_size) +
@@ -101,10 +101,10 @@ plot_scheme_ <- function(scheme,
 plot_scheme <- function(scheme,
                         font_size = 8,
                         label_size = 2.5) {
-
   warning("`plot_scheme()` is deprecated as of STMr 0.1.4. Please use S3 `plot()` method instead.", call. = FALSE, immediate. = TRUE)
   plot_scheme_(
     scheme = scheme,
     font_size = font_size,
-    label_size = label_size)
+    label_size = label_size
+  )
 }
