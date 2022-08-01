@@ -115,16 +115,13 @@ scheme_ladder(
 \arguments{
 \item{reps}{Numeric vector indicating reps prescription}
 
-\item{adjustment}{Numeric vector indicating adjustments. Forwarded to \code{progression_table}.
-If the \code{progression_table} is \code{\link{progression_RIR_increment}}, \code{adjustment} will be done
-using RIR. On the other hand, if \code{\link{progression_perc_drop}} is used, \code{adjustment} will be done
-using 1RM percentage}
+\item{adjustment}{Numeric vector indicating adjustments. Forwarded to \code{progression_table}.}
 
-\item{vertical_planning}{Vertical planning function. Default is \code{\link{vertical_linear}}}
+\item{vertical_planning}{Vertical planning function. Default is \code{\link{vertical_constant}}}
 
 \item{vertical_planning_control}{Arguments forwarded to the \code{\link{vertical_planning}} function}
 
-\item{progression_table}{Progression table function. Default is \code{\link{progression_RIR_increment}}}
+\item{progression_table}{Progression table function. Default is \code{\link{progression_perc_drop}}}
 
 \item{progression_table_control}{Arguments forwarded to the \code{\link{progression_table}} function}
 }
