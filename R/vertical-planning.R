@@ -76,8 +76,16 @@ vertical_planning <- function(reps, reps_change = NULL, step = NULL) {
 
   df$reps <- df$reps + reps_change[df$index]
   df$step <- step[df$index]
+  df$set <- seq_along(reps)
 
-  df
+  # Call constructor
+  new_STMr_vertical(
+    index = df$index,
+    step = df$step,
+    set = df$set,
+    reps = df$reps
+  )
+
 }
 
 #' @describeIn vertical_planning_functions Constants Vertical Planning
@@ -262,8 +270,13 @@ vertical_set_accumulation <- function(reps,
       dplyr::arrange(index, set_index)
   }
 
-  dplyr::select(vp, reps, index, step) %>%
-    data.frame()
+  # Call constructor
+  new_STMr_vertical(
+    index = vp$index,
+    step = vp$step,
+    set = vp$set_index,
+    reps = vp$reps
+  )
 }
 
 #' @describeIn vertical_planning_functions Set Accumulation Reverse Vertical Planning
@@ -356,8 +369,13 @@ vertical_set_accumulation_reverse <- function(reps,
       dplyr::arrange(index, set_index)
   }
 
-  dplyr::select(vp, reps, index, step) %>%
-    data.frame()
+  # Call constructor
+  new_STMr_vertical(
+    index = vp$index,
+    step = vp$step,
+    set = vp$set_index,
+    reps = vp$reps
+  )
 }
 
 #' @describeIn vertical_planning_functions Undulating Vertical Planning

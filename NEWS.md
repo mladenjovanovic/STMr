@@ -18,7 +18,8 @@
 * Added `label_size` and `font_size` arguments to `plot_scheme()` and `plot_progression_table()` functions
 * Removed default progression table from `generate_progression_table()`, `create_example()`, `plot_progression_table()` functions
 * Added `plot_vertical()` function for plotting vertical plan
-* Created `STMr_scheme` class, and now scheme can be plotted by using simple S3 `plot` method. `plot_scheme()` function is now deprecated. Added three types of plots: `bar`, `table`, and `olympic`
+* Created `STMr_scheme` class, and now scheme can be plotted by using simple S3 `plot` method. `plot_scheme()` function is now deprecated. Added three types of plots: `bar`, `table`, and `olympic`. 
+* Added `STMr_vertical` constructor. Now the `vertical_` functions return `STMr_vertical` data frame object with following column names: `index`, `step`, `set`, and `reps`
 
 # STMr 0.1.3
 

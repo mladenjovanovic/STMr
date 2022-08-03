@@ -2,7 +2,7 @@
 #'
 #' Function for creating \code{ggplot2} plot of the Vertical Planning function
 #'
-#' @param vertical_plan Vertical Plan functions
+#' @param vertical_plan Vertical Plan function
 #' @param reps Numeric vector
 #' @param font_size Numeric. Default is 8
 #' @param label_size Numeric. Default is 2.5
@@ -21,6 +21,7 @@ plot_vertical <- function(vertical_plan,
   # Code chunk for dealing with R CMD check note
   index <- NULL
   step <- NULL
+  set <- NULL
   step_index <- NULL
   step_norm <- NULL
   set_index <- NULL
@@ -30,7 +31,7 @@ plot_vertical <- function(vertical_plan,
 
   vertical_plan(reps = reps, ...) %>%
     dplyr::group_by(index) %>%
-    dplyr::mutate(set_index = seq_along(reps)) %>%
+    dplyr::mutate(set_index = set) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(
       step_index = paste0("Step #", index),
