@@ -77,15 +77,16 @@ vertical_planning <- function(reps, reps_change = NULL, step = NULL) {
   df$reps <- df$reps + reps_change[df$index]
   df$step <- step[df$index]
   df$set <- seq_along(reps)
+  df$set_id <- df$set
 
   # Call constructor
   new_STMr_vertical(
     index = df$index,
     step = df$step,
     set = df$set,
+    set_id = df$set_id,
     reps = df$reps
   )
-
 }
 
 #' @describeIn vertical_planning_functions Constants Vertical Planning
@@ -221,6 +222,8 @@ vertical_set_accumulation <- function(reps,
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   index <- NULL
+  set_id <- NULL
+  set <- NULL
   set_index <- NULL
   .accumulate <- NULL
   .repeat <- NULL
@@ -238,43 +241,38 @@ vertical_set_accumulation <- function(reps,
   # Get the initial vertical plan
   vp <- vertical_planning(reps = reps, step = step)
 
-  # Get the set index
-  vp <- vp %>%
-    dplyr::group_by(index) %>%
-    dplyr::mutate(set_index = seq_along(reps)) %>%
-    dplyr::ungroup()
-
   if (sequence == TRUE) {
     vp <- vp %>%
       dplyr::group_by(index) %>%
       dplyr::mutate(
-        .accumulate = set_index %in% accumulate_set,
+        .accumulate = set_id %in% accumulate_set,
         .repeat = ifelse(.accumulate, (set_increment * (index - 1)) + 1, 1),
         .group = mark_sequences(.accumulate)
       ) %>%
       tidyr::uncount(.repeat, .id = ".id") %>%
       dplyr::arrange(.group, .id) %>%
-      dplyr::mutate(set_index = seq_along(reps)) %>%
+      dplyr::mutate(set = seq_along(reps)) %>%
       dplyr::ungroup() %>%
-      dplyr::arrange(index, set_index)
+      dplyr::arrange(index, set)
   } else {
     vp <- vp %>%
       dplyr::group_by(index) %>%
       dplyr::mutate(
-        .accumulate = set_index %in% accumulate_set,
+        .accumulate = set_id %in% accumulate_set,
         .repeat = ifelse(.accumulate, (set_increment * (index - 1)) + 1, 1)
       ) %>%
       tidyr::uncount(.repeat) %>%
-      dplyr::mutate(set_index = seq_along(reps)) %>%
+      dplyr::mutate(set = seq_along(reps)) %>%
       dplyr::ungroup() %>%
-      dplyr::arrange(index, set_index)
+      dplyr::arrange(index, set)
   }
 
   # Call constructor
   new_STMr_vertical(
     index = vp$index,
     step = vp$step,
-    set = vp$set_index,
+    set = vp$set,
+    set_id = vp$set_id,
     reps = vp$reps
   )
 }
@@ -319,6 +317,8 @@ vertical_set_accumulation_reverse <- function(reps,
   # Code chunk for dealing with R CMD check note
   index <- NULL
   set_index <- NULL
+  set_id <- NULL
+  set <- NULL
   .accumulate <- NULL
   .repeat <- NULL
   .group <- NULL
@@ -337,43 +337,38 @@ vertical_set_accumulation_reverse <- function(reps,
 
   max_step_index <- max(vp$index)
 
-  # Get the set index
-  vp <- vp %>%
-    dplyr::group_by(index) %>%
-    dplyr::mutate(set_index = seq_along(reps)) %>%
-    dplyr::ungroup()
-
   if (sequence == TRUE) {
     vp <- vp %>%
       dplyr::group_by(index) %>%
       dplyr::mutate(
-        .accumulate = set_index %in% accumulate_set,
+        .accumulate = set_id %in% accumulate_set,
         .repeat = ifelse(.accumulate, max_step_index - (set_increment * (index - 1)), 1),
         .group = mark_sequences(.accumulate)
       ) %>%
       tidyr::uncount(.repeat, .id = ".id") %>%
       dplyr::arrange(.group, .id) %>%
-      dplyr::mutate(set_index = seq_along(reps)) %>%
+      dplyr::mutate(set = seq_along(reps)) %>%
       dplyr::ungroup() %>%
-      dplyr::arrange(index, set_index)
+      dplyr::arrange(index, set)
   } else {
     vp <- vp %>%
       dplyr::group_by(index) %>%
       dplyr::mutate(
-        .accumulate = set_index %in% accumulate_set,
+        .accumulate = set_id %in% accumulate_set,
         .repeat = ifelse(.accumulate, max_step_index - (set_increment * (index - 1)), 1)
       ) %>%
       tidyr::uncount(.repeat) %>%
-      dplyr::mutate(set_index = seq_along(reps)) %>%
+      dplyr::mutate(set = seq_along(reps)) %>%
       dplyr::ungroup() %>%
-      dplyr::arrange(index, set_index)
+      dplyr::arrange(index, set)
   }
 
   # Call constructor
   new_STMr_vertical(
     index = vp$index,
     step = vp$step,
-    set = vp$set_index,
+    set = vp$set,
+    set_id = vp$set_id,
     reps = vp$reps
   )
 }
@@ -474,7 +469,9 @@ vertical_volume_intensity <- function(reps,
 #'
 #' # Please note that reps < 1 are removed. If you do not want this,
 #' # use `remove_reps = FALSE` parameter
-#' .vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
+#' scheme <- scheme_ladder()
+#' scheme <- .vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
+#' plot(scheme)
 .vertical_rep_accumulation.post <- function(scheme,
                                             rep_decrement = c(-3, -2, -1, 0),
                                             remove_reps = TRUE) {
@@ -489,16 +486,19 @@ vertical_volume_intensity <- function(reps,
   df <- tidyr::expand_grid(
     index_step,
     data.frame(
+      set = selected_step_df$set,
       reps = selected_step_df$reps,
       adjustment = selected_step_df$adjustment,
       perc_1RM = selected_step_df$perc_1RM
     )
   )
 
-  df <- data.frame(
-    reps = df$reps + df$rep_decrement,
+  # Call the constructor
+  df <- new_STMr_scheme(
     index = df$index,
     step = df$step,
+    set = df$set,
+    reps = df$reps + df$rep_decrement,
     adjustment = df$adjustment,
     perc_1RM = df$perc_1RM
   )
@@ -508,12 +508,5 @@ vertical_volume_intensity <- function(reps,
     df <- df[df$reps >= 1, ]
   }
 
-  # Call the constructor
-  new_STMr_scheme(
-    reps = df$reps,
-    index = df$index,
-    step = df$step,
-    adjustment = df$adjustment,
-    perc_1RM = df$perc_1RM
-  )
+  df
 }

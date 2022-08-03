@@ -41,6 +41,7 @@ plot_scheme_bar <- function(scheme,
   # Code chunk for dealing with R CMD check note
   index <- NULL
   reps <- NULL
+  set <- NULL
   perc_1RM <- NULL
   reps_norm <- NULL
   perc_1RM_norm <- NULL
@@ -52,9 +53,7 @@ plot_scheme_bar <- function(scheme,
 
   # Prepare the scheme df
   scheme %>%
-    dplyr::group_by(index) %>%
-    dplyr::mutate(set_index = seq_along(reps)) %>%
-    dplyr::ungroup() %>%
+    dplyr::mutate(set_index = set) %>%
     dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
     dplyr::mutate(
       step_index = paste0("Step #", index),
@@ -118,6 +117,7 @@ plot_scheme_vertical <- function(scheme,
   # Code chunk for dealing with R CMD check note
   index <- NULL
   reps <- NULL
+  set <- NULL
   perc_1RM <- NULL
   reps_norm <- NULL
   perc_1RM_norm <- NULL
@@ -130,9 +130,7 @@ plot_scheme_vertical <- function(scheme,
   # +++++++++++++++++++++++++++++++++++++++++++
 
   scheme %>%
-    dplyr::group_by(index) %>%
-    dplyr::mutate(set_index = rev(seq_along(reps))) %>%
-    dplyr::ungroup() %>%
+    dplyr::mutate(set_index = rev(set)) %>%
     dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
     dplyr::mutate(
       step_index = paste0("Step #", index),
@@ -199,6 +197,7 @@ plot_scheme_fraction <- function(scheme,
   # Code chunk for dealing with R CMD check note
   index <- NULL
   reps <- NULL
+  set <- NULL
   perc_1RM <- NULL
   reps_norm <- NULL
   perc_1RM_norm <- NULL
@@ -209,9 +208,7 @@ plot_scheme_fraction <- function(scheme,
 
 
   scheme %>%
-    dplyr::group_by(index) %>%
-    dplyr::mutate(set_index = seq_along(reps)) %>%
-    dplyr::ungroup() %>%
+    dplyr::mutate(set_index = set) %>%
     dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
     dplyr::mutate(
       step_index = paste0("Step #", index),

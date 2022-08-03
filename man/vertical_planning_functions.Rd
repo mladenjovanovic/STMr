@@ -309,5 +309,7 @@ plot(scheme)
 
 # Please note that reps < 1 are removed. If you do not want this,
 # use `remove_reps = FALSE` parameter
-.vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
+scheme <- scheme_ladder()
+scheme <- .vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
+plot(scheme)
 }

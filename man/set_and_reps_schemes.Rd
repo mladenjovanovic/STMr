@@ -149,6 +149,8 @@ differ to make easier and quicker schemes writing and groupings
 \item \code{scheme_wave_descending()}: Descending Wave set and rep scheme
 
 \item \code{scheme_light_heavy()}: Light-Heavy set and rep scheme
+Please note that the \code{adjustment} column in the output
+will be wrong, hence set to \code{NA}
 
 \item \code{scheme_pyramid()}: Pyramid set and rep scheme
 
@@ -157,6 +159,8 @@ differ to make easier and quicker schemes writing and groupings
 \item \code{scheme_rep_acc()}: Rep Accumulation set and rep scheme
 
 \item \code{scheme_ladder()}: Ladder set and rep scheme
+Please note that the \code{adjustment} column in the output
+will be wrong, hence set to \code{NA}
 
 }}
 \examples{
@@ -287,7 +291,9 @@ plot(scheme)
 
 # Please note that reps < 1 are removed. If you do not want this,
 # use `remove_reps = FALSE` parameter
-.vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
+scheme <- scheme_ladder()
+scheme <- .vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
+plot(scheme)
 
 # Ladder set and rep schemes
 # --------------------------

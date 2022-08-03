@@ -38,30 +38,22 @@ scheme_generic <- function(reps,
   # Just to make sure the lengths are the same
   .tmp <- data.frame(
     reps = reps,
-    adjustment = adjustment,
-    null_adjustment = 0
+    adjustment = adjustment
   )
 
   progression <- do.call(vertical_planning, c(list(reps = .tmp$reps), vertical_planning_control))
 
-  # This needs to be done for the adjustments to work for set accumulation vertical planning
-  adj <- do.call(vertical_planning, c(list(reps = .tmp$adjustment), vertical_planning_control))
-  null_adj <- do.call(vertical_planning, c(list(reps = .tmp$null_adjustment), vertical_planning_control))
-
-  .adjustment <- adj$reps - null_adj$reps
-
-  # Note
-  # ----
-  # This above is a messy/hacking code. It needs to be more "elegant"
-  # In new version this needs to be sorted out by using creator functions with more info
-  # returned (i.e., set, adjustment_table, adjustment_post, adjustment_total)
-  # This can then be used more elegantly
+  # Find reps based on the returned set_id
+  # This is needed for vertical_accumulate_set() and
+  #   vertical_accumulate_set_reverse() functions
+  .reps <- .tmp$reps[progression$set_id]
+  .adjustment <- .tmp$adjustment[progression$set_id]
 
   loads <- do.call(
     progression_table,
     c(
       list(
-        reps = progression$reps,
+        reps = .reps,
         step = progression$step,
         adjustment = .adjustment
       ),
@@ -71,10 +63,11 @@ scheme_generic <- function(reps,
 
   # Constructor
   new_STMr_scheme(
-    reps = progression$reps,
     index = progression$index,
     step = progression$step,
-    adjustment = loads$adjustment,
+    set = progression$set,
+    reps = .reps,
+    adjustment = .adjustment,
     perc_1RM = loads$perc_1RM
   )
 }
@@ -246,6 +239,8 @@ scheme_wave_descending <- function(reps = c(6, 8, 10),
 }
 
 #' @describeIn set_and_reps_schemes Light-Heavy set and rep scheme
+#'     Please note that the \code{adjustment} column in the output
+#'     will be wrong, hence set to \code{NA}
 #' @export
 #' @examples
 #'
@@ -278,6 +273,7 @@ scheme_light_heavy <- function(reps = c(10, 5, 10, 5),
   )
 
   df_max$reps <- df_reps$reps
+  df_max$adjustment <- NA
 
   df_max
 }
@@ -368,7 +364,9 @@ scheme_pyramid_reverse <- function(reps = c(8, 10, 12, 10, 8),
 #'
 #' # Please note that reps < 1 are removed. If you do not want this,
 #' # use `remove_reps = FALSE` parameter
-#' .vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
+#' scheme <- scheme_ladder()
+#' scheme <- .vertical_rep_accumulation.post(scheme, remove_reps = FALSE)
+#' plot(scheme)
 scheme_rep_acc <- function(reps = c(10, 10, 10),
                            adjustment = 0,
                            vertical_planning_control = list(step = rep(0, 4)),
@@ -389,6 +387,8 @@ scheme_rep_acc <- function(reps = c(10, 10, 10),
 }
 
 #' @describeIn set_and_reps_schemes Ladder set and rep scheme
+#'     Please note that the \code{adjustment} column in the output
+#'     will be wrong, hence set to \code{NA}
 #' @export
 #' @examples
 #'
@@ -421,6 +421,6 @@ scheme_ladder <- function(reps = c(3, 5, 10),
   )
 
   df_max$reps <- df_reps$reps
-
+  df_max$adjustment <- NA
   df_max
 }
