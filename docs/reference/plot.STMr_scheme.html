@@ -54,13 +54,17 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for STMr_scheme</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, font_size <span class="op">=</span> <span class="fl">8</span>, label_size <span class="op">=</span> <span class="fl">2.5</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, type <span class="op">=</span> <span class="st">"bar"</span>, font_size <span class="op">=</span> <span class="fl">8</span>, label_size <span class="op">=</span> <span class="fl">2.5</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p><code>STMr_scheme</code> object. See examples</p></dd>
+
+
+<dt>type</dt>
+<dd><p>Type of plot. Options are "bar" (default), "vertical", and "fraction"</p></dd>
 
 
 <dt>font_size</dt>
@@ -96,6 +100,10 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot.STMr_scheme-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, type <span class="op">=</span> <span class="st">"vertical"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot.STMr_scheme-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, type <span class="op">=</span> <span class="st">"fraction"</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot.STMr_scheme-3.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
