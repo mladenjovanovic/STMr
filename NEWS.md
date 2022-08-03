@@ -18,7 +18,9 @@
 * Added `label_size` and `font_size` arguments to `plot_scheme()` and `plot_progression_table()` functions
 * Removed default progression table from `generate_progression_table()`, `create_example()`, `plot_progression_table()` functions
 * Added `plot_vertical()` function for plotting vertical plan
-* Created `STMr_scheme` class, and now scheme can be plotted by using simple S3 `plot` method. `plot_scheme()` function is now deprecated. Added three types of plots: `bar`, `table`, and `olympic`
+* Created `STMr_scheme` class (subclass of data frame), and now scheme can be plotted by using simple S3 `plot` method. `plot_scheme()` function is now deprecated. Added three types of plots: `bar`, `vertical`, and `fraction`. The `STMr_scheme` class has now the following columns: `index`, `step`, `set`, `reps`, `adjustment`, and `perc_1RM`.
+* Added `STMr_vertical` constructor. Now the `vertical_` functions return `STMr_vertical` data frame object with following column names: `index`, `step`, `set`, `set_id`, and `reps`. `set_id` is needed to sort out an issue (see above) for the `vertical_set_accumulation()` and `vertical_set_accumulation_reverse()` vertical plans when adjustment is applied inside `scheme_generic()` function 
+* In the output of the `scheme_light_heavy()` and `scheme_ladder()` functions, I have set `adjustment` to `NA` since to avoid confusing the user. This is because due to the modifications that these functions does to the "light" sets, the adjustment is not applicable and not related to selected progression table
 
 # STMr 0.1.3
 

@@ -1,8 +1,9 @@
-new_STMr_scheme <- function(reps, index, step, adjustment, perc_1RM) {
+new_STMr_scheme <- function(index, step, set, reps, adjustment, perc_1RM) {
   scheme <- data.frame(
-    reps = reps,
     index = index,
     step = step,
+    set = set,
+    reps = reps,
     adjustment = adjustment,
     perc_1RM = perc_1RM
   )

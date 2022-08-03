@@ -13,7 +13,7 @@ plot_vertical(
 )
 }
 \arguments{
-\item{vertical_plan}{Vertical Plan functions}
+\item{vertical_plan}{Vertical Plan function}
 
 \item{reps}{Numeric vector}
 
