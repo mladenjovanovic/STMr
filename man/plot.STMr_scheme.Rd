@@ -4,10 +4,12 @@
 \alias{plot.STMr_scheme}
 \title{Plotting of the Set and Reps Scheme}
 \usage{
-\method{plot}{STMr_scheme}(x, font_size = 8, label_size = 2.5, ...)
+\method{plot}{STMr_scheme}(x, type = "bar", font_size = 8, label_size = 2.5, ...)
 }
 \arguments{
 \item{x}{\code{STMr_scheme} object. See examples}
+
+\item{type}{Type of plot. Options are "bar" (default), "vertical", and "fraction"}
 
 \item{font_size}{Numeric. Default is 8}
 
@@ -33,4 +35,6 @@ scheme <- scheme_wave(
 )
 
 plot(scheme)
+plot(scheme, type = "vertical")
+plot(scheme, type = "fraction")
 }

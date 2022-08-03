@@ -367,6 +367,16 @@ The output of the `scheme_` functions is a simple `data.frame` with following co
 plot(scheme)
 ```
 
+`{STMr}` implements two additional scheme visualizations:
+
+```{r}
+plot(scheme, type = "vertical")
+```
+
+```{r}
+plot(scheme, type = "fraction")
+```
+
 In the next example I will utilize different progression table and progression steps, as well as Linear/Brzycki's Reps-Max model with a custom model parameter value:
 
 ```{r}
