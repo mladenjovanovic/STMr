@@ -61,14 +61,6 @@ plot_scheme_bar <- function(scheme,
       perc_1RM_norm = 1.35 + range01(perc_1RM),
       perc_1RM_str = paste0(perc_1RM, "%")
     ) %>%
-    # Remove reps
-    # dplyr::mutate(
-    #  reps = ifelse(reps >= 1, reps, NA),
-    #  reps_norm = ifelse(reps >= 1, reps_norm, NA),
-    #  perc_1RM_norm = ifelse(reps >= 1, perc_1RM_norm, NA),
-    #  perc_1RM = ifelse(reps >= 1, perc_1RM, NA),
-    #  perc_1RM_str = ifelse(reps >= 1, perc_1RM_str, "")
-    # ) %>%
     # Plot
     ggplot2::ggplot() +
     ggplot2::theme_grey(font_size) +
