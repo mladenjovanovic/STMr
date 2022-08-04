@@ -423,3 +423,131 @@ scheme_ladder <- function(reps = c(3, 5, 10),
   df_max$adjustment <- NA
   df_max
 }
+
+#' @describeIn set_and_reps_schemes Manual set and rep scheme
+#' @param index Numeric vector. If not provided, index will be
+#'     create using sequence of \code{step}
+#' @param step Numeric vector
+#' @param sets Numeric vector. Used to replicate reps and adjustments
+#' @export
+#' @examples
+#'
+#' # Manual set and rep schemes
+#' # --------------------------
+#' scheme_df <- data.frame(
+#'   index = 1, # Use this just as an example
+#'   step = c(-3, -2, -1, 0),
+#'   # Sets are just an easy way to repeat reps and adjustment
+#'   sets = c(5, 4, 3, 2),
+#'   reps = c(5, 4, 3, 2),
+#'   adjustment = 0
+#' )
+#'
+#' # Step index is estimated to be sequences of steps
+#' # If you want specific indexes, use it as an argument (see next example)
+#' scheme <- scheme_manual(
+#'   step = scheme_df$step,
+#'   sets = scheme_df$sets,
+#'   reps = scheme_df$reps,
+#'   adjustment = scheme_df$adjustment
+#' )
+#'
+#' plot(scheme)
+#'
+#' # Here we are going to provide our own index
+#' scheme <- scheme_manual(
+#'   index = scheme_df$index,
+#'   step = scheme_df$step,
+#'   sets = scheme_df$sets,
+#'   reps = scheme_df$reps,
+#'   adjustment = scheme_df$adjustment
+#' )
+#'
+#' plot(scheme)
+#'
+#' # More complicated example
+#' scheme_df <- data.frame(
+#'   step = c(-3, -3, -3, -3, -2, -2, -2, -1, -1, 0),
+#'   sets = 1,
+#'   reps = c(5, 5, 5, 5, 3, 2, 1, 2, 1, 1),
+#'   adjustment = c(0, -0.05, -0.1, -0.15, -0.1, -0.05, 0, -0.1, 0, 0)
+#' )
+#'
+#' scheme_df
+#'
+#' scheme <- scheme_manual(
+#'   step = scheme_df$step,
+#'   sets = scheme_df$sets,
+#'   reps = scheme_df$reps,
+#'   adjustment = scheme_df$adjustment,
+#'
+#'   # Select another progression table
+#'   progression_table = progression_DI,
+#'   # Extra parameters for the progression table
+#'   progression_table_control = list(
+#'     volume = "extensive",
+#'     type = "ballistic",
+#'     max_perc_1RM_func = max_perc_1RM_linear,
+#'     klin = 36)
+#' )
+#'
+#' plot(scheme)
+scheme_manual <- function(index = NULL,
+                          step,
+                          sets = 1,
+                          reps,
+                          adjustment = 0,
+                          progression_table = progression_perc_drop,
+                          progression_table_control = list(volume = "normal")) {
+
+  # Create DF and Get the index
+  if (is.null(index)) {
+    # Create data frame
+    df <- data.frame(
+      step = step,
+      sets = sets,
+      reps = reps,
+      adjustment = adjustment
+    )
+
+    df$index <- mark_index(df$step)
+  } else {
+    # Create data frame
+    df <- data.frame(
+      index = index,
+      step = step,
+      sets = sets,
+      reps = reps,
+      adjustment = adjustment
+    )
+  }
+
+  # Repeat multiple sets
+  df <- df %>%
+    tidyr::uncount(sets) %>%
+    dplyr::group_by(index) %>%
+    dplyr::mutate(set = seq_along(reps)) %>%
+    dplyr::ungroup()
+
+  loads <- do.call(
+    progression_table,
+    c(
+      list(
+        reps = df$reps,
+        step = df$step,
+        adjustment = df$adjustment
+      ),
+      progression_table_control
+    )
+  )
+
+  # Constructor
+  new_STMr_scheme(
+    index = df$index,
+    step = df$step,
+    set = df$set,
+    reps = df$reps,
+    adjustment = loads$adjustment,
+    perc_1RM = loads$perc_1RM
+  )
+}
