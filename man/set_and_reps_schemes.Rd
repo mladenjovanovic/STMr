@@ -148,7 +148,7 @@ differ to make easier and quicker schemes writing and groupings
 
 \item \code{scheme_wave_descending()}: Descending Wave set and rep scheme
 
-\item \code{scheme_light_heavy()}: Light-Heavy set and rep scheme
+\item \code{scheme_light_heavy()}: Light-Heavy set and rep scheme.
 Please note that the \code{adjustment} column in the output
 will be wrong, hence set to \code{NA}
 
@@ -158,7 +158,7 @@ will be wrong, hence set to \code{NA}
 
 \item \code{scheme_rep_acc()}: Rep Accumulation set and rep scheme
 
-\item \code{scheme_ladder()}: Ladder set and rep scheme
+\item \code{scheme_ladder()}: Ladder set and rep scheme.
 Please note that the \code{adjustment} column in the output
 will be wrong, hence set to \code{NA}
 

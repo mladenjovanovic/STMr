@@ -129,7 +129,8 @@ Functions for creating vertical planning (progressions)
 \item \code{.vertical_rep_accumulation.post()}: Rep Accumulation Vertical Planning POST treatment
 This functions is to be applied AFTER scheme is generated. Other options is to use
 \code{\link{scheme_rep_acc}} function, that is flexible enough to generate most options,
-except for the \code{\link{scheme_ladder}} and \code{\link{scheme_light_heavy}}
+except for the \code{\link{scheme_ladder}} and \code{\link{scheme_light_heavy}}. Please note
+that the \code{adjustment} column in the output will be wrong, hence set to \code{NA}
 
 }}
 \examples{
