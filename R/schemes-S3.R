@@ -4,9 +4,11 @@
 #'
 #' @param x \code{STMr_scheme} object. See examples
 #' @param type Type of plot. Options are "bar" (default), "vertical", and "fraction"
-#' @param font_size Numeric. Default is 8
-#' @param label_size Numeric. Default is 2.5
-#' @param ... Not used
+#' @param font_size Numeric. Default is 14
+#' @param ... Forwarded to \code{\link[ggfittext]{geom_bar_text}} and
+#'     \code{\link[ggfittext]{geom_fit_text}} functions. Can be used to se the highest
+#'     labels size, for example, using \code{size=5}. See documentation for these two
+#'     packages for more info
 #' @return \code{ggplot2} object
 #' @export
 #' @examples
@@ -23,19 +25,19 @@
 #' plot(scheme)
 #' plot(scheme, type = "vertical")
 #' plot(scheme, type = "fraction")
-plot.STMr_scheme <- function(x, type = "bar", font_size = 8, label_size = 2.5, ...) {
+plot.STMr_scheme <- function(x, type = "bar", font_size = 14, ...) {
   switch(type,
-    "bar" =  plot_scheme_bar(scheme = x, font_size = font_size, label_size = label_size),
-    "vertical" = plot_scheme_vertical(scheme = x, font_size = font_size, label_size = label_size),
-    "fraction" = plot_scheme_fraction(scheme = x, font_size = font_size, label_size = label_size),
+    "bar" =  plot_scheme_bar(scheme = x, font_size = font_size, ...),
+    "vertical" = plot_scheme_vertical(scheme = x, font_size = font_size, ...),
+    "fraction" = plot_scheme_fraction(scheme = x, font_size = font_size, ...),
     stop("Unknown plot `type`. Please use `bar`, `vertical`, `fraction`", call. = FALSE)
   )
 }
 
 
 plot_scheme_bar <- function(scheme,
-                            font_size = 12,
-                            label_size = 2.5) {
+                            font_size = 14,
+                            ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
@@ -50,10 +52,9 @@ plot_scheme_bar <- function(scheme,
   step_index <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
-
   # Prepare the scheme df
   scheme %>%
-    dplyr::mutate(set_index = set) %>%
+    dplyr::mutate(set_index = factor(set, levels = sort(unique(set)))) %>%
     dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
     dplyr::mutate(
       step_index = paste0("Step #", index),
@@ -66,25 +67,25 @@ plot_scheme_bar <- function(scheme,
     ggplot2::theme_grey(font_size) +
 
     # %1RM
-    ggplot2::geom_bar(
+    ggplot2::geom_col(
       ggplot2::aes(x = step_index, y = perc_1RM_norm, group = set_index),
       fill = color_orange,
-      stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.7
+      width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.7
     ) +
-    ggplot2::geom_text(
+    ggfittext::geom_bar_text(
       ggplot2::aes(x = step_index, y = perc_1RM_norm, group = set_index, label = perc_1RM_str),
-      position = ggplot2::position_dodge(0.9), vjust = 1.5, size = label_size * 0.75
+      position = "dodge", place = "top", color = color_black, min.size = 0, ...
     ) +
 
     # Reps
-    ggplot2::geom_bar(
+    ggplot2::geom_col(
       ggplot2::aes(x = step_index, y = reps_norm, group = set_index),
       fill = color_blue,
-      stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
+      width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
     ) +
-    ggplot2::geom_text(
+    ggfittext::geom_bar_text(
       ggplot2::aes(x = step_index, y = reps_norm, group = set_index, label = reps),
-      position = ggplot2::position_dodge(0.9), vjust = 1.5, size = label_size
+      position = "dodge", place = "top", color = color_black, min.size = 0, ...
     ) +
     ggplot2::ylab(NULL) +
     ggplot2::xlab(NULL) +
@@ -102,8 +103,8 @@ plot_scheme_bar <- function(scheme,
 }
 
 plot_scheme_vertical <- function(scheme,
-                                 font_size = 12,
-                                 label_size = 2.5) {
+                                 font_size = 14,
+                                 ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
@@ -119,12 +120,14 @@ plot_scheme_vertical <- function(scheme,
   presc_center <- NULL
   presc_left <- NULL
   presc_right <- NULL
+  center <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
   scheme %>%
-    dplyr::mutate(set_index = rev(set)) %>%
+    dplyr::mutate(set_index = factor(set, levels = sort(unique(set), decreasing = TRUE))) %>%
     dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
     dplyr::mutate(
+      center = 0,
       step_index = paste0("Step #", index),
       reps_norm = -(0.3 + range01(reps)),
       perc_1RM_norm = (0.3 + range01(perc_1RM)),
@@ -137,31 +140,31 @@ plot_scheme_vertical <- function(scheme,
     ggplot2::theme_grey(font_size) +
 
     # %1RM
-    ggplot2::geom_bar(
+    ggplot2::geom_col(
       ggplot2::aes(x = step_index, y = perc_1RM_norm, group = set_index),
       fill = color_orange,
-      stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
+      width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
     ) +
 
     # Reps
-    ggplot2::geom_bar(
+    ggplot2::geom_col(
       ggplot2::aes(x = step_index, y = reps_norm, group = set_index),
       fill = color_blue,
-      stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
+      width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
     ) +
 
     # Text
-    ggplot2::geom_text(
-      ggplot2::aes(x = step_index, label = presc_center, y = 0, group = set_index),
-      size = label_size, position = ggplot2::position_dodge(0.9)
+    ggfittext::geom_fit_text(
+      ggplot2::aes(x = step_index, label = presc_center, y = center, group = set_index),
+      position = "dodge", min.size = 0, color = color_black, place = "center", ...
     ) +
-    ggplot2::geom_text(
-      ggplot2::aes(x = step_index, label = presc_left, y = 0, group = set_index),
-      size = label_size, hjust = 0.9, position = ggplot2::position_dodge(0.9)
+    ggfittext::geom_bar_text(
+      ggplot2::aes(x = step_index, label = presc_left, y = reps_norm, group = set_index),
+      position = "dodge", min.size = 0, color = color_black, place = "left", ...
     ) +
-    ggplot2::geom_text(
-      ggplot2::aes(x = step_index, label = presc_right, y = 0, group = set_index),
-      size = label_size, hjust = 0, position = ggplot2::position_dodge(0.9)
+    ggfittext::geom_bar_text(
+      ggplot2::aes(x = step_index, label = presc_right, y = perc_1RM_norm, group = set_index),
+      position = "dodge", min.size = 0, color = color_black, place = "left", ...
     ) +
     ggplot2::coord_flip() +
     ggplot2::scale_x_discrete(limits = rev) +
@@ -182,13 +185,15 @@ plot_scheme_vertical <- function(scheme,
 
 
 plot_scheme_fraction <- function(scheme,
-                                 font_size = 12,
-                                 label_size = 2.5) {
+                                 font_size = 14,
+                                 ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   index <- NULL
   reps <- NULL
+  center <- NULL
+  presc_center <- NULL
   set <- NULL
   perc_1RM <- NULL
   reps_norm <- NULL
@@ -198,46 +203,47 @@ plot_scheme_fraction <- function(scheme,
   step_index <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
-
   scheme %>%
-    dplyr::mutate(set_index = set) %>%
+    dplyr::mutate(set_index = factor(set, levels = sort(unique(set)))) %>%
     dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
     dplyr::mutate(
+      center = 0,
       step_index = paste0("Step #", index),
       reps_norm = -(0.3 + range01(reps)),
       perc_1RM_norm = 0.3 + range01(perc_1RM),
-      perc_1RM_str = paste0(perc_1RM, "%")
+      perc_1RM_str = paste0(perc_1RM, "%"),
+      presc_center = "|"
     ) %>%
     # plot
     ggplot2::ggplot() +
     ggplot2::theme_grey(font_size) +
 
     # %1RM
-    ggplot2::geom_bar(
+    ggplot2::geom_col(
       ggplot2::aes(x = step_index, y = perc_1RM_norm, group = set_index),
       fill = color_orange,
-      stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.7
+      width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.7
     ) +
-    ggplot2::geom_text(
-      ggplot2::aes(x = step_index, y = 0, group = set_index, label = perc_1RM_str),
-      position = ggplot2::position_dodge(0.9), vjust = -0.3, size = label_size * 0.75
+    ggfittext::geom_bar_text(
+      ggplot2::aes(x = step_index, y = perc_1RM_norm, group = set_index, label = perc_1RM_str),
+      position = "dodge", min.size = 0, color = color_black, place = "bottom", ...
     ) +
 
     # Reps
-    ggplot2::geom_bar(
+    ggplot2::geom_col(
       ggplot2::aes(x = step_index, y = reps_norm, group = set_index),
       fill = color_blue,
-      stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
+      width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
     ) +
-    ggplot2::geom_text(
-      ggplot2::aes(x = step_index, y = 0, group = set_index, label = reps),
-      position = ggplot2::position_dodge(0.9), vjust = 1.3, size = label_size
+    ggfittext::geom_bar_text(
+      ggplot2::aes(x = step_index, y = reps_norm, group = set_index, label = reps),
+      position = "dodge", min.size = 0, color = color_black, place = "bottom", ...
     ) +
-    ggplot2::geom_text(
-      ggplot2::aes(x = step_index, y = 0, group = set_index),
-      label = "|",
-      position = ggplot2::position_dodge(0.9),
-      size = label_size * 2, angle = 90, vjust = 0.3
+
+    # Fraction
+    ggfittext::geom_fit_text(
+      ggplot2::aes(x = step_index, y = center, group = set_index, label = presc_center),
+      position = "dodge", min.size = 0, color = color_black, angle = 90, ...
     ) +
     ggplot2::ylab(NULL) +
     ggplot2::xlab(NULL) +

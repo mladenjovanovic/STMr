@@ -4,18 +4,19 @@
 \alias{plot.STMr_scheme}
 \title{Plotting of the Set and Reps Scheme}
 \usage{
-\method{plot}{STMr_scheme}(x, type = "bar", font_size = 8, label_size = 2.5, ...)
+\method{plot}{STMr_scheme}(x, type = "bar", font_size = 14, ...)
 }
 \arguments{
 \item{x}{\code{STMr_scheme} object. See examples}
 
 \item{type}{Type of plot. Options are "bar" (default), "vertical", and "fraction"}
 
-\item{font_size}{Numeric. Default is 8}
+\item{font_size}{Numeric. Default is 14}
 
-\item{label_size}{Numeric. Default is 2.5}
-
-\item{...}{Not used}
+\item{...}{Forwarded to \code{\link[ggfittext]{geom_bar_text}} and
+\code{\link[ggfittext]{geom_fit_text}} functions. Can be used to se the highest
+labels size, for example, using \code{size=5}. See documentation for these two
+packages for more info}
 }
 \value{
 \code{ggplot2} object

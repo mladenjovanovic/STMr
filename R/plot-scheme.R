@@ -4,7 +4,6 @@
 #'
 #' @param scheme Data Frame create by one of the package functions. See examples
 #' @param font_size Numeric. Default is 8
-#' @param label_size Numeric. Default is 2.5
 #' @return \code{ggplot2} object
 #' @export
 #' @examples
@@ -20,12 +19,10 @@
 #'
 #' plot_scheme(scheme)
 plot_scheme <- function(scheme,
-                        font_size = 8,
-                        label_size = 2.5) {
+                        font_size = 8) {
   warning("`plot_scheme()` is deprecated as of STMr 0.1.4. Please use S3 `plot()` method instead.", call. = FALSE, immediate. = TRUE)
   plot_scheme_bar(
     scheme = scheme,
-    font_size = font_size,
-    label_size = label_size
+    font_size = font_size
   )
 }
