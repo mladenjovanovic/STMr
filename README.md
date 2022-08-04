@@ -549,28 +549,31 @@ scheme <- scheme_wave(
 
 head(scheme)
 #>   index step set reps adjustment perc_1RM
-#> 1     1   -2   1   10          4    0.567
-#> 2     1   -2   2    8          2    0.628
-#> 3     1   -2   3    6          0    0.702
-#> 4     1   -2   4   10          6    0.547
-#> 5     1   -2   5    8          4    0.602
-#> 6     1   -2   6    6          2    0.671
+#> 1     1   -2   1   10      12.91    0.567
+#> 2     1   -2   2    8       9.82    0.628
+#> 3     1   -2   3    6       6.73    0.702
+#> 4     1   -2   4   10      14.91    0.547
+#> 5     1   -2   5    8      11.82    0.602
+#> 6     1   -2   6    6       8.73    0.671
 ```
+
+The output of the `scheme_` functions is a simple `data.frame` with the
+following six columns: (1) `index`, (2) `step`, (3) `set`, (4) `reps`,
+(5) `adjustment`, and (6) `perc_1RM`.
 
 Set and rep scheme functions offers you the ability to utilize different
 vertical planning (using the `vertical_planning` argument, as well as
 `vertical_planning_control` to forward extra parameters to the vertical
 planning function), progression table (using the `progression_table`
 argument, as well as `progression_table_control` to forward extra
-parameters, including Reps-Max function), and extra adjustments to the
+parameters, including Reps-Max function), and *extra adjustments* to the
 reps utilized. Please note that the adjustment utilized depends on the
 progression table selected (i.e., if using RIR Increment, adjustment
-will be RIR).
+will be RIR). Also, the `adjustment` in the results is the *total*
+adjustment, which is the sum of the progression table adjustment and
+user-provided extra adjustment using the `adjustment` argument.
 
-The output of the `scheme_` functions is a simple `data.frame` with the
-following six columns: (1) `index`, (2) `step`, (3) `set`, (4) `reps`,
-(5) `adjustment`, and (6) `perc_1RM`. Plotting the scheme is a better
-way to comprehend it:
+Plotting the scheme is a better way to comprehend it:
 
 ``` r
 plot(scheme)
@@ -678,18 +681,18 @@ functions, it will yield wrong result. Here is an example:
 ``` r
 scheme_plateau(reps = c(5, 5, 5), vertical_planning = vertical_rep_accumulation)
 #>    index step set reps adjustment perc_1RM
-#> 1      1    0   1    2          0    0.910
-#> 2      1    0   2    2          0    0.910
-#> 3      1    0   3    2          0    0.910
-#> 4      2    0   1    3          0    0.880
-#> 5      2    0   2    3          0    0.880
-#> 6      2    0   3    3          0    0.880
-#> 7      3    0   1    4          0    0.851
-#> 8      3    0   2    4          0    0.851
-#> 9      3    0   3    4          0    0.851
-#> 10     4    0   1    5          0    0.823
-#> 11     4    0   2    5          0    0.823
-#> 12     4    0   3    5          0    0.823
+#> 1      1    0   1    2    -0.0273    0.910
+#> 2      1    0   2    2    -0.0273    0.910
+#> 3      1    0   3    2    -0.0273    0.910
+#> 4      2    0   1    3    -0.0295    0.880
+#> 5      2    0   2    3    -0.0295    0.880
+#> 6      2    0   3    3    -0.0295    0.880
+#> 7      3    0   1    4    -0.0318    0.851
+#> 8      3    0   2    4    -0.0318    0.851
+#> 9      3    0   3    4    -0.0318    0.851
+#> 10     4    0   1    5    -0.0341    0.823
+#> 11     4    0   2    5    -0.0341    0.823
+#> 12     4    0   3    5    -0.0341    0.823
 ```
 
 You need to check the `perc_1RM` column - it needs to be the same across
@@ -701,18 +704,18 @@ sort this out, is to use the `scheme_rep_acc()` function:
 ``` r
 scheme_rep_acc(reps = c(5, 5, 5))
 #>    index step set reps adjustment perc_1RM
-#> 1      1    0   1    2          0    0.823
-#> 2      1    0   2    2          0    0.823
-#> 3      1    0   3    2          0    0.823
-#> 4      2    0   1    3          0    0.823
-#> 5      2    0   2    3          0    0.823
-#> 6      2    0   3    3          0    0.823
-#> 7      3    0   1    4          0    0.823
-#> 8      3    0   2    4          0    0.823
-#> 9      3    0   3    4          0    0.823
-#> 10     4    0   1    5          0    0.823
-#> 11     4    0   2    5          0    0.823
-#> 12     4    0   3    5          0    0.823
+#> 1      1    0   1    2    -0.0341    0.823
+#> 2      1    0   2    2    -0.0341    0.823
+#> 3      1    0   3    2    -0.0341    0.823
+#> 4      2    0   1    3    -0.0341    0.823
+#> 5      2    0   2    3    -0.0341    0.823
+#> 6      2    0   3    3    -0.0341    0.823
+#> 7      3    0   1    4    -0.0341    0.823
+#> 8      3    0   2    4    -0.0341    0.823
+#> 9      3    0   3    4    -0.0341    0.823
+#> 10     4    0   1    5    -0.0341    0.823
+#> 11     4    0   2    5    -0.0341    0.823
+#> 12     4    0   3    5    -0.0341    0.823
 ```
 
 With some extra arguments, we can generate waves, pyramid and other
@@ -721,18 +724,18 @@ schemes:
 ``` r
 scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
 #>    index step set reps adjustment perc_1RM
-#> 1      1    0   1    7      -0.10    0.605
-#> 2      1    0   2    5      -0.05    0.699
-#> 3      1    0   3    3       0.00    0.797
-#> 4      2    0   1    8      -0.10    0.605
-#> 5      2    0   2    6      -0.05    0.699
-#> 6      2    0   3    4       0.00    0.797
-#> 7      3    0   1    9      -0.10    0.605
-#> 8      3    0   2    7      -0.05    0.699
-#> 9      3    0   3    5       0.00    0.797
-#> 10     4    0   1   10      -0.10    0.605
-#> 11     4    0   2    8      -0.05    0.699
-#> 12     4    0   3    6       0.00    0.797
+#> 1      1    0   1    7    -0.1455    0.605
+#> 2      1    0   2    5    -0.0909    0.699
+#> 3      1    0   3    3    -0.0364    0.797
+#> 4      2    0   1    8    -0.1455    0.605
+#> 5      2    0   2    6    -0.0909    0.699
+#> 6      2    0   3    4    -0.0364    0.797
+#> 7      3    0   1    9    -0.1455    0.605
+#> 8      3    0   2    7    -0.0909    0.699
+#> 9      3    0   3    5    -0.0364    0.797
+#> 10     4    0   1   10    -0.1455    0.605
+#> 11     4    0   2    8    -0.0909    0.699
+#> 12     4    0   3    6    -0.0364    0.797
 ```
 
 Unfortunately, this will not work for the ladders and volume-intensity

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
   out.width = "80%",
   fig.align = "center",
   fig.width = 10,
-  fig.height = 10 * 0.618, # 1 / phi
+  fig.height = 10 * 0.618, # 1 /phi
   message = FALSE,
   warning = FALSE,
   dpi = 100,
@@ -359,9 +359,11 @@ scheme <- scheme_wave(
 head(scheme)
 ```
 
-Set and rep scheme functions offers you the ability to utilize different vertical planning (using the `vertical_planning` argument, as well as `vertical_planning_control` to forward extra parameters to the vertical planning function), progression table (using the `progression_table` argument, as well as `progression_table_control` to forward extra parameters, including Reps-Max function), and extra adjustments to the reps utilized. Please note that the adjustment utilized depends on the progression table selected (i.e., if using RIR Increment, adjustment will be RIR).
+The output of the `scheme_` functions is a simple `data.frame` with the following six columns: (1) `index`, (2) `step`, (3) `set`, (4) `reps`, (5) `adjustment`, and (6) `perc_1RM`.
 
-The output of the `scheme_` functions is a simple `data.frame` with the following six columns: (1) `index`, (2) `step`, (3) `set`, (4) `reps`, (5) `adjustment`, and (6) `perc_1RM`. Plotting the scheme is a better way to comprehend it:
+Set and rep scheme functions offers you the ability to utilize different vertical planning (using the `vertical_planning` argument, as well as `vertical_planning_control` to forward extra parameters to the vertical planning function), progression table (using the `progression_table` argument, as well as `progression_table_control` to forward extra parameters, including Reps-Max function), and *extra adjustments* to the reps utilized. Please note that the adjustment utilized depends on the progression table selected (i.e., if using RIR Increment, adjustment will be RIR). Also, the `adjustment` in the results is the *total* adjustment, which is the sum of the progression table adjustment and user-provided extra adjustment using the `adjustment` argument. 
+
+Plotting the scheme is a better way to comprehend it:
 
 ```{r}
 plot(scheme)
