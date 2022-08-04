@@ -4,13 +4,7 @@
 \alias{plot_vertical}
 \title{Plotting of the Vertical Planning}
 \usage{
-plot_vertical(
-  vertical_plan,
-  reps = c(5, 5, 5),
-  font_size = 8,
-  label_size = 2.5,
-  ...
-)
+plot_vertical(vertical_plan, reps = c(5, 5, 5), font_size = 8, ...)
 }
 \arguments{
 \item{vertical_plan}{Vertical Plan function}
@@ -19,13 +13,11 @@ plot_vertical(
 
 \item{font_size}{Numeric. Default is 8}
 
-\item{label_size}{Numeric. Default is 2.5}
-
 \item{...}{Forwarded to \code{vertical_plan} function}
 }
 \description{
 Function for creating \code{ggplot2} plot of the Vertical Planning function
 }
 \examples{
-plot_vertical(vertical_block_undulating)
+plot_vertical(vertical_block_undulating, reps = c(8, 6, 4))
 }

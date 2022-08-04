@@ -21,6 +21,7 @@ URL: https://mladenjovanovic.github.io/STMr/
 BugReports: https://github.com/mladenjovanovic/STMr/issues
 Imports: 
     dplyr,
+    ggfittext,
     ggplot2,
     magrittr,
     nlme,

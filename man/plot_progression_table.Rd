@@ -10,7 +10,6 @@ plot_progression_table(
   signif_digits = 3,
   adjustment_multiplier = 1,
   font_size = 8,
-  label_size = 2.5,
   ...
 )
 }
@@ -26,9 +25,7 @@ Default is 1}
 
 \item{font_size}{Numeric. Default is 8}
 
-\item{label_size}{Numeric. Default is 2.5}
-
-\item{...}{Forwarder to the \code{\link{generate_progression_table}} function}
+\item{...}{Forwarded to the \code{\link{generate_progression_table}} function}
 }
 \value{
 \code{ggplot2} object

@@ -8,8 +8,7 @@
 #'     Default is 1
 #' @param plot Character string. Options include "%1RM" (default) and "adjustment"
 #' @param font_size Numeric. Default is 8
-#' @param label_size Numeric. Default is 2.5
-#' @param ... Forwarder to the \code{\link{generate_progression_table}} function
+#' @param ... Forwarded to the \code{\link{generate_progression_table}} function
 #' @return \code{ggplot2} object
 #' @export
 #' @examples
@@ -27,7 +26,6 @@ plot_progression_table <- function(progression_table,
                                    signif_digits = 3,
                                    adjustment_multiplier = 1,
                                    font_size = 8,
-                                   label_size = 2.5,
                                    ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
@@ -64,8 +62,8 @@ plot_progression_table <- function(progression_table,
   gg <- switch(plot,
     "%1RM" = ggplot2::ggplot(progression_tbl, ggplot2::aes(x = step, y = reps)) +
       ggplot2::theme_linedraw(font_size) +
-      # geom_tile(fill = "transparent", color = "black") +
-      ggplot2::geom_text(ggplot2::aes(label = perc_1RM), size = label_size) +
+      ggplot2::geom_tile(fill = "transparent", color = "transparent") +
+      ggfittext::geom_fit_text(ggplot2::aes(label = perc_1RM), min.size = 0) +
       ggplot2::scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
       ggplot2::theme(
         legend.position = "none",
@@ -80,8 +78,8 @@ plot_progression_table <- function(progression_table,
       ggplot2::ggtitle("%1RM"),
     "adjustment" = ggplot2::ggplot(progression_tbl, ggplot2::aes(x = step, y = reps)) +
       ggplot2::theme_linedraw() +
-      # ggplot2::geom_tile(fill = "transparent", color = "black") +
-      ggplot2::geom_text(ggplot2::aes(label = adjustment), size = label_size) +
+      ggplot2::geom_tile(fill = "transparent", color = "transparent") +
+      ggfittext::geom_fit_text(ggplot2::aes(label = adjustment), min.size = 0) +
       ggplot2::scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
       ggplot2::theme(
         legend.position = "none",

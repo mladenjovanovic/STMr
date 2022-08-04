@@ -5,15 +5,13 @@
 #' @param vertical_plan Vertical Plan function
 #' @param reps Numeric vector
 #' @param font_size Numeric. Default is 8
-#' @param label_size Numeric. Default is 2.5
 #' @param ... Forwarded to \code{vertical_plan} function
 #' @export
 #' @examples
-#' plot_vertical(vertical_block_undulating)
+#' plot_vertical(vertical_block_undulating, reps = c(8, 6, 4))
 plot_vertical <- function(vertical_plan,
                           reps = c(5, 5, 5),
                           font_size = 8,
-                          label_size = 2.5,
                           ...) {
 
 
@@ -44,25 +42,27 @@ plot_vertical <- function(vertical_plan,
     ggplot2::theme_grey(font_size) +
 
     # Step
-    ggplot2::geom_bar(
+    ggplot2::geom_col(
       ggplot2::aes(x = step_index, y = step_norm, group = set_index),
       fill = color_purple,
-      stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.7
+      width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.7
     ) +
-    ggplot2::geom_text(
+    ggfittext::geom_bar_text(
       ggplot2::aes(x = step_index, y = step_norm, group = set_index, label = step_str),
-      position = ggplot2::position_dodge(0.9), vjust = 1.5, size = label_size
+      place = "top",
+      position = "dodge", min.size = 0, color = color_black
     ) +
 
     # Reps
-    ggplot2::geom_bar(
+    ggplot2::geom_col(
       ggplot2::aes(x = step_index, y = reps_norm, group = set_index),
       fill = color_blue,
-      stat = "identity", width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
+      width = 0.8, position = ggplot2::position_dodge(0.9), alpha = 0.8
     ) +
-    ggplot2::geom_text(
+    ggfittext::geom_bar_text(
       ggplot2::aes(x = step_index, y = reps_norm, group = set_index, label = reps),
-      position = ggplot2::position_dodge(0.9), vjust = 1.5, size = label_size
+      place = "top",
+      position = "dodge", min.size = 0, color = color_black
     ) +
     ggplot2::ylab(NULL) +
     ggplot2::xlab(NULL) +
