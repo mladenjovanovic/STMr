@@ -4,14 +4,14 @@
 #'
 #' @param vertical_plan Vertical Plan function
 #' @param reps Numeric vector
-#' @param font_size Numeric. Default is 8
+#' @param font_size Numeric. Default is 14
 #' @param ... Forwarded to \code{vertical_plan} function
 #' @export
 #' @examples
 #' plot_vertical(vertical_block_undulating, reps = c(8, 6, 4))
 plot_vertical <- function(vertical_plan,
                           reps = c(5, 5, 5),
-                          font_size = 8,
+                          font_size = 14,
                           ...) {
 
 

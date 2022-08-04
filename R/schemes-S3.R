@@ -36,7 +36,7 @@ plot.STMr_scheme <- function(x, type = "bar", font_size = 14, ...) {
 
 
 plot_scheme_bar <- function(scheme,
-                            font_size = 14,
+                            font_size,
                             ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
@@ -103,7 +103,7 @@ plot_scheme_bar <- function(scheme,
 }
 
 plot_scheme_vertical <- function(scheme,
-                                 font_size = 14,
+                                 font_size,
                                  ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
@@ -185,7 +185,7 @@ plot_scheme_vertical <- function(scheme,
 
 
 plot_scheme_fraction <- function(scheme,
-                                 font_size = 14,
+                                 font_size,
                                  ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++

@@ -7,7 +7,7 @@
 #' @param adjustment_multiplier Factor to multiply the adjustment. Useful when converting to percentage.
 #'     Default is 1
 #' @param plot Character string. Options include "%1RM" (default) and "adjustment"
-#' @param font_size Numeric. Default is 8
+#' @param font_size Numeric. Default is 14
 #' @param ... Forwarded to the \code{\link{generate_progression_table}} function
 #' @return \code{ggplot2} object
 #' @export
@@ -25,7 +25,7 @@ plot_progression_table <- function(progression_table,
                                    plot = "%1RM",
                                    signif_digits = 3,
                                    adjustment_multiplier = 1,
-                                   font_size = 8,
+                                   font_size = 14,
                                    ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
