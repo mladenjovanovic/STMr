@@ -123,7 +123,6 @@ mark_sequences <- function(x) {
 
 # Function to mark and index steps
 mark_index <- function(x) {
-
   group <- x
   group_index <- 1
 
@@ -142,4 +141,3 @@ mark_index <- function(x) {
 
   group
 }
-
