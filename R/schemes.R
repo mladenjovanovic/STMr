@@ -66,7 +66,7 @@ scheme_generic <- function(reps,
     step = progression$step,
     set = progression$set,
     reps = progression$reps,
-    adjustment = .adjustment,
+    adjustment = loads$adjustment,
     perc_1RM = loads$perc_1RM
   )
 }
@@ -237,7 +237,7 @@ scheme_wave_descending <- function(reps = c(6, 8, 10),
   )
 }
 
-#' @describeIn set_and_reps_schemes Light-Heavy set and rep scheme
+#' @describeIn set_and_reps_schemes Light-Heavy set and rep scheme.
 #'     Please note that the \code{adjustment} column in the output
 #'     will be wrong, hence set to \code{NA}
 #' @export
@@ -385,7 +385,7 @@ scheme_rep_acc <- function(reps = c(10, 10, 10),
   scheme_df
 }
 
-#' @describeIn set_and_reps_schemes Ladder set and rep scheme
+#' @describeIn set_and_reps_schemes Ladder set and rep scheme.
 #'     Please note that the \code{adjustment} column in the output
 #'     will be wrong, hence set to \code{NA}
 #' @export
