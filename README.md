@@ -819,8 +819,8 @@ plot(scheme)
 
 <img src="man/figures/README-unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" />
 
-Set accumulation function is very flexible. For example, here we can use
-`vertical_set_accumulation_reverse()` to create a neat
+Set accumulation function is very flexible. As an another example, we
+can use `vertical_set_accumulation_reverse()` to create a neat
 accumulation-intensification progression:
 
 ``` r
@@ -835,6 +835,23 @@ plot(scheme)
 
 <img src="man/figures/README-unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" />
 
+Maybe we want another progression steps:
+
+``` r
+scheme <- scheme_wave(
+  reps = c(6, 4, 2),
+  vertical_planning = vertical_set_accumulation_reverse,
+  vertical_planning_control = list(
+    accumulate_set = 1:3,
+    # Lets create non-linear (aka unduating step changes)
+    step = c(-2, -1, -3, 0))
+  )
+
+plot(scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
+
 But maybe we want the reps to fall down as well, to have a even bigger
 accumulation-intensification effect. In that case we case use
 `reps_change` argument:
@@ -843,13 +860,33 @@ accumulation-intensification effect. In that case we case use
 scheme <- scheme_wave(
   reps = c(10, 8, 6),
   vertical_planning = vertical_set_accumulation_reverse,
-  vertical_planning_control = list(accumulate_set = 1:3, reps_change = c(0, -1, -2, -3))
+  vertical_planning_control = list(
+    accumulate_set = 1:3,
+    reps_change = c(0, -1, -2, -3))
   )
 
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
+
+As an last example, let us create Block Undulating with reverse set
+accumulation:
+
+``` r
+scheme <- scheme_wave(
+  reps = c(10, 8, 6),
+  vertical_planning = vertical_set_accumulation_reverse,
+  vertical_planning_control = list(
+    accumulate_set = 1:3,
+    step = c(-2, -1, -3, 0),
+    reps_change = c(0, -2, -1, -3))
+  )
+
+plot(scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Manual scheme
 
@@ -881,7 +918,7 @@ scheme <- scheme_manual(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 
@@ -897,7 +934,7 @@ scheme <- scheme_manual(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-39-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-41-2.png" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 
@@ -941,7 +978,7 @@ scheme <- scheme_manual(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-39-3.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-41-3.png" width="80%" style="display: block; margin: auto;" />
 
 ## Estimation
 
@@ -1045,7 +1082,7 @@ gg_relative <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM, color = A
 gg_absolute + gg_relative + plot_layout(widths = c(1, 1.1))
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" />
 
 Let’s use *Athlete B* from RTF testing dataset to estimate individual
 model parameter values for Epley’s, Modified Epley’s, and
@@ -1187,7 +1224,7 @@ ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
   geom_line(data = pred_df, aes(x = perc_1RM * 100, y = nRM), size = 1.5, alpha = 0.8)
 ```
 
-<img src="man/figures/README-unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-47-1.png" width="80%" style="display: block; margin: auto;" />
 
 When analyzing multiple individuals, particularly when absolute weights
 are used instead of %1RM, one needs to utilize mixed-effect approach.
@@ -1278,7 +1315,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-47-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" />
 
 `{STMr}` package also implements mixed-effect models that utilize
 absolute weight values. As alluded previously, this is novel technique
@@ -1363,7 +1400,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-51-1.png" width="80%" style="display: block; margin: auto;" />
 
 Mixed-effects functions implemented in `{STMr}` package allows you to
 set-up random parameters using `random=` function argument. In the
@@ -1444,7 +1481,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-51-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-53-1.png" width="80%" style="display: block; margin: auto;" />
 
 In my opinion this doesn’t make much sense. If you are interested in
 estimating group or *generic* `klin` (or `k` or `kmod`) model parameter
@@ -1489,7 +1526,7 @@ gg <- ggplot(strength_training_log) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-52-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-54-1.png" width="80%" style="display: block; margin: auto;" />
 
 We are interested in finding both the “best” and “worst” profiles (as
 well as estimated 1RMs). To achieve this, we will utilize *quantile
@@ -1572,7 +1609,7 @@ gg +
   geom_line(data = pred_df_worst, aes(x = weight, y = nRM), linetype = "dashed")
 ```
 
-<img src="man/figures/README-unnamed-chunk-54-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-56-1.png" width="80%" style="display: block; margin: auto;" />
 
 In this example we have used all 12 weeks of strength training log data
 (i.e., pooled). We can perform some type of “rolling” analysis to get
@@ -1617,7 +1654,7 @@ ggplot(rolling_weeks, aes(x = week_end)) +
   ylab("Estimated 1RM (kg)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-55-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-57-1.png" width="80%" style="display: block; margin: auto;" />
 
 This analysis represents novel technique and the time will tell how
 valid is it and how to interpret it correctly. But at least we have very
@@ -1646,7 +1683,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-56-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-58-1.png" width="80%" style="display: block; margin: auto;" />
 
 Another way to plot the scheme is using the `vertical` method.
 
@@ -1654,7 +1691,7 @@ Another way to plot the scheme is using the `vertical` method.
 plot(scheme, type = "vertical")
 ```
 
-<img src="man/figures/README-unnamed-chunk-57-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;" />
 
 And the final method is to use `fraction` method, which is very similar
 to the Olympic weightlifting log notation:
@@ -1663,7 +1700,7 @@ to the Olympic weightlifting log notation:
 plot(scheme, type = "fraction")
 ```
 
-<img src="man/figures/README-unnamed-chunk-58-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-60-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Different label sizes
 
@@ -1674,7 +1711,7 @@ size. This can be useful later once we used facets.
 plot(scheme, font_size = 20)
 ```
 
-<img src="man/figures/README-unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-61-1.png" width="80%" style="display: block; margin: auto;" />
 
 The plotting allows for the flexible labels, using the `{ggfittext}`
 package, which fits the labels so they do not exit the bars. Here is an
@@ -1690,7 +1727,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-60-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-62-1.png" width="80%" style="display: block; margin: auto;" />
 
 Using the `size` argument, you can set the maximum label size. This is
 useful if you want to avoid having different sizes of labels on your
@@ -1701,7 +1738,7 @@ bigger than selected font size:
 plot(scheme, size = 5)
 ```
 
-<img src="man/figures/README-unnamed-chunk-61-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-63-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Creating facets
 
@@ -1732,7 +1769,7 @@ plot(scheme_df) +
   facet_wrap(~scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-62-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-64-1.png" width="80%" style="display: block; margin: auto;" />
 
 Now we can adjust the font if needed:
 
@@ -1741,7 +1778,7 @@ plot(scheme_df, size = 4, font_size = 10) +
   facet_wrap(~scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-63-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Further information
 
