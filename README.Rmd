@@ -13,11 +13,11 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "80%",
   fig.align = "center",
-  fig.width = 6,
-  fig.height = 6 * 0.618, # 1 / phi
+  fig.width = 10,
+  fig.height = 10 * 0.618, # 1 / phi
   message = FALSE,
   warning = FALSE,
-  dpi = 150,
+  dpi = 100,
   size = "small"
 )
 
@@ -326,13 +326,13 @@ As can be seen from the code output, this Vertical Planning involves keeping the
 vertical_linear(reps = c(10, 10, 10), reps_change = c(0, -2, -4))
 ```
 
-You can also plot the vertical plan function, using `plot_vertical()`. Migh be easier to comprehend the variations in different vertical plans. 
+You can also plot the vertical plan function, using `plot_vertical()`. Might be easier to comprehend the variations in different vertical plans. 
 
 ```{r}
 plot_vertical(vertical_linear, reps = c(10, 10, 10))
 ```
 
-Most of these Vertical Planning functionalities can be achieved with the *generic* Vertical Planning function `vertical_planning()`. As can be seen from the output, result of the Vertical Planning functions is a simple `data.frame` with three columns: (1) `reps`, (2) `index`, and (3) `step`. Usability of Vertical Planning functions is mostly visible at the next layer of prescription: *schemes* (see [Set and Rep Schemes] section).
+Most of these Vertical Planning functionalities can be achieved with the *generic* Vertical Planning function `vertical_planning()`. As can be seen from the output, result of the Vertical Planning functions is a simple `data.frame` with five columns: (1) `index`, (2) `step`, and (3) `set`, (4) `set_id`, and `reps`. Usability of Vertical Planning functions is mostly visible at the next layer of prescription: *schemes* (see [Set and Rep Schemes] section).
 
 `{STMr}` currently features the following Vertical Planning functions: `vertical_planning()`, `vertical_constant()`, `vertical_linear()`, `vertical_linear_reverse()`, `vertical_block()`, `vertical_block_variant()`, `vertical_block_undulating()`, `vertical_rep_accumulation()`, `vertical_set_accumulation()`, `vertical_set_accumulation_reverse()`, `vertical_undulating()`, `vertical_undulating_reverse()`, `vertical_volume_intensity()`.
 
@@ -361,21 +361,13 @@ head(scheme)
 
 Set and rep scheme functions offers you the ability to utilize different vertical planning (using the `vertical_planning` argument, as well as `vertical_planning_control` to forward extra parameters to the vertical planning function), progression table (using the `progression_table` argument, as well as `progression_table_control` to forward extra parameters, including Reps-Max function), and extra adjustments to the reps utilized. Please note that the adjustment utilized depends on the progression table selected (i.e., if using RIR Increment, adjustment will be RIR).
 
-The output of the `scheme_` functions is a simple `data.frame` with following columns: (1) `reps`, (2) `index`, (3) `step`, (4) `adjustment`, and (5) `perc_1RM`. Plotting the scheme is a better way to comprehend it:
+The output of the `scheme_` functions is a simple `data.frame` with the following six columns: (1) `index`, (2) `step`, (3) `set`, (4) `reps`, (5) `adjustment`, and (6) `perc_1RM`. Plotting the scheme is a better way to comprehend it:
 
 ```{r}
 plot(scheme)
 ```
 
-`{STMr}` implements two additional scheme visualizations:
-
-```{r}
-plot(scheme, type = "vertical")
-```
-
-```{r}
-plot(scheme, type = "fraction")
-```
+Check the [Scheme plotting tips] section for more information and tips on plotting schemes. 
 
 In the next example I will utilize different progression table and progression steps, as well as Linear/Brzycki's Reps-Max model with a custom model parameter value:
 
@@ -483,6 +475,43 @@ plot(scheme)
 ```
 
 By default, `.vertical_rep_accumulation.post()` function will use the highest progression step in the scheme. 
+
+### Set Accumulation
+
+Set Accumulation can happen in multiple ways. We can accumulate the last set, which is the simplest and default approach:
+
+```{r}
+scheme <- scheme_step(
+  reps = c(5, 5, 5),
+  vertical_planning = vertical_set_accumulation
+  )
+
+plot(scheme)
+```
+
+We can also accumulate the whole sequence, for example when using the Waves:
+
+```{r}
+scheme <- scheme_wave(
+  reps = c(10, 8, 6),
+  vertical_planning = vertical_set_accumulation,
+  vertical_planning_control = list(accumulate_set = 1:3)
+  )
+
+plot(scheme)
+```
+
+Or, instead of accumulating sequence, we can accumulate individual sets:
+
+```{r}
+scheme <- scheme_wave(
+  reps = c(10, 8, 6),
+  vertical_planning = vertical_set_accumulation,
+  vertical_planning_control = list(accumulate_set = 1:3, sequence = FALSE)
+  )
+
+plot(scheme)
+```
 
 ## Estimation
 
@@ -856,6 +885,98 @@ ggplot(rolling_weeks, aes(x = week_end)) +
 ```
 
 This analysis represents novel technique and the time will tell how valid is it and how to interpret it correctly. But at least we have very powerful, transparent, and flexible open-source tool: `{STMr}` package.
+
+## Scheme plotting tips
+
+Since I have developed the `{STMr}` package to help me write the [Strength Training Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/) Volume 3 book, the plotting functionalites are vast and flexible. Here are the few tip you can use.
+
+### Different ways to plot the scheme
+
+S3 `plot` method for plotting `{STMr}` schemes allow for three different types of plots: (1) `bar` (default), (2) `vertical`, and (3) `fraction`. 
+
+Here is the default `bar` plot:
+
+```{r}
+scheme <- scheme_wave(
+  reps = c(10, 8, 6),
+  vertical_planning = vertical_linear)
+
+plot(scheme)
+```
+
+Another way to plot the scheme is using the `vertical` method.  
+
+```{r}
+plot(scheme, type = "vertical")
+```
+
+And the final method is to use `fraction` method, which is very similar to the Olympic weightlifting log notation:
+
+```{r}
+plot(scheme, type = "fraction")
+```
+
+### Different label sizes
+
+S3 `plot` method for plotting `{STMr}` schemes allow you to set the font size. This can be useful later once we used facets.
+
+```{r}
+plot(scheme, font_size = 20)
+```
+
+The plotting allows for the flexible labels, using the `{ggfittext}` package, which fits the labels so they do not exit the bars. Here is an example using the Set Accumulation vertical plan:
+
+```{r}
+scheme <- scheme_wave(
+  reps = c(10, 10, 10),
+  vertical_planning = vertical_set_accumulation, 
+  vertical_planning_control = list(accumulate_set = 1:3, sequence =TRUE)
+)
+
+plot(scheme)
+```
+
+Using the `size` argument, you can set the maximum label size. This is useful if you want to avoid having different sizes of labels on your plot. The labels will still be shrinked if needed, but it will not be bigger than selected font size:
+
+```{r}
+plot(scheme, size = 5)
+```
+
+### Creating facets
+
+Let's say you want to generate multiple schemes and want to plot them. Here is how you can do it easily:
+
+```{r}
+scheme_1 <- scheme_wave(
+  reps = c(10, 8, 6),
+  vertical_planning = vertical_linear
+)
+
+scheme_2 <- scheme_wave(
+  reps = c(10, 8, 6, 4),
+  vertical_planning = vertical_block_undulating
+)
+
+scheme_df <- rbind(
+  data.frame(scheme = "Linear Wave 10/8/6", scheme_1),
+  data.frame(scheme = "Block Undulating Wave 10/8/6", scheme_2)
+)
+
+# We need to set the same class to allow for S3 plotting method
+class(scheme_df) <- class(scheme_1)
+
+# Since the plot() returns ggplot object, we can create facets
+plot(scheme_df) +
+  facet_wrap(~scheme)
+```
+
+Now we can adjust the font if needed:
+
+```{r}
+plot(scheme_df, size = 4, font_size = 10) +
+  facet_wrap(~scheme)
+```
+
 
 ## Further information
 

@@ -4,14 +4,14 @@
 \alias{plot_vertical}
 \title{Plotting of the Vertical Planning}
 \usage{
-plot_vertical(vertical_plan, reps = c(5, 5, 5), font_size = 8, ...)
+plot_vertical(vertical_plan, reps = c(5, 5, 5), font_size = 14, ...)
 }
 \arguments{
 \item{vertical_plan}{Vertical Plan function}
 
 \item{reps}{Numeric vector}
 
-\item{font_size}{Numeric. Default is 8}
+\item{font_size}{Numeric. Default is 14}
 
 \item{...}{Forwarded to \code{vertical_plan} function}
 }

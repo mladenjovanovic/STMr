@@ -9,7 +9,7 @@ plot_progression_table(
   plot = "\%1RM",
   signif_digits = 3,
   adjustment_multiplier = 1,
-  font_size = 8,
+  font_size = 14,
   ...
 )
 }
@@ -23,7 +23,7 @@ plot_progression_table(
 \item{adjustment_multiplier}{Factor to multiply the adjustment. Useful when converting to percentage.
 Default is 1}
 
-\item{font_size}{Numeric. Default is 8}
+\item{font_size}{Numeric. Default is 14}
 
 \item{...}{Forwarded to the \code{\link{generate_progression_table}} function}
 }

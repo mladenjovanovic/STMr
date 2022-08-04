@@ -457,19 +457,19 @@ Here is an example involving *constant* variant of Vertical Planning:
 
 ``` r
 vertical_constant(reps = c(5, 5, 5))
-#>    reps index step
-#> 1     5     1   -3
-#> 2     5     1   -3
-#> 3     5     1   -3
-#> 4     5     2   -2
-#> 5     5     2   -2
-#> 6     5     2   -2
-#> 7     5     3   -1
-#> 8     5     3   -1
-#> 9     5     3   -1
-#> 10    5     4    0
-#> 11    5     4    0
-#> 12    5     4    0
+#>    index step set set_id reps
+#> 1      1   -3   1      1    5
+#> 2      1   -3   2      2    5
+#> 3      1   -3   3      3    5
+#> 4      2   -2   1      1    5
+#> 5      2   -2   2      2    5
+#> 6      2   -2   3      3    5
+#> 7      3   -1   1      1    5
+#> 8      3   -1   2      2    5
+#> 9      3   -1   3      3    5
+#> 10     4    0   1      1    5
+#> 11     4    0   2      2    5
+#> 12     4    0   3      3    5
 ```
 
 As can be seen from the code output, this Vertical Planning involves
@@ -478,20 +478,21 @@ use *linear* Vertical Planning:
 
 ``` r
 vertical_linear(reps = c(10, 10, 10), reps_change = c(0, -2, -4))
-#>   reps index step
-#> 1   10     1   -2
-#> 2   10     1   -2
-#> 3   10     1   -2
-#> 4    8     2   -1
-#> 5    8     2   -1
-#> 6    8     2   -1
-#> 7    6     3    0
-#> 8    6     3    0
-#> 9    6     3    0
+#>   index step set set_id reps
+#> 1     1   -2   1      1   10
+#> 2     1   -2   2      2   10
+#> 3     1   -2   3      3   10
+#> 4     2   -1   1      1    8
+#> 5     2   -1   2      2    8
+#> 6     2   -1   3      3    8
+#> 7     3    0   1      1    6
+#> 8     3    0   2      2    6
+#> 9     3    0   3      3    6
 ```
 
 You can also plot the vertical plan function, using `plot_vertical()`.
-Migh be easier to comprehend the variations in different vertical plans.
+Might be easier to comprehend the variations in different vertical
+plans.
 
 ``` r
 plot_vertical(vertical_linear, reps = c(10, 10, 10))
@@ -502,10 +503,10 @@ plot_vertical(vertical_linear, reps = c(10, 10, 10))
 Most of these Vertical Planning functionalities can be achieved with the
 *generic* Vertical Planning function `vertical_planning()`. As can be
 seen from the output, result of the Vertical Planning functions is a
-simple `data.frame` with three columns: (1) `reps`, (2) `index`, and (3)
-`step`. Usability of Vertical Planning functions is mostly visible at
-the next layer of prescription: *schemes* (see [Set and Rep
-Schemes](#set-and-rep-schemes) section).
+simple `data.frame` with five columns: (1) `index`, (2) `step`, and (3)
+`set`, (4) `set_id`, and `reps`. Usability of Vertical Planning
+functions is mostly visible at the next layer of prescription: *schemes*
+(see [Set and Rep Schemes](#set-and-rep-schemes) section).
 
 `{STMr}` currently features the following Vertical Planning functions:
 `vertical_planning()`, `vertical_constant()`, `vertical_linear()`,
@@ -547,13 +548,13 @@ scheme <- scheme_wave(
 )
 
 head(scheme)
-#>   reps index step adjustment perc_1RM
-#> 1   10     1   -2      12.91    0.567
-#> 2    8     1   -2       9.82    0.628
-#> 3    6     1   -2       6.73    0.702
-#> 4   10     1   -2      14.91    0.547
-#> 5    8     1   -2      11.82    0.602
-#> 6    6     1   -2       8.73    0.671
+#>   index step set reps adjustment perc_1RM
+#> 1     1   -2   1   10          4    0.567
+#> 2     1   -2   2    8          2    0.628
+#> 3     1   -2   3    6          0    0.702
+#> 4     1   -2   4   10          6    0.547
+#> 5     1   -2   5    8          4    0.602
+#> 6     1   -2   6    6          2    0.671
 ```
 
 Set and rep scheme functions offers you the ability to utilize different
@@ -566,10 +567,10 @@ reps utilized. Please note that the adjustment utilized depends on the
 progression table selected (i.e., if using RIR Increment, adjustment
 will be RIR).
 
-The output of the `scheme_` functions is a simple `data.frame` with
-following columns: (1) `reps`, (2) `index`, (3) `step`, (4)
-`adjustment`, and (5) `perc_1RM`. Plotting the scheme is a better way to
-comprehend it:
+The output of the `scheme_` functions is a simple `data.frame` with the
+following six columns: (1) `index`, (2) `step`, (3) `set`, (4) `reps`,
+(5) `adjustment`, and (6) `perc_1RM`. Plotting the scheme is a better
+way to comprehend it:
 
 ``` r
 plot(scheme)
@@ -577,19 +578,8 @@ plot(scheme)
 
 <img src="man/figures/README-unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" />
 
-`{STMr}` implements two additional scheme visualizations:
-
-``` r
-plot(scheme, type = "vertical")
-```
-
-<img src="man/figures/README-unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" />
-
-``` r
-plot(scheme, type = "fraction")
-```
-
-<img src="man/figures/README-unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" />
+Check the [Scheme plotting tips](#scheme-plotting-tips) section for more
+information and tips on plotting schemes.
 
 In the next example I will utilize different progression table and
 progression steps, as well as Linear/Brzycki’s Reps-Max model with a
@@ -615,7 +605,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" />
 
 This scheme would be pretty impossible to do, since I am using the
 *intensive* variant of the Deducted Intensity progression, but in this
@@ -633,7 +623,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 plot_progression_table(
@@ -647,7 +637,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
 
 To make the Waves Loading scheme in the above example doable, I can
 apply additional adjustments to make sets easier. Since I am using
@@ -671,7 +661,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-30-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;" />
 
 The `scheme_` functions afford you great flexibility in designing set
 and rep schemes. The following set and rep schemes are implemented in
@@ -687,19 +677,19 @@ functions, it will yield wrong result. Here is an example:
 
 ``` r
 scheme_plateau(reps = c(5, 5, 5), vertical_planning = vertical_rep_accumulation)
-#>    reps index step adjustment perc_1RM
-#> 1     2     1    0    -0.0273    0.910
-#> 2     2     1    0    -0.0273    0.910
-#> 3     2     1    0    -0.0273    0.910
-#> 4     3     2    0    -0.0295    0.880
-#> 5     3     2    0    -0.0295    0.880
-#> 6     3     2    0    -0.0295    0.880
-#> 7     4     3    0    -0.0318    0.851
-#> 8     4     3    0    -0.0318    0.851
-#> 9     4     3    0    -0.0318    0.851
-#> 10    5     4    0    -0.0341    0.823
-#> 11    5     4    0    -0.0341    0.823
-#> 12    5     4    0    -0.0341    0.823
+#>    index step set reps adjustment perc_1RM
+#> 1      1    0   1    2          0    0.910
+#> 2      1    0   2    2          0    0.910
+#> 3      1    0   3    2          0    0.910
+#> 4      2    0   1    3          0    0.880
+#> 5      2    0   2    3          0    0.880
+#> 6      2    0   3    3          0    0.880
+#> 7      3    0   1    4          0    0.851
+#> 8      3    0   2    4          0    0.851
+#> 9      3    0   3    4          0    0.851
+#> 10     4    0   1    5          0    0.823
+#> 11     4    0   2    5          0    0.823
+#> 12     4    0   3    5          0    0.823
 ```
 
 You need to check the `perc_1RM` column - it needs to be the same across
@@ -710,19 +700,19 @@ sort this out, is to use the `scheme_rep_acc()` function:
 
 ``` r
 scheme_rep_acc(reps = c(5, 5, 5))
-#>    reps index step adjustment perc_1RM
-#> 1     2     1    0    -0.0341    0.823
-#> 2     2     1    0    -0.0341    0.823
-#> 3     2     1    0    -0.0341    0.823
-#> 4     3     2    0    -0.0341    0.823
-#> 5     3     2    0    -0.0341    0.823
-#> 6     3     2    0    -0.0341    0.823
-#> 7     4     3    0    -0.0341    0.823
-#> 8     4     3    0    -0.0341    0.823
-#> 9     4     3    0    -0.0341    0.823
-#> 10    5     4    0    -0.0341    0.823
-#> 11    5     4    0    -0.0341    0.823
-#> 12    5     4    0    -0.0341    0.823
+#>    index step set reps adjustment perc_1RM
+#> 1      1    0   1    2          0    0.823
+#> 2      1    0   2    2          0    0.823
+#> 3      1    0   3    2          0    0.823
+#> 4      2    0   1    3          0    0.823
+#> 5      2    0   2    3          0    0.823
+#> 6      2    0   3    3          0    0.823
+#> 7      3    0   1    4          0    0.823
+#> 8      3    0   2    4          0    0.823
+#> 9      3    0   3    4          0    0.823
+#> 10     4    0   1    5          0    0.823
+#> 11     4    0   2    5          0    0.823
+#> 12     4    0   3    5          0    0.823
 ```
 
 With some extra arguments, we can generate waves, pyramid and other
@@ -730,19 +720,19 @@ schemes:
 
 ``` r
 scheme_rep_acc(reps = c(10, 8, 6), adjustment = c(-0.1, -0.05, 0))
-#>    reps index step adjustment perc_1RM
-#> 1     7     1    0    -0.1455    0.605
-#> 2     5     1    0    -0.0909    0.699
-#> 3     3     1    0    -0.0364    0.797
-#> 4     8     2    0    -0.1455    0.605
-#> 5     6     2    0    -0.0909    0.699
-#> 6     4     2    0    -0.0364    0.797
-#> 7     9     3    0    -0.1455    0.605
-#> 8     7     3    0    -0.0909    0.699
-#> 9     5     3    0    -0.0364    0.797
-#> 10   10     4    0    -0.1455    0.605
-#> 11    8     4    0    -0.0909    0.699
-#> 12    6     4    0    -0.0364    0.797
+#>    index step set reps adjustment perc_1RM
+#> 1      1    0   1    7      -0.10    0.605
+#> 2      1    0   2    5      -0.05    0.699
+#> 3      1    0   3    3       0.00    0.797
+#> 4      2    0   1    8      -0.10    0.605
+#> 5      2    0   2    6      -0.05    0.699
+#> 6      2    0   3    4       0.00    0.797
+#> 7      3    0   1    9      -0.10    0.605
+#> 8      3    0   2    7      -0.05    0.699
+#> 9      3    0   3    5       0.00    0.797
+#> 10     4    0   1   10      -0.10    0.605
+#> 11     4    0   2    8      -0.05    0.699
+#> 12     4    0   3    6       0.00    0.797
 ```
 
 Unfortunately, this will not work for the ladders and volume-intensity
@@ -755,18 +745,18 @@ scheme (this is default option):
 ``` r
 scheme_ladder() %>%
   .vertical_rep_accumulation.post()
-#>    reps index step adjustment perc_1RM
-#> 1     2     1    0    -0.0455    0.705
-#> 2     7     1    0    -0.0455    0.705
-#> 3     1     2    0    -0.0455    0.705
-#> 4     3     2    0    -0.0455    0.705
-#> 5     8     2    0    -0.0455    0.705
-#> 6     2     3    0    -0.0455    0.705
-#> 7     4     3    0    -0.0455    0.705
-#> 8     9     3    0    -0.0455    0.705
-#> 9     3     4    0    -0.0455    0.705
-#> 10    5     4    0    -0.0455    0.705
-#> 11   10     4    0    -0.0455    0.705
+#>    index step set reps adjustment perc_1RM
+#> 2      1    0   2    2         NA    0.705
+#> 3      1    0   3    7         NA    0.705
+#> 4      2    0   1    1         NA    0.705
+#> 5      2    0   2    3         NA    0.705
+#> 6      2    0   3    8         NA    0.705
+#> 7      3    0   1    2         NA    0.705
+#> 8      3    0   2    4         NA    0.705
+#> 9      3    0   3    9         NA    0.705
+#> 10     4    0   1    3         NA    0.705
+#> 11     4    0   2    5         NA    0.705
+#> 12     4    0   3   10         NA    0.705
 ```
 
 ``` r
@@ -776,10 +766,55 @@ scheme <- scheme_wave() %>%
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;" />
 
 By default, `.vertical_rep_accumulation.post()` function will use the
 highest progression step in the scheme.
+
+### Set Accumulation
+
+Set Accumulation can happen in multiple ways. We can accumulate the last
+set, which is the simplest and default approach:
+
+``` r
+scheme <- scheme_step(
+  reps = c(5, 5, 5),
+  vertical_planning = vertical_set_accumulation
+  )
+
+plot(scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" />
+
+We can also accumulate the whole sequence, for example when using the
+Waves:
+
+``` r
+scheme <- scheme_wave(
+  reps = c(10, 8, 6),
+  vertical_planning = vertical_set_accumulation,
+  vertical_planning_control = list(accumulate_set = 1:3)
+  )
+
+plot(scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" />
+
+Or, instead of accumulating sequence, we can accumulate individual sets:
+
+``` r
+scheme <- scheme_wave(
+  reps = c(10, 8, 6),
+  vertical_planning = vertical_set_accumulation,
+  vertical_planning_control = list(accumulate_set = 1:3, sequence = FALSE)
+  )
+
+plot(scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Estimation
 
@@ -883,7 +918,7 @@ gg_relative <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM, color = A
 gg_absolute + gg_relative + plot_layout(widths = c(1, 1.1))
 ```
 
-<img src="man/figures/README-unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
 
 Let’s use *Athlete B* from RTF testing dataset to estimate individual
 model parameter values for Epley’s, Modified Epley’s, and
@@ -1025,7 +1060,7 @@ ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
   geom_line(data = pred_df, aes(x = perc_1RM * 100, y = nRM), size = 1.5, alpha = 0.8)
 ```
 
-<img src="man/figures/README-unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" />
 
 When analyzing multiple individuals, particularly when absolute weights
 are used instead of %1RM, one needs to utilize mixed-effect approach.
@@ -1116,7 +1151,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" />
 
 `{STMr}` package also implements mixed-effect models that utilize
 absolute weight values. As alluded previously, this is novel technique
@@ -1201,7 +1236,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;" />
 
 Mixed-effects functions implemented in `{STMr}` package allows you to
 set-up random parameters using `random=` function argument. In the
@@ -1282,7 +1317,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-47-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-48-1.png" width="80%" style="display: block; margin: auto;" />
 
 In my opinion this doesn’t make much sense. If you are interested in
 estimating group or *generic* `klin` (or `k` or `kmod`) model parameter
@@ -1327,7 +1362,7 @@ gg <- ggplot(strength_training_log) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-48-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" />
 
 We are interested in finding both the “best” and “worst” profiles (as
 well as estimated 1RMs). To achieve this, we will utilize *quantile
@@ -1410,7 +1445,7 @@ gg +
   geom_line(data = pred_df_worst, aes(x = weight, y = nRM), linetype = "dashed")
 ```
 
-<img src="man/figures/README-unnamed-chunk-50-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-51-1.png" width="80%" style="display: block; margin: auto;" />
 
 In this example we have used all 12 weeks of strength training log data
 (i.e., pooled). We can perform some type of “rolling” analysis to get
@@ -1455,11 +1490,131 @@ ggplot(rolling_weeks, aes(x = week_end)) +
   ylab("Estimated 1RM (kg)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-51-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-52-1.png" width="80%" style="display: block; margin: auto;" />
 
 This analysis represents novel technique and the time will tell how
 valid is it and how to interpret it correctly. But at least we have very
 powerful, transparent, and flexible open-source tool: `{STMr}` package.
+
+## Scheme plotting tips
+
+Since I have developed the `{STMr}` package to help me write the
+[Strength Training
+Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+Volume 3 book, the plotting functionalites are vast and flexible. Here
+are the few tip you can use.
+
+### Different ways to plot the scheme
+
+S3 `plot` method for plotting `{STMr}` schemes allow for three different
+types of plots: (1) `bar` (default), (2) `vertical`, and (3) `fraction`.
+
+Here is the default `bar` plot:
+
+``` r
+scheme <- scheme_wave(
+  reps = c(10, 8, 6),
+  vertical_planning = vertical_linear)
+
+plot(scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-53-1.png" width="80%" style="display: block; margin: auto;" />
+
+Another way to plot the scheme is using the `vertical` method.
+
+``` r
+plot(scheme, type = "vertical")
+```
+
+<img src="man/figures/README-unnamed-chunk-54-1.png" width="80%" style="display: block; margin: auto;" />
+
+And the final method is to use `fraction` method, which is very similar
+to the Olympic weightlifting log notation:
+
+``` r
+plot(scheme, type = "fraction")
+```
+
+<img src="man/figures/README-unnamed-chunk-55-1.png" width="80%" style="display: block; margin: auto;" />
+
+### Different label sizes
+
+S3 `plot` method for plotting `{STMr}` schemes allow you to set the font
+size. This can be useful later once we used facets.
+
+``` r
+plot(scheme, font_size = 20)
+```
+
+<img src="man/figures/README-unnamed-chunk-56-1.png" width="80%" style="display: block; margin: auto;" />
+
+The plotting allows for the flexible labels, using the `{ggfittext}`
+package, which fits the labels so they do not exit the bars. Here is an
+example using the Set Accumulation vertical plan:
+
+``` r
+scheme <- scheme_wave(
+  reps = c(10, 10, 10),
+  vertical_planning = vertical_set_accumulation, 
+  vertical_planning_control = list(accumulate_set = 1:3, sequence =TRUE)
+)
+
+plot(scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-57-1.png" width="80%" style="display: block; margin: auto;" />
+
+Using the `size` argument, you can set the maximum label size. This is
+useful if you want to avoid having different sizes of labels on your
+plot. The labels will still be shrinked if needed, but it will not be
+bigger than selected font size:
+
+``` r
+plot(scheme, size = 5)
+```
+
+<img src="man/figures/README-unnamed-chunk-58-1.png" width="80%" style="display: block; margin: auto;" />
+
+### Creating facets
+
+Let’s say you want to generate multiple schemes and want to plot them.
+Here is how you can do it easily:
+
+``` r
+scheme_1 <- scheme_wave(
+  reps = c(10, 8, 6),
+  vertical_planning = vertical_linear
+)
+
+scheme_2 <- scheme_wave(
+  reps = c(10, 8, 6, 4),
+  vertical_planning = vertical_block_undulating
+)
+
+scheme_df <- rbind(
+  data.frame(scheme = "Linear Wave 10/8/6", scheme_1),
+  data.frame(scheme = "Block Undulating Wave 10/8/6", scheme_2)
+)
+
+# We need to set the same class to allow for S3 plotting method
+class(scheme_df) <- class(scheme_1)
+
+# Since the plot() returns ggplot object, we can create facets
+plot(scheme_df) +
+  facet_wrap(~scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;" />
+
+Now we can adjust the font if needed:
+
+``` r
+plot(scheme_df, size = 4, font_size = 10) +
+  facet_wrap(~scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-60-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Further information
 
