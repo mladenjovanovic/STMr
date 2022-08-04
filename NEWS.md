@@ -22,6 +22,8 @@
 * Added `STMr_vertical` constructor. Now the `vertical_` functions return `STMr_vertical` data frame object with following column names: `index`, `step`, `set`, `set_id`, and `reps`. `set_id` is needed to sort out an issue (see above) for the `vertical_set_accumulation()` and `vertical_set_accumulation_reverse()` vertical plans when adjustment is applied inside `scheme_generic()` function 
 * In the output of the `scheme_light_heavy()` and `scheme_ladder()` functions, I have set `adjustment` to `NA` since to avoid confusing the user. This is because due to the modifications that these functions does to the "light" sets, the adjustment is not applicable and not related to selected progression table
 * Added `{ggfittext}` package dependency, so the plot labels are now flexible and fit the "container". This can be useful when set accumulation is used, so the labels do not go outside of the bars
+* Added `reps_change` to `vertical_set_accumulation()` and `vertical_set_accumulation_reverse()`, making them really flexbile functions
+* Added `scheme_manual()` for manual generation of the scheme, which provides for the ultimate flexibility
 
 # STMr 0.1.3
 

@@ -515,6 +515,95 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
+Set accumulation function is very flexible. For example, here we can use `vertical_set_accumulation_reverse()` to create a neat accumulation-intensification progression:
+
+```{r}
+scheme <- scheme_wave(
+  reps = c(6, 4, 2),
+  vertical_planning = vertical_set_accumulation_reverse,
+  vertical_planning_control = list(accumulate_set = 1:3)
+  )
+
+plot(scheme)
+```
+
+But maybe we want the reps to fall down as well, to have a even bigger accumulation-intensification effect. In that case we case use `reps_change` argument:
+
+```{r}
+scheme <- scheme_wave(
+  reps = c(10, 8, 6),
+  vertical_planning = vertical_set_accumulation_reverse,
+  vertical_planning_control = list(accumulate_set = 1:3, reps_change = c(0, -1, -2, -3))
+  )
+
+plot(scheme)
+```
+
+### Manual scheme
+
+If you are looking for a pen-ultimate flexibility, then the `scheme_manual()` function is there for you. It allows you to manually code the index, step, number of sets, reps, and adjustments, and thus provide the greatest flexibility. Here are few examples to get you started:
+
+```{r}
+scheme_df <- data.frame(
+  index = 1, # Use this just as an example
+  step = c(-3, -2, -1, 0),
+  # Sets are just an easy way to repeat reps and adjustment
+  sets = c(5, 4, 3, 2),
+  reps = c(5, 4, 3, 2),
+  adjustment = 0
+)
+
+# Step index is estimated to be sequences of steps
+# If you want specific indexes, use it as an argument (see next example)
+scheme <- scheme_manual(
+  step = scheme_df$step,
+  sets = scheme_df$sets,
+  reps = scheme_df$reps,
+  adjustment = scheme_df$adjustment
+)
+
+plot(scheme)
+
+# Here we are going to provide our own index
+scheme <- scheme_manual(
+  index = scheme_df$index,
+  step = scheme_df$step,
+  sets = scheme_df$sets,
+  reps = scheme_df$reps,
+  adjustment = scheme_df$adjustment
+)
+
+plot(scheme)
+
+# More complicated example
+scheme_df <- data.frame(
+  step = c(-3, -3, -3, -3, -2, -2, -2, -1, -1, 0),
+  sets = 1,
+  reps = c(5, 5, 5, 5, 3, 2, 1, 2, 1, 1),
+  adjustment = c(0, -0.05, -0.1, -0.15, -0.1, -0.05, 0, -0.1, 0, 0)
+)
+
+scheme_df
+
+scheme <- scheme_manual(
+  step = scheme_df$step,
+  sets = scheme_df$sets,
+  reps = scheme_df$reps,
+  adjustment = scheme_df$adjustment, 
+  
+  # Select another progression table
+  progression_table = progression_DI,
+  # Extra parameters for the progression table
+  progression_table_control = list(
+    volume = "extensive",
+    type = "ballistic", 
+    max_perc_1RM_func = max_perc_1RM_linear,
+    klin = 36)
+)
+
+plot(scheme)
+```
+
 ## Estimation
 
 `{STMr}` package offers very flexible and customizable approach to percent-based strength prescription. As explained in the previous examples, one can use three models of Reps-Max relationship (or write additional implementation) and apply custom model parameter values (i.e., `k`, `kmod`, and `klin` for Epley's, Modified Epley's, and Linear/Brzycki's models respectively). In addition to providing custom model parameter values, `{STMr}` package offers function to estimate these parameter values. 

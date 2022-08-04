@@ -214,6 +214,7 @@ vertical_rep_accumulation <- function(reps,
 #' plot_vertical(vertical_set_accumulation)
 vertical_set_accumulation <- function(reps,
                                       step = c(-2, -2, -2, -2),
+                                      reps_change = rep(0, length(step)),
                                       accumulate_set = length(reps),
                                       set_increment = 1,
                                       sequence = TRUE) {
@@ -239,7 +240,7 @@ vertical_set_accumulation <- function(reps,
   accumulate_set <- accumulate_set[order(accumulate_set)]
 
   # Get the initial vertical plan
-  vp <- vertical_planning(reps = reps, step = step)
+  vp <- vertical_planning(reps = reps, step = step, reps_change = reps_change)
 
   if (sequence == TRUE) {
     vp <- vp %>%
@@ -309,6 +310,7 @@ vertical_set_accumulation <- function(reps,
 #' plot_vertical(vertical_set_accumulation_reverse)
 vertical_set_accumulation_reverse <- function(reps,
                                               step = c(-3, -2, -1, 0),
+                                              reps_change = rep(0, length(step)),
                                               accumulate_set = length(reps),
                                               set_increment = 1,
                                               sequence = TRUE) {
@@ -333,7 +335,7 @@ vertical_set_accumulation_reverse <- function(reps,
   accumulate_set <- accumulate_set[order(accumulate_set)]
 
   # Get the initial vertical plan
-  vp <- vertical_planning(reps = reps, step = step)
+  vp <- vertical_planning(reps = reps, step = step, reps_change = reps_change)
 
   max_step_index <- max(vp$index)
 

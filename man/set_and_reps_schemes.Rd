@@ -13,6 +13,7 @@
 \alias{scheme_pyramid_reverse}
 \alias{scheme_rep_acc}
 \alias{scheme_ladder}
+\alias{scheme_manual}
 \title{Set and Rep Schemes}
 \usage{
 scheme_generic(
@@ -111,6 +112,16 @@ scheme_ladder(
   progression_table = progression_perc_drop,
   progression_table_control = list(volume = "normal")
 )
+
+scheme_manual(
+  index = NULL,
+  step,
+  sets = 1,
+  reps,
+  adjustment = 0,
+  progression_table = progression_perc_drop,
+  progression_table_control = list(volume = "normal")
+)
 }
 \arguments{
 \item{reps}{Numeric vector indicating reps prescription}
@@ -124,6 +135,13 @@ scheme_ladder(
 \item{progression_table}{Progression table function. Default is \code{\link{progression_perc_drop}}}
 
 \item{progression_table_control}{Arguments forwarded to the \code{\link{progression_table}} function}
+
+\item{index}{Numeric vector. If not provided, index will be
+create using sequence of \code{step}}
+
+\item{step}{Numeric vector}
+
+\item{sets}{Numeric vector. Used to replicate reps and adjustments}
 }
 \value{
 Data frame with the following columns: \code{reps}, \code{index}, \code{step},
@@ -161,6 +179,8 @@ will be wrong, hence set to \code{NA}
 \item \code{scheme_ladder()}: Ladder set and rep scheme.
 Please note that the \code{adjustment} column in the output
 will be wrong, hence set to \code{NA}
+
+\item \code{scheme_manual()}: Manual set and rep scheme
 
 }}
 \examples{
@@ -298,5 +318,66 @@ plot(scheme)
 # Ladder set and rep schemes
 # --------------------------
 scheme <- scheme_ladder()
+plot(scheme)
+
+# Manual set and rep schemes
+# --------------------------
+scheme_df <- data.frame(
+  index = 1, # Use this just as an example
+  step = c(-3, -2, -1, 0),
+  # Sets are just an easy way to repeat reps and adjustment
+  sets = c(5, 4, 3, 2),
+  reps = c(5, 4, 3, 2),
+  adjustment = 0
+)
+
+# Step index is estimated to be sequences of steps
+# If you want specific indexes, use it as an argument (see next example)
+scheme <- scheme_manual(
+  step = scheme_df$step,
+  sets = scheme_df$sets,
+  reps = scheme_df$reps,
+  adjustment = scheme_df$adjustment
+)
+
+plot(scheme)
+
+# Here we are going to provide our own index
+scheme <- scheme_manual(
+  index = scheme_df$index,
+  step = scheme_df$step,
+  sets = scheme_df$sets,
+  reps = scheme_df$reps,
+  adjustment = scheme_df$adjustment
+)
+
+plot(scheme)
+
+# More complicated example
+scheme_df <- data.frame(
+  step = c(-3, -3, -3, -3, -2, -2, -2, -1, -1, 0),
+  sets = 1,
+  reps = c(5, 5, 5, 5, 3, 2, 1, 2, 1, 1),
+  adjustment = c(0, -0.05, -0.1, -0.15, -0.1, -0.05, 0, -0.1, 0, 0)
+)
+
+scheme_df
+
+scheme <- scheme_manual(
+  step = scheme_df$step,
+  sets = scheme_df$sets,
+  reps = scheme_df$reps,
+  adjustment = scheme_df$adjustment,
+
+  # Select another progression table
+  progression_table = progression_DI,
+  # Extra parameters for the progression table
+  progression_table_control = list(
+    volume = "extensive",
+    type = "ballistic",
+    max_perc_1RM_func = max_perc_1RM_linear,
+    klin = 36)
+)
+
 plot(scheme)
 }

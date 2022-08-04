@@ -148,6 +148,16 @@
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
 <span>  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">scheme_manual</span><span class="op">(</span></span>
+<span>  index <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">step</span>,</span>
+<span>  sets <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">reps</span>,</span>
+<span>  adjustment <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  progression_table <span class="op">=</span> <span class="va">progression_perc_drop</span>,</span>
+<span>  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>volume <span class="op">=</span> <span class="st">"normal"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -175,6 +185,19 @@
 
 <dt>progression_table_control</dt>
 <dd><p>Arguments forwarded to the <code><a href="progression_table.html">progression_table</a></code> function</p></dd>
+
+
+<dt>index</dt>
+<dd><p>Numeric vector. If not provided, index will be
+create using sequence of <code>step</code></p></dd>
+
+
+<dt>step</dt>
+<dd><p>Numeric vector</p></dd>
+
+
+<dt>sets</dt>
+<dd><p>Numeric vector. Used to replicate reps and adjustments</p></dd>
 
 </dl></div>
     <div id="value">
@@ -204,6 +227,7 @@ will be wrong, hence set to <code>NA</code></p></li>
 <li><p><code>scheme_ladder()</code>: Ladder set and rep scheme.
 Please note that the <code>adjustment</code> column in the output
 will be wrong, hence set to <code>NA</code></p></li>
+<li><p><code>scheme_manual()</code>: Manual set and rep scheme</p></li>
 </ul></div>
 
     <div id="ref-examples">
@@ -496,6 +520,81 @@ will be wrong, hence set to <code>NA</code></p></li>
 <span class="r-in"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu">scheme_ladder</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="set_and_reps_schemes-12.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Manual set and rep schemes</span></span></span>
+<span class="r-in"><span><span class="co"># --------------------------</span></span></span>
+<span class="r-in"><span><span class="va">scheme_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  index <span class="op">=</span> <span class="fl">1</span>, <span class="co"># Use this just as an example</span></span></span>
+<span class="r-in"><span>  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="co"># Sets are just an easy way to repeat reps and adjustment</span></span></span>
+<span class="r-in"><span>  sets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  adjustment <span class="op">=</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Step index is estimated to be sequences of steps</span></span></span>
+<span class="r-in"><span><span class="co"># If you want specific indexes, use it as an argument (see next example)</span></span></span>
+<span class="r-in"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu">scheme_manual</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  step <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">step</span>,</span></span>
+<span class="r-in"><span>  sets <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">sets</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">reps</span>,</span></span>
+<span class="r-in"><span>  adjustment <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">adjustment</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="set_and_reps_schemes-13.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Here we are going to provide our own index</span></span></span>
+<span class="r-in"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu">scheme_manual</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  index <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">index</span>,</span></span>
+<span class="r-in"><span>  step <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">step</span>,</span></span>
+<span class="r-in"><span>  sets <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">sets</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">reps</span>,</span></span>
+<span class="r-in"><span>  adjustment <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">adjustment</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="set_and_reps_schemes-14.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># More complicated example</span></span></span>
+<span class="r-in"><span><span class="va">scheme_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  sets <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  adjustment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.15</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">scheme_df</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    step sets reps adjustment</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    -3    1    5       0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    -3    1    5      -0.05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    -3    1    5      -0.10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    -3    1    5      -0.15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    -2    1    3      -0.10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    -2    1    2      -0.05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    -2    1    1       0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    -1    1    2      -0.10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    -1    1    1       0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10    0    1    1       0.00</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu">scheme_manual</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  step <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">step</span>,</span></span>
+<span class="r-in"><span>  sets <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">sets</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">reps</span>,</span></span>
+<span class="r-in"><span>  adjustment <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">adjustment</span>,</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="co"># Select another progression table</span></span></span>
+<span class="r-in"><span>  progression_table <span class="op">=</span> <span class="va">progression_DI</span>,</span></span>
+<span class="r-in"><span>  <span class="co"># Extra parameters for the progression table</span></span></span>
+<span class="r-in"><span>  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    volume <span class="op">=</span> <span class="st">"extensive"</span>,</span></span>
+<span class="r-in"><span>    type <span class="op">=</span> <span class="st">"ballistic"</span>,</span></span>
+<span class="r-in"><span>    max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span></span>
+<span class="r-in"><span>    klin <span class="op">=</span> <span class="fl">36</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="set_and_reps_schemes-15.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
