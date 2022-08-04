@@ -39,6 +39,7 @@ vertical_rep_accumulation(
 vertical_set_accumulation(
   reps,
   step = c(-2, -2, -2, -2),
+  reps_change = rep(0, length(step)),
   accumulate_set = length(reps),
   set_increment = 1,
   sequence = TRUE
@@ -47,6 +48,7 @@ vertical_set_accumulation(
 vertical_set_accumulation_reverse(
   reps,
   step = c(-3, -2, -1, 0),
+  reps_change = rep(0, length(step)),
   accumulate_set = length(reps),
   set_increment = 1,
   sequence = TRUE
