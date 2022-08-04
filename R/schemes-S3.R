@@ -53,11 +53,15 @@ plot_scheme_bar <- function(scheme,
   # +++++++++++++++++++++++++++++++++++++++++++
 
   # Prepare the scheme df
+
+  set_index_levels <-  sort(unique(scheme$set))
+  step_index_levels <- paste0("Step #", sort(unique(scheme$index)))
+
   scheme %>%
-    dplyr::mutate(set_index = factor(set, levels = sort(unique(set)))) %>%
+    dplyr::mutate(set_index = factor(set, levels = set_index_levels)) %>%
     dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
     dplyr::mutate(
-      step_index = paste0("Step #", index),
+      step_index = factor(paste0("Step #", index), levels = step_index_levels),
       reps_norm = 0.2 + range01(reps),
       perc_1RM_norm = 1.35 + range01(perc_1RM),
       perc_1RM_str = paste0(perc_1RM, "%")
@@ -123,12 +127,15 @@ plot_scheme_vertical <- function(scheme,
   center <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
+  set_index_levels <-  sort(unique(scheme$set), decreasing = TRUE)
+  step_index_levels <- paste0("Step #", sort(unique(scheme$index)))
+
   scheme %>%
-    dplyr::mutate(set_index = factor(set, levels = sort(unique(set), decreasing = TRUE))) %>%
+    dplyr::mutate(set_index = factor(set, levels = set_index_levels)) %>%
     dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
     dplyr::mutate(
       center = 0,
-      step_index = paste0("Step #", index),
+      step_index = factor(paste0("Step #", index), levels = step_index_levels),
       reps_norm = -(0.3 + range01(reps)),
       perc_1RM_norm = (0.3 + range01(perc_1RM)),
       presc_left = paste0(reps, "  "),
@@ -203,12 +210,15 @@ plot_scheme_fraction <- function(scheme,
   step_index <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
+  set_index_levels <-  sort(unique(scheme$set))
+  step_index_levels <- paste0("Step #", sort(unique(scheme$index)))
+
   scheme %>%
-    dplyr::mutate(set_index = factor(set, levels = sort(unique(set)))) %>%
+    dplyr::mutate(set_index = factor(set, levels =set_index_levels)) %>%
     dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
     dplyr::mutate(
       center = 0,
-      step_index = paste0("Step #", index),
+      step_index = factor(paste0("Step #", index), levels = step_index_levels),
       reps_norm = -(0.3 + range01(reps)),
       perc_1RM_norm = 0.3 + range01(perc_1RM),
       perc_1RM_str = paste0(perc_1RM, "%"),
