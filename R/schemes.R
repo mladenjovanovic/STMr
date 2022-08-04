@@ -43,17 +43,16 @@ scheme_generic <- function(reps,
 
   progression <- do.call(vertical_planning, c(list(reps = .tmp$reps), vertical_planning_control))
 
-  # Find reps based on the returned set_id
+  # Find adjustments based on the returned set_id
   # This is needed for vertical_accumulate_set() and
   #   vertical_accumulate_set_reverse() functions
-  .reps <- .tmp$reps[progression$set_id]
   .adjustment <- .tmp$adjustment[progression$set_id]
 
   loads <- do.call(
     progression_table,
     c(
       list(
-        reps = .reps,
+        reps = progression$reps,
         step = progression$step,
         adjustment = .adjustment
       ),
@@ -66,7 +65,7 @@ scheme_generic <- function(reps,
     index = progression$index,
     step = progression$step,
     set = progression$set,
-    reps = .reps,
+    reps = progression$reps,
     adjustment = .adjustment,
     perc_1RM = loads$perc_1RM
   )
