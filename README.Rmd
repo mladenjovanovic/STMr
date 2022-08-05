@@ -1039,6 +1039,12 @@ And the final method is to use `fraction` method, which is very similar to the O
 plot(scheme, type = "fraction")
 ```
 
+To avoid printing `%`, which will make `%1RM` labels bigger, use `perc_str = ""`:
+
+```{r}
+plot(scheme, perc_str = "")
+```
+
 ### Different label sizes
 
 S3 `plot` method for plotting `{STMr}` schemes allow you to set the font size. This can be useful later once we used facets.
@@ -1063,6 +1069,16 @@ Using the `size` argument, you can set the maximum label size. This is useful if
 
 ```{r}
 plot(scheme, size = 5)
+```
+
+You can also set padding of the labels. Let's remove `%` and set the padding:
+
+```{r}
+plot(
+  scheme,
+  perc_str = "",
+  padding.x = grid::unit(0.2, "mm"),
+  padding.y = grid::unit(0.2, "mm"),)
 ```
 
 ### Creating facets
@@ -1092,14 +1108,6 @@ class(scheme_df) <- class(scheme_1)
 plot(scheme_df) +
   facet_wrap(~scheme)
 ```
-
-Now we can adjust the font if needed:
-
-```{r}
-plot(scheme_df, size = 4, font_size = 10) +
-  facet_wrap(~scheme)
-```
-
 
 ## Further information
 

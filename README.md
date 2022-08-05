@@ -1702,6 +1702,15 @@ plot(scheme, type = "fraction")
 
 <img src="man/figures/README-unnamed-chunk-60-1.png" width="80%" style="display: block; margin: auto;" />
 
+To avoid printing `%`, which will make `%1RM` labels bigger, use
+`perc_str = ""`:
+
+``` r
+plot(scheme, perc_str = "")
+```
+
+<img src="man/figures/README-unnamed-chunk-61-1.png" width="80%" style="display: block; margin: auto;" />
+
 ### Different label sizes
 
 S3 `plot` method for plotting `{STMr}` schemes allow you to set the font
@@ -1711,7 +1720,7 @@ size. This can be useful later once we used facets.
 plot(scheme, font_size = 20)
 ```
 
-<img src="man/figures/README-unnamed-chunk-61-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-62-1.png" width="80%" style="display: block; margin: auto;" />
 
 The plotting allows for the flexible labels, using the `{ggfittext}`
 package, which fits the labels so they do not exit the bars. Here is an
@@ -1727,7 +1736,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-62-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-63-1.png" width="80%" style="display: block; margin: auto;" />
 
 Using the `size` argument, you can set the maximum label size. This is
 useful if you want to avoid having different sizes of labels on your
@@ -1738,7 +1747,20 @@ bigger than selected font size:
 plot(scheme, size = 5)
 ```
 
-<img src="man/figures/README-unnamed-chunk-63-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-64-1.png" width="80%" style="display: block; margin: auto;" />
+
+You can also set padding of the labels. Let’s remove `%` and set the
+padding:
+
+``` r
+plot(
+  scheme,
+  perc_str = "",
+  padding.x = grid::unit(0.2, "mm"),
+  padding.y = grid::unit(0.2, "mm"),)
+```
+
+<img src="man/figures/README-unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Creating facets
 
@@ -1769,16 +1791,7 @@ plot(scheme_df) +
   facet_wrap(~scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-64-1.png" width="80%" style="display: block; margin: auto;" />
-
-Now we can adjust the font if needed:
-
-``` r
-plot(scheme_df, size = 4, font_size = 10) +
-  facet_wrap(~scheme)
-```
-
-<img src="man/figures/README-unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-66-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Further information
 
