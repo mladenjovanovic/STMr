@@ -77,7 +77,7 @@ plot_progression_table <- function(progression_table,
       ggplot2::ylab(NULL) +
       ggplot2::ggtitle("%1RM"),
     "adjustment" = ggplot2::ggplot(progression_tbl, ggplot2::aes(x = step, y = reps)) +
-      ggplot2::theme_linedraw() +
+      ggplot2::theme_linedraw(font_size) +
       ggplot2::geom_tile(fill = "transparent", color = "transparent") +
       ggfittext::geom_fit_text(ggplot2::aes(label = adjustment), min.size = 0) +
       ggplot2::scale_y_discrete(limits = rev(levels(progression_tbl$reps))) +
