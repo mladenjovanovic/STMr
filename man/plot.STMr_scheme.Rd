@@ -4,7 +4,7 @@
 \alias{plot.STMr_scheme}
 \title{Plotting of the Set and Reps Scheme}
 \usage{
-\method{plot}{STMr_scheme}(x, type = "bar", font_size = 14, ...)
+\method{plot}{STMr_scheme}(x, type = "bar", font_size = 14, perc_str = "\%", ...)
 }
 \arguments{
 \item{x}{\code{STMr_scheme} object. See examples}
@@ -12,6 +12,8 @@
 \item{type}{Type of plot. Options are "bar" (default), "vertical", and "fraction"}
 
 \item{font_size}{Numeric. Default is 14}
+
+\item{perc_str}{Percent string. Default is "\%". Use "" to have more space on graph}
 
 \item{...}{Forwarded to \code{\link[ggfittext]{geom_bar_text}} and
 \code{\link[ggfittext]{geom_fit_text}} functions. Can be used to se the highest

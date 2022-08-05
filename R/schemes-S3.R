@@ -5,6 +5,7 @@
 #' @param x \code{STMr_scheme} object. See examples
 #' @param type Type of plot. Options are "bar" (default), "vertical", and "fraction"
 #' @param font_size Numeric. Default is 14
+#' @param perc_str Percent string. Default is "%". Use "" to have more space on graph
 #' @param ... Forwarded to \code{\link[ggfittext]{geom_bar_text}} and
 #'     \code{\link[ggfittext]{geom_fit_text}} functions. Can be used to se the highest
 #'     labels size, for example, using \code{size=5}. See documentation for these two
@@ -25,11 +26,11 @@
 #' plot(scheme)
 #' plot(scheme, type = "vertical")
 #' plot(scheme, type = "fraction")
-plot.STMr_scheme <- function(x, type = "bar", font_size = 14, ...) {
+plot.STMr_scheme <- function(x, type = "bar", font_size = 14, perc_str = "%", ...) {
   switch(type,
-    "bar" =  plot_scheme_bar(scheme = x, font_size = font_size, ...),
-    "vertical" = plot_scheme_vertical(scheme = x, font_size = font_size, ...),
-    "fraction" = plot_scheme_fraction(scheme = x, font_size = font_size, ...),
+    "bar" =  plot_scheme_bar(scheme = x, font_size = font_size, perc_str = perc_str, ...),
+    "vertical" = plot_scheme_vertical(scheme = x, font_size = font_size, perc_str = perc_str, ...),
+    "fraction" = plot_scheme_fraction(scheme = x, font_size = font_size, perc_str = perc_str, ...),
     stop("Unknown plot `type`. Please use `bar`, `vertical`, `fraction`", call. = FALSE)
   )
 }
@@ -37,6 +38,7 @@ plot.STMr_scheme <- function(x, type = "bar", font_size = 14, ...) {
 
 plot_scheme_bar <- function(scheme,
                             font_size,
+                            perc_str,
                             ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
@@ -64,7 +66,7 @@ plot_scheme_bar <- function(scheme,
       step_index = factor(paste0("Step #", index), levels = step_index_levels),
       reps_norm = 0.2 + range01(reps),
       perc_1RM_norm = 1.35 + range01(perc_1RM),
-      perc_1RM_str = paste0(perc_1RM, "%")
+      perc_1RM_str = paste0(perc_1RM, perc_str)
     ) %>%
     # Plot
     ggplot2::ggplot() +
@@ -108,6 +110,7 @@ plot_scheme_bar <- function(scheme,
 
 plot_scheme_vertical <- function(scheme,
                                  font_size,
+                                 perc_str,
                                  ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
@@ -138,9 +141,9 @@ plot_scheme_vertical <- function(scheme,
       step_index = factor(paste0("Step #", index), levels = step_index_levels),
       reps_norm = -(0.3 + range01(reps)),
       perc_1RM_norm = (0.3 + range01(perc_1RM)),
-      presc_left = paste0(reps, "  "),
+      presc_left = paste0(reps, " "),
       presc_center = "x",
-      presc_right = paste0("  ", perc_1RM, "%")
+      presc_right = paste0(" ", perc_1RM, perc_str)
     ) %>%
     # plot
     ggplot2::ggplot() +
@@ -193,6 +196,7 @@ plot_scheme_vertical <- function(scheme,
 
 plot_scheme_fraction <- function(scheme,
                                  font_size,
+                                 perc_str,
                                  ...) {
 
   # +++++++++++++++++++++++++++++++++++++++++++
@@ -221,7 +225,7 @@ plot_scheme_fraction <- function(scheme,
       step_index = factor(paste0("Step #", index), levels = step_index_levels),
       reps_norm = -(0.3 + range01(reps)),
       perc_1RM_norm = 0.3 + range01(perc_1RM),
-      perc_1RM_str = paste0(perc_1RM, "%"),
+      perc_1RM_str = paste0(perc_1RM, perc_str),
       presc_center = "|"
     ) %>%
     # plot
