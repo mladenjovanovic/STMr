@@ -4,12 +4,14 @@
 \alias{plot_scheme}
 \title{Plotting of the Set and Reps Scheme}
 \usage{
-plot_scheme(scheme, font_size = 8)
+plot_scheme(scheme, font_size = 8, perc_str = "\%")
 }
 \arguments{
 \item{scheme}{Data Frame create by one of the package functions. See examples}
 
 \item{font_size}{Numeric. Default is 8}
+
+\item{perc_str}{Percent string. Default is "\%". Use "" to have more space on graph}
 }
 \value{
 \code{ggplot2} object
