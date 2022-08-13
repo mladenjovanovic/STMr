@@ -9,6 +9,10 @@ color_pink <- "#F17CB0"
 color_purple <- "#B276B2"
 color_yellow <- "#DECF3F"
 
+# Rounding
+mround <- function (x, accuracy, f = round) {
+  f(x / accuracy) * accuracy
+}
 
 check_method <- function(method) {
   if (any(!(method %in% c("RIR", "DI", "RelInt", "%MR")))) {

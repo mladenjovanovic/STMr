@@ -90,6 +90,7 @@ over the course of 12 weeks (4 phases, each 3 weeks long). Individual eRIR (esti
 Added `get_max_perc_1RM_klin()`, `get_max_reps_klin()`, and `get_predicted_1RM_klin()` functions that uses user defined `klin` value/parameter for the linear equation
 * Added `estimate_` family of functions to estimate Epley's, modified Epley's, and linear equation parameters, as well as novel estimation functions that uses absolute weight to estimate both `k`, `kmod`, `klin` and `1RM` parameters
 * Added missing `font_size` when plotting adjustments using `plot_progression_table()`
+* Created `release` function and S3 `plot` method for merging multiple schemes (i.e., blocks or phases) into one release. This is used to inspect how multiple back-to-back phases mold together
 
 # STMr 0.0.1
 
