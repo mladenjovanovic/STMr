@@ -439,7 +439,26 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-The `scheme_` functions afford you great flexibility in designing set and rep schemes. The following set and rep schemes are implemented in `{STMr}` package: `scheme_generic()`, `scheme_wave()`, `scheme_plateau()`, `scheme_step()`, `scheme_step_reverse()`, `scheme_wave_descending()`, `scheme_light_heavy()`, `scheme_pyramid()`, `scheme_pyramid_reverse()`, `scheme_rep_acc()`. 
+The `scheme_` functions afford you great flexibility in designing set and rep schemes. The following set and rep schemes are implemented in `{STMr}` package: `scheme_generic()`, `scheme_wave()`, `scheme_plateau()`, `scheme_step()`, `scheme_step_reverse()`, `scheme_wave_descending()`, `scheme_light_heavy()`, `scheme_pyramid()`, `scheme_pyramid_reverse()`, `scheme_rep_acc()`, `scheme_manual()`, and `scheme_perc_1RM()`. 
+
+### Schemes modularity through `+` operator
+
+`{STMr}` package allows you very modular approach in designing set and rep schemes. For example, we might want to use simple warm-up, followed with single wave, and finished with 3 sets of 5 across. To do this, we can simple add them up using the `+` operator. I will explain the `scheme_perc_1RM()` function in [Manual scheme] section.
+
+```{r}
+warmup <- scheme_perc_1RM(
+  reps = c(5, 5, 5),
+  perc_1RM = c(0.4, 0.5, 0.6)
+)
+
+wave <- scheme_wave(vertical_planning = vertical_linear)
+plateau <- scheme_plateau()
+
+# Simply add them up
+my_scheme <- warmup + wave + plateau
+
+plot(my_scheme)
+```
 
 ### Rep Accumulation
 
@@ -635,6 +654,42 @@ scheme <- scheme_manual(
 )
 
 plot(scheme)
+```
+
+The `scheme_manual()` function allows you to manually enter 1RM percentage (rather than them being calculated using progression table):
+
+```{r}
+# Provide %1RM manually
+scheme_df <- data.frame(
+  index = rep(c(1, 2, 3, 4), each = 3),
+  reps = rep(c(5, 5, 5), 4),
+  perc_1RM = rep(c(0.4, 0.5, 0.6), 4)
+)
+
+warmup_scheme <- scheme_manual(
+  index = scheme_df$index,
+  reps = scheme_df$reps,
+  perc_1RM = scheme_df$perc_1RM
+)
+
+plot(warmup_scheme)
+```
+
+Easier method to create *pre-filled* 1RM percentages is to use `scheme_perc_1RM()` function: 
+
+```{r}
+warmup_scheme <- scheme_perc_1RM(
+  reps = c(5, 5, 5),
+  perc_1RM = c(0.4, 0.5, 0.6),
+  n_steps = 4)
+
+plot(warmup_scheme)
+```
+
+We can then use the `+` operator to mold the warm-up to selected scheme. Here is an example:
+
+```{r}
+plot(warmup_scheme + scheme_wave())
 ```
 
 ## Release
