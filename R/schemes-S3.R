@@ -1,3 +1,53 @@
+#' Method for adding set and rep schemes
+#' @param lhs \code{STMr_scheme} object
+#' @param rhs \code{STMr_scheme} object
+#' @return \code{STMr_scheme} object
+#' @export
+#' @examples
+#' scheme1 <- scheme_wave()
+#' warmup_scheme <- scheme_perc_1RM()
+#' plot(warmup_scheme + scheme1)
+`+.STMr_scheme` <- function(lhs, rhs) {
+
+  # +++++++++++++++++++++++++++++++++++++++++++
+  # Code chunk for dealing with R CMD check note
+  index <- NULL
+  scheme <- NULL
+  set <- NULL
+  max_set <- NULL
+  set_start <- NULL
+  # +++++++++++++++++++++++++++++++++++++++++++
+
+  df <- rbind(
+    data.frame(scheme = 1, lhs),
+    data.frame(scheme = 2, rhs))
+
+  scheme_index <- df %>%
+    dplyr::group_by(index, scheme) %>%
+    dplyr::summarize(max_set = max(set)) %>%
+    dplyr::group_by(index) %>%
+    dplyr::mutate(set_start = cumsum(max_set) - max_set) %>%
+    dplyr::select(-max_set) %>%
+    dplyr::ungroup()
+
+  scheme_df <- df %>%
+    dplyr::left_join(scheme_index, by = c("index", "scheme")) %>%
+    dplyr::mutate(set = set + set_start) %>%
+    dplyr::arrange(index, set)
+
+  # Call constructor
+  new_STMr_scheme(
+    index = scheme_df$index,
+    step = scheme_df$step,
+    set = scheme_df$set,
+    reps = scheme_df$reps,
+    adjustment = scheme_df$adjustment,
+    perc_1RM = scheme_df$perc_1RM
+  )
+}
+
+
+
 #' Plotting of the Set and Reps Scheme
 #'
 #' Functions for creating \code{ggplot2} plot of the Set and Reps Scheme
