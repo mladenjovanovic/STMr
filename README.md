@@ -673,7 +673,33 @@ and rep schemes. The following set and rep schemes are implemented in
 `{STMr}` package: `scheme_generic()`, `scheme_wave()`,
 `scheme_plateau()`, `scheme_step()`, `scheme_step_reverse()`,
 `scheme_wave_descending()`, `scheme_light_heavy()`, `scheme_pyramid()`,
-`scheme_pyramid_reverse()`, `scheme_rep_acc()`.
+`scheme_pyramid_reverse()`, `scheme_rep_acc()`, `scheme_manual()`, and
+`scheme_perc_1RM()`.
+
+### Schemes modularity through `+` operator
+
+`{STMr}` package allows you very modular approach in designing set and
+rep schemes. For example, we might want to use simple warm-up, followed
+with single wave, and finished with 3 sets of 5 across. To do this, we
+can simple add them up using the `+` operator. I will explain the
+`scheme_perc_1RM()` function in [Manual scheme](#manual-scheme) section.
+
+``` r
+warmup <- scheme_perc_1RM(
+  reps = c(5, 5, 5),
+  perc_1RM = c(0.4, 0.5, 0.6)
+)
+
+wave <- scheme_wave(vertical_planning = vertical_linear)
+plateau <- scheme_plateau()
+
+# Simply add them up
+my_scheme <- warmup + wave + plateau
+
+plot(my_scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Rep Accumulation
 
@@ -771,7 +797,7 @@ scheme <- scheme_wave() %>%
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-33-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" />
 
 By default, `.vertical_rep_accumulation.post()` function will use the
 highest progression step in the scheme.
@@ -790,7 +816,7 @@ scheme <- scheme_step(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" />
 
 We can also accumulate the whole sequence, for example when using the
 Waves:
@@ -805,7 +831,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" />
 
 Or, instead of accumulating sequence, we can accumulate individual sets:
 
@@ -819,7 +845,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" />
 
 Set accumulation function is very flexible. As an another example, we
 can use `vertical_set_accumulation_reverse()` to create a neat
@@ -835,7 +861,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
 
 Maybe we want another progression steps:
 
@@ -852,7 +878,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
 
 But maybe we want the reps to fall down as well, to have a even bigger
 accumulation-intensification effect. In that case we case use
@@ -870,7 +896,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" />
 
 As an last example, let us create Block Undulating with reverse set
 accumulation:
@@ -888,7 +914,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Manual scheme
 
@@ -920,7 +946,7 @@ scheme <- scheme_manual(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 
@@ -936,7 +962,7 @@ scheme <- scheme_manual(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-41-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-42-2.png" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 
@@ -980,7 +1006,52 @@ scheme <- scheme_manual(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-41-3.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-42-3.png" width="80%" style="display: block; margin: auto;" />
+
+The `scheme_manual()` function allows you to manually enter 1RM
+percentage (rather than them being calculated using progression table):
+
+``` r
+# Provide %1RM manually
+scheme_df <- data.frame(
+  index = rep(c(1, 2, 3, 4), each = 3),
+  reps = rep(c(5, 5, 5), 4),
+  perc_1RM = rep(c(0.4, 0.5, 0.6), 4)
+)
+
+warmup_scheme <- scheme_manual(
+  index = scheme_df$index,
+  reps = scheme_df$reps,
+  perc_1RM = scheme_df$perc_1RM
+)
+
+plot(warmup_scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" />
+
+Easier method to create *pre-filled* 1RM percentages is to use
+`scheme_perc_1RM()` function:
+
+``` r
+warmup_scheme <- scheme_perc_1RM(
+  reps = c(5, 5, 5),
+  perc_1RM = c(0.4, 0.5, 0.6),
+  n_steps = 4)
+
+plot(warmup_scheme)
+```
+
+<img src="man/figures/README-unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" />
+
+We can then use the `+` operator to mold the warm-up to selected scheme.
+Here is an example:
+
+``` r
+plot(warmup_scheme + scheme_wave())
+```
+
+<img src="man/figures/README-unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Release
 
@@ -1014,7 +1085,7 @@ release_df <- release(
 plot(release_df)
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Estimation
 
@@ -1118,7 +1189,7 @@ gg_relative <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM, color = A
 gg_absolute + gg_relative + plot_layout(widths = c(1, 1.1))
 ```
 
-<img src="man/figures/README-unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" />
 
 Let’s use *Athlete B* from RTF testing dataset to estimate individual
 model parameter values for Epley’s, Modified Epley’s, and
@@ -1260,7 +1331,7 @@ ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
   geom_line(data = pred_df, aes(x = perc_1RM * 100, y = nRM), size = 1.5, alpha = 0.8)
 ```
 
-<img src="man/figures/README-unnamed-chunk-48-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-52-1.png" width="80%" style="display: block; margin: auto;" />
 
 When analyzing multiple individuals, particularly when absolute weights
 are used instead of %1RM, one needs to utilize mixed-effect approach.
@@ -1351,7 +1422,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-50-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-54-1.png" width="80%" style="display: block; margin: auto;" />
 
 `{STMr}` package also implements mixed-effect models that utilize
 absolute weight values. As alluded previously, this is novel technique
@@ -1436,7 +1507,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-52-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-56-1.png" width="80%" style="display: block; margin: auto;" />
 
 Mixed-effects functions implemented in `{STMr}` package allows you to
 set-up random parameters using `random=` function argument. In the
@@ -1517,7 +1588,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-54-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-58-1.png" width="80%" style="display: block; margin: auto;" />
 
 In my opinion this doesn’t make much sense. If you are interested in
 estimating group or *generic* `klin` (or `k` or `kmod`) model parameter
@@ -1562,7 +1633,7 @@ gg <- ggplot(strength_training_log) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-55-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;" />
 
 We are interested in finding both the “best” and “worst” profiles (as
 well as estimated 1RMs). To achieve this, we will utilize *quantile
@@ -1645,7 +1716,7 @@ gg +
   geom_line(data = pred_df_worst, aes(x = weight, y = nRM), linetype = "dashed")
 ```
 
-<img src="man/figures/README-unnamed-chunk-57-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-61-1.png" width="80%" style="display: block; margin: auto;" />
 
 In this example we have used all 12 weeks of strength training log data
 (i.e., pooled). We can perform some type of “rolling” analysis to get
@@ -1690,7 +1761,7 @@ ggplot(rolling_weeks, aes(x = week_end)) +
   ylab("Estimated 1RM (kg)")
 ```
 
-<img src="man/figures/README-unnamed-chunk-58-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-62-1.png" width="80%" style="display: block; margin: auto;" />
 
 This analysis represents novel technique and the time will tell how
 valid is it and how to interpret it correctly. But at least we have very
@@ -1719,7 +1790,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-63-1.png" width="80%" style="display: block; margin: auto;" />
 
 Another way to plot the scheme is using the `vertical` method.
 
@@ -1727,7 +1798,7 @@ Another way to plot the scheme is using the `vertical` method.
 plot(scheme, type = "vertical")
 ```
 
-<img src="man/figures/README-unnamed-chunk-60-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-64-1.png" width="80%" style="display: block; margin: auto;" />
 
 And the final method is to use `fraction` method, which is very similar
 to the Olympic weightlifting log notation:
@@ -1736,7 +1807,7 @@ to the Olympic weightlifting log notation:
 plot(scheme, type = "fraction")
 ```
 
-<img src="man/figures/README-unnamed-chunk-61-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;" />
 
 To avoid printing `%`, which will make `%1RM` labels bigger, use
 `perc_str = ""`:
@@ -1745,7 +1816,7 @@ To avoid printing `%`, which will make `%1RM` labels bigger, use
 plot(scheme, perc_str = "")
 ```
 
-<img src="man/figures/README-unnamed-chunk-62-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-66-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Different label sizes
 
@@ -1756,7 +1827,7 @@ size. This can be useful later once we used facets.
 plot(scheme, font_size = 20)
 ```
 
-<img src="man/figures/README-unnamed-chunk-63-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-67-1.png" width="80%" style="display: block; margin: auto;" />
 
 The plotting allows for the flexible labels, using the `{ggfittext}`
 package, which fits the labels so they do not exit the bars. Here is an
@@ -1772,7 +1843,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-64-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-68-1.png" width="80%" style="display: block; margin: auto;" />
 
 Using the `size` argument, you can set the maximum label size. This is
 useful if you want to avoid having different sizes of labels on your
@@ -1783,7 +1854,7 @@ bigger than selected font size:
 plot(scheme, size = 5)
 ```
 
-<img src="man/figures/README-unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-69-1.png" width="80%" style="display: block; margin: auto;" />
 
 You can also set padding of the labels. Let’s remove `%` and set the
 padding:
@@ -1796,7 +1867,7 @@ plot(
   padding.y = grid::unit(0.2, "mm"),)
 ```
 
-<img src="man/figures/README-unnamed-chunk-66-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-70-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Creating facets
 
@@ -1827,7 +1898,7 @@ plot(scheme_df) +
   facet_wrap(~scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-67-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-71-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Further information
 

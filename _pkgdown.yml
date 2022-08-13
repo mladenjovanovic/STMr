@@ -2,5 +2,5 @@ url: https://mladenjovanovic.github.io/STMr/
 template:
   bootstrap: 5
 home:
-  sidebar:
-    toc: TRUE
+  toc: TRUE
+

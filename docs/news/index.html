@@ -73,6 +73,10 @@
 <li>Added <code>reps_change</code> to <code><a href="../reference/vertical_planning_functions.html">vertical_set_accumulation()</a></code> and <code><a href="../reference/vertical_planning_functions.html">vertical_set_accumulation_reverse()</a></code>, making them really flexible functions</li>
 <li>Added <code><a href="../reference/set_and_reps_schemes.html">scheme_manual()</a></code> for manual generation of the scheme, which provides for the ultimate flexibility</li>
 <li>Added <code>perc_str</code> argument to <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> S3 method, which allows the user to remove “%” and thus have more space for label</li>
+<li>Created <code>release</code> function and S3 <code>plot</code> method for merging multiple schemes (i.e., blocks or phases) into one release. This is used to inspect how multiple back-to-back phases mold together</li>
+<li>Added <code>perc_1RM</code> argument to <code><a href="../reference/set_and_reps_schemes.html">scheme_manual()</a></code> for the user to provide manual 1RM percentages, rather than to be estimated</li>
+<li>Added <code><a href="../reference/set_and_reps_schemes.html">scheme_perc_1RM()</a></code> which is simpler <code><a href="../reference/set_and_reps_schemes.html">scheme_manual()</a></code> for manually entering 1RM percentages. For example creating simple warm-up scheme</li>
+<li>Added <code>+</code> method for <code>STMr_scheme</code> objects. This allows for easy modular adding of the schemes</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.3" id="stmr-013">STMr 0.1.3<a class="anchor" aria-label="anchor" href="#stmr-013"></a></h2><p class="text-muted">CRAN release: 2022-03-16</p>
@@ -140,7 +144,6 @@
 <li>Added <code>estimate_</code> family of functions to estimate Epley’s, modified Epley’s, and linear equation parameters, as well as novel estimation functions that uses absolute weight to estimate both <code>k</code>, <code>kmod</code>, <code>klin</code> and <code>1RM</code> parameters</li>
 <li>Added missing <code>font_size</code> when plotting adjustments using <code><a href="../reference/plot_progression_table.html">plot_progression_table()</a></code>
 </li>
-<li>Created <code>release</code> function and S3 <code>plot</code> method for merging multiple schemes (i.e., blocks or phases) into one release. This is used to inspect how multiple back-to-back phases mold together</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.1" id="stmr-001">STMr 0.0.1<a class="anchor" aria-label="anchor" href="#stmr-001"></a></h2>
