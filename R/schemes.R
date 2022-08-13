@@ -598,3 +598,35 @@ scheme_manual <- function(index = NULL,
     )
   }
 }
+
+#' @describeIn set_and_reps_schemes Manual %1RM set and rep scheme
+#' @param perc_1RM Numeric vector of user provided 1RM percentage
+#' @param n_steps How many progression steps to generate? Default is 4
+#' @export
+#' @examples
+#' # Manual %1RM set and rep schemes
+#' # --------------------------
+#' warmup_scheme <- scheme_perc_1RM(
+#'   reps = c(10, 8, 6),
+#'   perc_1RM = c(0.4, 0.5, 0.6),
+#'   n_steps = 3)
+#'
+#' plot(warmup_scheme)
+scheme_perc_1RM <- function(reps = c(5, 5, 5),
+                          perc_1RM = c(0.4, 0.5, 0.6),
+                          n_steps = 4) {
+
+  scheme_df <- tidyr::expand_grid(
+    index = seq(1, n_steps),
+    data.frame(
+      reps = reps,
+      perc_1RM = perc_1RM
+    )
+  )
+
+  scheme_manual(
+   index = scheme_df$index,
+   reps = scheme_df$reps,
+   perc_1RM = scheme_df$perc_1RM
+  )
+}

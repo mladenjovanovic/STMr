@@ -14,6 +14,7 @@
 \alias{scheme_rep_acc}
 \alias{scheme_ladder}
 \alias{scheme_manual}
+\alias{scheme_perc_1RM}
 \title{Set and Rep Schemes}
 \usage{
 scheme_generic(
@@ -123,6 +124,8 @@ scheme_manual(
   progression_table = progression_perc_drop,
   progression_table_control = list(volume = "normal")
 )
+
+scheme_perc_1RM(reps = c(5, 5, 5), perc_1RM = c(0.4, 0.5, 0.6), n_steps = 4)
 }
 \arguments{
 \item{reps}{Numeric vector indicating reps prescription}
@@ -144,8 +147,9 @@ create using sequence of \code{step}}
 
 \item{sets}{Numeric vector. Used to replicate reps and adjustments}
 
-\item{perc_1RM}{Numeric vector. By default is \code{NULL} since \code{perc_1RM} is
-estimated, but if provided, it will be used instead. See examples}
+\item{perc_1RM}{Numeric vector of user provided 1RM percentage}
+
+\item{n_steps}{How many progression steps to generate? Default is 4}
 }
 \value{
 Data frame with the following columns: \code{reps}, \code{index}, \code{step},
@@ -185,6 +189,8 @@ Please note that the \code{adjustment} column in the output
 will be wrong, hence set to \code{NA}
 
 \item \code{scheme_manual()}: Manual set and rep scheme
+
+\item \code{scheme_perc_1RM()}: Manual \%1RM set and rep scheme
 
 }}
 \examples{
@@ -399,6 +405,14 @@ warmup_scheme <- scheme_manual(
   reps = scheme_df$reps,
   perc_1RM = scheme_df$perc_1RM
 )
+
+plot(warmup_scheme)
+# Manual \%1RM set and rep schemes
+# --------------------------
+warmup_scheme <- scheme_perc_1RM(
+  reps = c(10, 8, 6),
+  perc_1RM = c(0.4, 0.5, 0.6),
+  n_steps = 3)
 
 plot(warmup_scheme)
 }

@@ -27,6 +27,7 @@
 * Added `perc_str` argument to `plot()` S3 method, which allows the user to remove "%" and thus have more space for label
 * Created `release` function and S3 `plot` method for merging multiple schemes (i.e., blocks or phases) into one release. This is used to inspect how multiple back-to-back phases mold together
 * Added `perc_1RM` argument to `scheme_manual()` for the user to provide manual 1RM percentages, rather than to be estimated
+* Added `scheme_perc_1RM()` which is simpler `scheme_manual()` for manually entering 1RM percentages. For example creating simple warm-up scheme 
 
 # STMr 0.1.3
 
