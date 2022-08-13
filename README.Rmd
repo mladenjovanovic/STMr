@@ -45,6 +45,7 @@ options(digits = 3)
 -   progression functions (start with `progression_`)
 -   *vertical planning* functions (start with `vertical_`)
 -   *scheme function* (start with `scheme_`)
+-   `release()` function for molding multiple back-to-back schemes (i.e., blocks or phases)
 -   plotting and printing functions: `generate_progression_table()`, `plot_progression_table()`, `plot_scheme()` (deprecated as of `{STMr}` version 0.1.4. Please use S3 `plot()` method instead), and `create_example()`
 -   built-in datasets (`strength_training_log` and `RTF_testing`)
 -   estimation functions (start with `estimate_`)
@@ -634,6 +635,29 @@ scheme <- scheme_manual(
 )
 
 plot(scheme)
+```
+
+## Release
+
+To mold multiple schemes (i.e., blocks or phases) together, use `release()` function and accompanying S3 `plot()` method. The `release()` function allows you to inspect how multiple back-to-back schemes merge together and provide long-term progressive overload. 
+
+To calculate weight from scheme percentages, use `prescription_1RM`, which is adjusted/updated every phases using `additive_1RM_adjustment` and `multiplicative_1RM_adjustment` arguments. Additionally, `load_1RM` is calculated using selected reps-max function. This is done by dividing the weight used by estimated %1RM from done repetitions. This helps in visualizing how loading trends over time. Please check [Further information] section for more info.
+
+```{r}
+scheme1 <- scheme_step(vertical_planning = vertical_constant)
+scheme2 <- scheme_step(vertical_planning = vertical_linear)
+scheme3 <- scheme_step(vertical_planning = vertical_undulating)
+
+release_df <- release(
+  scheme1, scheme2, scheme3,
+  prescription_1RM = 150, 
+  additive_1RM_adjustment = 5,  
+  multiplicative_1RM_adjustment = 1, #no adjustment   
+  rounding = 2.5, # round weight to the closest 2.5
+  max_perc_1RM_func = max_perc_1RM_epley
+ )
+
+plot(release_df)
 ```
 
 ## Estimation
