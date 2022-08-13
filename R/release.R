@@ -1,10 +1,50 @@
+#' Create a Release period
+#'
+#' Release combines multiple schemes together with \code{prescription_1RM},
+#'    \code{additive_1RM_adjustment}, and \code{multiplicative_1RM_adjustment}
+#'    parameters to calculate working \code{weight}, \code{load_1RM}, and
+#'    \code{buffer}
+#'
+#' @param ... \code{STMr_scheme} objects create by \code{scheme_} functions
+#' @param prescription_1RM Initial prescription planning 1RM to calculate weight
+#'     Default is 100
+#' @param additive_1RM_adjustment Additive 1RM adjustment across phases. Default is 2.5
+#' @param multiplicative_1RM_adjustment multiplicative 1RM adjustment across phases.
+#'     Default is 1 (i.e., no adjustment)
+#' @param rounding Rounding for the calculated weight. Default is 2.5
+#' @param max_perc_1RM_func Max Perc 1RM function to use when calculating
+#'     \code{load_1RM}. Default is \code{\link{max_perc_1RM_epley}}
+#' @return \code{STMr_relase} data frame
 #' @export
+#' @examples
+#' scheme1 <- scheme_step(vertical_planning = vertical_constant)
+#' scheme2 <- scheme_step(vertical_planning = vertical_linear)
+#' scheme3 <- scheme_step(vertical_planning = vertical_undulating)
+#'
+#' release_df <- release(
+#'   scheme1, scheme2, scheme3,
+#'   additive_1RM_adjustment = 2.5)
+#'
+#' plot(release_df)
 release <- function(...,
                     prescription_1RM = 100,
                     additive_1RM_adjustment = 2.5,
                     multiplicative_1RM_adjustment = 1,
                     rounding = 2.5,
                     max_perc_1RM_func = max_perc_1RM_epley) {
+
+  # +++++++++++++++++++++++++++++++++++++++++++
+  # Code chunk for dealing with R CMD check note
+  phase <- NULL
+  index <- NULL
+  max_index <- NULL
+  index_start <- NULL
+  perc_1RM <- NULL
+  weight <- NULL
+  reps <- NULL
+  load_1RM <- NULL
+  # +++++++++++++++++++++++++++++++++++++++++++
+
 
   phase_counter <- 1
 
