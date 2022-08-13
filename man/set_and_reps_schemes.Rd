@@ -119,6 +119,7 @@ scheme_manual(
   sets = 1,
   reps,
   adjustment = 0,
+  perc_1RM = NULL,
   progression_table = progression_perc_drop,
   progression_table_control = list(volume = "normal")
 )
@@ -142,6 +143,9 @@ create using sequence of \code{step}}
 \item{step}{Numeric vector}
 
 \item{sets}{Numeric vector. Used to replicate reps and adjustments}
+
+\item{perc_1RM}{Numeric vector. By default is \code{NULL} since \code{perc_1RM} is
+estimated, but if provided, it will be used instead. See examples}
 }
 \value{
 Data frame with the following columns: \code{reps}, \code{index}, \code{step},
@@ -376,8 +380,25 @@ scheme <- scheme_manual(
     volume = "extensive",
     type = "ballistic",
     max_perc_1RM_func = max_perc_1RM_linear,
-    klin = 36)
+    klin = 36
+  )
 )
 
 plot(scheme)
+
+# Provide \%1RM manually
+
+scheme_df <- data.frame(
+  index = rep(c(1, 2, 3, 4), each = 3),
+  reps = rep(c(5, 5, 5), 4),
+  perc_1RM = rep(c(0.4, 0.5, 0.6), 4)
+)
+
+warmup_scheme <- scheme_manual(
+  index = scheme_df$index,
+  reps = scheme_df$reps,
+  perc_1RM = scheme_df$perc_1RM
+)
+
+plot(warmup_scheme)
 }

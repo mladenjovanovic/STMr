@@ -429,6 +429,8 @@ scheme_ladder <- function(reps = c(3, 5, 10),
 #'     create using sequence of \code{step}
 #' @param step Numeric vector
 #' @param sets Numeric vector. Used to replicate reps and adjustments
+#' @param perc_1RM Numeric vector. By default is \code{NULL} since \code{perc_1RM} is
+#'     estimated, but if provided, it will be used instead. See examples
 #' @export
 #' @examples
 #'
@@ -488,37 +490,71 @@ scheme_ladder <- function(reps = c(3, 5, 10),
 #'     volume = "extensive",
 #'     type = "ballistic",
 #'     max_perc_1RM_func = max_perc_1RM_linear,
-#'     klin = 36)
+#'     klin = 36
+#'   )
 #' )
 #'
 #' plot(scheme)
+#'
+#' # Provide %1RM manually
+#'
+#' scheme_df <- data.frame(
+#'   index = rep(c(1, 2, 3, 4), each = 3),
+#'   reps = rep(c(5, 5, 5), 4),
+#'   perc_1RM = rep(c(0.4, 0.5, 0.6), 4)
+#' )
+#'
+#' warmup_scheme <- scheme_manual(
+#'   index = scheme_df$index,
+#'   reps = scheme_df$reps,
+#'   perc_1RM = scheme_df$perc_1RM
+#' )
+#'
+#' plot(warmup_scheme)
 scheme_manual <- function(index = NULL,
                           step,
                           sets = 1,
                           reps,
                           adjustment = 0,
+                          perc_1RM = NULL,
                           progression_table = progression_perc_drop,
                           progression_table_control = list(volume = "normal")) {
+  if (is.null(perc_1RM)) {
+    # %1RM is not provided - it needs to ne estimated
+    # Check if index is NULL - then create index
+    if (is.null(index)) {
+      # Create data frame
+      df <- data.frame(
+        step = step,
+        sets = sets,
+        reps = reps,
+        adjustment = adjustment
+      )
 
-  # Create DF and Get the index
-  if (is.null(index)) {
-    # Create data frame
-    df <- data.frame(
-      step = step,
-      sets = sets,
-      reps = reps,
-      adjustment = adjustment
-    )
-
-    df$index <- mark_index(df$step)
+      df$index <- mark_index(df$step)
+    } else {
+      # Create data frame
+      df <- data.frame(
+        index = index,
+        step = step,
+        sets = sets,
+        reps = reps,
+        adjustment = adjustment
+      )
+    }
   } else {
-    # Create data frame
+    # %1RM is provided
+    if (is.null(index)) {
+      stop("Please provide index vector when using perc_1RM.", call. = FALSE)
+    }
+
     df <- data.frame(
       index = index,
-      step = step,
+      step = NA,
       sets = sets,
       reps = reps,
-      adjustment = adjustment
+      adjustment = NA,
+      perc_1RM = perc_1RM
     )
   }
 
@@ -529,25 +565,36 @@ scheme_manual <- function(index = NULL,
     dplyr::mutate(set = seq_along(reps)) %>%
     dplyr::ungroup()
 
-  loads <- do.call(
-    progression_table,
-    c(
-      list(
-        reps = df$reps,
-        step = df$step,
-        adjustment = df$adjustment
-      ),
-      progression_table_control
+  if (is.null(perc_1RM)) {
+    loads <- do.call(
+      progression_table,
+      c(
+        list(
+          reps = df$reps,
+          step = df$step,
+          adjustment = df$adjustment
+        ),
+        progression_table_control
+      )
     )
-  )
 
-  # Constructor
-  new_STMr_scheme(
-    index = df$index,
-    step = df$step,
-    set = df$set,
-    reps = df$reps,
-    adjustment = loads$adjustment,
-    perc_1RM = loads$perc_1RM
-  )
+    # Constructor
+    new_STMr_scheme(
+      index = df$index,
+      step = df$step,
+      set = df$set,
+      reps = df$reps,
+      adjustment = loads$adjustment,
+      perc_1RM = loads$perc_1RM
+    )
+  } else {
+    new_STMr_scheme(
+      index = df$index,
+      step = df$step,
+      set = df$set,
+      reps = df$reps,
+      adjustment = df$adjustment,
+      perc_1RM = df$perc_1RM
+    )
+  }
 }
