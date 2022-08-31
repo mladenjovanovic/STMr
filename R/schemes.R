@@ -609,13 +609,13 @@ scheme_manual <- function(index = NULL,
 #' warmup_scheme <- scheme_perc_1RM(
 #'   reps = c(10, 8, 6),
 #'   perc_1RM = c(0.4, 0.5, 0.6),
-#'   n_steps = 3)
+#'   n_steps = 3
+#' )
 #'
 #' plot(warmup_scheme)
 scheme_perc_1RM <- function(reps = c(5, 5, 5),
-                          perc_1RM = c(0.4, 0.5, 0.6),
-                          n_steps = 4) {
-
+                            perc_1RM = c(0.4, 0.5, 0.6),
+                            n_steps = 4) {
   scheme_df <- tidyr::expand_grid(
     index = seq(1, n_steps),
     data.frame(
@@ -625,8 +625,8 @@ scheme_perc_1RM <- function(reps = c(5, 5, 5),
   )
 
   scheme_manual(
-   index = scheme_df$index,
-   reps = scheme_df$reps,
-   perc_1RM = scheme_df$perc_1RM
+    index = scheme_df$index,
+    reps = scheme_df$reps,
+    perc_1RM = scheme_df$perc_1RM
   )
 }

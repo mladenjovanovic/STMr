@@ -19,7 +19,8 @@
 #'
 #' release_df <- release(
 #'   scheme1, scheme2, scheme3,
-#'   additive_1RM_adjustment = 2.5)
+#'   additive_1RM_adjustment = 2.5
+#' )
 #'
 #' plot(release_df)
 plot.STMr_release <- function(x, font_size = 14, load_1RM_agg_func = max, ...) {
@@ -48,7 +49,7 @@ plot.STMr_release <- function(x, font_size = 14, load_1RM_agg_func = max, ...) {
 
   phase_index_levels <- paste0("Phase #", sort(unique(x$phase)))
   step_index_levels <- paste0("Step #", sort(unique(x$index)))
-  set_index_levels <-  sort(unique(x$set))
+  set_index_levels <- sort(unique(x$set))
 
   weight.min <- min(c(x$weight, x$prescription_1RM, x$load_1RM))
   weight.max <- max(c(x$weight, x$prescription_1RM, x$load_1RM))
@@ -72,10 +73,12 @@ plot.STMr_release <- function(x, font_size = 14, load_1RM_agg_func = max, ...) {
       prescription_1RM = load_1RM_agg_func(prescription_1RM),
       prescription_1RM_norm = load_1RM_agg_func(prescription_1RM_norm),
       load_1RM = load_1RM_agg_func(load_1RM),
-      load_1RM_norm = load_1RM_agg_func(load_1RM_norm)) %>%
+      load_1RM_norm = load_1RM_agg_func(load_1RM_norm)
+    ) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(
-      load_1RM_str = round(load_1RM, 0))
+      load_1RM_str = round(load_1RM, 0)
+    )
 
   phase_1RM <- summary_1RM %>%
     dplyr::group_by(phase_index) %>%
@@ -86,9 +89,10 @@ plot.STMr_release <- function(x, font_size = 14, load_1RM_agg_func = max, ...) {
     ) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(
-      prescription_1RM_str = round(prescription_1RM, 2))
+      prescription_1RM_str = round(prescription_1RM, 2)
+    )
 
-    # Plot
+  # Plot
   x %>%
     ggplot2::ggplot() +
     ggplot2::theme_grey(font_size) +
@@ -154,5 +158,4 @@ plot.STMr_release <- function(x, font_size = 14, load_1RM_agg_func = max, ...) {
       strip.placement = "outside",
       panel.spacing.x = ggplot2::unit(0, "mm")
     )
-
 }

@@ -23,7 +23,8 @@
 #'
 #' release_df <- release(
 #'   scheme1, scheme2, scheme3,
-#'   additive_1RM_adjustment = 2.5)
+#'   additive_1RM_adjustment = 2.5
+#' )
 #'
 #' plot(release_df)
 release <- function(...,
@@ -68,8 +69,8 @@ release <- function(...,
     dplyr::left_join(phases_index, by = "phase") %>%
     dplyr::mutate(
       total_index = index + index_start,
-      prescription_1RM = prescription_1RM * (multiplicative_1RM_adjustment ^ (phase - 1)) +
-                         (additive_1RM_adjustment * (phase - 1)),
+      prescription_1RM = prescription_1RM * (multiplicative_1RM_adjustment^(phase - 1)) +
+        (additive_1RM_adjustment * (phase - 1)),
       weight = mround(prescription_1RM * perc_1RM, rounding),
       load_1RM = weight / max_perc_1RM_func(reps),
       buffer = (prescription_1RM - load_1RM) / prescription_1RM

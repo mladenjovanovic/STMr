@@ -10,7 +10,7 @@ color_purple <- "#B276B2"
 color_yellow <- "#DECF3F"
 
 # Rounding
-mround <- function (x, accuracy, f = round) {
+mround <- function(x, accuracy, f = round) {
   f(x / accuracy) * accuracy
 }
 

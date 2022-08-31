@@ -412,7 +412,8 @@ plot(warmup_scheme)
 warmup_scheme <- scheme_perc_1RM(
   reps = c(10, 8, 6),
   perc_1RM = c(0.4, 0.5, 0.6),
-  n_steps = 3)
+  n_steps = 3
+)
 
 plot(warmup_scheme)
 }

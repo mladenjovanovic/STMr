@@ -32,7 +32,8 @@ scheme3 <- scheme_step(vertical_planning = vertical_undulating)
 
 release_df <- release(
   scheme1, scheme2, scheme3,
-  additive_1RM_adjustment = 2.5)
+  additive_1RM_adjustment = 2.5
+)
 
 plot(release_df)
 }

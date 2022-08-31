@@ -20,7 +20,8 @@
 
   df <- rbind(
     data.frame(scheme = 1, lhs),
-    data.frame(scheme = 2, rhs))
+    data.frame(scheme = 2, rhs)
+  )
 
   scheme_index <- df %>%
     dplyr::group_by(index, scheme) %>%
@@ -106,7 +107,7 @@ plot_scheme_bar <- function(scheme,
 
   # Prepare the scheme df
 
-  set_index_levels <-  sort(unique(scheme$set))
+  set_index_levels <- sort(unique(scheme$set))
   step_index_levels <- paste0("Step #", sort(unique(scheme$index)))
 
   scheme %>%
@@ -180,7 +181,7 @@ plot_scheme_vertical <- function(scheme,
   center <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
-  set_index_levels <-  sort(unique(scheme$set), decreasing = TRUE)
+  set_index_levels <- sort(unique(scheme$set), decreasing = TRUE)
   step_index_levels <- paste0("Step #", sort(unique(scheme$index)))
 
   scheme %>%
@@ -264,11 +265,11 @@ plot_scheme_fraction <- function(scheme,
   step_index <- NULL
   # +++++++++++++++++++++++++++++++++++++++++++
 
-  set_index_levels <-  sort(unique(scheme$set))
+  set_index_levels <- sort(unique(scheme$set))
   step_index_levels <- paste0("Step #", sort(unique(scheme$index)))
 
   scheme %>%
-    dplyr::mutate(set_index = factor(set, levels =set_index_levels)) %>%
+    dplyr::mutate(set_index = factor(set, levels = set_index_levels)) %>%
     dplyr::mutate(perc_1RM = round(perc_1RM * 100, 0)) %>%
     dplyr::mutate(
       center = 0,
