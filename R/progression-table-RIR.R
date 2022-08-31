@@ -124,10 +124,6 @@ progression_RIR <- function(reps,
 #'   max_perc_1RM_func = max_perc_1RM_linear,
 #'   klin = 36
 #' )
-#'
-#' # Plot progression table
-#' plot_progression_table(progression_RIR_increment)
-#' plot_progression_table(progression_RIR_increment, "adjustment")
 progression_RIR_increment <- function(reps,
                                       step = 0,
                                       volume = "normal",

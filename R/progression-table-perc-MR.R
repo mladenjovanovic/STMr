@@ -29,9 +29,6 @@
 #'   klin = 36
 #' )
 #'
-#' # Plot progression table
-#' plot_progression_table(progression_perc_MR)
-#' plot_progression_table(progression_perc_MR, "adjustment")
 progression_perc_MR <- function(reps,
                                 step = 0,
                                 volume = "normal",
@@ -127,10 +124,6 @@ progression_perc_MR <- function(reps,
 #'   max_perc_1RM_func = max_perc_1RM_linear,
 #'   klin = 36
 #' )
-#'
-#' # Plot progression table
-#' plot_progression_table(progression_perc_MR_variable)
-#' plot_progression_table(progression_perc_MR_variable, "adjustment")
 progression_perc_MR_variable <- function(reps,
                                          step = 0,
                                          volume = "normal",

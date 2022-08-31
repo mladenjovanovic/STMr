@@ -20,10 +20,6 @@
 #'   max_perc_1RM_func = max_perc_1RM_linear,
 #'   klin = 36
 #' )
-#'
-#' # Plot progression table
-#' plot_progression_table(progression_rel_int)
-#' plot_progression_table(progression_rel_int, "adjustment")
 progression_rel_int <- function(reps,
                                 step = 0,
                                 volume = "normal",

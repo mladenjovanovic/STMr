@@ -200,9 +200,6 @@ generate_progression_table(
   klin = 36
 )
 
-# Plot progression table
-plot_progression_table(progression_DI)
-plot_progression_table(progression_DI, "adjustment")
 # ------------------------------------------
 # Progression RIR Constant
 progression_RIR(10, step = seq(-3, 0, 1))
@@ -247,10 +244,6 @@ generate_progression_table(
   max_perc_1RM_func = max_perc_1RM_linear,
   klin = 36
 )
-
-# Plot progression table
-plot_progression_table(progression_RIR_increment)
-plot_progression_table(progression_RIR_increment, "adjustment")
 # ------------------------------------------
 # Progression \%MR Step Const
 progression_perc_MR(10, step = seq(-3, 0, 1))
@@ -276,9 +269,6 @@ generate_progression_table(
   klin = 36
 )
 
-# Plot progression table
-plot_progression_table(progression_perc_MR)
-plot_progression_table(progression_perc_MR, "adjustment")
 # ------------------------------------------
 # Progression \%MR Step Variable
 progression_perc_MR_variable(10, step = seq(-3, 0, 1))
@@ -295,10 +285,6 @@ generate_progression_table(
   max_perc_1RM_func = max_perc_1RM_linear,
   klin = 36
 )
-
-# Plot progression table
-plot_progression_table(progression_perc_MR_variable)
-plot_progression_table(progression_perc_MR_variable, "adjustment")
 # ------------------------------------------
 # Progression Perc Drop
 progression_perc_drop(10, step = seq(-3, 0, 1))
@@ -316,10 +302,6 @@ generate_progression_table(
   max_perc_1RM_func = max_perc_1RM_linear,
   klin = 36
 )
-
-# Plot progression table
-plot_progression_table(progression_perc_drop)
-plot_progression_table(progression_perc_drop, "adjustment")
 # ------------------------------------------
 # Progression Relative Intensity
 progression_rel_int(10, step = seq(-3, 0, 1))
@@ -338,10 +320,6 @@ generate_progression_table(
   max_perc_1RM_func = max_perc_1RM_linear,
   klin = 36
 )
-
-# Plot progression table
-plot_progression_table(progression_rel_int)
-plot_progression_table(progression_rel_int, "adjustment")
 }
 \references{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.

@@ -34,12 +34,13 @@ Default is 1}
 Function for creating \code{ggplot2} plot of the Progression Table
 }
 \examples{
-plot_progression_table(progression_RIR_increment, "\%1RM")
-plot_progression_table(progression_RIR_increment, "adjustment")
+plot_progression_table(progression_RIR_increment, "\%1RM", reps = 1:5)
+plot_progression_table(progression_RIR_increment, "adjustment", reps = 1:5)
 
 # Create progression pot by using specific reps-max table and klin value
 plot_progression_table(
   progression_RIR,
+  reps = 1:5,
   max_perc_1RM_func = max_perc_1RM_linear,
   klin = 36
 )

@@ -2,4 +2,4 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is a new release.
+* This is resubmission: Removed time-spending examples from the previous submission

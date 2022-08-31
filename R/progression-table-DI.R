@@ -28,9 +28,6 @@
 #'   klin = 36
 #' )
 #'
-#' # Plot progression table
-#' plot_progression_table(progression_DI)
-#' plot_progression_table(progression_DI, "adjustment")
 progression_DI <- function(reps,
                            step = 0,
                            volume = "normal",
