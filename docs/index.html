@@ -43,7 +43,7 @@
     
     <a class="navbar-brand me-2" href="index.html">STMr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -962,15 +962,15 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">strength_training_log</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">strength_training_log</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 7</span></span>
-<span><span class="co">#&gt;   phase  week session     set weight  reps  eRIR</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1     1     1 Session A     1   57.5    12    NA</span></span>
-<span><span class="co">#&gt; 2     1     1 Session A     2   62.5    10     5</span></span>
-<span><span class="co">#&gt; 3     1     1 Session A     3   70       8     3</span></span>
-<span><span class="co">#&gt; 4     1     1 Session A     4   55      12    NA</span></span>
-<span><span class="co">#&gt; 5     1     1 Session A     5   60      10    NA</span></span>
-<span><span class="co">#&gt; 6     1     1 Session A     6   65       8     4</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 6 × 8</span></span>
+<span><span class="co">#&gt;   phase  week   day session     set weight  reps  eRIR</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1     1     1     1 Session A     1   57.5    12    NA</span></span>
+<span><span class="co">#&gt; 2     1     1     1 Session A     2   62.5    10     5</span></span>
+<span><span class="co">#&gt; 3     1     1     1 Session A     3   70       8     3</span></span>
+<span><span class="co">#&gt; 4     1     1     1 Session A     4   55      12    NA</span></span>
+<span><span class="co">#&gt; 5     1     1     1 Session A     5   60      10    NA</span></span>
+<span><span class="co">#&gt; 6     1     1     1 Session A     6   65       8     4</span></span></code></pre></div>
 <p>This dataset contains strength training log for a single athlete and single exercise performed in the training program. Strength training program involves doing two strength training sessions, over 12 week (4 phases of 3 weeks each). Session A involves linear wave-loading pattern starting with 2x12/10/8 reps and reaching 2x8/6/4 reps. Session B involves constant wave-loading pattern using 2x3/2/1. This dataset contains weight being used, as well as estimated/perceived reps-in-reserve (eRIR), which represent subjective rating of the proximity to failure.</p>
 <p><a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package has three types of estimation functions: (1) simple estimation functions, (2) mixed-effect estimation functions, and (3) quantile estimation functions. Each of these three types of estimation functions allow you to work with (1) %1RM and repetitions to estimate single parameter (i.e., <code>k</code>, <code>kmod</code>, or <code>klin</code> parameters for Epley’s, Modified Epley’s, and Linear/Brzycki’s models respectively), and (2) absolute weight and repetitions, which in addition to estimating model parameter value estimates 1RM. This represent novel technique in sports science, yet to be validated (paper preparation currently ongoing). In the next section I will walk you through each of these, but for more information please refer to <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series.</p>
 <div class="section level3">
@@ -1335,13 +1335,13 @@
 <span><span class="va">gg</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>We are interested in finding both the “best” and “worst” profiles (as well as estimated 1RMs). To achieve this, we will utilize <em>quantile non-linear regression</em>. This quantile non-linear estimation is implemented in <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package using the <code>nlrq()</code> function from the <a href="https://www.r-project.org" class="external-link">quantreg</a> package. Quantile estimation functions ends with <code>_quantile</code>. You can also use the <code>...</code> feature of the quantile estimation functions to forward extra arguments to <code>nlrq()</code> function.</p>
-<p>For the “best” performance profile we can use 0.95 quantile, and for “worst” we can use 0.05 quantile. I will utilize Linear/Brzycki’s model. For more information please refer to <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series.</p>
+<p>For the “best” performance profile we can use 0.9 quantile, and for “worst” we can use 0.1 quantile. I will utilize Linear/Brzycki’s model. For more information please refer to <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mq_best</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions_quantile.html">estimate_klin_1RM_quantile</a></span><span class="op">(</span></span>
 <span>  weight <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">weight</span>,</span>
 <span>  reps <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">reps</span>,</span>
 <span>  eRIR <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">eRIR</span>,</span>
-<span>  tau <span class="op">=</span> <span class="fl">0.95</span></span>
+<span>  tau <span class="op">=</span> <span class="fl">0.9</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mq_best</span><span class="op">)</span></span>
@@ -1351,21 +1351,21 @@
 <span><span class="co">#&gt;     tau = tau, control = list(maxiter = 10000, k = 2, InitialStepSize = 0, </span></span>
 <span><span class="co">#&gt;         big = 1e+20, eps = 1e-07, beta = 0.97), trace = FALSE)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; tau: [1] 0.95</span></span>
+<span><span class="co">#&gt; tau: [1] 0.9</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
 <span><span class="co">#&gt;      Value  Std. Error t value Pr(&gt;|t|)</span></span>
-<span><span class="co">#&gt; klin  36.54   1.41      25.98    0.00  </span></span>
-<span><span class="co">#&gt; 1RM  107.95   1.64      65.82    0.00</span></span>
+<span><span class="co">#&gt; klin  36.88   1.48      24.91    0.00  </span></span>
+<span><span class="co">#&gt; 1RM  105.36   1.15      91.97    0.00</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mq_best</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  klin   1RM </span></span>
-<span><span class="co">#&gt;  36.5 108.0</span></span>
+<span><span class="co">#&gt;  36.9 105.4</span></span>
 <span></span>
 <span><span class="va">mq_worst</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions_quantile.html">estimate_klin_1RM_quantile</a></span><span class="op">(</span></span>
 <span>  weight <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">weight</span>,</span>
 <span>  reps <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">reps</span>,</span>
 <span>  eRIR <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">eRIR</span>,</span>
-<span>  tau <span class="op">=</span> <span class="fl">0.05</span></span>
+<span>  tau <span class="op">=</span> <span class="fl">0.1</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">mq_worst</span><span class="op">)</span></span>
@@ -1375,15 +1375,15 @@
 <span><span class="co">#&gt;     tau = tau, control = list(maxiter = 10000, k = 2, InitialStepSize = 0, </span></span>
 <span><span class="co">#&gt;         big = 1e+20, eps = 1e-07, beta = 0.97), trace = FALSE)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; tau: [1] 0.05</span></span>
+<span><span class="co">#&gt; tau: [1] 0.1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Coefficients:</span></span>
 <span><span class="co">#&gt;      Value Std. Error t value Pr(&gt;|t|)</span></span>
-<span><span class="co">#&gt; klin 28.50  4.21       6.78    0.00   </span></span>
-<span><span class="co">#&gt; 1RM  95.00  1.56      60.75    0.00</span></span>
+<span><span class="co">#&gt; klin 26.00  3.90       6.67    0.00   </span></span>
+<span><span class="co">#&gt; 1RM  97.50  1.89      51.71    0.00</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mq_worst</span><span class="op">)</span></span>
 <span><span class="co">#&gt; klin  1RM </span></span>
-<span><span class="co">#&gt; 28.5 95.0</span></span></code></pre></div>
+<span><span class="co">#&gt; 26.0 97.5</span></span></code></pre></div>
 <p>Graphically, these profiles look like this:</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_df_best</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">120</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -1398,43 +1398,75 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pred_df_best</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">weight</span>, y <span class="op">=</span> <span class="va">nRM</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">pred_df_worst</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">weight</span>, y <span class="op">=</span> <span class="va">nRM</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-61-1.png" width="80%" style="display: block; margin: auto;"></p>
-<p>In this example we have used all 12 weeks of strength training log data (i.e., pooled). We can perform some type of “rolling” analysis to get ideas of trends, particularly the estimated 1RM trend across time. In the following example, I am using rolling 3 weeks estimation of the “best” and “worst” 1RM:</p>
+</div>
+<div class="section level3">
+<h3 id="rolling-estmation">Rolling estmation<a class="anchor" aria-label="anchor" href="#rolling-estmation"></a>
+</h3>
+<p>In the previous example we have used all 12 weeks of strength training log data (i.e., pooled). We can perform the <em>rolling</em> analysis using the <code><a href="reference/estimate_rolling_1RM.html">estimate_rolling_1RM()</a></code> function. <code><a href="reference/estimate_rolling_1RM.html">estimate_rolling_1RM()</a></code> allows you to use different functions (i.e., <code><a href="reference/estimate_functions.html">estimate_k_1RM()</a></code>, <code><a href="reference/estimate_functions.html">estimate_kmod_1RM()</a></code>, <code><a href="reference/estimate_functions.html">estimate_klin_1RM()</a></code>, <code><a href="reference/estimate_functions_quantile.html">estimate_k_1RM_quantile()</a></code>, <code><a href="reference/estimate_functions_quantile.html">estimate_kmod_1RM_quantile()</a></code>, and <code><a href="reference/estimate_functions_quantile.html">estimate_klin_1RM_quantile()</a></code>). Here is an example using previous 6 days (i.e., one phase, or 3 rolling weeks):</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">estimate_1RM</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df_log</span>, <span class="va">week_start</span>, <span class="va">week_end</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df_log</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>index <span class="op">=</span> <span class="op">(</span><span class="va">phase</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span> <span class="op">*</span> <span class="fl">3</span> <span class="op">+</span> <span class="va">week</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">index</span> <span class="op">&gt;=</span> <span class="va">week_start</span> <span class="op">&amp;</span> <span class="va">index</span> <span class="op">&lt;=</span> <span class="va">week_end</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="va">mq_best</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions_quantile.html">estimate_klin_1RM_quantile</a></span><span class="op">(</span></span>
-<span>    weight <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">weight</span>,</span>
-<span>    reps <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">reps</span>,</span>
-<span>    eRIR <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">eRIR</span>,</span>
-<span>    tau <span class="op">=</span> <span class="fl">0.95</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span>  <span class="va">mq_worst</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_functions_quantile.html">estimate_klin_1RM_quantile</a></span><span class="op">(</span></span>
-<span>    weight <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">weight</span>,</span>
-<span>    reps <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">reps</span>,</span>
-<span>    eRIR <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">eRIR</span>,</span>
-<span>    tau <span class="op">=</span> <span class="fl">0.05</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>best <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mq_best</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>, worst <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">mq_worst</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/estimate_rolling_1RM.html">estimate_rolling_1RM</a></span><span class="op">(</span></span>
+<span>  weight <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">weight</span>,</span>
+<span>  reps <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">reps</span>,</span>
+<span>  eRIR <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">eRIR</span>,</span>
+<span>  day_index <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">day</span>,</span>
+<span>  window <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>  estimate_function <span class="op">=</span> <span class="va">estimate_kmod_1RM_quantile</span>,</span>
+<span>  tau <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 19 × 3</span></span>
+<span><span class="co">#&gt;    day_index   kmod `1RM`</span></span>
+<span><span class="co">#&gt;        &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1         6 0.0404  98.8</span></span>
+<span><span class="co">#&gt;  2         7 0.0368  98.5</span></span>
+<span><span class="co">#&gt;  3         8 0.0400 101. </span></span>
+<span><span class="co">#&gt;  4         9 0.0383 101. </span></span>
+<span><span class="co">#&gt;  5        10 0.0431 104. </span></span>
+<span><span class="co">#&gt;  6        11 0.0432 104. </span></span>
+<span><span class="co">#&gt;  7        12 0.0455 106. </span></span>
+<span><span class="co">#&gt;  8        13 0.0385 104. </span></span>
+<span><span class="co">#&gt;  9        14 0.0385 104. </span></span>
+<span><span class="co">#&gt; 10        15 0.0410 106. </span></span>
+<span><span class="co">#&gt; 11        16 0.0415 107. </span></span>
+<span><span class="co">#&gt; 12        17 0.0415 107. </span></span>
+<span><span class="co">#&gt; 13        18 0.0410 106. </span></span>
+<span><span class="co">#&gt; 14        19 0.0410 106. </span></span>
+<span><span class="co">#&gt; 15        20 0.0415 107. </span></span>
+<span><span class="co">#&gt; 16        21 0.0381 106. </span></span>
+<span><span class="co">#&gt; 17        22 0.0381 106. </span></span>
+<span><span class="co">#&gt; 18        23 0.0364 106. </span></span>
+<span><span class="co">#&gt; 19        24 0.0382 107.</span></span></code></pre></div>
+<p>In the following example, I am using rolling 3 weeks estimation of the “best” and “worst” 1RM, as well as the <code>kmod</code> parameter using 0.1 and 0.9 quantiles:</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">est_profiles</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/estimate_rolling_1RM.html">estimate_rolling_1RM</a></span><span class="op">(</span></span>
+<span>    weight <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">weight</span>,</span>
+<span>    reps <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">reps</span>,</span>
+<span>    eRIR <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">eRIR</span>,</span>
+<span>    day_index <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">day</span>,</span>
+<span>    window <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>    estimate_function <span class="op">=</span> <span class="va">estimate_kmod_1RM_quantile</span>,</span>
+<span>    tau <span class="op">=</span> <span class="va">.x</span><span class="op">$</span><span class="va">tau</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>tau <span class="op">=</span> <span class="va">.x</span><span class="op">$</span><span class="va">tau</span>, <span class="va">res</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">rolling_weeks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>week_start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>week_end <span class="op">=</span> <span class="va">week_start</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.9</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">estimate_1RM</span><span class="op">(</span><span class="va">strength_training_log</span>, <span class="va">week_start</span>, <span class="va">week_end</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">rolling_weeks</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">week_end</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/do.html" class="external-link">do</a></span><span class="op">(</span><span class="fu">est_profiles</span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tau</span>, <span class="va">day_index</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"param"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">day_index</span>, <span class="va">param</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>, upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  </span>
+<span>  <span class="co"># Plot</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">day_index</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">best</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">worst</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Week"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Estimated 1RM (kg)"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-62-1.png" width="80%" style="display: block; margin: auto;"></p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html" class="external-link">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">lower</span>, ymax <span class="op">=</span> <span class="va">upper</span>, fill <span class="op">=</span> <span class="va">param</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"black"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">param</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Day index"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-63-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>This analysis represents novel technique and the time will tell how valid is it and how to interpret it correctly. But at least we have very powerful, transparent, and flexible open-source tool: <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package.</p>
 </div>
 </div>
@@ -1447,35 +1479,35 @@
 </h3>
 <p>S3 <code>plot</code> method for plotting <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> schemes allow for three different types of plots: (1) <code>bar</code> (default), (2) <code>vertical</code>, and (3) <code>fraction</code>.</p>
 <p>Here is the default <code>bar</code> plot:</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-63-1.png" width="80%" style="display: block; margin: auto;"></p>
-<p>Another way to plot the scheme is using the <code>vertical</code> method.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, type <span class="op">=</span> <span class="st">"vertical"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-64-1.png" width="80%" style="display: block; margin: auto;"></p>
-<p>And the final method is to use <code>fraction</code> method, which is very similar to the Olympic weightlifting log notation:</p>
+<p>Another way to plot the scheme is using the <code>vertical</code> method.</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, type <span class="op">=</span> <span class="st">"fraction"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, type <span class="op">=</span> <span class="st">"vertical"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;"></p>
-<p>To avoid printing <code>%</code>, which will make <code>%1RM</code> labels bigger, use <code>perc_str = ""</code>:</p>
+<p>And the final method is to use <code>fraction</code> method, which is very similar to the Olympic weightlifting log notation:</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, perc_str <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, type <span class="op">=</span> <span class="st">"fraction"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-66-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p>To avoid printing <code>%</code>, which will make <code>%1RM</code> labels bigger, use <code>perc_str = ""</code>:</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, perc_str <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-67-1.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="different-label-sizes">Different label sizes<a class="anchor" aria-label="anchor" href="#different-label-sizes"></a>
 </h3>
 <p>S3 <code>plot</code> method for plotting <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> schemes allow you to set the font size. This can be useful later once we used facets.</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, font_size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-67-1.png" width="80%" style="display: block; margin: auto;"></p>
-<p>The plotting allows for the flexible labels, using the <a href="https://wilkox.org/ggfittext/" class="external-link">ggfittext</a> package, which fits the labels so they do not exit the bars. Here is an example using the Set Accumulation vertical plan:</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, font_size <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-68-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p>The plotting allows for the flexible labels, using the <a href="https://wilkox.org/ggfittext/" class="external-link">ggfittext</a> package, which fits the labels so they do not exit the bars. Here is an example using the Set Accumulation vertical plan:</p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_set_accumulation</span>, </span>
@@ -1483,25 +1515,25 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-68-1.png" width="80%" style="display: block; margin: auto;"></p>
-<p>Using the <code>size</code> argument, you can set the maximum label size. This is useful if you want to avoid having different sizes of labels on your plot. The labels will still be shrinked if needed, but it will not be bigger than selected font size:</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-69-1.png" width="80%" style="display: block; margin: auto;"></p>
-<p>You can also set padding of the labels. Let’s remove <code>%</code> and set the padding:</p>
+<p>Using the <code>size</code> argument, you can set the maximum label size. This is useful if you want to avoid having different sizes of labels on your plot. The labels will still be shrinked if needed, but it will not be bigger than selected font size:</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span>, size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-70-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p>You can also set padding of the labels. Let’s remove <code>%</code> and set the padding:</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">scheme</span>,</span>
 <span>  perc_str <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  padding.x <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="st">"mm"</span><span class="op">)</span>,</span>
 <span>  padding.y <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="st">"mm"</span><span class="op">)</span>,<span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-70-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-71-1.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="creating-facets">Creating facets<a class="anchor" aria-label="anchor" href="#creating-facets"></a>
 </h3>
 <p>Let’s say you want to generate multiple schemes and want to plot them. Here is how you can do it easily:</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scheme_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span></span>
@@ -1523,7 +1555,7 @@
 <span><span class="co"># Since the plot() returns ggplot object, we can create facets</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme_df</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-71-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-unnamed-chunk-72-1.png" width="80%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -1536,13 +1568,13 @@
 <a class="anchor" aria-label="anchor" href="#how-to-cite-stmr"></a>
 </h2>
 <p>If you are using <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package in your publications, please use the following citation:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"STMr"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; To cite 'STMr' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Mladen Jovanović (2022). {STMr}: Strength Training Manual R-Language</span></span>
-<span><span class="co">#&gt;   Functions. R package version 0.1.4. url:</span></span>
+<span><span class="co">#&gt;   Functions. R package version 0.1.4.9000. url:</span></span>
 <span><span class="co">#&gt;   https://github.com/mladenjovanovic/STMr</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
@@ -1550,7 +1582,7 @@
 <span><span class="co">#&gt;   @Manual{,</span></span>
 <span><span class="co">#&gt;     title = {{STMr}: Strength Training Manual R-Language Functions},</span></span>
 <span><span class="co">#&gt;     author = {Mladen Jovanović},</span></span>
-<span><span class="co">#&gt;     note = {R package version 0.1.4},</span></span>
+<span><span class="co">#&gt;     note = {R package version 0.1.4.9000},</span></span>
 <span><span class="co">#&gt;     year = {2022},</span></span>
 <span><span class="co">#&gt;     address = {Belgrade, Serbia},</span></span>
 <span><span class="co">#&gt;     url = {https://github.com/mladenjovanovic/STMr},</span></span>
