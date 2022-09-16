@@ -74,9 +74,9 @@ strength_training_log <- strength_training_log %>%
   rename(week = index) %>%
   group_by(phase, session, week) %>%
   mutate(
-    set = seq(1, n())) %>%
+    set = seq(1, n())
+  ) %>%
   ungroup() %>%
-
   # Calculate day
   mutate(
     day = ((phase - 1) * 6) + ((week - 1) * 2) + ifelse(session == "Session A", 1, 2)

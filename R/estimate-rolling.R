@@ -17,7 +17,8 @@
 #'   day_index = strength_training_log$day,
 #'   window = 10,
 #'   estimate_function = estimate_k_1RM_quantile,
-#'   tau = 0.9)
+#'   tau = 0.9
+#' )
 estimate_rolling_1RM <- function(weight,
                                  reps,
                                  eRIR = 0,
