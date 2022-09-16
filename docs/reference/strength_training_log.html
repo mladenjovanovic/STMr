@@ -20,7 +20,7 @@ of the proximity to failure"><meta property="og:image" content="https://mladenjo
     
     <a class="navbar-brand me-2" href="../index.html">STMr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,11 +71,14 @@ of the proximity to failure</p>
 
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
-    <p>A data frame with 144 rows and 7 variables:</p><dl><dt>phase</dt>
+    <p>A data frame with 144 rows and 8 variables:</p><dl><dt>phase</dt>
 <dd><p>Phase index number. Numeric from 1 to 4</p></dd>
 
 <dt>week</dt>
-<dd><p>Week index number. Numeric from 1 to 3</p></dd>
+<dd><p>Week index number (within phase). Numeric from 1 to 3</p></dd>
+
+<dt>day</dt>
+<dd><p>Day (total) index number. Numeric from 1 to 3</p></dd>
 
 <dt>session</dt>
 <dd><p>Name of the session. Can be "Session A" or "Session B"</p></dd>
