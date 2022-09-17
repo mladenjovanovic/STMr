@@ -43,7 +43,7 @@
     
     <a class="navbar-brand me-2" href="index.html">STMr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,6 +85,25 @@
 </div>
 <!-- badges: start -->
 
+<p><strong>Table of Contents</strong></p>
+<p><em>This is longer README file, so here is the TOC for easier jumping to topics</em></p>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#reps-max-functions">Reps-Max Functions</a></li>
+<li><a href="#adjustment-functions">Adjustment Functions</a></li>
+<li><a href="#progressions">Progressions</a></li>
+<li><a href="#vertical-planning">Vertical Planning</a></li>
+<li><a href="#set-and-rep-schemes">Set and Rep Schemes</a></li>
+<li><a href="#release">Release</a></li>
+<li><a href="#estimation">Estimation</a></li>
+<li><a href="#scheme-plotting-tips">Scheme plotting tips</a></li>
+<li><a href="#further-information">Further information</a></li>
+<li><a href="#how-to-cite-stmr">How to cite <code>{STMr}</code></a></li>
+</ul>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p><a href="https://mladenjovanovic.github.io/STMr/">STMr</a> (short of <em>Strength Training Manual R-functions</em>) package is created to help sports scientists and strength coaches estimate strength profiles, create and visualize (percent-based) progression tables and set and rep schemes. Originally <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package was created as an internal project/package to help me in writing <a href="https://complementarytraining.net/strength-training-manual-paperback-edition/" class="external-link">Strength Training Manual</a> Volume 3 book, but it soon became a project in itself. <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package is open-source package under MIT License implemented in the R language.</p>
 <p><a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package can be divided in the following functional units:</p>
 <ul>
@@ -106,6 +125,7 @@
 <p>Figure below depicts the relationship between <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package functional units:</p>
 <p><img src="reference/figures/STMr-package.png" width="80%" style="display: block; margin: auto;"></p>
 <p>I will walk you through each of these functional units to demonstrate the simplicity, flexibility, usability, and power of the <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package. For more information regarding the logic behind the <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package please check the <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series.</p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -197,7 +217,7 @@
 <h2 id="adjustment-functions">Adjustment Functions<a class="anchor" aria-label="anchor" href="#adjustment-functions"></a>
 </h2>
 <p>Reps-Max functions help you map out the relationship between reps-to-failure and %1RM. Luckily, not all sets are taken to the point of failure. <a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package allows you to <em>adjust</em> the %1RM or repetitions using four different methods: (1) Deducted Intensity (DI), (2) Relative Intensity (Rel Int), (3) Reps-In-Reserve (RIR), and (4) Percentage of Maximum Reps (%MR). This is done using the <code>adj_</code> family of functions, which apply adjustments to selected Reps-Max function/relationship.</p>
-<p>Adjustment method is the main element of the progression table and represents the method for progression (see <a href="#progression">Progression</a> section). Although the adjustment of the %1RM used for the target reps (<code>adj_perc_1RM_</code> family of functions) is the most common, you can also adjust the reps for target %1RM (<code>adj_reps_</code> family of functions). Default Reps-Max function used across adjustment functions is the <code><a href="reference/max_perc_1RM.html">max_perc_1RM_epley()</a></code>. User is allowed to provide other Reps-Max function as well as custom model parameter value. This is extremely useful in creating individualized progression tables and set and rep schemes.</p>
+<p>Adjustment method is the main element of the progression table and represents the method for progression (see [Progression] section). Although the adjustment of the %1RM used for the target reps (<code>adj_perc_1RM_</code> family of functions) is the most common, you can also adjust the reps for target %1RM (<code>adj_reps_</code> family of functions). Default Reps-Max function used across adjustment functions is the <code><a href="reference/max_perc_1RM.html">max_perc_1RM_epley()</a></code>. User is allowed to provide other Reps-Max function as well as custom model parameter value. This is extremely useful in creating individualized progression tables and set and rep schemes.</p>
 <p>Here is how you can use the adjustment functions to adjust %1RM when doing 5 repetitions:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use 10 perc deducted intensity</span></span>
@@ -235,7 +255,7 @@
 <span>  kmod <span class="op">=</span> <span class="fl">0.06</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.735</span></span></code></pre></div>
-<p>Although I will show you simpler solution to this (see <a href="#progression">Progression</a> section), here is how you can create simple RIR adjustment table:</p>
+<p>Although I will show you simpler solution to this (see [Progression] section), here is how you can create simple RIR adjustment table:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("knitr", dependencies = TRUE)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
@@ -322,7 +342,7 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="progression">Progression<a class="anchor" aria-label="anchor" href="#progression"></a>
+<h2 id="progressions">Progressions<a class="anchor" aria-label="anchor" href="#progressions"></a>
 </h2>
 <p>Progressions (or progression tables) represent implemented adjustments in a systematic and organized manner across <em>progression steps</em> and scheme <em>volume types</em> (intensive, normal, and extensive). Please refer to <a href="https://complementarytraining.net/strength-training-manual-paperback-edition/" class="external-link">Strength Training Manual</a> book and <a href="https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series for more information about progression tables.</p>
 <p><a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package has multiple progressions implemented and they all start with <code>progression_</code>. Progression functions also allow user to utilize different Reps-Max function (default is <code><a href="reference/max_perc_1RM.html">max_perc_1RM_epley()</a></code>) and provide custom model parameter value. This modular and flexible feature allows for easier generation of individualized progression tables, as well as set and rep schemes.</p>
