@@ -10,6 +10,26 @@
 status](https://www.r-pkg.org/badges/version/STMr)](https://CRAN.R-project.org/package=STMr)
 <!-- badges: end -->
 
+**Table of Contents**
+
+*This is longer readme file, ho here is the TOC for easier jumping to
+topics*
+
+-   [Introduction](#introduction)
+-   [Installation](#installation)
+-   [Reps-Max Functions](#reps-max-functions)
+-   [Adjustment Functions](#adjustment-functions)
+-   [Progressions](#progressions)
+-   [Vertical Planning](#vertical-planning)
+-   [Set and Rep Schemes](#set-and-rep-schemes)
+-   [Release](#release)
+-   [Estimation](#estimation)
+-   [Scheme plotting tips](#scheme-plotting-tips)
+-   [Further information](#further-information)
+-   [How to cite `{STMr}`](#how-to-cite-stmr)
+
+## Introduction
+
 `{STMr}` (short of *Strength Training Manual R-functions*) package is
 created to help sports scientists and strength coaches estimate strength
 profiles, create and visualize (percent-based) progression tables and
@@ -184,8 +204,8 @@ of functions, which apply adjustments to selected Reps-Max
 function/relationship.
 
 Adjustment method is the main element of the progression table and
-represents the method for progression (see [Progression](#progression)
-section). Although the adjustment of the %1RM used for the target reps
+represents the method for progression (see \[Progression\] section).
+Although the adjustment of the %1RM used for the target reps
 (`adj_perc_1RM_` family of functions) is the most common, you can also
 adjust the reps for target %1RM (`adj_reps_` family of functions).
 Default Reps-Max function used across adjustment functions is the
@@ -246,9 +266,8 @@ adj_perc_1RM_RIR(
 #> [1] 0.735
 ```
 
-Although I will show you simpler solution to this (see
-[Progression](#progression) section), here is how you can create simple
-RIR adjustment table:
+Although I will show you simpler solution to this (see \[Progression\]
+section), here is how you can create simple RIR adjustment table:
 
 ``` r
 # install.packages("knitr", dependencies = TRUE)
@@ -297,7 +316,7 @@ get_reps(0.85, method = "RIR", model = "modified epley", adjustment = 2, kmod = 
 #> [1] 4.04
 ```
 
-## Progression
+## Progressions
 
 Progressions (or progression tables) represent implemented adjustments
 in a systematic and organized manner across *progression steps* and

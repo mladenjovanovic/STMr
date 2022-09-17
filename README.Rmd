@@ -35,6 +35,25 @@ options(digits = 3)
 [![CRAN status](https://www.r-pkg.org/badges/version/STMr)](https://CRAN.R-project.org/package=STMr)
 <!-- badges: end -->
 
+**Table of Contents**
+
+*This is longer readme file, ho here is the TOC for easier jumping to topics*
+
+- [Introduction]
+- [Installation]
+- [Reps-Max Functions]
+- [Adjustment Functions]
+- [Progressions]
+- [Vertical Planning]
+- [Set and Rep Schemes]
+- [Release]
+- [Estimation]
+- [Scheme plotting tips]
+- [Further information]
+- [How to cite `{STMr}`]
+
+## Introduction
+
 `{STMr}` (short of *Strength Training Manual R-functions*) package is created to help sports scientists and strength coaches estimate strength profiles, create and visualize (percent-based) progression tables and set and rep schemes. Originally `{STMr}` package was created as an internal project/package to help me in writing [Strength Training Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/) Volume 3 book, but it soon became a project in itself. `{STMr}` package is open-source package under MIT License implemented in the R language.
 
 `{STMr}` package can be divided in the following functional units:
@@ -227,7 +246,7 @@ get_perc_1RM(5, method = "%MR", model = "linear", adjustment = 0.8, klin = 36)
 get_reps(0.85, method = "RIR", model = "modified epley", adjustment = 2, kmod = 0.035)
 ```
 
-## Progression
+## Progressions
 
 Progressions (or progression tables) represent implemented adjustments in a systematic and organized manner across *progression steps* and scheme *volume types* (intensive, normal, and extensive). Please refer to [Strength Training Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/) book and [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/) article series for more information about progression tables.
 
