@@ -1,4 +1,4 @@
-# STMr 0.1.4.9000
+# STMr 0.1.5
 
 * Added day counter (`day`) in the `strength_training_log` dataset. This will be used for an example on how to use the rolling estimation
 * Added `estimate_rolling_1RM()` function. This is used to implement "embedded testing" using training logs to estimate both reps-max profiles and 1RMs

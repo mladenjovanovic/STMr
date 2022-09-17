@@ -1,6 +1,6 @@
 Package: STMr
 Title: Strength Training Manual R-Language Functions
-Version: 0.1.4.9000
+Version: 0.1.5
 Authors@R: 
     person(given = "Mladen",
            family = "Jovanović",
