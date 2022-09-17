@@ -1,5 +1,5 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-* This is resubmission: Removed time-spending examples from the previous submission
+* This is new release (version 0.1.5)
