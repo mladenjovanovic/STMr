@@ -1,5 +1,5 @@
 ## code to prepare `strength_training_log` dataset goes here
-require(STM)
+require(STMr)
 require(tidyverse)
 
 mround <- function(x, m = 2.5) {
@@ -73,9 +73,15 @@ strength_training_log <- strength_training_log %>%
   ) %>%
   rename(week = index) %>%
   group_by(phase, session, week) %>%
-  mutate(set = seq(1, n())) %>%
+  mutate(
+    set = seq(1, n())
+  ) %>%
   ungroup() %>%
-  select(phase, week, session, set, weight, reps, eRIR) %>%
-  arrange(phase, week, session, set)
+  # Calculate day
+  mutate(
+    day = ((phase - 1) * 6) + ((week - 1) * 2) + ifelse(session == "Session A", 1, 2)
+  ) %>%
+  select(phase, week, day, session, set, weight, reps, eRIR) %>%
+  arrange(phase, week, day, session, set)
 
 usethis::use_data(strength_training_log, overwrite = TRUE)

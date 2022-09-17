@@ -5,10 +5,11 @@
 \alias{strength_training_log}
 \title{Strength Training Log}
 \format{
-A data frame with 144 rows and 7 variables:
+A data frame with 144 rows and 8 variables:
 \describe{
 \item{phase}{Phase index number. Numeric from 1 to 4}
-\item{week}{Week index number. Numeric from 1 to 3}
+\item{week}{Week index number (within phase). Numeric from 1 to 3}
+\item{day}{Day (total) index number. Numeric from 1 to 3}
 \item{session}{Name of the session. Can be "Session A" or "Session B"}
 \item{set}{Set index number. Numeric from 1 to 6}
 \item{weight}{Weight in kg being used}
