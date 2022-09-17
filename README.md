@@ -12,7 +12,7 @@ status](https://www.r-pkg.org/badges/version/STMr)](https://CRAN.R-project.org/p
 
 **Table of Contents**
 
-*This is longer readme file, ho here is the TOC for easier jumping to
+*This is longer README file, so here is the TOC for easier jumping to
 topics*
 
 -   [Introduction](#introduction)
