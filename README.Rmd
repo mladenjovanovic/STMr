@@ -35,7 +35,7 @@ options(digits = 3)
 [![CRAN status](https://www.r-pkg.org/badges/version/STMr)](https://CRAN.R-project.org/package=STMr)
 <!-- badges: end -->
 
-**Table of Contents**
+**Table of Contents **
 
 *This is longer README file, so here is the TOC for easier jumping to topics*
 

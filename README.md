@@ -10,7 +10,7 @@
 status](https://www.r-pkg.org/badges/version/STMr)](https://CRAN.R-project.org/package=STMr)
 <!-- badges: end -->
 
-**Table of Contents**
+**Table of Contents **
 
 *This is longer README file, so here is the TOC for easier jumping to
 topics*
@@ -1976,7 +1976,7 @@ citation("STMr")
 #> To cite 'STMr' in publications use:
 #> 
 #>   Mladen Jovanović (2022). {STMr}: Strength Training Manual R-Language
-#>   Functions. R package version 0.1.4.9000. url:
+#>   Functions. R package version 0.1.5. url:
 #>   https://github.com/mladenjovanovic/STMr
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -1984,7 +1984,7 @@ citation("STMr")
 #>   @Manual{,
 #>     title = {{STMr}: Strength Training Manual R-Language Functions},
 #>     author = {Mladen Jovanović},
-#>     note = {R package version 0.1.4.9000},
+#>     note = {R package version 0.1.5},
 #>     year = {2022},
 #>     address = {Belgrade, Serbia},
 #>     url = {https://github.com/mladenjovanovic/STMr},
