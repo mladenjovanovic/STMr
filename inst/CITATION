@@ -3,14 +3,14 @@ citHeader("To cite 'STMr' in publications use:")
 citEntry(entry = "Manual",
   title        = "{STMr}: Strength Training Manual R-Language Functions",
   author       = personList(as.person("Mladen Jovanović")),
-  note         = "R package version 0.1.5",
-  year         = "2022",
+  note         = "R package version 0.1.5.9000",
+  year         = "2023",
   address      = "Belgrade, Serbia",
   url          = "https://github.com/mladenjovanovic/STMr",
 
   textVersion  =
-  paste("Mladen Jovanović (2022).",
+  paste("Mladen Jovanović (2023).",
         "{STMr}: Strength Training Manual R-Language Functions.",
-        "R package version 0.1.5.",
+        "R package version 0.1.5.9000.",
         "url: https://github.com/mladenjovanovic/STMr")
 )

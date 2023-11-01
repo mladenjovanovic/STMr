@@ -1,3 +1,7 @@
+# STMR 0.1.5.9000
+
+* Changed from `stats::nlm()` to `minpack.lm::nlsLM()` function for estimating parameters in `estimate_k()`, `estimate_k_1RM()`,  `estimate_kmod()`, `estimate_kmod_1RM()`, `estimate_klin()`, and  `estimate_klin_1RM()` functions.
+
 # STMr 0.1.5
 
 * Added day counter (`day`) in the `strength_training_log` dataset. This will be used for an example on how to use the rolling estimation
