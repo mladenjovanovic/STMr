@@ -11,8 +11,8 @@
 #' @param weighted What weighting should be used for the non-linear regression? Default is "none". Other options include:
 #'     "reps" (for 1/reps weighting), "load" (for using weight or %1RM), "eRIR" (for 1/(eRIR+1) weighting),
 #'     "reps x load", "reps x eRIR", "load x eRIR", and "reps x load x eRIR"
-#' @param ... Forwarded to \code{\link[stats]{nls}} function
-#' @return \code{\link[stats]{nls}} object
+#' @param ... Forwarded to \code{\link[minpack.lm]{nlsLM}} function
+#' @return \code{\link[minpack.lm]{nlsLM}} object
 #' @name estimate_functions
 NULL
 
@@ -40,7 +40,7 @@ estimate_k <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "no
     )
 
   if (reverse == FALSE) {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       nRM ~ (1 - perc_1RM) / (k * perc_1RM),
       data =  df,
       start = list(k = 1),
@@ -48,7 +48,7 @@ estimate_k <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "no
       ...
     )
   } else {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       perc_1RM ~ 1 / (k * nRM + 1),
       data =  df,
       start = list(k = 1),
@@ -84,7 +84,7 @@ estimate_k_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "
     )
 
   if (reverse == FALSE) {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       nRM ~ (`0RM` - weight) / (k * weight),
       data =  df,
       start = list(k = 1, `0RM` = max(df$weight)),
@@ -92,7 +92,7 @@ estimate_k_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "
       ...
     )
   } else {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       weight ~ `0RM` / (k * nRM + 1),
       data =  df,
       start = list(k = 1, `0RM` = max(df$weight)),
@@ -127,7 +127,7 @@ estimate_kmod <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = 
     )
 
   if (reverse == FALSE) {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       nRM ~ ((kmod - 1) * perc_1RM + 1) / (kmod * perc_1RM),
       data =  df,
       start = list(kmod = 1),
@@ -135,7 +135,7 @@ estimate_kmod <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = 
       ...
     )
   } else {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       perc_1RM ~ 1 / (kmod * (nRM - 1) + 1),
       data =  df,
       start = list(kmod = 1),
@@ -171,7 +171,7 @@ estimate_kmod_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted 
     )
 
   if (reverse == FALSE) {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       nRM ~ ((kmod - 1) * weight + `1RM`) / (kmod * weight),
       data =  df,
       start = list(kmod = 1, `1RM` = max(df$weight)),
@@ -179,7 +179,7 @@ estimate_kmod_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted 
       ...
     )
   } else {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       weight ~ `1RM` / (kmod * (nRM - 1) + 1),
       data =  df,
       start = list(kmod = 1, `1RM` = max(df$weight)),
@@ -215,7 +215,7 @@ estimate_klin <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = 
     )
 
   if (reverse == FALSE) {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       nRM ~ (1 - perc_1RM) * klin + 1,
       data =  df,
       start = list(klin = 1),
@@ -223,7 +223,7 @@ estimate_klin <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = 
       ...
     )
   } else {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       perc_1RM ~ (klin - nRM + 1) / klin,
       data =  df,
       start = list(klin = 1),
@@ -260,7 +260,7 @@ estimate_klin_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted 
     )
 
   if (reverse == FALSE) {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       nRM ~ (1 - (weight / `1RM`)) * klin + 1,
       data =  df,
       start = list(klin = 1, `1RM` = max(df$weight)),
@@ -268,7 +268,7 @@ estimate_klin_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted 
       ...
     )
   } else {
-    m1 <- stats::nls(
+    m1 <- minpack.lm::nlsLM(
       weight ~ (`1RM` * (klin - nRM + 1)) / klin,
       data =  df,
       start = list(klin = 1, `1RM` = max(df$weight)),

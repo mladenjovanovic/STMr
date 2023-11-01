@@ -66,14 +66,14 @@ get_predicted_1RM_from_k_model(model)
 "reps" (for 1/reps weighting), "load" (for using weight or \%1RM), "eRIR" (for 1/(eRIR+1) weighting),
 "reps x load", "reps x eRIR", "load x eRIR", and "reps x load x eRIR"}
 
-\item{...}{Forwarded to \code{\link[stats]{nls}} function}
+\item{...}{Forwarded to \code{\link[minpack.lm]{nlsLM}} function}
 
 \item{weight}{Weight used}
 
 \item{model}{Object returned from the  \code{\link{estimate_k_1RM}} function}
 }
 \value{
-\code{\link[stats]{nls}} object
+\code{\link[minpack.lm]{nlsLM}} object
 }
 \description{
 By default, target variable is the reps performed, while the predictors is the \code{perc_1RM} or
