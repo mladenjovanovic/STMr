@@ -2,6 +2,8 @@
 % Please edit documentation in R/estimate-functions.R
 \name{estimate_functions}
 \alias{estimate_functions}
+\alias{estimate_k_generic}
+\alias{estimate_k_generic_1RM}
 \alias{estimate_k}
 \alias{estimate_k_1RM}
 \alias{estimate_kmod}
@@ -11,6 +13,26 @@
 \alias{get_predicted_1RM_from_k_model}
 \title{Estimate relationship between reps and \%1RM (or weight)}
 \usage{
+estimate_k_generic(
+  perc_1RM,
+  reps,
+  eRIR = 0,
+  k = 0.0333,
+  reverse = FALSE,
+  weighted = "none",
+  ...
+)
+
+estimate_k_generic_1RM(
+  weight,
+  reps,
+  eRIR = 0,
+  k = 0.0333,
+  reverse = FALSE,
+  weighted = "none",
+  ...
+)
+
 estimate_k(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...)
 
 estimate_k_1RM(weight, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...)
@@ -60,6 +82,8 @@ get_predicted_1RM_from_k_model(model)
 
 \item{eRIR}{Subjective estimation of reps-in-reserve (eRIR)}
 
+\item{k}{Value for the generic Epley's equation, which is by default equal to 0.0333}
+
 \item{reverse}{Logical, default is \code{FALSE}. Should reps be used as predictor instead as a target?}
 
 \item{weighted}{What weighting should be used for the non-linear regression? Default is "none". Other options include:
@@ -81,6 +105,11 @@ By default, target variable is the reps performed, while the predictors is the \
 }
 \section{Functions}{
 \itemize{
+\item \code{estimate_k_generic()}: Provides the model with generic \code{k} parameter
+
+\item \code{estimate_k_generic_1RM()}: Provides the model with generic \code{k} parameter, as well as
+estimated \code{1RM}. This is a novel estimation function that uses the absolute weights.
+
 \item \code{estimate_k()}: Estimate the parameter \code{k} in the Epley's equation
 
 \item \code{estimate_k_1RM()}: Estimate the parameter \code{k} in the Epley's equation, as well as
@@ -105,6 +134,22 @@ weight at nRM = 1 for both the normal and reverse model. See Examples for code
 
 }}
 \examples{
+# ---------------------------------------------------------
+# Generic Epley's model
+m1 <- estimate_k_generic(
+  perc_1RM = c(0.7, 0.8, 0.9),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
+# ---------------------------------------------------------
+# Generic Epley's model that also estimates 1RM
+m1 <- estimate_k_generic_1RM(
+  weight = c(70, 110, 140),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
 # ---------------------------------------------------------
 # Epley's model
 m1 <- estimate_k(

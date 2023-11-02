@@ -17,6 +17,99 @@
 NULL
 
 
+#' @describeIn estimate_functions Provides the model with generic \code{k} parameter
+#' @param k Value for the generic Epley's equation, which is by default equal to 0.0333
+#' @export
+#' @examples
+#' # ---------------------------------------------------------
+#' # Generic Epley's model
+#' m1 <- estimate_k_generic(
+#'   perc_1RM = c(0.7, 0.8, 0.9),
+#'   reps = c(10, 5, 3)
+#' )
+#'
+#' coef(m1)
+estimate_k_generic <- function(perc_1RM, reps, eRIR = 0, k = 0.0333, reverse = FALSE, weighted = "none", ...) {
+
+  # Do checks
+  check_weighting(weighted)
+
+  df <- data.frame(perc_1RM = perc_1RM, reps = reps, eRIR = eRIR, weighted = weighted) %>%
+    dplyr::mutate(
+      nRM = reps + eRIR,
+      reg_weights = get_weighting(weighted, reps, perc_1RM, eRIR)
+    )
+
+  if (reverse == FALSE) {
+    m1 <- minpack.lm::nlsLM(
+      nRM ~ (1 - perc_1RM) / (k * perc_1RM),
+      data =  df,
+      start = list(k = k),
+      weights = df$reg_weights,
+      lower = k, upper = k,
+      ...
+    )
+  } else {
+    m1 <- minpack.lm::nlsLM(
+      perc_1RM ~ 1 / (k * nRM + 1),
+      data =  df,
+      start = list(k = k),
+      weights = df$reg_weights,
+      lower = k, upper = k,
+      ...
+    )
+  }
+
+  m1
+}
+
+#' @describeIn estimate_functions Provides the model with generic \code{k} parameter, as well as
+#'     estimated \code{1RM}. This is a novel estimation function that uses the absolute weights.
+#' @param k Value for the generic Epley's equation, which is by default equal to 0.0333
+#' @export
+#' @examples
+#' # ---------------------------------------------------------
+#' # Generic Epley's model that also estimates 1RM
+#' m1 <- estimate_k_generic_1RM(
+#'   weight = c(70, 110, 140),
+#'   reps = c(10, 5, 3)
+#' )
+#'
+#' coef(m1)
+estimate_k_generic_1RM <- function(weight, reps, eRIR = 0, k = 0.0333, reverse = FALSE, weighted = "none", ...) {
+
+  # Do checks
+  check_weighting(weighted)
+
+  df <- data.frame(weight = weight, reps = reps, eRIR = eRIR, weighted = weighted) %>%
+    dplyr::mutate(
+      nRM = reps + eRIR,
+      reg_weights = get_weighting(weighted, reps, weight, eRIR)
+    )
+
+  if (reverse == FALSE) {
+    m1 <- minpack.lm::nlsLM(
+      nRM ~ (`0RM` - weight) / (k * weight),
+      data =  df,
+      start = list(k = k, `0RM` = max(df$weight)),
+      weights = df$reg_weights,
+      lower = c(k, 0), upper = c(k, Inf),
+      ...
+    )
+  } else {
+    m1 <- minpack.lm::nlsLM(
+      weight ~ `0RM` / (k * nRM + 1),
+      data =  df,
+      start = list(k = 1, `0RM` = max(df$weight)),
+      weights = df$reg_weights,
+      lower = c(k, 0), upper = c(k, Inf),
+      ...
+    )
+  }
+
+  m1
+}
+
 #' @describeIn estimate_functions Estimate the parameter \code{k} in the Epley's equation
 #' @export
 #' @examples
