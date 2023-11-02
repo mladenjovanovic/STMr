@@ -2,4 +2,4 @@
 
 0 errors | 0 warnings | 0 notes
 
-* This is new release (version 0.1.5)
+* This is new release (version 0.1.6)
