@@ -1,16 +1,14 @@
-citHeader("To cite 'STMr' in publications use:")
-
-citEntry(entry = "Manual",
-  title        = "{STMr}: Strength Training Manual R-Language Functions",
-  author       = personList(as.person("Mladen Jovanović")),
-  note         = "R package version 0.1.6",
-  year         = "2023",
-  address      = "Belgrade, Serbia",
-  url          = "https://github.com/mladenjovanovic/STMr",
-
-  textVersion  =
-  paste("Mladen Jovanović (2023).",
-        "{STMr}: Strength Training Manual R-Language Functions.",
-        "R package version 0.1.6.",
-        "url: https://github.com/mladenjovanovic/STMr")
-)
+bibentry(
+     bibtype = "Manual",
+     title = "{STMr}: Strength Training Manual R-Language Functions",
+     author = c(
+       person(given = "Mladen",
+           family = "Jovanović",
+           role = c("aut", "cre"),
+           email = "coach.mladen.jovanovic@gmail.com")
+     ),
+     year = "2023",
+     note = "R package version 0.1.6",
+     url = "https://github.com/mladenjovanovic/STMr",
+     key = "STMr-package"
+   )
