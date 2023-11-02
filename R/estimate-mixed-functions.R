@@ -66,6 +66,58 @@ estimate_k_mixed <- function(athlete,
   m1
 }
 
+#' @describeIn estimate_functions_mixed Provides the model with generic \code{k} parameter, as well as
+#'     estimated \code{1RM}. This is a novel estimation function that uses the absolute weights
+#' @param k Value for the generic Epley's equation, which is by default equal to 0.0333
+#' @export
+#' @examples
+#' # ---------------------------------------------------------
+#' # Generic Epley's model that also estimates 1RM
+#' m1 <- estimate_k_generic_1RM_mixed(
+#'   athlete = RTF_testing$Athlete,
+#'   weight = RTF_testing$`Real Weight`,
+#'   reps = RTF_testing$nRM
+#' )
+#'
+#' coef(m1)
+estimate_k_generic_1RM_mixed <- function(athlete,
+                                 weight,
+                                 reps,
+                                 eRIR = 0,
+                                 k = 0.0333,
+                                 reverse = FALSE,
+                                 random = zeroRM ~ 1,
+                                 ...) {
+  df <- data.frame(athlete = athlete, weight = weight, reps = reps, eRIR = eRIR) %>%
+    dplyr::mutate(
+      nRM = reps + eRIR,
+      k = k
+    )
+
+  if (reverse == FALSE) {
+    m1 <- nlme::nlme(
+      nRM ~ (zeroRM - weight) / (k * weight),
+      data =  df,
+      start = c(zeroRM = max(df$weight)),
+      groups = ~athlete,
+      fixed = zeroRM ~ 1,
+      random = random,
+      ...
+    )
+  } else {
+    m1 <- nlme::nlme(
+      weight ~ zeroRM / (k * nRM + 1),
+      data =  df,
+      start = c(zeroRM = max(df$weight)),
+      groups = ~athlete,
+      fixed = zeroRM ~ 1,
+      random = random,
+      ...
+    )
+  }
+
+  m1
+}
 
 
 #' @describeIn estimate_functions_mixed Estimate the parameter \code{k} in the Epley's equation, as well as

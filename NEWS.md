@@ -2,6 +2,7 @@
 
 * Changed from `stats::nlm()` to `minpack.lm::nlsLM()` function for estimating parameters in `estimate_k()`, `estimate_k_1RM()`,  `estimate_kmod()`, `estimate_kmod_1RM()`, `estimate_klin()`, and  `estimate_klin_1RM()` functions.
 * Added `estimate_k_generic()` and `estimate_k_generic_1RM()`. These functions return the model object, but use the default `k` value of 0.0333
+* Added `estimate_k_generic_1RM_mixed()` which uses generic `k` value of 0.0333 to predict the `0RM`
 
 # STMr 0.1.5
 

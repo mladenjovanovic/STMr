@@ -3,6 +3,7 @@
 \name{estimate_functions_mixed}
 \alias{estimate_functions_mixed}
 \alias{estimate_k_mixed}
+\alias{estimate_k_generic_1RM_mixed}
 \alias{estimate_k_1RM_mixed}
 \alias{estimate_kmod_mixed}
 \alias{estimate_kmod_1RM_mixed}
@@ -11,6 +12,17 @@
 \title{Estimate relationship between reps and weight using the non-linear mixed-effects regression}
 \usage{
 estimate_k_mixed(athlete, perc_1RM, reps, eRIR = 0, reverse = FALSE, ...)
+
+estimate_k_generic_1RM_mixed(
+  athlete,
+  weight,
+  reps,
+  eRIR = 0,
+  k = 0.0333,
+  reverse = FALSE,
+  random = zeroRM ~ 1,
+  ...
+)
 
 estimate_k_1RM_mixed(
   athlete,
@@ -61,6 +73,8 @@ estimate_klin_1RM_mixed(
 
 \item{weight}{Weight used}
 
+\item{k}{Value for the generic Epley's equation, which is by default equal to 0.0333}
+
 \item{random}{Random parameter forwarded to \code{\link[nlme]{nlme}} function. Default is \code{k + zeroRM ~ 1} for,
 \code{\link{estimate_k_mixed}} function, or \code{k + oneRM ~ 1} for \code{\link{estimate_kmod_mixed}} and
 \code{\link{estimate_klin_mixed}} functions}
@@ -76,6 +90,9 @@ target variable is the reps performed, while the predictor is the \code{perc_1RM
 \section{Functions}{
 \itemize{
 \item \code{estimate_k_mixed()}: Estimate the parameter \code{k} in the Epley's equation
+
+\item \code{estimate_k_generic_1RM_mixed()}: Provides the model with generic \code{k} parameter, as well as
+estimated \code{1RM}. This is a novel estimation function that uses the absolute weights
 
 \item \code{estimate_k_1RM_mixed()}: Estimate the parameter \code{k} in the Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
@@ -97,6 +114,15 @@ target variable is the reps performed, while the predictor is the \code{perc_1RM
 m1 <- estimate_k_mixed(
   athlete = RTF_testing$Athlete,
   perc_1RM = RTF_testing$`Real \%1RM`,
+  reps = RTF_testing$nRM
+)
+
+coef(m1)
+# ---------------------------------------------------------
+# Generic Epley's model that also estimates 1RM
+m1 <- estimate_k_generic_1RM_mixed(
+  athlete = RTF_testing$Athlete,
+  weight = RTF_testing$`Real Weight`,
   reps = RTF_testing$nRM
 )
 
