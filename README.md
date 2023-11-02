@@ -15,18 +15,18 @@ status](https://www.r-pkg.org/badges/version/STMr)](https://CRAN.R-project.org/p
 *This is longer README file, so here is the TOC for easier jumping to
 topics*
 
--   [Introduction](#introduction)
--   [Installation](#installation)
--   [Reps-Max Functions](#reps-max-functions)
--   [Adjustment Functions](#adjustment-functions)
--   [Progressions](#progressions)
--   [Vertical Planning](#vertical-planning)
--   [Set and Rep Schemes](#set-and-rep-schemes)
--   [Release](#release)
--   [Estimation](#estimation)
--   [Scheme plotting tips](#scheme-plotting-tips)
--   [Further information](#further-information)
--   [How to cite `{STMr}`](#how-to-cite-stmr)
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Reps-Max Functions](#reps-max-functions)
+- [Adjustment Functions](#adjustment-functions)
+- [Progressions](#progressions)
+- [Vertical Planning](#vertical-planning)
+- [Set and Rep Schemes](#set-and-rep-schemes)
+- [Release](#release)
+- [Estimation](#estimation)
+- [Scheme plotting tips](#scheme-plotting-tips)
+- [Further information](#further-information)
+- [How to cite `{STMr}`](#how-to-cite-stmr)
 
 ## Introduction
 
@@ -41,22 +41,22 @@ is open-source package under MIT License implemented in the R language.
 
 `{STMr}` package can be divided in the following functional units:
 
--   Reps-Max functions (start with `max_`)
--   adjustment functions (start with `adj_`)
--   wrapper functions `get_reps()` and `get_perc_1RM()` are implemented
-    to combine Reps-Max models as well as progression (adjustment)
-    functions into easy to use format
--   progression functions (start with `progression_`)
--   *vertical planning* functions (start with `vertical_`)
--   *scheme function* (start with `scheme_`)
--   `release()` function for molding multiple back-to-back schemes
-    (i.e., blocks or phases)
--   plotting and printing functions: `generate_progression_table()`,
-    `plot_progression_table()`, `plot_scheme()` (deprecated as of
-    `{STMr}` version 0.1.4. Please use S3 `plot()` method instead), and
-    `create_example()`
--   built-in datasets (`strength_training_log` and `RTF_testing`)
--   estimation functions (start with `estimate_`)
+- Reps-Max functions (start with `max_`)
+- adjustment functions (start with `adj_`)
+- wrapper functions `get_reps()` and `get_perc_1RM()` are implemented to
+  combine Reps-Max models as well as progression (adjustment) functions
+  into easy to use format
+- progression functions (start with `progression_`)
+- *vertical planning* functions (start with `vertical_`)
+- *scheme function* (start with `scheme_`)
+- `release()` function for molding multiple back-to-back schemes (i.e.,
+  blocks or phases)
+- plotting and printing functions: `generate_progression_table()`,
+  `plot_progression_table()`, `plot_scheme()` (deprecated as of `{STMr}`
+  version 0.1.4. Please use S3 `plot()` method instead), and
+  `create_example()`
+- built-in datasets (`strength_training_log` and `RTF_testing`)
+- estimation functions (start with `estimate_`)
 
 Figure below depicts the relationship between `{STMr}` package
 functional units:
@@ -1973,20 +1973,19 @@ following citation:
 ``` r
 citation("STMr")
 #> 
-#> To cite 'STMr' in publications use:
+#> To cite package 'STMr' in publications use:
 #> 
-#>   Mladen Jovanović (2022). {STMr}: Strength Training Manual R-Language
-#>   Functions. R package version 0.1.5. url:
-#>   https://github.com/mladenjovanovic/STMr
+#>   Jovanović M (2023). _STMr: Strength Training Manual R-Language
+#>   Functions_. R package version 0.1.6,
+#>   <https://github.com/mladenjovanovic/STMr>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
-#>   @Manual{,
+#>   @Manual{STMr-package,
 #>     title = {{STMr}: Strength Training Manual R-Language Functions},
 #>     author = {Mladen Jovanović},
-#>     note = {R package version 0.1.5},
-#>     year = {2022},
-#>     address = {Belgrade, Serbia},
+#>     year = {2023},
+#>     note = {R package version 0.1.6},
 #>     url = {https://github.com/mladenjovanovic/STMr},
 #>   }
 ```
