@@ -64,6 +64,56 @@ estimate_k_quantile <- function(perc_1RM,
 }
 
 
+#' @describeIn estimate_functions_quantile Provides the model with generic \code{k} parameter, as well as
+#'     estimated \code{1RM}. This is a novel estimation function that uses the absolute weights
+#' @param k Value for the generic Epley's equation, which is by default equal to 0.0333
+#' @export
+#' @examples
+#' # ---------------------------------------------------------
+#' # Epley's model that also estimates 1RM
+#' m1 <- estimate_k_generic_1RM_quantile(
+#'   weight = c(70, 110, 140),
+#'   reps = c(10, 5, 3)
+#' )
+#'
+#' coef(m1)
+estimate_k_generic_1RM_quantile <- function(weight,
+                                    reps,
+                                    eRIR = 0,
+                                    k = 0.0333,
+                                    tau = 0.5,
+                                    reverse = FALSE,
+                                    control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+                                    ...) {
+  df <- data.frame(weight = weight, reps = reps, eRIR = eRIR) %>%
+    dplyr::mutate(
+      nRM = reps + eRIR,
+      k = k
+    )
+
+  if (reverse == FALSE) {
+    m1 <- quantreg::nlrq(
+      nRM ~ (`0RM` - weight) / (k * weight),
+      data =  df,
+      start = list(`0RM` = max(df$weight)),
+      tau = tau,
+      control = control,
+      ...
+    )
+  } else {
+    m1 <- quantreg::nlrq(
+      weight ~ `0RM` / (k * nRM + 1),
+      data =  df,
+      start = list(`0RM` = max(df$weight)),
+      tau = tau,
+      control = control,
+      ...
+    )
+  }
+
+  m1
+}
+
 
 #' @describeIn estimate_functions_quantile Estimate the parameter \code{k} in the Epley's equation, as well as
 #'     \code{1RM}. This is a novel estimation function that uses the absolute weights
