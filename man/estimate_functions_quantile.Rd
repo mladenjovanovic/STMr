@@ -3,6 +3,7 @@
 \name{estimate_functions_quantile}
 \alias{estimate_functions_quantile}
 \alias{estimate_k_quantile}
+\alias{estimate_k_generic_1RM_quantile}
 \alias{estimate_k_1RM_quantile}
 \alias{estimate_kmod_quantile}
 \alias{estimate_kmod_1RM_quantile}
@@ -14,6 +15,17 @@ estimate_k_quantile(
   perc_1RM,
   reps,
   eRIR = 0,
+  tau = 0.5,
+  reverse = FALSE,
+  control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
+  ...
+)
+
+estimate_k_generic_1RM_quantile(
+  weight,
+  reps,
+  eRIR = 0,
+  k = 0.0333,
   tau = 0.5,
   reverse = FALSE,
   control = quantreg::nlrq.control(maxiter = 10^4, InitialStepSize = 0),
@@ -87,6 +99,8 @@ estimate_klin_1RM_quantile(
 \item{...}{Forwarded to \code{\link[quantreg]{nlrq}} function}
 
 \item{weight}{Weight used}
+
+\item{k}{Value for the generic Epley's equation, which is by default equal to 0.0333}
 }
 \value{
 \code{\link[quantreg]{nlrq}} object
@@ -99,6 +113,9 @@ target variable is the reps performed, while the predictors is the \code{perc_1R
 \section{Functions}{
 \itemize{
 \item \code{estimate_k_quantile()}: Estimate the parameter \code{k} in the Epley's equation
+
+\item \code{estimate_k_generic_1RM_quantile()}: Provides the model with generic \code{k} parameter, as well as
+estimated \code{1RM}. This is a novel estimation function that uses the absolute weights
 
 \item \code{estimate_k_1RM_quantile()}: Estimate the parameter \code{k} in the Epley's equation, as well as
 \code{1RM}. This is a novel estimation function that uses the absolute weights
@@ -119,6 +136,14 @@ target variable is the reps performed, while the predictors is the \code{perc_1R
 # Epley's model
 m1 <- estimate_k_quantile(
   perc_1RM = c(0.7, 0.8, 0.9),
+  reps = c(10, 5, 3)
+)
+
+coef(m1)
+# ---------------------------------------------------------
+# Epley's model that also estimates 1RM
+m1 <- estimate_k_generic_1RM_quantile(
+  weight = c(70, 110, 140),
   reps = c(10, 5, 3)
 )
 
