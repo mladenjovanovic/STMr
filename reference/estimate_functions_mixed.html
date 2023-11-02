@@ -59,6 +59,17 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">estimate_k_mixed</span><span class="op">(</span><span class="va">athlete</span>, <span class="va">perc_1RM</span>, <span class="va">reps</span>, eRIR <span class="op">=</span> <span class="fl">0</span>, reverse <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">estimate_k_generic_1RM_mixed</span><span class="op">(</span></span>
+<span>  <span class="va">athlete</span>,</span>
+<span>  <span class="va">weight</span>,</span>
+<span>  <span class="va">reps</span>,</span>
+<span>  eRIR <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  k <span class="op">=</span> <span class="fl">0.0333</span>,</span>
+<span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  random <span class="op">=</span> <span class="va">zeroRM</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">estimate_k_1RM_mixed</span><span class="op">(</span></span>
 <span>  <span class="va">athlete</span>,</span>
 <span>  <span class="va">weight</span>,</span>
@@ -124,6 +135,10 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 <dd><p>Weight used</p></dd>
 
 
+<dt>k</dt>
+<dd><p>Value for the generic Epley's equation, which is by default equal to 0.0333</p></dd>
+
+
 <dt>random</dt>
 <dd><p>Random parameter forwarded to <code><a href="https://rdrr.io/pkg/nlme/man/nlme.html" class="external-link">nlme</a></code> function. Default is <code>k + zeroRM ~ 1</code> for,
 <code>estimate_k_mixed</code> function, or <code>k + oneRM ~ 1</code> for <code>estimate_kmod_mixed</code> and
@@ -140,6 +155,8 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
     <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
     
 <ul><li><p><code>estimate_k_mixed()</code>: Estimate the parameter <code>k</code> in the Epley's equation</p></li>
+<li><p><code>estimate_k_generic_1RM_mixed()</code>: Provides the model with generic <code>k</code> parameter, as well as
+estimated <code>1RM</code>. This is a novel estimation function that uses the absolute weights</p></li>
 <li><p><code>estimate_k_1RM_mixed()</code>: Estimate the parameter <code>k</code> in the Epley's equation, as well as
 <code>1RM</code>. This is a novel estimation function that uses the absolute weights</p></li>
 <li><p><code>estimate_kmod_mixed()</code>: Estimate the parameter <code>kmod</code> in the Modified Epley's equation</p></li>
@@ -174,6 +191,28 @@ target variable is the reps performed, while the predictor is the <code>perc_1RM
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete J 0.04741195</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete K 0.05844494</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Athlete L 0.03987504</span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Generic Epley's model that also estimates 1RM</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_generic_1RM_mixed</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  athlete <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">Athlete</span>,</span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">`Real Weight`</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="va">RTF_testing</span><span class="op">$</span><span class="va">nRM</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              zeroRM</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete A 115.60573</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete B  94.61033</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete C 106.24996</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete D 110.00999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete E 106.53626</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete F  97.34956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete G 100.87702</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete H 133.10815</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete I 119.93968</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete J  86.68878</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete K  93.39298</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Athlete L 133.96571</span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co"># Epley's model that also estimates 1RM</span></span></span>
 <span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM_mixed</span><span class="op">(</span></span></span>

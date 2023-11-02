@@ -67,6 +67,17 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">estimate_k_generic_1RM_quantile</span><span class="op">(</span></span>
+<span>  <span class="va">weight</span>,</span>
+<span>  <span class="va">reps</span>,</span>
+<span>  eRIR <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  k <span class="op">=</span> <span class="fl">0.0333</span>,</span>
+<span>  tau <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  control <span class="op">=</span> <span class="fu">quantreg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/quantreg/man/nlrq.control.html" class="external-link">nlrq.control</a></span><span class="op">(</span>maxiter <span class="op">=</span> <span class="fl">10</span><span class="op">^</span><span class="fl">4</span>, InitialStepSize <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">estimate_k_1RM_quantile</span><span class="op">(</span></span>
 <span>  <span class="va">weight</span>,</span>
 <span>  <span class="va">reps</span>,</span>
@@ -152,6 +163,10 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
 <dt>weight</dt>
 <dd><p>Weight used</p></dd>
 
+
+<dt>k</dt>
+<dd><p>Value for the generic Epley's equation, which is by default equal to 0.0333</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -163,6 +178,8 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
     <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a></h2>
     
 <ul><li><p><code>estimate_k_quantile()</code>: Estimate the parameter <code>k</code> in the Epley's equation</p></li>
+<li><p><code>estimate_k_generic_1RM_quantile()</code>: Provides the model with generic <code>k</code> parameter, as well as
+estimated <code>1RM</code>. This is a novel estimation function that uses the absolute weights</p></li>
 <li><p><code>estimate_k_1RM_quantile()</code>: Estimate the parameter <code>k</code> in the Epley's equation, as well as
 <code>1RM</code>. This is a novel estimation function that uses the absolute weights</p></li>
 <li><p><code>estimate_kmod_quantile()</code>: Estimate the parameter <code>kmod</code> in the modified Epley's equation</p></li>
@@ -185,6 +202,16 @@ target variable is the reps performed, while the predictors is the <code>perc_1R
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          k </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.04285747 </span>
+<span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
+<span class="r-in"><span><span class="co"># Epley's model that also estimates 1RM</span></span></span>
+<span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_generic_1RM_quantile</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">70</span>, <span class="fl">110</span>, <span class="fl">140</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     0RM </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128.315 </span>
 <span class="r-in"><span><span class="co"># ---------------------------------------------------------</span></span></span>
 <span class="r-in"><span><span class="co"># Epley's model that also estimates 1RM</span></span></span>
 <span class="r-in"><span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">estimate_k_1RM_quantile</span><span class="op">(</span></span></span>
