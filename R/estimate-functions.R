@@ -30,7 +30,6 @@ NULL
 #'
 #' coef(m1)
 estimate_k_generic <- function(perc_1RM, reps, eRIR = 0, k = 0.0333, reverse = FALSE, weighted = "none", ...) {
-
   # Do checks
   check_weighting(weighted)
 
@@ -43,7 +42,7 @@ estimate_k_generic <- function(perc_1RM, reps, eRIR = 0, k = 0.0333, reverse = F
   if (reverse == FALSE) {
     m1 <- minpack.lm::nlsLM(
       nRM ~ (1 - perc_1RM) / (k * perc_1RM),
-      data =  df,
+      data = df,
       start = list(k = k),
       weights = df$reg_weights,
       lower = k, upper = k,
@@ -52,7 +51,7 @@ estimate_k_generic <- function(perc_1RM, reps, eRIR = 0, k = 0.0333, reverse = F
   } else {
     m1 <- minpack.lm::nlsLM(
       perc_1RM ~ 1 / (k * nRM + 1),
-      data =  df,
+      data = df,
       start = list(k = k),
       weights = df$reg_weights,
       lower = k, upper = k,
@@ -77,7 +76,6 @@ estimate_k_generic <- function(perc_1RM, reps, eRIR = 0, k = 0.0333, reverse = F
 #'
 #' coef(m1)
 estimate_k_generic_1RM <- function(weight, reps, eRIR = 0, k = 0.0333, reverse = FALSE, weighted = "none", ...) {
-
   # Do checks
   check_weighting(weighted)
 
@@ -90,7 +88,7 @@ estimate_k_generic_1RM <- function(weight, reps, eRIR = 0, k = 0.0333, reverse =
   if (reverse == FALSE) {
     m1 <- minpack.lm::nlsLM(
       nRM ~ (`0RM` - weight) / (k * weight),
-      data =  df,
+      data = df,
       start = list(k = k, `0RM` = max(df$weight)),
       weights = df$reg_weights,
       lower = c(k, 0), upper = c(k, Inf),
@@ -99,7 +97,7 @@ estimate_k_generic_1RM <- function(weight, reps, eRIR = 0, k = 0.0333, reverse =
   } else {
     m1 <- minpack.lm::nlsLM(
       weight ~ `0RM` / (k * nRM + 1),
-      data =  df,
+      data = df,
       start = list(k = 1, `0RM` = max(df$weight)),
       weights = df$reg_weights,
       lower = c(k, 0), upper = c(k, Inf),
@@ -122,7 +120,6 @@ estimate_k_generic_1RM <- function(weight, reps, eRIR = 0, k = 0.0333, reverse =
 #'
 #' coef(m1)
 estimate_k <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...) {
-
   # Do checks
   check_weighting(weighted)
 
@@ -135,7 +132,7 @@ estimate_k <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "no
   if (reverse == FALSE) {
     m1 <- minpack.lm::nlsLM(
       nRM ~ (1 - perc_1RM) / (k * perc_1RM),
-      data =  df,
+      data = df,
       start = list(k = 1),
       weights = df$reg_weights,
       ...
@@ -143,7 +140,7 @@ estimate_k <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "no
   } else {
     m1 <- minpack.lm::nlsLM(
       perc_1RM ~ 1 / (k * nRM + 1),
-      data =  df,
+      data = df,
       start = list(k = 1),
       weights = df$reg_weights,
       ...
@@ -166,7 +163,6 @@ estimate_k <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "no
 #'
 #' coef(m1)
 estimate_k_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...) {
-
   # Do checks
   check_weighting(weighted)
 
@@ -179,7 +175,7 @@ estimate_k_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "
   if (reverse == FALSE) {
     m1 <- minpack.lm::nlsLM(
       nRM ~ (`0RM` - weight) / (k * weight),
-      data =  df,
+      data = df,
       start = list(k = 1, `0RM` = max(df$weight)),
       weights = df$reg_weights,
       ...
@@ -187,7 +183,7 @@ estimate_k_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "
   } else {
     m1 <- minpack.lm::nlsLM(
       weight ~ `0RM` / (k * nRM + 1),
-      data =  df,
+      data = df,
       start = list(k = 1, `0RM` = max(df$weight)),
       weights = df$reg_weights,
       ...
@@ -209,7 +205,6 @@ estimate_k_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "
 #'
 #' coef(m1)
 estimate_kmod <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...) {
-
   # Do checks
   check_weighting(weighted)
 
@@ -222,7 +217,7 @@ estimate_kmod <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = 
   if (reverse == FALSE) {
     m1 <- minpack.lm::nlsLM(
       nRM ~ ((kmod - 1) * perc_1RM + 1) / (kmod * perc_1RM),
-      data =  df,
+      data = df,
       start = list(kmod = 1),
       weights = df$reg_weights,
       ...
@@ -230,7 +225,7 @@ estimate_kmod <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = 
   } else {
     m1 <- minpack.lm::nlsLM(
       perc_1RM ~ 1 / (kmod * (nRM - 1) + 1),
-      data =  df,
+      data = df,
       start = list(kmod = 1),
       weights = df$reg_weights,
       ...
@@ -253,7 +248,6 @@ estimate_kmod <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = 
 #'
 #' coef(m1)
 estimate_kmod_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...) {
-
   # Do checks
   check_weighting(weighted)
 
@@ -266,7 +260,7 @@ estimate_kmod_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted 
   if (reverse == FALSE) {
     m1 <- minpack.lm::nlsLM(
       nRM ~ ((kmod - 1) * weight + `1RM`) / (kmod * weight),
-      data =  df,
+      data = df,
       start = list(kmod = 1, `1RM` = max(df$weight)),
       weights = df$reg_weights,
       ...
@@ -274,7 +268,7 @@ estimate_kmod_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted 
   } else {
     m1 <- minpack.lm::nlsLM(
       weight ~ `1RM` / (kmod * (nRM - 1) + 1),
-      data =  df,
+      data = df,
       start = list(kmod = 1, `1RM` = max(df$weight)),
       weights = df$reg_weights,
       ...
@@ -297,7 +291,6 @@ estimate_kmod_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted 
 #'
 #' coef(m1)
 estimate_klin <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...) {
-
   # Do checks
   check_weighting(weighted)
 
@@ -310,7 +303,7 @@ estimate_klin <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = 
   if (reverse == FALSE) {
     m1 <- minpack.lm::nlsLM(
       nRM ~ (1 - perc_1RM) * klin + 1,
-      data =  df,
+      data = df,
       start = list(klin = 1),
       weights = df$reg_weights,
       ...
@@ -318,7 +311,7 @@ estimate_klin <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = 
   } else {
     m1 <- minpack.lm::nlsLM(
       perc_1RM ~ (klin - nRM + 1) / klin,
-      data =  df,
+      data = df,
       start = list(klin = 1),
       weights = df$reg_weights,
       ...
@@ -342,7 +335,6 @@ estimate_klin <- function(perc_1RM, reps, eRIR = 0, reverse = FALSE, weighted = 
 #'
 #' coef(m1)
 estimate_klin_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted = "none", ...) {
-
   # Do checks
   check_weighting(weighted)
 
@@ -355,7 +347,7 @@ estimate_klin_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted 
   if (reverse == FALSE) {
     m1 <- minpack.lm::nlsLM(
       nRM ~ (1 - (weight / `1RM`)) * klin + 1,
-      data =  df,
+      data = df,
       start = list(klin = 1, `1RM` = max(df$weight)),
       weights = df$reg_weights,
       ...
@@ -363,7 +355,7 @@ estimate_klin_1RM <- function(weight, reps, eRIR = 0, reverse = FALSE, weighted 
   } else {
     m1 <- minpack.lm::nlsLM(
       weight ~ (`1RM` * (klin - nRM + 1)) / klin,
-      data =  df,
+      data = df,
       start = list(klin = 1, `1RM` = max(df$weight)),
       weights = df$reg_weights,
       ...

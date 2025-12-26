@@ -29,8 +29,6 @@ progression_rel_int <- function(reps,
                                 step_increment = -0.05,
                                 volume_increment = -0.075,
                                 ...) {
-
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   rep_start <- NULL

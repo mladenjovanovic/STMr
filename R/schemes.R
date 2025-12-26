@@ -34,7 +34,6 @@ scheme_generic <- function(reps,
                            vertical_planning_control = list(),
                            progression_table,
                            progression_table_control = list()) {
-
   # Just to make sure the lengths are the same
   .tmp <- data.frame(
     reps = reps,

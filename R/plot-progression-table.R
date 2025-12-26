@@ -28,7 +28,6 @@ plot_progression_table <- function(progression_table,
                                    adjustment_multiplier = 1,
                                    font_size = 14,
                                    ...) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   perc_1RM <- NULL

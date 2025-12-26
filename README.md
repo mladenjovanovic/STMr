@@ -838,7 +838,7 @@ set, which is the simplest and default approach:
 scheme <- scheme_step(
   reps = c(5, 5, 5),
   vertical_planning = vertical_set_accumulation
-  )
+)
 
 plot(scheme)
 ```
@@ -853,7 +853,7 @@ scheme <- scheme_wave(
   reps = c(10, 8, 6),
   vertical_planning = vertical_set_accumulation,
   vertical_planning_control = list(accumulate_set = 1:3)
-  )
+)
 
 plot(scheme)
 ```
@@ -867,7 +867,7 @@ scheme <- scheme_wave(
   reps = c(10, 8, 6),
   vertical_planning = vertical_set_accumulation,
   vertical_planning_control = list(accumulate_set = 1:3, sequence = FALSE)
-  )
+)
 
 plot(scheme)
 ```
@@ -883,7 +883,7 @@ scheme <- scheme_wave(
   reps = c(6, 4, 2),
   vertical_planning = vertical_set_accumulation_reverse,
   vertical_planning_control = list(accumulate_set = 1:3)
-  )
+)
 
 plot(scheme)
 ```
@@ -899,8 +899,9 @@ scheme <- scheme_wave(
   vertical_planning_control = list(
     accumulate_set = 1:3,
     # Lets create non-linear (aka unduating step changes)
-    step = c(-2, -1, -3, 0))
+    step = c(-2, -1, -3, 0)
   )
+)
 
 plot(scheme)
 ```
@@ -917,8 +918,9 @@ scheme <- scheme_wave(
   vertical_planning = vertical_set_accumulation_reverse,
   vertical_planning_control = list(
     accumulate_set = 1:3,
-    reps_change = c(0, -1, -2, -3))
+    reps_change = c(0, -1, -2, -3)
   )
+)
 
 plot(scheme)
 ```
@@ -935,8 +937,9 @@ scheme <- scheme_wave(
   vertical_planning_control = list(
     accumulate_set = 1:3,
     step = c(-2, -1, -3, 0),
-    reps_change = c(0, -2, -1, -3))
+    reps_change = c(0, -2, -1, -3)
   )
+)
 
 plot(scheme)
 ```
@@ -1018,16 +1021,17 @@ scheme <- scheme_manual(
   step = scheme_df$step,
   sets = scheme_df$sets,
   reps = scheme_df$reps,
-  adjustment = scheme_df$adjustment, 
-  
+  adjustment = scheme_df$adjustment,
+
   # Select another progression table
   progression_table = progression_DI,
   # Extra parameters for the progression table
   progression_table_control = list(
     volume = "extensive",
-    type = "ballistic", 
+    type = "ballistic",
     max_perc_1RM_func = max_perc_1RM_linear,
-    klin = 36)
+    klin = 36
+  )
 )
 
 plot(scheme)
@@ -1064,7 +1068,8 @@ Easier method to create *pre-filled* 1RM percentages is to use
 warmup_scheme <- scheme_perc_1RM(
   reps = c(5, 5, 5),
   perc_1RM = c(0.4, 0.5, 0.6),
-  n_steps = 4)
+  n_steps = 4
+)
 
 plot(warmup_scheme)
 ```
@@ -1102,12 +1107,12 @@ scheme3 <- scheme_step(vertical_planning = vertical_undulating)
 
 release_df <- release(
   scheme1, scheme2, scheme3,
-  prescription_1RM = 150, 
-  additive_1RM_adjustment = 5,  
-  multiplicative_1RM_adjustment = 1, #no adjustment   
+  prescription_1RM = 150,
+  additive_1RM_adjustment = 5,
+  multiplicative_1RM_adjustment = 1, # no adjustment
   rounding = 2.5, # round weight to the closest 2.5
   max_perc_1RM_func = max_perc_1RM_epley
- )
+)
 
 plot(release_df)
 ```
@@ -1764,7 +1769,8 @@ estimate_rolling_1RM(
   day_index = strength_training_log$day,
   window = 6,
   estimate_function = estimate_kmod_1RM_quantile,
-  tau = 0.9)
+  tau = 0.9
+)
 #> # A tibble: 19 × 3
 #>    day_index   kmod `1RM`
 #>        <int>  <dbl> <dbl>
@@ -1802,8 +1808,9 @@ est_profiles <- function(.x) {
     day_index = strength_training_log$day,
     window = 6,
     estimate_function = estimate_kmod_1RM_quantile,
-    tau = .x$tau)
-  
+    tau = .x$tau
+  )
+
   tibble(tau = .x$tau, res)
 }
 
@@ -1815,7 +1822,6 @@ data.frame(tau = c(0.1, 0.9)) %>%
   group_by(day_index, param) %>%
   summarise(lower = min(value), upper = max(value)) %>%
   ungroup() %>%
-  
   # Plot
   ggplot(aes(x = day_index)) +
   theme_bw() +
@@ -1850,7 +1856,8 @@ Here is the default `bar` plot:
 ``` r
 scheme <- scheme_wave(
   reps = c(10, 8, 6),
-  vertical_planning = vertical_linear)
+  vertical_planning = vertical_linear
+)
 
 plot(scheme)
 ```
@@ -1901,8 +1908,8 @@ example using the Set Accumulation vertical plan:
 ``` r
 scheme <- scheme_wave(
   reps = c(10, 10, 10),
-  vertical_planning = vertical_set_accumulation, 
-  vertical_planning_control = list(accumulate_set = 1:3, sequence =TRUE)
+  vertical_planning = vertical_set_accumulation,
+  vertical_planning_control = list(accumulate_set = 1:3, sequence = TRUE)
 )
 
 plot(scheme)
@@ -1929,7 +1936,8 @@ plot(
   scheme,
   perc_str = "",
   padding.x = grid::unit(0.2, "mm"),
-  padding.y = grid::unit(0.2, "mm"),)
+  padding.y = grid::unit(0.2, "mm"),
+)
 ```
 
 <img src="man/figures/README-unnamed-chunk-72-1.png" alt="" width="80%" style="display: block; margin: auto;" />

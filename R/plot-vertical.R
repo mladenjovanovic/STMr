@@ -13,8 +13,6 @@ plot_vertical <- function(vertical_plan,
                           reps = c(5, 5, 5),
                           font_size = 14,
                           ...) {
-
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   index <- NULL

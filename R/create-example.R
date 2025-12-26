@@ -36,7 +36,6 @@ create_example <- function(progression_table,
                            volume = c("intensive", "normal", "extensive"),
                            type = c("grinding", "ballistic"),
                            ...) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   step <- NULL

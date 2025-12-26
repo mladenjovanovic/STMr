@@ -37,8 +37,6 @@ progression_DI <- function(reps,
                            step_increment = -0.025,
                            volume_increment = step_increment,
                            ...) {
-
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   rep_start <- NULL

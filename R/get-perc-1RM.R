@@ -25,7 +25,6 @@ get_perc_1RM <- function(reps,
                          method = "RIR",
                          model = "epley",
                          ...) {
-
   # Perform checks
   check_method(method)
   check_model(model)

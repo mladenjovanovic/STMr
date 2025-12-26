@@ -33,7 +33,6 @@ release <- function(...,
                     multiplicative_1RM_adjustment = 1,
                     rounding = 2.5,
                     max_perc_1RM_func = max_perc_1RM_epley) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   phase <- NULL

@@ -24,7 +24,6 @@ generate_progression_table <- function(progression_table,
                                        reps = 1:12,
                                        step = seq(-3, 0, 1),
                                        ...) {
-
   # Perform checks
   check_volume(volume)
   check_type(type)

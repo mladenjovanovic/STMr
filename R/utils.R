@@ -50,7 +50,7 @@ get_mfactor <- function(type) {
       ifelse(
         type == "conservative",
         3,
-      NA
+        NA
       )
     )
   )
@@ -63,7 +63,6 @@ check_weighting <- function(weighted) {
 }
 
 get_weighting <- function(weighted, reps, load, eRIR, normalize = FALSE) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   weight <- NULL

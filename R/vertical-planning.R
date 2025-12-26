@@ -218,8 +218,6 @@ vertical_set_accumulation <- function(reps,
                                       accumulate_set = length(reps),
                                       set_increment = 1,
                                       sequence = TRUE) {
-
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   index <- NULL
@@ -314,7 +312,6 @@ vertical_set_accumulation_reverse <- function(reps,
                                               accumulate_set = length(reps),
                                               set_increment = 1,
                                               sequence = TRUE) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   index <- NULL

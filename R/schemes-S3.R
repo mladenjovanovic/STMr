@@ -8,7 +8,6 @@
 #' warmup_scheme <- scheme_perc_1RM()
 #' plot(warmup_scheme + scheme1)
 `+.STMr_scheme` <- function(lhs, rhs) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   index <- NULL
@@ -48,7 +47,6 @@
 }
 
 
-
 #' Plotting of the Set and Reps Scheme
 #'
 #' Functions for creating \code{ggplot2} plot of the Set and Reps Scheme
@@ -79,7 +77,7 @@
 #' plot(scheme, type = "fraction")
 plot.STMr_scheme <- function(x, type = "bar", font_size = 14, perc_str = "%", ...) {
   switch(type,
-    "bar" =  plot_scheme_bar(scheme = x, font_size = font_size, perc_str = perc_str, ...),
+    "bar" = plot_scheme_bar(scheme = x, font_size = font_size, perc_str = perc_str, ...),
     "vertical" = plot_scheme_vertical(scheme = x, font_size = font_size, perc_str = perc_str, ...),
     "fraction" = plot_scheme_fraction(scheme = x, font_size = font_size, perc_str = perc_str, ...),
     stop("Unknown plot `type`. Please use `bar`, `vertical`, `fraction`", call. = FALSE)
@@ -91,7 +89,6 @@ plot_scheme_bar <- function(scheme,
                             font_size,
                             perc_str,
                             ...) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   index <- NULL
@@ -163,7 +160,6 @@ plot_scheme_vertical <- function(scheme,
                                  font_size,
                                  perc_str,
                                  ...) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   index <- NULL
@@ -249,7 +245,6 @@ plot_scheme_fraction <- function(scheme,
                                  font_size,
                                  perc_str,
                                  ...) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   index <- NULL

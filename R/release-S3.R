@@ -24,7 +24,6 @@
 #'
 #' plot(release_df)
 plot.STMr_release <- function(x, font_size = 14, load_1RM_agg_func = max, ...) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   phase <- NULL

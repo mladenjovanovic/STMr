@@ -26,7 +26,6 @@ estimate_rolling_1RM <- function(weight,
                                  window = 14,
                                  estimate_function = estimate_k_1RM,
                                  ...) {
-
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   `.` <- NULL
