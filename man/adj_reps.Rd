@@ -46,7 +46,8 @@ adj_reps_perc_MR(
 \item{adjustment}{Numeric vector. Adjustment to be implemented}
 
 \item{mfactor}{Numeric vector. Default is 1 (i.e., no adjustment).
-Use \code{mfactor = 2} to generate ballistic adjustment and tables}
+Use \code{mfactor = 2} to generate ballistic adjustment and tables,
+and \code{mfactor = 3} to generate conservative adjustment and tables}
 
 \item{max_reps_func}{Max reps function to be used. Default is \code{\link{max_reps_epley}}}
 

@@ -1,3 +1,8 @@
+# STMR 0.1.6.9000
+
+* Added `conservative` option when generating progression tables, which is equal to `mfactor = 3`
+* Updated READMER.Rmd file
+
 # STMr 0.1.6
 
 * Changed from `stats::nlm()` to `minpack.lm::nlsLM()` function for estimating parameters in `estimate_k()`, `estimate_k_1RM()`,  `estimate_kmod()`, `estimate_kmod_1RM()`, `estimate_klin()`, and  `estimate_klin_1RM()` functions.

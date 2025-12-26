@@ -160,12 +160,25 @@ progression_perc_MR_variable <- function(reps,
   )
 
   params <- data.frame(
-    volume = c("intensive", "normal", "extensive", "intensive", "normal", "extensive"),
-    type = c("grinding", "grinding", "grinding", "ballistic", "ballistic", "ballistic"),
-    rep_start = c(0, 0.3, 0.5, 0, 0.3, 0.5),
-    rep_step = c(0, -(0.1 / 11), -(0.1 / 11), 0, -(0.1 / 11), -(0.1 / 11)),
-    inc_start = c(-0.4 / 3, -0.3 / 3, -0.3 / 3, -0.4 / 3, -0.3 / 3, -0.3 / 3),
-    inc_step = c((0.7 - 0.6) / (11 * 3), (0.5 - 0.5) / (11 * 3), (0.3 - 0.3) / (11 * 3), (0.7 - 0.6) / (11 * 3), (0.5 - 0.5) / (11 * 3), (0.3 - 0.3) / (11 * 3))
+    volume = c("intensive", "normal", "extensive",
+               "intensive", "normal", "extensive",
+               "intensive", "normal", "extensive"),
+    type = c("grinding", "grinding", "grinding",
+             "ballistic", "ballistic", "ballistic",
+             "conservative", "conservative", "conservative"),
+    # For conservative, I am simply copying ballistic adjustments
+    rep_start = c(0, 0.3, 0.5,
+                  0, 0.3, 0.5,
+                  0, 0.3, 0.5),
+    rep_step = c(0, -(0.1 / 11), -(0.1 / 11),
+                 0, -(0.1 / 11), -(0.1 / 11),
+                 0, -(0.1 / 11), -(0.1 / 11)),
+    inc_start = c(-0.4 / 3, -0.3 / 3, -0.3 / 3,
+                  -0.4 / 3, -0.3 / 3, -0.3 / 3,
+                  -0.4 / 3, -0.3 / 3, -0.3 / 3),
+    inc_step = c((0.7 - 0.6) / (11 * 3), (0.5 - 0.5) / (11 * 3), (0.3 - 0.3) / (11 * 3),
+                 (0.7 - 0.6) / (11 * 3), (0.5 - 0.5) / (11 * 3), (0.3 - 0.3) / (11 * 3),
+                 (0.7 - 0.6) / (11 * 3), (0.5 - 0.5) / (11 * 3), (0.3 - 0.3) / (11 * 3))
   )
 
   # Merge them together

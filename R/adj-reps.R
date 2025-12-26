@@ -9,7 +9,8 @@
 #' @param max_reps_func Max reps function to be used. Default is \code{\link{max_reps_epley}}
 #' @param adjustment Numeric vector. Adjustment to be implemented
 #' @param mfactor Numeric vector. Default is 1 (i.e., no adjustment).
-#'     Use \code{mfactor = 2} to generate ballistic adjustment and tables
+#'     Use \code{mfactor = 2} to generate ballistic adjustment and tables,
+#'     and \code{mfactor = 3} to generate conservative adjustment and tables
 #' @param ... Forwarded to \code{max_reps_func}. Usually the parameter value.
 #'     For example \code{klin = 36} when using \code{\link{max_reps_linear}} as
 #'     \code{max_reps_func} function

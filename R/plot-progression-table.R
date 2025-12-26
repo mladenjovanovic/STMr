@@ -49,7 +49,7 @@ plot_progression_table <- function(progression_table,
 
   progression_tbl$type <- factor(
     progression_tbl$type,
-    levels = c("grinding", "ballistic")
+    levels = c("grinding", "ballistic", "conservative")
   )
 
   progression_tbl$reps <- factor(progression_tbl$reps)

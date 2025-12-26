@@ -19,7 +19,8 @@ create_example(
 
 \item{volume}{Character vector. Default is \code{c("intensive", "normal", "extensive")}}
 
-\item{type}{Character vector. Type of max rep table. Options are grinding (Default) and ballistic}
+\item{type}{Character vector. Type of max rep table. Options are grinding (Default), ballistic,
+and conservative}
 
 \item{...}{Extra arguments forwarded to \code{progression_table}}
 }

@@ -35,7 +35,7 @@ options(digits = 3)
 [![CRAN status](https://www.r-pkg.org/badges/version/STMr)](https://CRAN.R-project.org/package=STMr)
 <!-- badges: end -->
 
-**Table of Contents **
+**Table of Contents**
 
 *This is longer README file, so here is the TOC for easier jumping to topics*
 
@@ -54,7 +54,7 @@ options(digits = 3)
 
 ## Introduction
 
-`{STMr}` (short of *Strength Training Manual R-functions*) package is created to help sports scientists and strength coaches estimate strength profiles, create and visualize (percent-based) progression tables and set and rep schemes. Originally `{STMr}` package was created as an internal project/package to help me in writing [Strength Training Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/) Volume 3 book, but it soon became a project in itself. `{STMr}` package is open-source package under MIT License implemented in the R language.
+`{STMr}` (short of *Strength Training Manual R-functions*) package is created to help sports scientists and strength coaches estimate strength profiles, create and visualize (percent-based) progression tables and set and rep schemes. Originally `{STMr}` package was created as an internal project/package to help me in writing [Strength Training Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/) Volume 3 book, but it soon became a project in itself. `{STMr}` package is open-source package under MIT License implemented in the R language.
 
 `{STMr}` package can be divided in the following functional units:
 
@@ -75,7 +75,7 @@ Figure below depicts the relationship between `{STMr}` package functional units:
 knitr::include_graphics("man/figures/STMr-package.png")
 ```
 
-I will walk you through each of these functional units to demonstrate the simplicity, flexibility, usability, and power of the `{STMr}` package. For more information regarding the logic behind the `{STMr}` package please check the [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/) article series.
+I will walk you through each of these functional units to demonstrate the simplicity, flexibility, usability, and power of the `{STMr}` package. For more information regarding the logic behind the `{STMr}` package please check the [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/) article series.
 
 ## Installation
 
@@ -95,12 +95,12 @@ devtools::install_github("mladenjovanovic/STMr")
 Once installed, you can load `{STMr}` package:
 
 ```{r}
-require(STMr)
+library(STMr)
 ```
 
 ## Reps-Max Functions
 
-Reps-Max functions map the relationship between %1RM and maximum number of repetitions (*nRM*, or reps-to-failure; *RTF*). `{STMr}` package comes with three Reps-Max models: (1) Epley's, (2) Modified Epley's, and (3) Linear/Brzycki's. Please refer to [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/) article series for more information.
+Reps-Max functions map the relationship between %1RM and maximum number of repetitions (*nRM*, *MNR*, or reps-to-failure; *RTF*). `{STMr}` package comes with three Reps-Max models: (1) Epley's, (2) Modified Epley's, and (3) Linear/Brzycki's. Please refer to [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/) article series for more information.
 
 Reps-Max functions start with `max_` and allow you to either predict max %1RM from repetitions (start with `max_perc_1RM_`), or to predict max repetitions (i.e., nRM) from %1RM used (start with `max_reps_`). Each of Reps-Max functions allow you to use different model parameter values. This is very helpful when using individualized profiles to create set and rep schemes (see [Estimation] section).
 
@@ -150,7 +150,7 @@ Let's make this a bit more eye appealing. Here we have plotted the relationship 
 
 ```{r}
 # install.packages("tidyverse", dependencies = TRUE)
-require(tidyverse)
+library(tidyverse)
 
 max_reps_relationship <- tibble(Reps = seq(1, 12)) %>%
   mutate(
@@ -164,6 +164,7 @@ max_reps_relationship <- tibble(Reps = seq(1, 12)) %>%
 ggplot(max_reps_relationship, aes(x = Reps, y = `%1RM`, color = Model)) +
   theme_bw() +
   geom_line() +
+  xlab("Maximum Number of Reps") +
   scale_x_continuous(breaks = 1:12)
 ```
 
@@ -189,12 +190,18 @@ adj_perc_1RM_RIR(5, adjustment = 2)
 adj_perc_1RM_perc_MR(5, adjustment = 0.7)
 ```
 
-In addition to using adjustment, user can use *multiplication factor* (`mfactor` parameter). This is useful for creating *ballistic* schemes. In [Strength Training Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/) I have suggested using factor of 2 for ballistic exercises. 
+In addition to using adjustment, user can use *multiplication factor* (`mfactor` parameter). This is useful for creating *ballistic*, as well as *conservative* schemes. In [Strength Training Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/) I have suggested using factor of 2 for ballistic exercises and using factor of 3 for *control* exercises (implementing holds or various tempos of execution). 
 
 ```{r}
-# Use ballistic adjustment (this implies doing half the reps of max reps possible)
+# Use ballistic adjustment (this implies doing half of the max reps possible)
 # In other words, if I am doing 5 reps, I will use 10RM
 adj_perc_1RM_DI(5, mfactor = 2)
+```
+
+```{r}
+# Use conservative adjustment (this implies doing 1/3 of the max reps possible)
+# In other words, if I am doing 5 reps, I will use 15RM
+adj_perc_1RM_DI(5, mfactor = 3)
 ```
 
 Using the RIR method, I will show you how you can customize adjustments using different Reps-Max function and custom model parameter value: 
@@ -216,7 +223,7 @@ Although I will show you simpler solution to this (see [Progression] section), h
 
 ```{r}
 # install.packages("knitr", dependencies = TRUE)
-require(knitr)
+library(knitr)
 
 at <- expand_grid(Reps = 1:5, RIR = 0:4) %>%
   mutate(
@@ -248,7 +255,7 @@ get_reps(0.85, method = "RIR", model = "modified epley", adjustment = 2, kmod = 
 
 ## Progressions
 
-Progressions (or progression tables) represent implemented adjustments in a systematic and organized manner across *progression steps* and scheme *volume types* (intensive, normal, and extensive). Please refer to [Strength Training Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/) book and [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/) article series for more information about progression tables.
+Progressions (or progression tables) represent implemented adjustments in a systematic and organized manner across *progression steps* and scheme *volume types* (intensive, normal, and extensive). Please refer to [Strength Training Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/) book and [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/) article series for more information about progression tables.
 
 `{STMr}` package has multiple progressions implemented and they all start with `progression_`. Progression functions also allow user to utilize different Reps-Max function (default is `max_perc_1RM_epley()`) and provide custom model parameter value. This modular and flexible feature allows for easier generation of individualized progression tables, as well as set and rep schemes.
 
@@ -260,26 +267,24 @@ progression_RIR(5, step = c(-3, -2, -1, 0), volume = "normal")
 
 The output of `progression_` functions is a `list` with two elements: (1) `adjustment`, and (2) `perc_1RM`. You can use this directly, but `progression_` function is most often used within `scheme_` functions (see [Set and Rep Schemes] section). 
 
-Easier way to create progression table across different types (grinding, ballistic), volumes, rep ranges, and progression steps is to use `generate_progression_table()` function:
+Easier way to create progression table across different types (grinding, ballistic, and conservative), volumes, rep ranges, and progression steps is to use `generate_progression_table()` function:
 
 ```{r}
-pt <- generate_progression_table(progression_RIR)
+pt <- generate_progression_table(progression_RIR, type = "conservative")
 
 head(pt)
 ```
 
-The default `mfactor` for the ballistic progression table is equal to 2.
-
 Even better approach would be to plot progression table:
 
 ```{r}
-plot_progression_table(progression_RIR, signif_digits = 2)
+plot_progression_table(progression_RIR, signif_digits = 2, type = "grinding")
 ```
 
 If you are interested in plotting the adjustments used, use:
 
 ```{r}
-plot_progression_table(progression_RIR, plot = "adjustment")
+plot_progression_table(progression_RIR, plot = "adjustment", type = "grinding")
 ```
 
 `progression_RIR()` allows you to use custom progression increments as well as volume increments:
@@ -289,7 +294,8 @@ plot_progression_table(
   progression_RIR,
   plot = "adjustment",
   step_increment = 1,
-  volume_increment = 2
+  volume_increment = 2,
+  type = "grinding"
 )
 ```
 
@@ -328,11 +334,11 @@ example <- create_example(progression_perc_MR_variable, reps = c(5, 10), type = 
 kable(example)
 ```
 
- `{STMr}` package have the following progression tables implemented: `progression_DI()`, `progression_perc_drop()`, `progression_perc_MR()`, `progression_perc_MR_variable()`, `progression_rel_int()`, `progression_RIR()`, and `progression_RIR_increment()`. You can use aforementioned functions to explore these progression tables, and build your own. Please refer to [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/) article series for more information about these progression tables.
+ `{STMr}` package have the following progression tables implemented: `progression_DI()`, `progression_perc_drop()`, `progression_perc_MR()`, `progression_perc_MR_variable()`, `progression_rel_int()`, `progression_RIR()`, and `progression_RIR_increment()`. You can use aforementioned functions to explore these progression tables, and build your own. Please refer to [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/) article series for more information about these progression tables.
  
 ## Vertical Planning
 
-Vertical Planning represents another layer in building set and rep schemes and it revolves around changes or progressions across time. This involves changes to repetitions, progression steps, number of sets and so forth. Please refer to [Strength Training Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/) book for thorough information about the Vertical Planning. Vertical Planning functions in `{STMr}` package begin with `vertical_`.
+Vertical Planning represents another layer in building set and rep schemes and it revolves around changes or progressions across time. This involves changes to repetitions, progression steps, number of sets and so forth. Please refer to [Strength Training Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/) book for thorough information about the Vertical Planning. Vertical Planning functions in `{STMr}` package begin with `vertical_`.
 
 Here is an example involving *constant* variant of Vertical Planning:
 
@@ -356,13 +362,13 @@ Most of these Vertical Planning functionalities can be achieved with the *generi
 
 `{STMr}` currently features the following Vertical Planning functions: `vertical_planning()`, `vertical_constant()`, `vertical_linear()`, `vertical_linear_reverse()`, `vertical_block()`, `vertical_block_variant()`, `vertical_block_undulating()`, `vertical_rep_accumulation()`, `vertical_set_accumulation()`, `vertical_set_accumulation_reverse()`, `vertical_undulating()`, `vertical_undulating_reverse()`, `vertical_volume_intensity()`.
 
-Please note that `vertical_rep_accumulation()` when used with [Set and Rep Schemes] will yield *wrong* results. I will address how to deal with this issue in [Rep Accumulation] section.
+**Note:** Please note that `vertical_rep_accumulation()` when used with [Set and Rep Schemes] will yield *wrong* results. I will address how to deal with this issue in [Rep Accumulation] section.
 
 ## Set and Rep Schemes
 
 Set and rep schemes are the highest layer in `{STMr}` package, since they utilize Reps-Max model, adjustment method, progression table, and vertical planning. `{STMr}` package is built to follow this *modular* approach, which makes is extensible and flexible. 
 
-Set and rep schemes are implemented using the functions that begin with `scheme_`. Here is an example for the Wave Set and Rep Scheme (for more information about various set and rep schemes please refer to [Strength Training Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/) book):
+Set and rep schemes are implemented using the functions that begin with `scheme_`. Here is an example for the Wave Set and Rep Scheme (for more information about various set and rep schemes please refer to [Strength Training Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/) book):
 
 ```{r}
 # Wave set and rep scheme
@@ -382,7 +388,6 @@ head(scheme)
 The output of the `scheme_` functions is a simple `data.frame` with the following six columns: (1) `index`, (2) `step`, (3) `set`, (4) `reps`, (5) `adjustment`, and (6) `perc_1RM`.
 
 Set and rep scheme functions offers you the ability to utilize different vertical planning (using the `vertical_planning` argument, as well as `vertical_planning_control` to forward extra parameters to the vertical planning function), progression table (using the `progression_table` argument, as well as `progression_table_control` to forward extra parameters, including Reps-Max function), and *extra adjustments* to the reps utilized. Please note that the adjustment utilized depends on the progression table selected (i.e., if using RIR Increment, adjustment will be RIR). Also, the `adjustment` in the results is the *total* adjustment, which is the sum of the progression table adjustment and user-provided extra adjustment using the `adjustment` argument. 
-
 Plotting the scheme is a better way to comprehend it:
 
 ```{r}
@@ -758,7 +763,7 @@ head(strength_training_log)
 
 This dataset contains strength training log for a single athlete and single exercise performed in the training program. Strength training program involves doing two strength training sessions, over 12 week (4 phases of 3 weeks each). Session A involves linear wave-loading pattern starting with 2x12/10/8 reps and reaching 2x8/6/4 reps. Session B involves constant wave-loading pattern using 2x3/2/1. This dataset contains weight being used, as well as estimated/perceived reps-in-reserve (eRIR), which represent subjective rating of the proximity to failure. 
 
-`{STMr}` package has three types of estimation functions: (1) simple estimation functions, (2) mixed-effect estimation functions, and (3) quantile estimation functions. Each of these three types of estimation functions allow you to work with (1) %1RM and repetitions to estimate single parameter (i.e., `k`, `kmod`, or `klin` parameters for Epley's, Modified Epley's, and Linear/Brzycki's models respectively), and (2) absolute weight and repetitions, which in addition to estimating model parameter value estimates 1RM. This represent novel technique in sports science, yet to be validated (paper preparation currently ongoing). In the next section I will walk you through each of these, but for more information please refer to [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/) article series.
+`{STMr}` package has three types of estimation functions: (1) simple estimation functions, (2) mixed-effect estimation functions, and (3) quantile estimation functions. Each of these three types of estimation functions allow you to work with (1) %1RM and repetitions to estimate single parameter (i.e., `k`, `kmod`, or `klin` parameters for Epley's, Modified Epley's, and Linear/Brzycki's models respectively), and (2) absolute weight and repetitions, which in addition to estimating model parameter value estimates 1RM. This represent novel technique in sports science, yet to be validated (paper preparation currently ongoing). In the next section I will walk you through each of these, but for more information please refer to [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/) article series.
 
 ### Simple estimation
 
@@ -766,7 +771,7 @@ To demonstrate simple profile estimation I will use `RTF_testing` dataset. The f
 
 ```{r}
 # install.packages("patchwork", dependencies = TRUE)
-require(patchwork)
+library(patchwork)
 
 gg_absolute <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM, color = Athlete)) +
   theme_bw() +
@@ -854,7 +859,7 @@ m3 <- estimate_klin_1RM(
 coef(m3)
 ```
 
-This novel technique allows for *embedded testing* (please refer to [Strength Training Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/) and [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/) article series for more information) using the strength training log data. In the case where sets are not taken to failure, one can also utilize subjective rating of perceived/estimated RIR (`eRIR` argument). This technique will be applied to log analysis in the [Quantile estimation] section. 
+This novel technique allows for *embedded testing* (please refer to [Strength Training Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/) and [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/) article series for more information) using the strength training log data. In the case where sets are not taken to failure, one can also utilize subjective rating of perceived/estimated RIR (`eRIR` argument). This technique will be applied to log analysis in the [Quantile estimation] section. 
 
 ### Mixed-effect estimation
 
@@ -1026,7 +1031,7 @@ gg
 
 We are interested in finding both the "best" and "worst" profiles (as well as estimated 1RMs). To achieve this, we will utilize *quantile non-linear regression*. This quantile non-linear estimation is implemented in `{STMr}` package using the `nlrq()` function from the `{quantreg}` package. Quantile estimation functions ends with `_quantile`. You can also use the `...` feature of the quantile estimation functions to forward extra arguments to `nlrq()` function.
 
-For the "best" performance profile we can use 0.9 quantile, and for "worst" we can use 0.1 quantile. I will utilize Linear/Brzycki's model. For more information please refer to [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/) article series. 
+For the "best" performance profile we can use 0.9 quantile, and for "worst" we can use 0.1 quantile. I will utilize Linear/Brzycki's model. For more information please refer to [Load-Exertion Tables And Their Use For Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/) article series. 
 
 ```{r}
 mq_best <- estimate_klin_1RM_quantile(
@@ -1120,7 +1125,7 @@ This analysis represents novel technique and the time will tell how valid is it 
 
 ## Scheme plotting tips
 
-Since I have developed the `{STMr}` package to help me write the [Strength Training Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/) Volume 3 book, the plotting functionalites are vast and flexible. Here are the few tip you can use.
+Since I have developed the `{STMr}` package to help me write the [Strength Training Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/) Volume 3 book, the plotting functionalites are vast and flexible. Here are the few tip you can use.
 
 ### Different ways to plot the scheme
 
@@ -1220,7 +1225,7 @@ plot(scheme_df) +
 
 ## Further information
 
-To find out more, please check the [Create Custom Set and Rep Schemes With {STMr}](https://complementarytraining.net/create-custom-set-and-rep-schemes-with-stmr/) course, which covers a lot of ground and the utilization of the `{STMr}` package in depth. 
+To find out more, please check the [Create Custom Set and Rep Schemes With {STMr}](https://complementarytraining.com/create-custom-set-and-rep-schemes-with-stmr/) course, which covers a lot of ground and the utilization of the `{STMr}` package in depth. 
 
 ## How to cite `{STMr}`
 

@@ -17,7 +17,7 @@
 \usage{
 generate_progression_table(
   progression_table,
-  type = c("grinding", "ballistic"),
+  type = c("grinding", "ballistic", "conservative"),
   volume = c("intensive", "normal", "extensive"),
   reps = 1:12,
   step = seq(-3, 0, 1),
@@ -105,7 +105,7 @@ progression_rel_int(
 \arguments{
 \item{progression_table}{Progression table function to use}
 
-\item{type}{Character vector. Type of max rep table. Options are grinding (Default) and ballistic.}
+\item{type}{Character vector. Type of max rep table. Options are grinding (Default), ballistic, and conservative.}
 
 \item{volume}{Character vector: 'intensive', 'normal' (Default), or 'extensive'}
 

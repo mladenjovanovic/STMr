@@ -33,8 +33,8 @@ check_volume <- function(volume) {
 }
 
 check_type <- function(type) {
-  if (any(!(type %in% c("grinding", "ballistic")))) {
-    stop("Please provide valid type. Options are 'grinding' and 'ballistic'", call. = FALSE)
+  if (any(!(type %in% c("grinding", "ballistic", "conservative")))) {
+    stop("Please provide valid type. Options are 'grinding', 'ballistic' and 'conservative'", call. = FALSE)
   }
 }
 
@@ -47,7 +47,11 @@ get_mfactor <- function(type) {
     ifelse(
       type == "ballistic",
       2,
+      ifelse(
+        type == "conservative",
+        3,
       NA
+      )
     )
   )
 }

@@ -4,7 +4,8 @@
 #' @param max_perc_1RM_func Max  %1RM function to be used. Default is \code{\link{max_perc_1RM_epley}}
 #' @param adjustment Numeric vector. Adjustment to be implemented
 #' @param mfactor Numeric vector. Default is 1 (i.e., no adjustment).
-#'     Use \code{mfactor = 2} to generate ballistic adjustment and tables
+#'     Use \code{mfactor = 2} to generate ballistic adjustment and tables,
+#'     and \code{mfactor = 3} to generate conservative adjustment and tables
 #' @param ... Forwarded to \code{max_perc_1RM_func}. Usually the parameter value.
 #'     For example \code{klin = 36} when using \code{\link{max_perc_1RM_linear}} as
 #'     \code{max_perc_1RM_func} function

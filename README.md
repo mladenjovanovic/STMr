@@ -10,7 +10,7 @@
 status](https://www.r-pkg.org/badges/version/STMr)](https://CRAN.R-project.org/package=STMr)
 <!-- badges: end -->
 
-**Table of Contents **
+**Table of Contents**
 
 *This is longer README file, so here is the TOC for easier jumping to
 topics*
@@ -35,7 +35,7 @@ created to help sports scientists and strength coaches estimate strength
 profiles, create and visualize (percent-based) progression tables and
 set and rep schemes. Originally `{STMr}` package was created as an
 internal project/package to help me in writing [Strength Training
-Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/)
 Volume 3 book, but it soon became a project in itself. `{STMr}` package
 is open-source package under MIT License implemented in the R language.
 
@@ -61,13 +61,13 @@ is open-source package under MIT License implemented in the R language.
 Figure below depicts the relationship between `{STMr}` package
 functional units:
 
-<img src="man/figures/STMr-package.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/STMr-package.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 I will walk you through each of these functional units to demonstrate
 the simplicity, flexibility, usability, and power of the `{STMr}`
 package. For more information regarding the logic behind the `{STMr}`
 package please check the [Load-Exertion Tables And Their Use For
-Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/)
+Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series.
 
 ## Installation
@@ -89,17 +89,17 @@ devtools::install_github("mladenjovanovic/STMr")
 Once installed, you can load `{STMr}` package:
 
 ``` r
-require(STMr)
+library(STMr)
 ```
 
 ## Reps-Max Functions
 
 Reps-Max functions map the relationship between %1RM and maximum number
-of repetitions (*nRM*, or reps-to-failure; *RTF*). `{STMr}` package
-comes with three Reps-Max models: (1) Epley’s, (2) Modified Epley’s, and
-(3) Linear/Brzycki’s. Please refer to [Load-Exertion Tables And Their
-Use For
-Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/)
+of repetitions (*nRM*, *MNR*, or reps-to-failure; *RTF*). `{STMr}`
+package comes with three Reps-Max models: (1) Epley’s, (2) Modified
+Epley’s, and (3) Linear/Brzycki’s. Please refer to [Load-Exertion Tables
+And Their Use For
+Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series for more information.
 
 Reps-Max functions start with `max_` and allow you to either predict max
@@ -173,7 +173,7 @@ used on y-axis:
 
 ``` r
 # install.packages("tidyverse", dependencies = TRUE)
-require(tidyverse)
+library(tidyverse)
 
 max_reps_relationship <- tibble(Reps = seq(1, 12)) %>%
   mutate(
@@ -187,10 +187,11 @@ max_reps_relationship <- tibble(Reps = seq(1, 12)) %>%
 ggplot(max_reps_relationship, aes(x = Reps, y = `%1RM`, color = Model)) +
   theme_bw() +
   geom_line() +
+  xlab("Maximum Number of Reps") +
   scale_x_continuous(breaks = 1:12)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ## Adjustment Functions
 
@@ -236,16 +237,25 @@ adj_perc_1RM_perc_MR(5, adjustment = 0.7)
 ```
 
 In addition to using adjustment, user can use *multiplication factor*
-(`mfactor` parameter). This is useful for creating *ballistic* schemes.
-In [Strength Training
-Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
-I have suggested using factor of 2 for ballistic exercises.
+(`mfactor` parameter). This is useful for creating *ballistic*, as well
+as *conservative* schemes. In [Strength Training
+Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/)
+I have suggested using factor of 2 for ballistic exercises and using
+factor of 3 for *control* exercises (implementing holds or various
+tempos of execution).
 
 ``` r
-# Use ballistic adjustment (this implies doing half the reps of max reps possible)
+# Use ballistic adjustment (this implies doing half of the max reps possible)
 # In other words, if I am doing 5 reps, I will use 10RM
 adj_perc_1RM_DI(5, mfactor = 2)
 #> [1] 0.75
+```
+
+``` r
+# Use conservative adjustment (this implies doing 1/3 of the max reps possible)
+# In other words, if I am doing 5 reps, I will use 15RM
+adj_perc_1RM_DI(5, mfactor = 3)
+#> [1] 0.667
 ```
 
 Using the RIR method, I will show you how you can customize adjustments
@@ -271,7 +281,7 @@ section), here is how you can create simple RIR adjustment table:
 
 ``` r
 # install.packages("knitr", dependencies = TRUE)
-require(knitr)
+library(knitr)
 
 at <- expand_grid(Reps = 1:5, RIR = 0:4) %>%
   mutate(
@@ -322,9 +332,9 @@ Progressions (or progression tables) represent implemented adjustments
 in a systematic and organized manner across *progression steps* and
 scheme *volume types* (intensive, normal, and extensive). Please refer
 to [Strength Training
-Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/)
 book and [Load-Exertion Tables And Their Use For
-Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/)
+Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series for more information about progression tables.
 
 `{STMr}` package has multiple progressions implemented and they all
@@ -354,39 +364,37 @@ The output of `progression_` functions is a `list` with two elements:
 (see [Set and Rep Schemes](#set-and-rep-schemes) section).
 
 Easier way to create progression table across different types (grinding,
-ballistic), volumes, rep ranges, and progression steps is to use
-`generate_progression_table()` function:
+ballistic, and conservative), volumes, rep ranges, and progression steps
+is to use `generate_progression_table()` function:
 
 ``` r
-pt <- generate_progression_table(progression_RIR)
+pt <- generate_progression_table(progression_RIR, type = "conservative")
 
 head(pt)
-#>        type    volume reps step adjustment perc_1RM
-#> 1  grinding intensive    1   -3          3    0.882
-#> 2 ballistic intensive    1   -3          3    0.790
-#> 3  grinding    normal    1   -3          4    0.857
-#> 4 ballistic    normal    1   -3          4    0.750
-#> 5  grinding extensive    1   -3          5    0.833
-#> 6 ballistic extensive    1   -3          5    0.714
+#>           type    volume reps step adjustment perc_1RM
+#> 1 conservative intensive    1   -3          3    0.714
+#> 2 conservative    normal    1   -3          4    0.667
+#> 3 conservative extensive    1   -3          5    0.625
+#> 4 conservative intensive    2   -3          3    0.667
+#> 5 conservative    normal    2   -3          4    0.625
+#> 6 conservative extensive    2   -3          5    0.588
 ```
-
-The default `mfactor` for the ballistic progression table is equal to 2.
 
 Even better approach would be to plot progression table:
 
 ``` r
-plot_progression_table(progression_RIR, signif_digits = 2)
+plot_progression_table(progression_RIR, signif_digits = 2, type = "grinding")
 ```
 
-<img src="man/figures/README-unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-15-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 If you are interested in plotting the adjustments used, use:
 
 ``` r
-plot_progression_table(progression_RIR, plot = "adjustment")
+plot_progression_table(progression_RIR, plot = "adjustment", type = "grinding")
 ```
 
-<img src="man/figures/README-unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 `progression_RIR()` allows you to use custom progression increments as
 well as volume increments:
@@ -396,11 +404,12 @@ plot_progression_table(
   progression_RIR,
   plot = "adjustment",
   step_increment = 1,
-  volume_increment = 2
+  volume_increment = 2,
+  type = "grinding"
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Here is another example using *Perc Drop* progression table and
 Linear/Brzycki’s model:
@@ -416,7 +425,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-18-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Here are the adjustments used in the *Perc Drop* progression table
 (deducted %1RM):
@@ -433,7 +442,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-19-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Another useful feature implemented in `{STMr}` package is a
 `create_example()` function to quickly generate strength training
@@ -446,14 +455,14 @@ example <- create_example(progression_perc_MR_variable, reps = c(5, 10), type = 
 kable(example)
 ```
 
-| type     | reps | volume    | Step 1 | Step 2 | Step 3 | Step 4 | Step 2-1 Diff | Step 3-2 Diff | Step 4-3 Diff |
-|:---------|-----:|:----------|-------:|-------:|-------:|-------:|--------------:|--------------:|--------------:|
-| grinding |    5 | intensive |   79.3 |   82.0 |   84.1 |   85.7 |          2.72 |          2.09 |          1.66 |
-| grinding |    5 | normal    |   72.4 |   76.3 |   79.3 |   81.6 |          3.93 |          2.95 |          2.30 |
-| grinding |    5 | extensive |   58.7 |   66.9 |   72.4 |   76.3 |          8.22 |          5.49 |          3.93 |
-| grinding |   10 | intensive |   67.2 |   70.3 |   72.9 |   75.0 |          3.10 |          2.57 |          2.16 |
-| grinding |   10 | normal    |   59.1 |   63.6 |   67.2 |   70.1 |          4.47 |          3.59 |          2.94 |
-| grinding |   10 | extensive |   45.8 |   53.4 |   59.1 |   63.6 |          7.58 |          5.72 |          4.47 |
+| type | reps | volume | Step 1 | Step 2 | Step 3 | Step 4 | Step 2-1 Diff | Step 3-2 Diff | Step 4-3 Diff |
+|:---|---:|:---|---:|---:|---:|---:|---:|---:|---:|
+| grinding | 5 | intensive | 79.3 | 82.0 | 84.1 | 85.7 | 2.72 | 2.09 | 1.66 |
+| grinding | 5 | normal | 72.4 | 76.3 | 79.3 | 81.6 | 3.93 | 2.95 | 2.30 |
+| grinding | 5 | extensive | 58.7 | 66.9 | 72.4 | 76.3 | 8.22 | 5.49 | 3.93 |
+| grinding | 10 | intensive | 67.2 | 70.3 | 72.9 | 75.0 | 3.10 | 2.57 | 2.16 |
+| grinding | 10 | normal | 59.1 | 63.6 | 67.2 | 70.1 | 4.47 | 3.59 | 2.94 |
+| grinding | 10 | extensive | 45.8 | 53.4 | 59.1 | 63.6 | 7.58 | 5.72 | 4.47 |
 
 `{STMr}` package have the following progression tables implemented:
 `progression_DI()`, `progression_perc_drop()`, `progression_perc_MR()`,
@@ -461,7 +470,7 @@ kable(example)
 `progression_RIR()`, and `progression_RIR_increment()`. You can use
 aforementioned functions to explore these progression tables, and build
 your own. Please refer to [Load-Exertion Tables And Their Use For
-Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/)
+Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series for more information about these progression tables.
 
 ## Vertical Planning
@@ -470,7 +479,7 @@ Vertical Planning represents another layer in building set and rep
 schemes and it revolves around changes or progressions across time. This
 involves changes to repetitions, progression steps, number of sets and
 so forth. Please refer to [Strength Training
-Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/)
 book for thorough information about the Vertical Planning. Vertical
 Planning functions in `{STMr}` package begin with `vertical_`.
 
@@ -519,7 +528,7 @@ plans.
 plot_vertical(vertical_linear, reps = c(10, 10, 10))
 ```
 
-<img src="man/figures/README-unnamed-chunk-22-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-23-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Most of these Vertical Planning functionalities can be achieved with the
 *generic* Vertical Planning function `vertical_planning()`. As can be
@@ -537,9 +546,9 @@ functions is mostly visible at the next layer of prescription: *schemes*
 `vertical_set_accumulation_reverse()`, `vertical_undulating()`,
 `vertical_undulating_reverse()`, `vertical_volume_intensity()`.
 
-Please note that `vertical_rep_accumulation()` when used with [Set and
-Rep Schemes](#set-and-rep-schemes) will yield *wrong* results. I will
-address how to deal with this issue in [Rep
+**Note:** Please note that `vertical_rep_accumulation()` when used with
+[Set and Rep Schemes](#set-and-rep-schemes) will yield *wrong* results.
+I will address how to deal with this issue in [Rep
 Accumulation](#rep-accumulation) section.
 
 ## Set and Rep Schemes
@@ -553,7 +562,7 @@ Set and rep schemes are implemented using the functions that begin with
 `scheme_`. Here is an example for the Wave Set and Rep Scheme (for more
 information about various set and rep schemes please refer to [Strength
 Training
-Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/)
 book):
 
 ``` r
@@ -592,15 +601,14 @@ reps utilized. Please note that the adjustment utilized depends on the
 progression table selected (i.e., if using RIR Increment, adjustment
 will be RIR). Also, the `adjustment` in the results is the *total*
 adjustment, which is the sum of the progression table adjustment and
-user-provided extra adjustment using the `adjustment` argument.
-
-Plotting the scheme is a better way to comprehend it:
+user-provided extra adjustment using the `adjustment` argument. Plotting
+the scheme is a better way to comprehend it:
 
 ``` r
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-24-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-25-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Check the [Scheme plotting tips](#scheme-plotting-tips) section for more
 information and tips on plotting schemes.
@@ -629,7 +637,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-25-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-26-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 This scheme would be pretty impossible to do, since I am using the
 *intensive* variant of the Deducted Intensity progression, but in this
@@ -647,7 +655,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-26-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-27-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 plot_progression_table(
@@ -661,7 +669,7 @@ plot_progression_table(
 )
 ```
 
-<img src="man/figures/README-unnamed-chunk-27-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-28-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 To make the Waves Loading scheme in the above example doable, I can
 apply additional adjustments to make sets easier. Since I am using
@@ -685,7 +693,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-28-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-29-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 The `scheme_` functions afford you great flexibility in designing set
 and rep schemes. The following set and rep schemes are implemented in
@@ -718,7 +726,7 @@ my_scheme <- warmup + wave + plateau
 plot(my_scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-29-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-30-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ### Rep Accumulation
 
@@ -816,7 +824,7 @@ scheme <- scheme_wave() %>%
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-34-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-35-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 By default, `.vertical_rep_accumulation.post()` function will use the
 highest progression step in the scheme.
@@ -835,7 +843,7 @@ scheme <- scheme_step(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-35-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-36-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 We can also accumulate the whole sequence, for example when using the
 Waves:
@@ -850,7 +858,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-36-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-37-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Or, instead of accumulating sequence, we can accumulate individual sets:
 
@@ -864,7 +872,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-37-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-38-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Set accumulation function is very flexible. As an another example, we
 can use `vertical_set_accumulation_reverse()` to create a neat
@@ -880,7 +888,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-38-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-39-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Maybe we want another progression steps:
 
@@ -897,7 +905,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-39-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-40-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 But maybe we want the reps to fall down as well, to have a even bigger
 accumulation-intensification effect. In that case we case use
@@ -915,7 +923,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-40-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-41-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 As an last example, let us create Block Undulating with reverse set
 accumulation:
@@ -933,7 +941,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-41-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-42-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ### Manual scheme
 
@@ -965,7 +973,7 @@ scheme <- scheme_manual(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-43-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 
@@ -981,7 +989,7 @@ scheme <- scheme_manual(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-43-2.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ``` r
 
@@ -1025,7 +1033,7 @@ scheme <- scheme_manual(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-42-3.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-43-3.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 The `scheme_manual()` function allows you to manually enter 1RM
 percentage (rather than them being calculated using progression table):
@@ -1047,7 +1055,7 @@ warmup_scheme <- scheme_manual(
 plot(warmup_scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-43-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-44-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Easier method to create *pre-filled* 1RM percentages is to use
 `scheme_perc_1RM()` function:
@@ -1061,7 +1069,7 @@ warmup_scheme <- scheme_perc_1RM(
 plot(warmup_scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-44-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-45-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 We can then use the `+` operator to mold the warm-up to selected scheme.
 Here is an example:
@@ -1070,7 +1078,7 @@ Here is an example:
 plot(warmup_scheme + scheme_wave())
 ```
 
-<img src="man/figures/README-unnamed-chunk-45-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-46-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ## Release
 
@@ -1104,7 +1112,7 @@ release_df <- release(
 plot(release_df)
 ```
 
-<img src="man/figures/README-unnamed-chunk-46-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-47-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ## Estimation
 
@@ -1177,7 +1185,7 @@ parameter value estimates 1RM. This represent novel technique in sports
 science, yet to be validated (paper preparation currently ongoing). In
 the next section I will walk you through each of these, but for more
 information please refer to [Load-Exertion Tables And Their Use For
-Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/)
+Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series.
 
 ### Simple estimation
@@ -1189,7 +1197,7 @@ performed against both absolute (or raw) and relative weights (using
 
 ``` r
 # install.packages("patchwork", dependencies = TRUE)
-require(patchwork)
+library(patchwork)
 
 gg_absolute <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM, color = Athlete)) +
   theme_bw() +
@@ -1208,7 +1216,7 @@ gg_relative <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM, color = A
 gg_absolute + gg_relative + plot_layout(widths = c(1, 1.1))
 ```
 
-<img src="man/figures/README-unnamed-chunk-49-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-50-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Let’s use *Athlete B* from RTF testing dataset to estimate individual
 model parameter values for Epley’s, Modified Epley’s, and
@@ -1306,9 +1314,9 @@ coef(m3)
 
 This novel technique allows for *embedded testing* (please refer to
 [Strength Training
-Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/)
 and [Load-Exertion Tables And Their Use For
-Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/)
+Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series for more information) using the strength training log
 data. In the case where sets are not taken to failure, one can also
 utilize subjective rating of perceived/estimated RIR (`eRIR` argument).
@@ -1350,7 +1358,7 @@ ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
   geom_line(data = pred_df, aes(x = perc_1RM * 100, y = nRM), size = 1.5, alpha = 0.8)
 ```
 
-<img src="man/figures/README-unnamed-chunk-52-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-53-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 When analyzing multiple individuals, particularly when absolute weights
 are used instead of %1RM, one needs to utilize mixed-effect approach.
@@ -1441,7 +1449,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real %1RM` * 100, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-54-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-55-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 `{STMr}` package also implements mixed-effect models that utilize
 absolute weight values. As alluded previously, this is novel technique
@@ -1526,7 +1534,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-56-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-57-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Mixed-effects functions implemented in `{STMr}` package allows you to
 set-up random parameters using `random=` function argument. In the
@@ -1607,7 +1615,7 @@ gg <- ggplot(RTF_testing, aes(x = `Real Weight`, y = nRM)) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-58-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-59-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 In my opinion this doesn’t make much sense. If you are interested in
 estimating group or *generic* `klin` (or `k` or `kmod`) model parameter
@@ -1652,7 +1660,7 @@ gg <- ggplot(strength_training_log) +
 gg
 ```
 
-<img src="man/figures/README-unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-60-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 We are interested in finding both the “best” and “worst” profiles (as
 well as estimated 1RMs). To achieve this, we will utilize *quantile
@@ -1666,7 +1674,7 @@ For the “best” performance profile we can use 0.9 quantile, and for
 “worst” we can use 0.1 quantile. I will utilize Linear/Brzycki’s model.
 For more information please refer to [Load-Exertion Tables And Their Use
 For
-Planning](https://complementarytraining.net/load-exertion-tables-and-their-use-for-planning-part-1/)
+Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series.
 
 ``` r
@@ -1735,7 +1743,7 @@ gg +
   geom_line(data = pred_df_worst, aes(x = weight, y = nRM), linetype = "dashed")
 ```
 
-<img src="man/figures/README-unnamed-chunk-61-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-62-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ### Rolling estmation
 
@@ -1818,7 +1826,7 @@ data.frame(tau = c(0.1, 0.9)) %>%
   theme(legend.position = "none")
 ```
 
-<img src="man/figures/README-unnamed-chunk-63-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-64-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 This analysis represents novel technique and the time will tell how
 valid is it and how to interpret it correctly. But at least we have very
@@ -1828,7 +1836,7 @@ powerful, transparent, and flexible open-source tool: `{STMr}` package.
 
 Since I have developed the `{STMr}` package to help me write the
 [Strength Training
-Manual](https://complementarytraining.net/strength-training-manual-paperback-edition/)
+Manual](https://complementarytraining.com/strength-training-manual-paperback-edition/)
 Volume 3 book, the plotting functionalites are vast and flexible. Here
 are the few tip you can use.
 
@@ -1847,7 +1855,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-64-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-65-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Another way to plot the scheme is using the `vertical` method.
 
@@ -1855,7 +1863,7 @@ Another way to plot the scheme is using the `vertical` method.
 plot(scheme, type = "vertical")
 ```
 
-<img src="man/figures/README-unnamed-chunk-65-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-66-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 And the final method is to use `fraction` method, which is very similar
 to the Olympic weightlifting log notation:
@@ -1864,7 +1872,7 @@ to the Olympic weightlifting log notation:
 plot(scheme, type = "fraction")
 ```
 
-<img src="man/figures/README-unnamed-chunk-66-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-67-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 To avoid printing `%`, which will make `%1RM` labels bigger, use
 `perc_str = ""`:
@@ -1873,7 +1881,7 @@ To avoid printing `%`, which will make `%1RM` labels bigger, use
 plot(scheme, perc_str = "")
 ```
 
-<img src="man/figures/README-unnamed-chunk-67-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-68-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ### Different label sizes
 
@@ -1884,7 +1892,7 @@ size. This can be useful later once we used facets.
 plot(scheme, font_size = 20)
 ```
 
-<img src="man/figures/README-unnamed-chunk-68-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-69-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 The plotting allows for the flexible labels, using the `{ggfittext}`
 package, which fits the labels so they do not exit the bars. Here is an
@@ -1900,7 +1908,7 @@ scheme <- scheme_wave(
 plot(scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-69-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-70-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 Using the `size` argument, you can set the maximum label size. This is
 useful if you want to avoid having different sizes of labels on your
@@ -1911,7 +1919,7 @@ bigger than selected font size:
 plot(scheme, size = 5)
 ```
 
-<img src="man/figures/README-unnamed-chunk-70-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-71-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 You can also set padding of the labels. Let’s remove `%` and set the
 padding:
@@ -1924,7 +1932,7 @@ plot(
   padding.y = grid::unit(0.2, "mm"),)
 ```
 
-<img src="man/figures/README-unnamed-chunk-71-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-72-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ### Creating facets
 
@@ -1955,13 +1963,13 @@ plot(scheme_df) +
   facet_wrap(~scheme)
 ```
 
-<img src="man/figures/README-unnamed-chunk-72-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-73-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 ## Further information
 
 To find out more, please check the [Create Custom Set and Rep Schemes
 With
-{STMr}](https://complementarytraining.net/create-custom-set-and-rep-schemes-with-stmr/)
+{STMr}](https://complementarytraining.com/create-custom-set-and-rep-schemes-with-stmr/)
 course, which covers a lot of ground and the utilization of the `{STMr}`
 package in depth.
 
@@ -1972,11 +1980,10 @@ following citation:
 
 ``` r
 citation("STMr")
-#> 
 #> To cite package 'STMr' in publications use:
 #> 
-#>   Jovanović M (2023). _STMr: Strength Training Manual R-Language
-#>   Functions_. R package version 0.1.6,
+#>   Jovanović M (2026). _STMr: Strength Training Manual R-Language
+#>   Functions_. R package version 0.1.6.9000,
 #>   <https://github.com/mladenjovanovic/STMr>.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -1984,8 +1991,8 @@ citation("STMr")
 #>   @Manual{STMr-package,
 #>     title = {{STMr}: Strength Training Manual R-Language Functions},
 #>     author = {Mladen Jovanović},
-#>     year = {2023},
-#>     note = {R package version 0.1.6},
+#>     year = {2026},
+#>     note = {R package version 0.1.6.9000},
 #>     url = {https://github.com/mladenjovanovic/STMr},
 #>   }
 ```
