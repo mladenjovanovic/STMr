@@ -732,7 +732,7 @@
 <code class="sourceCode R"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_step</a></span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_set_accumulation</span></span>
-<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-36-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
@@ -742,7 +742,7 @@
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_set_accumulation</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>accumulate_set <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-37-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
@@ -752,7 +752,7 @@
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_set_accumulation</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>accumulate_set <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, sequence <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-38-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
@@ -762,7 +762,7 @@
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_set_accumulation_reverse</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>accumulate_set <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-39-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
@@ -774,8 +774,9 @@
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    accumulate_set <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
 <span>    <span class="co"># Lets create non-linear (aka unduating step changes)</span></span>
-<span>    step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span>    step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-40-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
@@ -786,8 +787,9 @@
 <span>  vertical_planning <span class="op">=</span> <span class="va">vertical_set_accumulation_reverse</span>,</span>
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    accumulate_set <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
-<span>    reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span>    reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-41-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
@@ -799,8 +801,9 @@
 <span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    accumulate_set <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
 <span>    step <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span><span class="op">)</span>,</span>
-<span>    reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span>    reps_change <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="op">-</span><span class="fl">2</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-42-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
@@ -870,16 +873,17 @@
 <span>  step <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">step</span>,</span>
 <span>  sets <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">sets</span>,</span>
 <span>  reps <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">reps</span>,</span>
-<span>  adjustment <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">adjustment</span>, </span>
-<span>  </span>
+<span>  adjustment <span class="op">=</span> <span class="va">scheme_df</span><span class="op">$</span><span class="va">adjustment</span>,</span>
+<span></span>
 <span>  <span class="co"># Select another progression table</span></span>
 <span>  progression_table <span class="op">=</span> <span class="va">progression_DI</span>,</span>
 <span>  <span class="co"># Extra parameters for the progression table</span></span>
 <span>  progression_table_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>    volume <span class="op">=</span> <span class="st">"extensive"</span>,</span>
-<span>    type <span class="op">=</span> <span class="st">"ballistic"</span>, </span>
+<span>    type <span class="op">=</span> <span class="st">"ballistic"</span>,</span>
 <span>    max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_linear</span>,</span>
-<span>    klin <span class="op">=</span> <span class="fl">36</span><span class="op">)</span></span>
+<span>    klin <span class="op">=</span> <span class="fl">36</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
@@ -906,7 +910,8 @@
 <code class="sourceCode R"><span><span class="va">warmup_scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_perc_1RM</a></span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>,</span>
 <span>  perc_1RM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span><span class="op">)</span>,</span>
-<span>  n_steps <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span>  n_steps <span class="op">=</span> <span class="fl">4</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">warmup_scheme</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-45-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
@@ -928,12 +933,12 @@
 <span></span>
 <span><span class="va">release_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/release.html">release</a></span><span class="op">(</span></span>
 <span>  <span class="va">scheme1</span>, <span class="va">scheme2</span>, <span class="va">scheme3</span>,</span>
-<span>  prescription_1RM <span class="op">=</span> <span class="fl">150</span>, </span>
-<span>  additive_1RM_adjustment <span class="op">=</span> <span class="fl">5</span>,  </span>
-<span>  multiplicative_1RM_adjustment <span class="op">=</span> <span class="fl">1</span>, <span class="co">#no adjustment   </span></span>
+<span>  prescription_1RM <span class="op">=</span> <span class="fl">150</span>,</span>
+<span>  additive_1RM_adjustment <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  multiplicative_1RM_adjustment <span class="op">=</span> <span class="fl">1</span>, <span class="co"># no adjustment</span></span>
 <span>  rounding <span class="op">=</span> <span class="fl">2.5</span>, <span class="co"># round weight to the closest 2.5</span></span>
 <span>  max_perc_1RM_func <span class="op">=</span> <span class="va">max_perc_1RM_epley</span></span>
-<span> <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">release_df</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-47-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
@@ -1411,7 +1416,8 @@
 <span>  day_index <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">day</span>,</span>
 <span>  window <span class="op">=</span> <span class="fl">6</span>,</span>
 <span>  estimate_function <span class="op">=</span> <span class="va">estimate_kmod_1RM_quantile</span>,</span>
-<span>  tau <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span>
+<span>  tau <span class="op">=</span> <span class="fl">0.9</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 19 × 3</span></span>
 <span><span class="co">#&gt;    day_index   kmod `1RM`</span></span>
 <span><span class="co">#&gt;        &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;</span></span>
@@ -1444,8 +1450,9 @@
 <span>    day_index <span class="op">=</span> <span class="va">strength_training_log</span><span class="op">$</span><span class="va">day</span>,</span>
 <span>    window <span class="op">=</span> <span class="fl">6</span>,</span>
 <span>    estimate_function <span class="op">=</span> <span class="va">estimate_kmod_1RM_quantile</span>,</span>
-<span>    tau <span class="op">=</span> <span class="va">.x</span><span class="op">$</span><span class="va">tau</span><span class="op">)</span></span>
-<span>  </span>
+<span>    tau <span class="op">=</span> <span class="va">.x</span><span class="op">$</span><span class="va">tau</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
 <span>  <span class="fu">tibble</span><span class="op">(</span>tau <span class="op">=</span> <span class="va">.x</span><span class="op">$</span><span class="va">tau</span>, <span class="va">res</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -1457,7 +1464,6 @@
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">day_index</span>, <span class="va">param</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">summarise</span><span class="op">(</span>lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>, upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  </span>
 <span>  <span class="co"># Plot</span></span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">day_index</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_bw</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1482,7 +1488,8 @@
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">8</span>, <span class="fl">6</span><span class="op">)</span>,</span>
-<span>  vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span><span class="op">)</span></span>
+<span>  vertical_planning <span class="op">=</span> <span class="va">vertical_linear</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-65-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
@@ -1510,8 +1517,8 @@
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scheme</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/set_and_reps_schemes.html">scheme_wave</a></span><span class="op">(</span></span>
 <span>  reps <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>  vertical_planning <span class="op">=</span> <span class="va">vertical_set_accumulation</span>, </span>
-<span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>accumulate_set <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, sequence <span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  vertical_planning <span class="op">=</span> <span class="va">vertical_set_accumulation</span>,</span>
+<span>  vertical_planning_control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>accumulate_set <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, sequence <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">scheme</span><span class="op">)</span></span></code></pre></div>
@@ -1526,7 +1533,8 @@
 <span>  <span class="va">scheme</span>,</span>
 <span>  perc_str <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  padding.x <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="st">"mm"</span><span class="op">)</span>,</span>
-<span>  padding.y <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="st">"mm"</span><span class="op">)</span>,<span class="op">)</span></span></code></pre></div>
+<span>  padding.y <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="st">"mm"</span><span class="op">)</span>,</span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-72-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
