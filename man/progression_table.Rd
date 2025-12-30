@@ -2,7 +2,8 @@
 % Please edit documentation in R/generate-progression-table.R,
 %   R/progression-table-DI.R, R/progression-table-RIR.R,
 %   R/progression-table-perc-MR.R, R/progression-table-perc-drop.R,
-%   R/progression-table-rel-int.R, R/progression-table.R
+%   R/progression-table-rel-int.R, R/progression-table-variable-DI.R,
+%   R/progression-table.R
 \name{generate_progression_table}
 \alias{generate_progression_table}
 \alias{progression_DI}
@@ -12,6 +13,7 @@
 \alias{progression_perc_MR_variable}
 \alias{progression_perc_drop}
 \alias{progression_rel_int}
+\alias{progression_variable_DI}
 \alias{progression_table}
 \title{Family of functions to create progression tables}
 \usage{
@@ -101,6 +103,20 @@ progression_rel_int(
   volume_increment = -0.075,
   ...
 )
+
+progression_variable_DI(
+  reps,
+  step = 0,
+  volume = "normal",
+  adjustment = 0,
+  type = "grinding",
+  mfactor = NULL,
+  rep_1_step_increment = -0.02,
+  rep_12_step_increment = -0.04,
+  rep_1_volume_increment = -0.02,
+  rep_12_volume_increment = -0.04,
+  ...
+)
 }
 \arguments{
 \item{progression_table}{Progression table function to use}
@@ -124,6 +140,14 @@ function (i.e., \code{max_perc_1RM_func = max_perc_1RM_linear)}}
 unless \code{NULL}}
 
 \item{step_increment, volume_increment}{Numeric vector. Used to adjust specific progression methods}
+
+\item{rep_1_step_increment}{Numeric vector. Default -0.02}
+
+\item{rep_12_step_increment}{Numeric vector. Default -0.04}
+
+\item{rep_1_volume_increment}{Numeric vector. Default -0.02,}
+
+\item{rep_12_volume_increment}{Numeric vector. Default -0.04}
 }
 \value{
 List with two elements: \code{adjustment} and \code{perc_1RM}
@@ -157,6 +181,10 @@ utilize needed increments
 
 \item \code{progression_rel_int()}: Relative Intensity progression table. Use \code{step_increment}
 and  \code{volume_increment} parameters to utilize needed increments
+
+\item \code{progression_variable_DI()}: Variable Deducted Intensity progression table. This function
+allows you to generate variable Deducted Intensity table, with adjustments linearly
+increasing for both step progressions as well volume increment based on the reps done.
 
 }}
 \examples{
@@ -320,6 +348,52 @@ generate_progression_table(
   max_perc_1RM_func = max_perc_1RM_linear,
   klin = 36
 )
+# ------------------------------------------
+# Progression Deducted Intensity
+progression_variable_DI(10, step = seq(-3, 0, 1))
+progression_variable_DI(10, step = seq(-3, 0, 1), volume = "extensive")
+progression_variable_DI(5, step = seq(-3, 0, 1), type = "ballistic")
+progression_variable_DI(
+  5,
+  step = seq(-3, 0, 1),
+  type = "grinding",
+  rep_1_step_increment = -0.02,
+  rep_12_step_increment = -0.04,
+  rep_1_volume_increment = -0.02,
+  rep_12_volume_increment = -0.04
+)
+
+
+# Generate progression table
+generate_progression_table(
+  progression_variable_DI,
+  type = "grinding",
+  volume = "normal")
+
+# Use different reps-max model
+generate_progression_table(
+  progression_variable_DI,
+  type = "grinding",
+  volume = "normal",
+  max_perc_1RM_func = max_perc_1RM_linear,
+  klin = 36
+)
+
+# Recreate "progression_perc_drop()" for grinding
+setequal(
+  generate_progression_table(
+    progression_variable_DI,
+    type = "grinding",
+    rep_1_step_increment = -0.025,
+    rep_12_step_increment = -0.05,
+    rep_1_volume_increment = -0.025,
+    rep_12_volume_increment = -0.05),
+
+  generate_progression_table(
+    progression_perc_drop,
+    type = "grinding")
+)
+
 }
 \references{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.

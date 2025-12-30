@@ -468,9 +468,10 @@ kable(example)
 `{STMr}` package have the following progression tables implemented:
 `progression_DI()`, `progression_perc_drop()`, `progression_perc_MR()`,
 `progression_perc_MR_variable()`, `progression_rel_int()`,
-`progression_RIR()`, and `progression_RIR_increment()`. You can use
-aforementioned functions to explore these progression tables, and build
-your own. Please refer to [Load-Exertion Tables And Their Use For
+`progression_RIR()`, `progression_RIR_increment()` and
+`progression_variable_DI()`. You can use aforementioned functions to
+explore these progression tables, and build your own. Please refer to
+[Load-Exertion Tables And Their Use For
 Planning](https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/)
 article series for more information about these progression tables.
 
