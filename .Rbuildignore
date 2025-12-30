@@ -4,6 +4,7 @@
 ^cran-comments\.md$
 ^README\.Rmd$
 ^docs$
+^dev$
 ^data-raw$
 ^_pkgdown\.yml$
 ^pkgdown$
