@@ -53,10 +53,10 @@ plot_progression_table <- function(progression_table,
 
   progression_tbl$reps <- factor(progression_tbl$reps)
   progression_tbl$step <- factor(progression_tbl$step)
-  progression_tbl$perc_1RM <- signif(progression_tbl$perc_1RM * 100, signif_digits)
-  progression_tbl$adjustment <- signif(
+  progression_tbl$perc_1RM <- sig_pad(progression_tbl$perc_1RM * 100, sig = signif_digits)
+  progression_tbl$adjustment <- sig_pad(
     progression_tbl$adjustment * multiplier,
-    signif_digits
+    sig = signif_digits
   )
 
   gg <- switch(plot,

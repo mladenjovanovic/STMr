@@ -2,6 +2,7 @@
 
 * Added `conservative` option when generating progression tables, which is equal to `mfactor = 3`
 * In function `plot_progression_table()`, renamed `adjustment_multiplier` to `multiplier`, due to R "error" of assuming user-provided `adjustment` parameter to be `adjustment_multiplier`.
+* Added utils function `sig_pad()` which is used in `plot_progression_table()` to maintain number of characters and same label size.
 * Updated READMER.Rmd file
 
 # STMr 0.1.6

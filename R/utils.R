@@ -148,3 +148,53 @@ mark_index <- function(x) {
 
   group
 }
+
+#' Format to significant digits and pad to equal string width
+#'
+#' @param x Numeric vector.
+#' @param sig Integer >= 1. Significant digits.
+#' @param na Character to use for NA values.
+#' @return Character vector with equal nchar (non-NA values), left-padded with spaces.
+sig_pad <- function(x, sig = 3L, na = NA_character_) {
+  if (!is.numeric(x)) stop("`x` must be numeric.", call. = FALSE)
+  if (length(sig) != 1L || !is.finite(sig) || sig < 1) {
+    stop("`sig` must be a single finite number >= 1.", call. = FALSE)
+  }
+  sig <- as.integer(sig)
+
+  xr <- signif(x, sig)
+  out <- rep(na, length(xr))
+
+  fin <- is.finite(xr)
+  if (any(fin)) {
+    dec <- integer(length(xr))
+
+    z <- fin & xr == 0
+    dec[z] <- sig - 1L
+
+    idx <- fin & !z
+    if (any(idx)) {
+      dec[idx] <- pmax(sig - floor(log10(abs(xr[idx]))) - 1L, 0L)
+    }
+
+    out[fin] <- mapply(
+      function(val, d) formatC(val, format = "f", digits = d),
+      xr[fin], dec[fin],
+      USE.NAMES = FALSE
+    )
+  }
+
+  # Inf/-Inf/NaN as text
+  nf <- !fin & !is.na(xr)
+  if (any(nf)) out[nf] <- as.character(xr[nf])
+
+  # pad all non-NA to common width (includes '-' automatically)
+  ok <- !is.na(out)
+  if (any(ok)) {
+    w <- max(nchar(out[ok], type = "chars"))
+    out[ok] <- sprintf("%*s", w, out[ok])
+  }
+
+  names(out) <- names(x)
+  out
+}
