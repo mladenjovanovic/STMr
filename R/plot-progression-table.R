@@ -43,7 +43,7 @@ plot_progression_table <- function(progression_table,
 
   progression_tbl$volume <- factor(
     progression_tbl$volume,
-    levels = c("intensive", "normal", "extensive")
+    levels = rev(c("intensive", "normal", "extensive"))
   )
 
   progression_tbl$type <- factor(
