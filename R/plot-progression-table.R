@@ -4,7 +4,7 @@
 #'
 #' @param progression_table Function for creating progression table
 #' @param signif_digits Rounding numbers for plotting. Default is 3
-#' @param adjustment_multiplier Factor to multiply the adjustment. Useful when converting to percentage.
+#' @param multiplier Factor to multiply the adjustment. Useful when converting to percentage.
 #'     Default is 1
 #' @param plot Character string. Options include "%1RM" (default) and "adjustment"
 #' @param font_size Numeric. Default is 14
@@ -25,7 +25,7 @@
 plot_progression_table <- function(progression_table,
                                    plot = "%1RM",
                                    signif_digits = 3,
-                                   adjustment_multiplier = 1,
+                                   multiplier = 1,
                                    font_size = 14,
                                    ...) {
   # +++++++++++++++++++++++++++++++++++++++++++
@@ -55,7 +55,7 @@ plot_progression_table <- function(progression_table,
   progression_tbl$step <- factor(progression_tbl$step)
   progression_tbl$perc_1RM <- signif(progression_tbl$perc_1RM * 100, signif_digits)
   progression_tbl$adjustment <- signif(
-    progression_tbl$adjustment * adjustment_multiplier,
+    progression_tbl$adjustment * multiplier,
     signif_digits
   )
 
