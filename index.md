@@ -450,7 +450,8 @@ Here are the adjustments used in the *Perc Drop* progression table
 ``` r
 plot_progression_table(
   progression_perc_drop,
-  plot = "adjustment", adjustment_multiplier = 100,
+  plot = "adjustment",
+  multiplier = 100,
   max_perc_1RM_func = max_perc_1RM_linear,
   klin = 36,
   type = "grinding",
@@ -701,7 +702,8 @@ plot_progression_table(
 ``` r
 plot_progression_table(
   progression_DI,
-  plot = "adjustment", adjustment_multiplier = 100,
+  plot = "adjustment",
+  multiplier = 100,
   max_perc_1RM_func = max_perc_1RM_linear,
   klin = 36,
   type = "grinding",

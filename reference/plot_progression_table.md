@@ -9,7 +9,7 @@ plot_progression_table(
   progression_table,
   plot = "%1RM",
   signif_digits = 3,
-  adjustment_multiplier = 1,
+  multiplier = 1,
   font_size = 14,
   ...
 )
@@ -29,7 +29,7 @@ plot_progression_table(
 
   Rounding numbers for plotting. Default is 3
 
-- adjustment_multiplier:
+- multiplier:
 
   Factor to multiply the adjustment. Useful when converting to
   percentage. Default is 1
