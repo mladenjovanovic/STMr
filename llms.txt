@@ -2070,7 +2070,7 @@ plot(scheme_df) +
 
 To find out more, please check the [Create Custom Set and Rep Schemes
 With
-{STMr}](https://complementarytraining.com/create-custom-set-and-rep-schemes-with-stmr/)
+{STMr}](https://complementarytraining.com/courses/create-custom-set-and-rep-schemes-with-stmr/)
 course, which covers a lot of ground and the utilization of the
 [STMr](https://mladenjovanovic.github.io/STMr/) package in depth.
 
