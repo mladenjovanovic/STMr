@@ -27,7 +27,8 @@
 #' generate_progression_table(
 #'   progression_variable_DI,
 #'   type = "grinding",
-#'   volume = "normal")
+#'   volume = "normal"
+#' )
 #'
 #' # Use different reps-max model
 #' generate_progression_table(
@@ -46,24 +47,25 @@
 #'     rep_1_step_increment = -0.025,
 #'     rep_12_step_increment = -0.05,
 #'     rep_1_volume_increment = -0.025,
-#'     rep_12_volume_increment = -0.05),
-#'
+#'     rep_12_volume_increment = -0.05
+#'   ),
 #'   generate_progression_table(
 #'     progression_perc_drop,
-#'     type = "grinding")
+#'     type = "grinding"
+#'   )
 #' )
 #'
 progression_variable_DI <- function(reps,
-                           step = 0,
-                           volume = "normal",
-                           adjustment = 0,
-                           type = "grinding",
-                           mfactor = NULL,
-                           rep_1_step_increment = -0.02,
-                           rep_12_step_increment = -0.04,
-                           rep_1_volume_increment = -0.02,
-                           rep_12_volume_increment = -0.04,
-                           ...) {
+                                    step = 0,
+                                    volume = "normal",
+                                    adjustment = 0,
+                                    type = "grinding",
+                                    mfactor = NULL,
+                                    rep_1_step_increment = -0.02,
+                                    rep_12_step_increment = -0.04,
+                                    rep_1_volume_increment = -0.02,
+                                    rep_12_volume_increment = -0.04,
+                                    ...) {
   # +++++++++++++++++++++++++++++++++++++++++++
   # Code chunk for dealing with R CMD check note
   rep_start <- NULL
@@ -95,7 +97,7 @@ progression_variable_DI <- function(reps,
     rep_12_volume_increment = rep_12_volume_increment
   ) %>%
     dplyr::mutate(
-      rep_volume_adjustement = (reps-1) * ((rep_12_volume_increment - rep_1_volume_increment) / 11),
+      rep_volume_adjustement = (reps - 1) * ((rep_12_volume_increment - rep_1_volume_increment) / 11),
       volume_adjustment = dplyr::case_when(
         volume == "intensive" ~ 0,
         volume == "normal" ~ rep_1_volume_increment + rep_volume_adjustement,
@@ -103,7 +105,7 @@ progression_variable_DI <- function(reps,
       ),
 
       # Calculate
-      rep_adjustment = (-1 * step) * ((reps-1) * ((rep_12_step_increment - rep_1_step_increment) / 11) + rep_1_step_increment),
+      rep_adjustment = (-1 * step) * ((reps - 1) * ((rep_12_step_increment - rep_1_step_increment) / 11) + rep_1_step_increment),
       total_adjustment = rep_adjustment + volume_adjustment + post_adjustment,
       perc_1RM = adj_perc_1RM_DI(
         reps = reps,

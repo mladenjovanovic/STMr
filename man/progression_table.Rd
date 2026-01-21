@@ -387,7 +387,8 @@ progression_variable_DI(
 generate_progression_table(
   progression_variable_DI,
   type = "grinding",
-  volume = "normal")
+  volume = "normal"
+)
 
 # Use different reps-max model
 generate_progression_table(
@@ -406,11 +407,12 @@ setequal(
     rep_1_step_increment = -0.025,
     rep_12_step_increment = -0.05,
     rep_1_volume_increment = -0.025,
-    rep_12_volume_increment = -0.05),
-
+    rep_12_volume_increment = -0.05
+  ),
   generate_progression_table(
     progression_perc_drop,
-    type = "grinding")
+    type = "grinding"
+  )
 )
 
 # ------------------------------------------
@@ -433,7 +435,8 @@ progression_variable_RIR(
 generate_progression_table(
   progression_variable_DI,
   type = "grinding",
-  volume = "normal")
+  volume = "normal"
+)
 
 # Use different reps-max model
 generate_progression_table(
@@ -452,11 +455,12 @@ setequal(
     rep_1_step_increment = 1,
     rep_12_step_increment = 2,
     rep_1_volume_increment = 1,
-    rep_12_volume_increment = 3),
-
+    rep_12_volume_increment = 3
+  ),
   generate_progression_table(
     progression_RIR_increment,
-    type = "grinding")
+    type = "grinding"
+  )
 )
 
 }
