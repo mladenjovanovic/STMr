@@ -452,7 +452,7 @@ setequal(
     rep_1_step_increment = 1,
     rep_12_step_increment = 2,
     rep_1_volume_increment = 1,
-    rep_12_volume_increment = 2),
+    rep_12_volume_increment = 3),
 
   generate_progression_table(
     progression_RIR_increment,
