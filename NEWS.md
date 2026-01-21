@@ -5,6 +5,8 @@
 * Added utils function `sig_pad()` which is used in `plot_progression_table()` to maintain number of characters and same label size.
 * Reversed the order of panels in `plot_progression_table()` from intensive-normal-extensive to extensive-normal-intensive.
 * Added `progression_variable_DI()` function to allow user to specify various progression and volume adjustment based on the reps done.
+* Added `progression_variable_RIR()` function to allow user to specify various progression and volume adjustment based on the reps done.
+* Change default `reps` parameter in  from `1:12` to `1:5`  in `generate_progression_table()` function to make plotting with `plot_progression_table()` functions visible by default due to newly added `conservative` progression.
 * Updated READMER.Rmd file
 
 # STMr 0.1.6
