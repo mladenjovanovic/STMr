@@ -22,7 +22,7 @@ generate_progression_table(
   progression_table,
   type = c("grinding", "ballistic", "conservative"),
   volume = c("intensive", "normal", "extensive"),
-  reps = 1:12,
+  reps = 1:5,
   step = seq(-3, 0, 1),
   ...
 )
@@ -414,7 +414,7 @@ setequal(
 )
 
 # ------------------------------------------
-# Progression Deducted Intensity
+# Progression Variable RIR
 progression_variable_RIR(10, step = seq(-3, 0, 1))
 progression_variable_RIR(10, step = seq(-3, 0, 1), volume = "extensive")
 progression_variable_RIR(5, step = seq(-3, 0, 1), type = "ballistic")

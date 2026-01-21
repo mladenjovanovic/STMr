@@ -21,7 +21,7 @@
 generate_progression_table <- function(progression_table,
                                        type = c("grinding", "ballistic", "conservative"),
                                        volume = c("intensive", "normal", "extensive"),
-                                       reps = 1:12,
+                                       reps = 1:5,
                                        step = seq(-3, 0, 1),
                                        ...) {
   # Perform checks
