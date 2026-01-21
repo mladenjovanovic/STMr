@@ -78,6 +78,8 @@
   [`progression_perc_MR_variable()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md)
   [`progression_perc_drop()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md)
   [`progression_rel_int()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md)
+  [`progression_variable_DI()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md)
+  [`progression_variable_RIR()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md)
   : Family of functions to create progression tables
 - [`release()`](https://mladenjovanovic.github.io/STMr/reference/release.md)
   : Create a Release period
@@ -95,6 +97,8 @@
   [`scheme_manual()`](https://mladenjovanovic.github.io/STMr/reference/set_and_reps_schemes.md)
   [`scheme_perc_1RM()`](https://mladenjovanovic.github.io/STMr/reference/set_and_reps_schemes.md)
   : Set and Rep Schemes
+- [`sig_pad()`](https://mladenjovanovic.github.io/STMr/reference/sig_pad.md)
+  : Format to significant digits and pad to equal string width
 - [`strength_training_log`](https://mladenjovanovic.github.io/STMr/reference/strength_training_log.md)
   : Strength Training Log
 - [`vertical_planning()`](https://mladenjovanovic.github.io/STMr/reference/vertical_planning_functions.md)

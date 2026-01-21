@@ -493,8 +493,10 @@ following progression tables implemented:
 [`progression_perc_MR_variable()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md),
 [`progression_rel_int()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md),
 [`progression_RIR()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md),
+[`progression_RIR_increment()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md),
+[`progression_variable_DI()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md),
 and
-[`progression_RIR_increment()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md).
+[`progression_variable_RIR()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md).
 You can use aforementioned functions to explore these progression
 tables, and build your own. Please refer to [Load-Exertion Tables And
 Their Use For
