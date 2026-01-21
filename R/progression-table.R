@@ -12,5 +12,9 @@
 #'     Use this to supply different parameter value (i.e., \code{k = 0.035}), or model
 #'     function (i.e., \code{max_perc_1RM_func = max_perc_1RM_linear)}
 #' @return List with two elements: \code{adjustment} and \code{perc_1RM}
+#' @references
+#'     Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.
+#'     Independently published.
+#'
 #' @name progression_table
 NULL
