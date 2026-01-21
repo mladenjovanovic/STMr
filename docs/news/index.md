@@ -1,6 +1,6 @@
 # Changelog
 
-## STMR 0.1.6.9000
+## STMR 0.1.7
 
 - Added `conservative` option when generating progression tables, which
   is equal to `mfactor = 3`
@@ -9,6 +9,28 @@
   renamed `adjustment_multiplier` to `multiplier`, due to R “error” of
   assuming user-provided `adjustment` parameter to be
   `adjustment_multiplier`.
+- Added utils function
+  [`sig_pad()`](https://mladenjovanovic.github.io/STMr/reference/sig_pad.md)
+  which is used in
+  [`plot_progression_table()`](https://mladenjovanovic.github.io/STMr/reference/plot_progression_table.md)
+  to maintain number of characters and same label size.
+- Reversed the order of panels in
+  [`plot_progression_table()`](https://mladenjovanovic.github.io/STMr/reference/plot_progression_table.md)
+  from intensive-normal-extensive to extensive-normal-intensive.
+- Added
+  [`progression_variable_DI()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md)
+  function to allow user to specify various progression and volume
+  adjustment based on the reps done.
+- Added
+  [`progression_variable_RIR()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md)
+  function to allow user to specify various progression and volume
+  adjustment based on the reps done.
+- Change default `reps` parameter in from `1:12` to `1:5` in
+  [`generate_progression_table()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md)
+  function to make plotting with
+  [`plot_progression_table()`](https://mladenjovanovic.github.io/STMr/reference/plot_progression_table.md)
+  functions visible by default due to newly added `conservative`
+  progression.
 - Updated READMER.Rmd file
 
 ## STMr 0.1.6

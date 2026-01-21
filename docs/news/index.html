@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">STMr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,10 +32,15 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.6.9000" id="stmr-0169000">STMR 0.1.6.9000<a class="anchor" aria-label="anchor" href="#stmr-0169000"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.7" id="stmr-017">STMR 0.1.7<a class="anchor" aria-label="anchor" href="#stmr-017"></a></h2>
 <ul><li>Added <code>conservative</code> option when generating progression tables, which is equal to <code>mfactor = 3</code>
 </li>
 <li>In function <code><a href="../reference/plot_progression_table.html">plot_progression_table()</a></code>, renamed <code>adjustment_multiplier</code> to <code>multiplier</code>, due to R “error” of assuming user-provided <code>adjustment</code> parameter to be <code>adjustment_multiplier</code>.</li>
+<li>Added utils function <code><a href="../reference/sig_pad.html">sig_pad()</a></code> which is used in <code><a href="../reference/plot_progression_table.html">plot_progression_table()</a></code> to maintain number of characters and same label size.</li>
+<li>Reversed the order of panels in <code><a href="../reference/plot_progression_table.html">plot_progression_table()</a></code> from intensive-normal-extensive to extensive-normal-intensive.</li>
+<li>Added <code><a href="../reference/progression_table.html">progression_variable_DI()</a></code> function to allow user to specify various progression and volume adjustment based on the reps done.</li>
+<li>Added <code><a href="../reference/progression_table.html">progression_variable_RIR()</a></code> function to allow user to specify various progression and volume adjustment based on the reps done.</li>
+<li>Change default <code>reps</code> parameter in from <code>1:12</code> to <code>1:5</code> in <code><a href="../reference/progression_table.html">generate_progression_table()</a></code> function to make plotting with <code><a href="../reference/plot_progression_table.html">plot_progression_table()</a></code> functions visible by default due to newly added <code>conservative</code> progression.</li>
 <li>Updated READMER.Rmd file</li>
 </ul></div>
     <div class="section level2">

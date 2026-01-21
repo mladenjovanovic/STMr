@@ -399,7 +399,7 @@ head(pt)
 Even better approach would be to plot progression table:
 
 ``` r
-plot_progression_table(progression_RIR, signif_digits = 2, type = "grinding")
+plot_progression_table(progression_RIR, reps = 1:12, signif_digits = 2, type = "grinding")
 ```
 
 ![](reference/figures/README-unnamed-chunk-15-1.png)
@@ -407,7 +407,7 @@ plot_progression_table(progression_RIR, signif_digits = 2, type = "grinding")
 If you are interested in plotting the adjustments used, use:
 
 ``` r
-plot_progression_table(progression_RIR, plot = "adjustment", type = "grinding")
+plot_progression_table(progression_RIR, reps = 1:12, plot = "adjustment", type = "grinding")
 ```
 
 ![](reference/figures/README-unnamed-chunk-16-1.png)
@@ -420,6 +420,7 @@ increments:
 plot_progression_table(
   progression_RIR,
   plot = "adjustment",
+  reps = 1:12,
   step_increment = 1,
   volume_increment = 2,
   type = "grinding"
@@ -493,8 +494,10 @@ following progression tables implemented:
 [`progression_perc_MR_variable()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md),
 [`progression_rel_int()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md),
 [`progression_RIR()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md),
+[`progression_RIR_increment()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md),
+[`progression_variable_DI()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md),
 and
-[`progression_RIR_increment()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md).
+[`progression_variable_RIR()`](https://mladenjovanovic.github.io/STMr/reference/progression_table.md).
 You can use aforementioned functions to explore these progression
 tables, and build your own. Please refer to [Load-Exertion Tables And
 Their Use For
@@ -2081,7 +2084,7 @@ citation("STMr")
 #> To cite package 'STMr' in publications use:
 #> 
 #>   Jovanović M (2026). _STMr: Strength Training Manual R-Language
-#>   Functions_. R package version 0.1.6.9000,
+#>   Functions_. R package version 0.1.7,
 #>   <https://github.com/mladenjovanovic/STMr>.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -2090,7 +2093,7 @@ citation("STMr")
 #>     title = {{STMr}: Strength Training Manual R-Language Functions},
 #>     author = {Mladen Jovanović},
 #>     year = {2026},
-#>     note = {R package version 0.1.6.9000},
+#>     note = {R package version 0.1.7},
 #>     url = {https://github.com/mladenjovanovic/STMr},
 #>   }
 ```

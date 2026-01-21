@@ -383,7 +383,7 @@ head(pt)
 Even better approach would be to plot progression table:
 
 ``` r
-plot_progression_table(progression_RIR, signif_digits = 2, type = "grinding")
+plot_progression_table(progression_RIR, reps = 1:12, signif_digits = 2, type = "grinding")
 ```
 
 <img src="man/figures/README-unnamed-chunk-15-1.png" alt="" width="80%" style="display: block; margin: auto;" />
@@ -391,7 +391,7 @@ plot_progression_table(progression_RIR, signif_digits = 2, type = "grinding")
 If you are interested in plotting the adjustments used, use:
 
 ``` r
-plot_progression_table(progression_RIR, plot = "adjustment", type = "grinding")
+plot_progression_table(progression_RIR, reps = 1:12, plot = "adjustment", type = "grinding")
 ```
 
 <img src="man/figures/README-unnamed-chunk-16-1.png" alt="" width="80%" style="display: block; margin: auto;" />
@@ -403,6 +403,7 @@ well as volume increments:
 plot_progression_table(
   progression_RIR,
   plot = "adjustment",
+  reps = 1:12,
   step_increment = 1,
   volume_increment = 2,
   type = "grinding"
@@ -1994,7 +1995,7 @@ citation("STMr")
 #> To cite package 'STMr' in publications use:
 #> 
 #>   Jovanović M (2026). _STMr: Strength Training Manual R-Language
-#>   Functions_. R package version 0.1.6.9000,
+#>   Functions_. R package version 0.1.7,
 #>   <https://github.com/mladenjovanovic/STMr>.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -2003,7 +2004,7 @@ citation("STMr")
 #>     title = {{STMr}: Strength Training Manual R-Language Functions},
 #>     author = {Mladen Jovanović},
 #>     year = {2026},
-#>     note = {R package version 0.1.6.9000},
+#>     note = {R package version 0.1.7},
 #>     url = {https://github.com/mladenjovanovic/STMr},
 #>   }
 ```

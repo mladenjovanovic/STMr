@@ -278,13 +278,13 @@ head(pt)
 Even better approach would be to plot progression table:
 
 ```{r}
-plot_progression_table(progression_RIR, signif_digits = 2, type = "grinding")
+plot_progression_table(progression_RIR, reps = 1:12, signif_digits = 2, type = "grinding")
 ```
 
 If you are interested in plotting the adjustments used, use:
 
 ```{r}
-plot_progression_table(progression_RIR, plot = "adjustment", type = "grinding")
+plot_progression_table(progression_RIR, reps = 1:12, plot = "adjustment", type = "grinding")
 ```
 
 `progression_RIR()` allows you to use custom progression increments as well as volume increments:
@@ -293,6 +293,7 @@ plot_progression_table(progression_RIR, plot = "adjustment", type = "grinding")
 plot_progression_table(
   progression_RIR,
   plot = "adjustment",
+  reps = 1:12,
   step_increment = 1,
   volume_increment = 2,
   type = "grinding"

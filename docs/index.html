@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">STMr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.6.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -350,17 +350,18 @@
 <span><span class="co">#&gt; 6 conservative extensive    2   -3          5    0.588</span></span></code></pre></div>
 <p>Even better approach would be to plot progression table:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR</span>, signif_digits <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"grinding"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>, signif_digits <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="st">"grinding"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-15-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
 <p>If you are interested in plotting the adjustments used, use:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR</span>, plot <span class="op">=</span> <span class="st">"adjustment"</span>, type <span class="op">=</span> <span class="st">"grinding"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span><span class="va">progression_RIR</span>, reps <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>, plot <span class="op">=</span> <span class="st">"adjustment"</span>, type <span class="op">=</span> <span class="st">"grinding"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-16-1.png" alt="" width="80%" style="display: block; margin: auto;"></p>
 <p><code><a href="reference/progression_table.html">progression_RIR()</a></code> allows you to use custom progression increments as well as volume increments:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/plot_progression_table.html">plot_progression_table</a></span><span class="op">(</span></span>
 <span>  <span class="va">progression_RIR</span>,</span>
 <span>  plot <span class="op">=</span> <span class="st">"adjustment"</span>,</span>
+<span>  reps <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>,</span>
 <span>  step_increment <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  volume_increment <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"grinding"</span></span>
@@ -495,7 +496,7 @@
 </tr>
 </tbody>
 </table>
-<p><a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package have the following progression tables implemented: <code><a href="reference/progression_table.html">progression_DI()</a></code>, <code><a href="reference/progression_table.html">progression_perc_drop()</a></code>, <code><a href="reference/progression_table.html">progression_perc_MR()</a></code>, <code><a href="reference/progression_table.html">progression_perc_MR_variable()</a></code>, <code><a href="reference/progression_table.html">progression_rel_int()</a></code>, <code><a href="reference/progression_table.html">progression_RIR()</a></code>, and <code><a href="reference/progression_table.html">progression_RIR_increment()</a></code>. You can use aforementioned functions to explore these progression tables, and build your own. Please refer to <a href="https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series for more information about these progression tables.</p>
+<p><a href="https://mladenjovanovic.github.io/STMr/">STMr</a> package have the following progression tables implemented: <code><a href="reference/progression_table.html">progression_DI()</a></code>, <code><a href="reference/progression_table.html">progression_perc_drop()</a></code>, <code><a href="reference/progression_table.html">progression_perc_MR()</a></code>, <code><a href="reference/progression_table.html">progression_perc_MR_variable()</a></code>, <code><a href="reference/progression_table.html">progression_rel_int()</a></code>, <code><a href="reference/progression_table.html">progression_RIR()</a></code>, <code><a href="reference/progression_table.html">progression_RIR_increment()</a></code>, <code><a href="reference/progression_table.html">progression_variable_DI()</a></code>, and <code><a href="reference/progression_table.html">progression_variable_RIR()</a></code>. You can use aforementioned functions to explore these progression tables, and build your own. Please refer to <a href="https://complementarytraining.com/load-exertion-tables-and-their-use-for-planning-part-1/" class="external-link">Load-Exertion Tables And Their Use For Planning</a> article series for more information about these progression tables.</p>
 </div>
 <div class="section level2">
 <h2 id="vertical-planning">Vertical Planning<a class="anchor" aria-label="anchor" href="#vertical-planning"></a>
@@ -1583,7 +1584,7 @@
 <span><span class="co">#&gt; To cite package 'STMr' in publications use:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Jovanović M (2026). _STMr: Strength Training Manual R-Language</span></span>
-<span><span class="co">#&gt;   Functions_. R package version 0.1.6.9000,</span></span>
+<span><span class="co">#&gt;   Functions_. R package version 0.1.7,</span></span>
 <span><span class="co">#&gt;   &lt;https://github.com/mladenjovanovic/STMr&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
@@ -1592,7 +1593,7 @@
 <span><span class="co">#&gt;     title = {{STMr}: Strength Training Manual R-Language Functions},</span></span>
 <span><span class="co">#&gt;     author = {Mladen Jovanović},</span></span>
 <span><span class="co">#&gt;     year = {2026},</span></span>
-<span><span class="co">#&gt;     note = {R package version 0.1.6.9000},</span></span>
+<span><span class="co">#&gt;     note = {R package version 0.1.7},</span></span>
 <span><span class="co">#&gt;     url = {https://github.com/mladenjovanovic/STMr},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
 <p>If you plan using estimation models in your commercial or non-commercial products, please contact me at my email: <code>coach.mladen.jovanovic</code> @ <code>gmail.com</code></p>
