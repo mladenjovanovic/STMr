@@ -1446,7 +1446,8 @@ progression_variable_DI(
 generate_progression_table(
   progression_variable_DI,
   type = "grinding",
-  volume = "normal")
+  volume = "normal"
+)
 #>        type volume reps step  adjustment  perc_1RM
 #> 1  grinding normal    1   -3 -0.08000000 0.8877732
 #> 2  grinding normal    2   -3 -0.08727273 0.8502859
@@ -1507,11 +1508,12 @@ setequal(
     rep_1_step_increment = -0.025,
     rep_12_step_increment = -0.05,
     rep_1_volume_increment = -0.025,
-    rep_12_volume_increment = -0.05),
-
+    rep_12_volume_increment = -0.05
+  ),
   generate_progression_table(
     progression_perc_drop,
-    type = "grinding")
+    type = "grinding"
+  )
 )
 #> [1] TRUE
 
@@ -1559,7 +1561,8 @@ progression_variable_RIR(
 generate_progression_table(
   progression_variable_DI,
   type = "grinding",
-  volume = "normal")
+  volume = "normal"
+)
 #>        type volume reps step  adjustment  perc_1RM
 #> 1  grinding normal    1   -3 -0.08000000 0.8877732
 #> 2  grinding normal    2   -3 -0.08727273 0.8502859
@@ -1620,11 +1623,12 @@ setequal(
     rep_1_step_increment = 1,
     rep_12_step_increment = 2,
     rep_1_volume_increment = 1,
-    rep_12_volume_increment = 3),
-
+    rep_12_volume_increment = 3
+  ),
   generate_progression_table(
     progression_RIR_increment,
-    type = "grinding")
+    type = "grinding"
+  )
 )
 #> [1] TRUE
 ```

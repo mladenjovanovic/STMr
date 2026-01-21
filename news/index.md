@@ -1,6 +1,6 @@
 # Changelog
 
-## STMR 0.1.6.9000
+## STMR 0.1.7
 
 - Added `conservative` option when generating progression tables, which
   is equal to `mfactor = 3`
