@@ -3,7 +3,7 @@
 #'      increasing for both step progressions as well volume increment based on the reps done.
 #' @param rep_1_step_increment Numeric vector. Default -0.02
 #' @param rep_12_step_increment Numeric vector. Default -0.04
-#' @param rep_1_volume_increment Numeric vector. Default -0.02,
+#' @param rep_1_volume_increment Numeric vector. Default -0.02
 #' @param rep_12_volume_increment Numeric vector. Default -0.04
 #' @export
 #' @examples
