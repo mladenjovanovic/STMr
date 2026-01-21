@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/mladenjovanovic/STMr/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/mladenjovanovic/STMr/blob/0.1.7/inst/CITATION)
 
 Jovanović M (2026). *STMr: Strength Training Manual R-Language
 Functions*. R package version 0.1.7,
