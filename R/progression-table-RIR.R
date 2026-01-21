@@ -100,10 +100,6 @@ progression_RIR <- function(reps,
 
 #' @describeIn progression_table RIR Increment progression table (see Strength Training Manual)
 #' @export
-#' @references
-#'     Jovanović M. 2020. Strength Training Manual: The Agile Periodization Approach.
-#'     Independently published.
-#'
 #' @examples
 #' # ------------------------------------------
 #' # Progression RIR Increment
