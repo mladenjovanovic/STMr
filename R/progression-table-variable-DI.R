@@ -8,7 +8,7 @@
 #' @export
 #' @examples
 #' # ------------------------------------------
-#' # Progression Deducted Intensity
+#' # Progression Variable Deducted Intensity
 #' progression_variable_DI(10, step = seq(-3, 0, 1))
 #' progression_variable_DI(10, step = seq(-3, 0, 1), volume = "extensive")
 #' progression_variable_DI(5, step = seq(-3, 0, 1), type = "ballistic")
